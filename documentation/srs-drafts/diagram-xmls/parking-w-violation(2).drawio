@@ -1,0 +1,85 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0" version="29.3.8">
+  <diagram name="Page-1" id="DKf_Jei7Ko1Vl5X4Ym96">
+    <mxGraphModel dx="1892" dy="728" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-3" edge="1" parent="1" source="V30wHDKuMkFiGS1YIRbN-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="UHNrg0wvrulP-Jya6eEy-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="350" y="315" />
+              <mxPoint x="350" y="315" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-6" edge="1" parent="1" source="V30wHDKuMkFiGS1YIRbN-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" target="UHNrg0wvrulP-Jya6eEy-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="V30wHDKuMkFiGS1YIRbN-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;b&gt;Available&lt;/b&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="90" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-1" edge="1" parent="1" source="V30wHDKuMkFiGS1YIRbN-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="V30wHDKuMkFiGS1YIRbN-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="V30wHDKuMkFiGS1YIRbN-28" parent="1" style="ellipse;shape=doubleEllipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="20" width="20" x="140" y="205" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-22" edge="1" parent="1" source="UHNrg0wvrulP-Jya6eEy-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="UHNrg0wvrulP-Jya6eEy-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-25" edge="1" parent="1" source="UHNrg0wvrulP-Jya6eEy-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" target="V30wHDKuMkFiGS1YIRbN-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;b&gt;Occupied&lt;/b&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="460" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-7" edge="1" parent="1" source="UHNrg0wvrulP-Jya6eEy-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="V30wHDKuMkFiGS1YIRbN-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-15" edge="1" parent="1" source="UHNrg0wvrulP-Jya6eEy-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="UHNrg0wvrulP-Jya6eEy-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;b&gt;Unavailable&lt;/b&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="90" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-9" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="[sensor 1 &amp;amp;&amp;amp; sensor 2 detect vehicle]/&lt;br&gt;change LED to red, decrement estimated in-transit, decrement available" vertex="1">
+          <mxGeometry height="40" width="229.99" x="213.13" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-10" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="[sensor 1 &amp;amp;&amp;amp; sensor 2 do not detect vehicle]/&lt;br&gt;change LED to assigned available color, increment estimated in-transit, increment available" vertex="1">
+          <mxGeometry height="80" width="229.99" x="213.13" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-11" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="admin overrides state to available/&lt;br&gt;change LED to assigned unavailable color, decrement available" vertex="1">
+          <mxGeometry height="80" width="150" x="-30" y="452.5" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-12" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="admin overrides state to unavailable/&lt;br&gt;change LED to assigned available color, increment available" vertex="1">
+          <mxGeometry height="80" width="150" x="150" y="452.5" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-17" edge="1" parent="1" source="UHNrg0wvrulP-Jya6eEy-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" target="UHNrg0wvrulP-Jya6eEy-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-19" edge="1" parent="1" source="UHNrg0wvrulP-Jya6eEy-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;" target="UHNrg0wvrulP-Jya6eEy-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="520" y="590" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;b&gt;Violation&lt;/b&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="460" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-16" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="[sensor 1 &amp;amp;&amp;amp; sensor 2 detect vehicle]/&lt;br&gt;change LED to violation color, flash LED, notify admin application if running" vertex="1">
+          <mxGeometry height="50" width="225" x="222.5" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-18" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="[sensor 1 &amp;amp;&amp;amp; sensor 2 do not detect vehicle]/&lt;br&gt;change LED to assigned unavailable color" vertex="1">
+          <mxGeometry height="40" width="243.75" x="213.13" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-23" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;div&gt;admin overrides state to unavailable/&lt;/div&gt;&lt;div&gt;change LED to violation color, flash LED, notify admin application if running&lt;/div&gt;" vertex="1">
+          <mxGeometry height="75" width="130" x="550" y="455" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-24" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;div&gt;admin overrides state to available/&lt;/div&gt;&lt;div&gt;change LED to red&lt;/div&gt;" vertex="1">
+          <mxGeometry height="47.5" width="130" x="390" y="460" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
