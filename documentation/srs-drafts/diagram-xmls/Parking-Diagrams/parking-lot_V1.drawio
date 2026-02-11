@@ -1,0 +1,39 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0" version="29.3.8">
+  <diagram name="Page-1" id="FJ7zC6V7Uc46Jnhgr3rt">
+    <mxGraphModel dx="868" dy="607" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="fXTGKIDVAuTXHwE6euoH-2" edge="1" parent="1" source="fXTGKIDVAuTXHwE6euoH-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="110" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fXTGKIDVAuTXHwE6euoH-1" parent="1" style="ellipse;shape=doubleEllipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#000000;" value="" vertex="1">
+          <mxGeometry height="20" width="20" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="fXTGKIDVAuTXHwE6euoH-22" edge="1" parent="1" source="fXTGKIDVAuTXHwE6euoH-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="fXTGKIDVAuTXHwE6euoH-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fXTGKIDVAuTXHwE6euoH-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;b&gt;Open&lt;/b&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="110" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="fXTGKIDVAuTXHwE6euoH-21" edge="1" parent="1" source="fXTGKIDVAuTXHwE6euoH-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" target="fXTGKIDVAuTXHwE6euoH-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fXTGKIDVAuTXHwE6euoH-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;b&gt;Closed&lt;/b&gt;&lt;/div&gt;do: continue availability tracking in background" vertex="1">
+          <mxGeometry height="60" width="120" x="560" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="fXTGKIDVAuTXHwE6euoH-6" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="admin request to close lot/change entrance gate to locked state, change all availability display numbers&amp;nbsp; to 0, update log message on availability displays to &quot;CLOSED&quot;" vertex="1">
+          <mxGeometry height="70" width="280" x="260" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="fXTGKIDVAuTXHwE6euoH-20" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="admin request to open lot/change entrance gate to closed state, change all availability display numbers to current tracking numbers, clear log message" vertex="1">
+          <mxGeometry height="70" width="280" x="260" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="fXTGKIDVAuTXHwE6euoH-23" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="parking lot initial state, open parking lot" vertex="1">
+          <mxGeometry height="70" width="80" x="20" y="210" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
