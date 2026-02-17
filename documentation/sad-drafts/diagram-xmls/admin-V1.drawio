@@ -1,0 +1,49 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0" version="29.4.0">
+  <diagram name="Page-1" id="iTYxYUOpwh-DW8Xf4Mhh">
+    <mxGraphModel dx="868" dy="607" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="69EV4ao3Va-oxW8k7skj-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="80" width="120" x="401.1919126779651" y="69.48999999999998" as="geometry" />
+        </mxCell>
+        <mxCell id="69EV4ao3Va-oxW8k7skj-3" edge="1" parent="1" source="69EV4ao3Va-oxW8k7skj-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="69EV4ao3Va-oxW8k7skj-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="69EV4ao3Va-oxW8k7skj-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Parking Management Controller&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="120" x="401.1919126779651" y="69.48999999999998" as="geometry" />
+        </mxCell>
+        <mxCell id="69EV4ao3Va-oxW8k7skj-5" parent="1" style="triangle;whiteSpace=wrap;html=1;rotation=-135;fillColor=#e51400;fontColor=#ffffff;strokeColor=#B20000;" value="" vertex="1">
+          <mxGeometry height="30" width="14.44" x="400.00191267796504" y="60.51999999999998" as="geometry" />
+        </mxCell>
+        <mxCell id="69EV4ao3Va-oxW8k7skj-13" edge="1" parent="1" source="69EV4ao3Va-oxW8k7skj-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="69EV4ao3Va-oxW8k7skj-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="69EV4ao3Va-oxW8k7skj-14" edge="1" parent="1" source="69EV4ao3Va-oxW8k7skj-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="69EV4ao3Va-oxW8k7skj-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="69EV4ao3Va-oxW8k7skj-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="80" width="120" x="792.3838253559302" y="68.97191267796507" as="geometry" />
+        </mxCell>
+        <mxCell id="69EV4ao3Va-oxW8k7skj-7" edge="1" parent="1" source="69EV4ao3Va-oxW8k7skj-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="69EV4ao3Va-oxW8k7skj-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="69EV4ao3Va-oxW8k7skj-8" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Administrator&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="120" x="792.3838253559302" y="69.49191267796508" as="geometry" />
+        </mxCell>
+        <mxCell id="69EV4ao3Va-oxW8k7skj-9" parent="1" style="triangle;whiteSpace=wrap;html=1;rotation=-135;fillColor=#e51400;fontColor=#ffffff;strokeColor=#B20000;" value="" vertex="1">
+          <mxGeometry height="30" width="14.44" x="791.1938253559301" y="60.001912677965066" as="geometry" />
+        </mxCell>
+        <mxCell id="69EV4ao3Va-oxW8k7skj-10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;PMS API&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="601.1919126779651" y="74.48999999999998" as="geometry" />
+        </mxCell>
+        <mxCell id="69EV4ao3Va-oxW8k7skj-11" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;User Interface&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="700" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="69EV4ao3Va-oxW8k7skj-12" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Action Manager&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="880" y="200" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,61 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0" version="29.4.0">
+  <diagram name="Page-1" id="DKf_Jei7Ko1Vl5X4Ym96">
+    <mxGraphModel dx="1569" dy="502" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-6" edge="1" parent="1" source="V30wHDKuMkFiGS1YIRbN-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" target="UHNrg0wvrulP-Jya6eEy-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="V30wHDKuMkFiGS1YIRbN-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;b&gt;Available&lt;/b&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="90" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-1" edge="1" parent="1" source="V30wHDKuMkFiGS1YIRbN-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="V30wHDKuMkFiGS1YIRbN-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="V30wHDKuMkFiGS1YIRbN-28" parent="1" style="ellipse;shape=doubleEllipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="20" width="20" x="140" y="205" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-8" edge="1" parent="1" source="UHNrg0wvrulP-Jya6eEy-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" target="V30wHDKuMkFiGS1YIRbN-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="330" y="345" />
+              <mxPoint x="330" y="345" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;b&gt;Occupied&lt;/b&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="460" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-7" edge="1" parent="1" source="UHNrg0wvrulP-Jya6eEy-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="V30wHDKuMkFiGS1YIRbN-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;b&gt;Unavailable&lt;/b&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="90" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-9" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="vehicle parks/change LED to red, decrement estimated in-transit, decrement available" vertex="1">
+          <mxGeometry height="40" width="240" x="220" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-10" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="vehicle leaves/&lt;br&gt;change LED to assigned available color, increment estimated in-transit, increment available" vertex="1">
+          <mxGeometry height="70" width="240" x="214" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-11" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="admin overrides state/&lt;br&gt;change LED to assigned unavailable color, decrement available, disable sensors" vertex="1">
+          <mxGeometry height="80" width="150" x="-30" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="UHNrg0wvrulP-Jya6eEy-12" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="admin overrides state/&lt;br&gt;change LED to assigned available color, increment available, enable sensors" vertex="1">
+          <mxGeometry height="80" width="150" x="150" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="4sSjl9xzqJRtwI4-cDs7-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="initial parking state" vertex="1">
+          <mxGeometry height="40" width="120" x="30" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="KyS3E94JtquE8pJxR9tY-2" edge="1" parent="1" source="V30wHDKuMkFiGS1YIRbN-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="UHNrg0wvrulP-Jya6eEy-2" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="210" y="315" as="sourcePoint" />
+            <mxPoint x="259.9999999999998" y="165" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
