@@ -14,7 +14,11 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(CS460_Project_1 main.cpp)
+add_executable(CS460_Project_1
+        run_demo.cpp run_demo.h
+        ParkingLot/ParkingLotDemo/run_parking_lot.cpp
+        Admin/run_admin.cpp
+)
 target_link_libraries(CS460_Project_1
         Qt::Core
         Qt::Gui
