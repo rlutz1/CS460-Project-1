@@ -16,8 +16,12 @@ find_package(Qt6 COMPONENTS
 
 add_executable(CS460_Project_1
         run_demo.cpp run_demo.h
-        ParkingLot/ParkingLotDemo/run_parking_lot.cpp
+        ParkingLotDemo/run_parking_lot.cpp
         Admin/run_admin.cpp
+        ParkingLotDemo/PMSSoftware/ParkingManagementController.cpp
+        ParkingLotDemo/PMSSoftware/ParkingManagementController.h
+        ParkingLotDemo/ParkingLot/ParkingLot.cpp
+        ParkingLotDemo/ParkingLot/ParkingLot.h
 )
 target_link_libraries(CS460_Project_1
         Qt::Core

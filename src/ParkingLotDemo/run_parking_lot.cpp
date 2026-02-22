@@ -1,6 +1,6 @@
 #include <QApplication>
 #include <QPushButton>
-#include "../../run_demo.h"
+#include "../run_demo.h"
 
 int run_parking_lot(int argc, char *argv[]) {
     QApplication a(argc, argv);
