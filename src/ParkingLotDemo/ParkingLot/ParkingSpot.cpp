@@ -10,6 +10,8 @@ ParkingSpot::ParkingSpot() {
     this -> weight_sensor = new ParkingSpotSensor("Sensor 2");
     this -> available = true; // TODO MAYBE
     this -> spotId = "";
+    this -> setStyleSheet("background-color: black; border: medium dashed green;min-width: 50px;");
+    // this -> show();
 }
 
 ParkingSpot::ParkingSpot(std::string spotId) {
@@ -17,6 +19,8 @@ ParkingSpot::ParkingSpot(std::string spotId) {
     this -> weight_sensor = new ParkingSpotSensor(spotId + "|Sensor 2");
     this -> available = true; // TODO MAYBE
     this -> spotId = spotId;
+    this -> setStyleSheet("background-color: black; border: medium dashed green; min-width: 50px;");
+    // this -> show();
 }
 
 QSize ParkingSpot::sizeHint() const {

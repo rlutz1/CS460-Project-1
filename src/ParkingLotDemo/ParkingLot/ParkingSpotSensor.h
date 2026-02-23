@@ -11,7 +11,7 @@
 
 class ParkingSpotSensor : public QWidget {
 public:
-    std::string ID;
+    std::string sensorId;
     bool enabled;
     ParkingSpotSensor(std::string id);
 

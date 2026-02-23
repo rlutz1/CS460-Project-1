@@ -5,17 +5,45 @@
 #include "ParkingLot.h"
 #include "../Mediator/Mediator.h"
 #include <iostream>
+#include <QHBoxLayout>
 
 #include "ParkingSpot.h"
 
 // namespace ParkingLot {
-ParkingLot::ParkingLot() = default;
+ParkingLot::ParkingLot() {
+    // TODO hardcoded to test
+    ParkingSpot spot1("Vehicle 1"); ParkingSpot spot2("Vehicle 2"); ParkingSpot spot3("Vehicle 3");
+    this -> parking_spots = {&spot1, &spot2, &spot3};
+
+    QHBoxLayout* layout = new QHBoxLayout(this); // TODO: memory leaking...
+    this -> setStyleSheet("background-color: grey;");
+    this -> setLayout(layout);
+
+    for (ParkingSpot* spot : this -> parking_spots) {
+        layout -> addWidget((QWidget*)spot);
+    }
+
+    // std::cout << this -> isVisible() << std::endl;
+    // this -> show();
+};
 
 ParkingLot::ParkingLot(Mediator* m) {
     this -> mediator = m;
     // TODO hardcoded to test
     ParkingSpot spot1("Vehicle 1"); ParkingSpot spot2("Vehicle 2"); ParkingSpot spot3("Vehicle 3");
     this -> parking_spots = {&spot1, &spot2, &spot3};
+
+    QHBoxLayout* layout = new QHBoxLayout(this); // TODO: memory leaking...
+    this -> setLayout(layout);
+
+    for (ParkingSpot* spot : this -> parking_spots) {
+        layout -> addWidget((QWidget*)spot);
+    }
+    this -> setStyleSheet("background-color: grey;");
+    std::cout << this -> isVisible() << std::endl;
+    this -> show();
+    // free(layout);
+
 } // end constructor
 
 void ParkingLot::add_output_stream(Mediator* m) {
