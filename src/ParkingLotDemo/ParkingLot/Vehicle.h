@@ -6,6 +6,7 @@
 #define CS460_PROJECT_1_VEHICLE_H
 #include <qwidget.h>
 #include <QGraphicsWidget>
+#include <QPauseAnimation>
 #include <QSequentialAnimationGroup>
 
 
@@ -14,7 +15,8 @@ public:
     std::string vehicleId;
     Vehicle(std::string vehicleId);
     QSequentialAnimationGroup* gen_animation_group(float x_dest, float y_dest);
-
+public slots:
+    void simple();
 protected:
     // QSize sizeHint() const override;
     QRectF boundingRect() const override;
@@ -22,6 +24,8 @@ protected:
            QWidget *widget) override;
 
 };
+
+
 
 
 #endif //CS460_PROJECT_1_VEHICLE_H

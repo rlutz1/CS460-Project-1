@@ -4,8 +4,31 @@
 
 #include "Vehicle.h"
 
+#include <iostream>
 #include <QPainter>
 #include <QPropertyAnimation>
+
+class CustomPause : public QPauseAnimation {
+public:
+    CustomPause(int msecs, QObject *parent = nullptr)
+        : QPauseAnimation(msecs, parent) {}
+
+    signals:
+        void test() {}
+
+protected:
+
+
+
+    void updateCurrentTime(int currentTime) override {
+        // Custom logic during the pause
+        emit test();
+        QPauseAnimation::updateCurrentTime(currentTime);
+    }
+};
+
+
+
 
 Vehicle::Vehicle(std::string vehicleId) {
     // setPos(0, 0);
@@ -29,6 +52,9 @@ QSequentialAnimationGroup* Vehicle::gen_animation_group(float x_dest, float y_de
     park_anim->setStartValue(QPoint(x_dest, -50));
     park_anim->setEndValue(QPoint(x_dest, y_dest));
     // enter_anim->start();
+
+    CustomPause pause(1000, this);
+    QObject::connect(&pause, &CustomPause::test, this, &Vehicle::simple);
 
     QPropertyAnimation* unpark_anim = new QPropertyAnimation(this, "pos");
     unpark_anim->setDuration(1000);
@@ -57,6 +83,10 @@ QRectF Vehicle::boundingRect() const {
                   20 + penWidth, 20 + penWidth);
 }
 
+void Vehicle::simple() {
+    std::cout << "SIGNALLLLL!" << std::endl;
+}
+
 // REQUIRED FOR GRAPHICS ITEM
 void Vehicle::paint(QPainter *painter,
     const QStyleOptionGraphicsItem *option,
@@ -65,3 +95,5 @@ void Vehicle::paint(QPainter *painter,
     painter->setBrush(QBrush(Qt::blue));
     painter->drawRect(QRectF(0, 0, 10, 10));
 }
+
+
