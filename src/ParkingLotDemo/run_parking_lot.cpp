@@ -9,24 +9,23 @@
 #include "Mediator/Mediator.h"
 #include "ParkingLot/ParkingLot.h"
 #include "PMSSoftware/ParkingManagementController.h"
+#include "ParkingLot/ParkingSpot.h"
 
 int run_parking_lot(int argc, char *argv[]) {
 
     QApplication a(argc, argv);
 
-    QMainWindow* mainWindow = new QMainWindow(); // TODO: free memory issues?
-    QWidget* mainLayout = new QWidget(mainWindow);
+    // QMainWindow* mainWindow = new QMainWindow(); // TODO: free memory issues?
+
+    QWidget* mainLayout = new QWidget;
     QVBoxLayout* layout = new QVBoxLayout(mainLayout);
     mainLayout -> setLayout(layout);
 
 
-
-
-    QPushButton button("Sensor Trigger", nullptr);
+    QPushButton button("Sensor Trigger", mainLayout);
     button.resize(200, 100);
 
-    ParkingLot parking_lot;
-
+    ParkingLot parking_lot(mainLayout);
     ParkingManagementController pmc;
     Mediator mediator(&parking_lot, &pmc);
     // std::cout << "Parking Lot Making\n";
@@ -35,8 +34,12 @@ int run_parking_lot(int argc, char *argv[]) {
     pmc.add_output_stream(&mediator);
 
 
-    layout -> addWidget((QWidget*) &parking_lot);
+    layout -> addWidget(&parking_lot);
     layout -> addWidget(&button);
+
+    //TESTING
+    ParkingSpot* parking_spot = new ParkingSpot("Testing", mainLayout);
+    layout -> addWidget(parking_spot);
     // pl.send_signal();
     // QSequentialAnimationGroup group;
 
@@ -44,8 +47,8 @@ int run_parking_lot(int argc, char *argv[]) {
 
     // mainWindow
     // button.show();
-    mainWindow -> setCentralWidget(mainLayout);
-    mainWindow -> show();
+    // mainWindow -> setCentralWidget(mainLayout);
+    mainLayout -> show();
 
 
 

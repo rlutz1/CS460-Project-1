@@ -8,10 +8,10 @@
 
 class ParkingSpotSensor;
 
-class ParkingSpot : public QWidget{
+class ParkingSpot : public QWidget {
 public:
     ParkingSpot();
-    ParkingSpot(std::string spotId);
+    ParkingSpot(std::string spotId, QWidget *parent);
     ParkingSpotSensor* ultrasonic_sensor;
     ParkingSpotSensor* weight_sensor;
     bool available; // TODO MAYBE

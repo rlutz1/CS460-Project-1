@@ -17,8 +17,8 @@ class ParkingSpot;
 class ParkingLot : public QWidget {
 
 public:
-    ParkingLot();
-    ParkingLot(Mediator* pmc);
+    ParkingLot(QWidget *parent);
+    ParkingLot(Mediator* pmc, QWidget *parent);
 
     void add_output_stream(Mediator* pmc);
     void hardware_update(std::string str);
@@ -28,6 +28,7 @@ public:
         void send_signal();
 private:
     Mediator* mediator;
+    QLayout *layout;
     // QPushButton* button;
     std::list<ParkingSpot*> parking_spots; // TODO: sizeof issue?
 
