@@ -10,7 +10,7 @@ ParkingSpotSensor::ParkingSpotSensor(std::string id, QGraphicsWidget *parent) : 
     // setParentItem(parent);
     this -> sensorId = id;
     this -> enabled = true;
-    setPos(parent->pos().x(), parent->pos().y()); // this makes it's orgin relative to the parent
+    // setPos(parent->pos().x(), parent->pos().y()); // this makes it's orgin relative to the parent
 }
 
 void ParkingSpotSensor::enable() {
@@ -34,5 +34,5 @@ void ParkingSpotSensor::paint(QPainter *painter,
     QWidget *widget) {
     painter->setPen(QPen(Qt::black));
     painter->setBrush(QBrush(Qt::black));
-    painter->drawEllipse(QRectF(20, 45, 10, 10));
+    painter->drawEllipse(QRectF(20, 0, 10, 10));
 }

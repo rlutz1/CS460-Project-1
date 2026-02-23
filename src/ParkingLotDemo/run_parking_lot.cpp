@@ -22,8 +22,7 @@ int run_parking_lot(int argc, char *argv[]) {
     mainLayout -> setLayout(layout);
 
 
-    QPushButton button("Sensor Trigger", mainLayout);
-    button.resize(200, 100);
+
 
     ParkingLot parking_lot(mainLayout);
     ParkingManagementController pmc;
@@ -33,6 +32,8 @@ int run_parking_lot(int argc, char *argv[]) {
     // parking_lot.add_component(&button);
     pmc.add_output_stream(&mediator);
 
+    QPushButton button("Start Demo", mainLayout);
+    QObject::connect(&button, &QPushButton::clicked, &parking_lot, &ParkingLot::run_demo);
 
     layout -> addWidget(&parking_lot);
     layout -> addWidget(&button);

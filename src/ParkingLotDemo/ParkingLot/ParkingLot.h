@@ -26,6 +26,7 @@ public:
 
     public slots: // slots for signals to send to!
         void send_signal();
+        void run_demo();
 private:
     Mediator* mediator;
     QLayout *layout;

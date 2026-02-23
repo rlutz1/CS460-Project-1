@@ -11,8 +11,10 @@
 #include <QPushButton>
 #include <QPropertyAnimation>
 #include <QStackedLayout>
+#include <QParallelAnimationGroup>
 
 #include "ParkingSpot.h"
+#include "Vehicle.h"
 
 // namespace ParkingLot {
 ParkingLot::ParkingLot(QWidget *parent) : QGraphicsView(parent) {
@@ -20,8 +22,15 @@ ParkingLot::ParkingLot(QWidget *parent) : QGraphicsView(parent) {
     scene = new QGraphicsScene;
     // scene -> addRect(QRectF(50, 50, 100, 200), QPen(Qt::black), QBrush(Qt::green));
     ParkingSpot* parking_spot_1 = new ParkingSpot("Spot 1");
+    // ParkingSpot* parking_spot_2 = new ParkingSpot("Spot 2", this);
+    // ParkingSpot* parking_spot_3 = new ParkingSpot("Spot 3", this);
+    parking_spots = {parking_spot_1};
+    // for (ParkingSpot* parking_spot : parking_spots) {
+    //     scene -> addItem(parking_spot);
+    // }
     scene -> addItem(parking_spot_1);
     setScene(scene);
+
 
 
 
@@ -62,6 +71,26 @@ void ParkingLot::hardware_update(std::string str) {
 void ParkingLot::send_signal() {
     this -> mediator -> send_to_PMC("FROM PL: signal triggered!");
 } // end method
+
+void ParkingLot::run_demo() {
+    std::cout << "running demo..." << std::endl;
+    Vehicle* vehicle = new Vehicle("Vehicle 1");
+    QSequentialAnimationGroup* group;
+
+    for (ParkingSpot* ps : parking_spots) { // quick and dirty, better ways
+        if (ps->available) {
+            ps->available = false;
+            group = vehicle -> gen_animation_group(ps->x(), ps->y());
+            std::cout << ps->x() << ps->y() << std::endl;
+            break;
+        }
+    }
+    scene -> addItem(vehicle);
+
+    group->start();
+    // group.duration(-1);
+    // ParkingSpot dest = parking_spots.remove([](ParkingSpot* ps){ return ps->available; });
+}
 
 QSize ParkingLot::sizeHint() const {
     return QSize(500, 400);
