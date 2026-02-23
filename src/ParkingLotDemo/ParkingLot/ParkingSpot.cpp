@@ -19,7 +19,7 @@ ParkingSpot::ParkingSpot() {
 }
 
 ParkingSpot::ParkingSpot(std::string spotId) {
-    setPos(0, 0);
+    setPos(0, -300);
     ultrasonic_sensor = new ParkingSpotSensor(spotId + "|Sensor 1", this);
     weight_sensor = new ParkingSpotSensor(spotId + "|Sensor 2", this);
     available = true; // TODO MAYBE
@@ -50,3 +50,5 @@ void ParkingSpot::paint(QPainter *painter,
     painter->setBrush(QBrush(Qt::gray));
     painter->drawRect(QRectF(0, 0, 50, 100));
 }
+
+
