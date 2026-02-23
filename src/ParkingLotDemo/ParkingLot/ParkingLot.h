@@ -28,11 +28,11 @@ public:
         void send_signal();
 private:
     Mediator* mediator;
-    QPushButton* button;
+    // QPushButton* button;
     std::list<ParkingSpot*> parking_spots; // TODO: sizeof issue?
 
 protected:
-    // QSize sizeHint() const override;
+    QSize sizeHint() const override;
 };
 // } // ParkingLot
 

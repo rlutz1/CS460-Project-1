@@ -10,9 +10,15 @@ class ParkingSpotSensor;
 
 class ParkingSpot : public QWidget{
 public:
+    ParkingSpot();
+    ParkingSpot(std::string spotId);
     ParkingSpotSensor* ultrasonic_sensor;
     ParkingSpotSensor* weight_sensor;
     bool available; // TODO MAYBE
+    std::string spotId;
+
+protected:
+    QSize sizeHint() const override;
 };
 
 
