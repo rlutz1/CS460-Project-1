@@ -16,7 +16,8 @@ public:
     Vehicle(std::string vehicleId);
     QSequentialAnimationGroup* gen_animation_group(float x_dest, float y_dest);
 public slots:
-    void simple();
+    void trigger_vehicle_parked();
+    void trigger_vehicle_left();
 protected:
     // QSize sizeHint() const override;
     QRectF boundingRect() const override;
