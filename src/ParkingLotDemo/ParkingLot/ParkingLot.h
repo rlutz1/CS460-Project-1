@@ -5,11 +5,12 @@
 #ifndef CS460_PROJECT_1_PARKINGLOT_H
 #define CS460_PROJECT_1_PARKINGLOT_H
 
+#include <QObject>
 #include <string>
 class Mediator;
 
 // namespace ParkingLot {
-class ParkingLot {
+class ParkingLot : public QObject {
 
 public:
     ParkingLot();
@@ -17,7 +18,8 @@ public:
 
     void add_output_stream(Mediator* pmc);
     void hardware_update(std::string str);
-    void send_signal();
+    public slots:
+        void send_signal();
 private:
     Mediator* mediator;
 };
