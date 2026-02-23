@@ -28,6 +28,7 @@ ParkingLot::ParkingLot(QWidget *parent) : QWidget(parent) {
         layout->addWidget(parking_spot);
     }
 
+    std::cout << parking_spot_3->x();
 
 };
 
