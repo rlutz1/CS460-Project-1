@@ -22,8 +22,7 @@ void ParkingManagementController::send_directive(std::string update) {
 } // end method
 
 void ParkingManagementController::receive_signal(std::string str) {
-    std::cout << "PMC: Received Signal: \n";
-    std::cout << str;
+    std::cout << "PMC: Received Signal: " << str << "\n";
     send_directive("FROM PMC: Received the signal.");
 } // end method
 // } // PMS

@@ -18,8 +18,7 @@ void ParkingLot::add_output_stream(Mediator* m) {
 } // end method
 
 void ParkingLot::hardware_update(std::string str) {
-    std::cout << "PL: Received Update to Hardware: \n";
-    std::cout << str;
+    std::cout << "PL: Received Update to Hardware: "<< str << "\n";
 } // end method
 
 void ParkingLot::send_signal() {

@@ -15,7 +15,7 @@ int run_parking_lot(int argc, char *argv[]) {
     ParkingManagementController pmc;
     ParkingLot pl;
     Mediator mediator(&pl, &pmc);
-    std::cout << "Parking Lot Making";
+    std::cout << "Parking Lot Making\n";
     pl.add_output_stream(&mediator);
     pmc.add_output_stream(&mediator);
     pl.send_signal();

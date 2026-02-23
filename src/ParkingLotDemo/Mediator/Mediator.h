@@ -5,9 +5,6 @@
 #ifndef CS460_PROJECT_1_MEDIATOR_H
 #define CS460_PROJECT_1_MEDIATOR_H
 
-// #include "../PMSSoftware/ParkingManagementController.h"
-// #include "../ParkingLot/ParkingLot.h"
-
 class ParkingLot;
 class ParkingManagementController;
 

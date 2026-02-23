@@ -8,7 +8,7 @@
 #include <iostream>
 
 int main(int argc, char *argv[]) {
-    std::cout << *argv[argc - 1];
+    // std::cout << *argv[argc - 1];
     if (*argv[argc - 1] == 'p') {
         run_parking_lot(argc, argv);
     } else {
