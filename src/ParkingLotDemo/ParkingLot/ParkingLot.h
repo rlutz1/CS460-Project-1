@@ -18,7 +18,6 @@ class ParkingLot : public QWidget {
 
 public:
     ParkingLot(QWidget *parent);
-    ParkingLot(Mediator* pmc, QWidget *parent);
 
     void add_output_stream(Mediator* pmc);
     void hardware_update(std::string str);

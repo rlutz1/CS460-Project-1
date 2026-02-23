@@ -20,14 +20,16 @@ ParkingLot::ParkingLot(QWidget *parent) : QWidget(parent) {
     setLayout(layout);
     // QPushButton *button = new QPushButton("testing", this);
     // button->resize(200, 200); // this is not necessary
-    ParkingSpot* parking_spot = new ParkingSpot("Testing", this);
-    layout->addWidget(parking_spot);
+    ParkingSpot* parking_spot_1 = new ParkingSpot("Spot 1", this);
+    ParkingSpot* parking_spot_2 = new ParkingSpot("Spot 2", this);
+    ParkingSpot* parking_spot_3 = new ParkingSpot("Spot 3", this);
+    parking_spots = {parking_spot_1, parking_spot_2, parking_spot_3};
+    for (ParkingSpot* parking_spot : parking_spots) {
+        layout->addWidget(parking_spot);
+    }
+
 
 };
-
-ParkingLot::ParkingLot(Mediator* m, QWidget *parent) : QWidget(parent) {
-
-} // end constructor
 
 void ParkingLot::add_output_stream(Mediator* m) {
     this -> mediator = m;

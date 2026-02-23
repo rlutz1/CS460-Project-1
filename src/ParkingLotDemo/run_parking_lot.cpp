@@ -38,8 +38,8 @@ int run_parking_lot(int argc, char *argv[]) {
     layout -> addWidget(&button);
 
     //TESTING
-    ParkingSpot* parking_spot = new ParkingSpot("Testing", mainLayout);
-    layout -> addWidget(parking_spot);
+    // ParkingSpot* parking_spot = new ParkingSpot("Testing", mainLayout);
+    // layout -> addWidget(parking_spot);
     // pl.send_signal();
     // QSequentialAnimationGroup group;
 
