@@ -16,11 +16,12 @@
 // namespace ParkingLot {
 ParkingLot::ParkingLot(QWidget *parent) : QWidget(parent) {
 
-    layout = new QVBoxLayout(this);
+    layout = new QHBoxLayout(this);
     setLayout(layout);
-    QPushButton *button = new QPushButton("testing", this);
-    button->resize(200, 200);
-    layout->addWidget(button);
+    // QPushButton *button = new QPushButton("testing", this);
+    // button->resize(200, 200); // this is not necessary
+    ParkingSpot* parking_spot = new ParkingSpot("Testing", this);
+    layout->addWidget(parking_spot);
 
 };
 
