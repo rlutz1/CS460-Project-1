@@ -6,10 +6,16 @@
 #define CS460_PROJECT_1_PARKINGSPOT_H
 #include <qwidget.h>
 #include <QGraphicsItem>
+#include <QGraphicsWidget>
+
+#include "ParkingLot.h"
 
 class ParkingSpotSensor;
 
-class ParkingSpot : public QGraphicsItem {
+class ParkingSpot : public QGraphicsWidget {// TODO REMOVE QOBJECT! TESTING ONLY!
+    // Q_OBJECT
+    // Q_PROPERTY(QPointF pos READ pos WRITE setPos)
+
 public:
     ParkingSpot();
     // ParkingSpot(std::string spotId, QWidget *parent);

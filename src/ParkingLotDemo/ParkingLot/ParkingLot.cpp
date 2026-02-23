@@ -9,6 +9,7 @@
 #include <QVBoxLayout>
 #include <QGridLayout>
 #include <QPushButton>
+#include <QPropertyAnimation>
 #include <QStackedLayout>
 
 #include "ParkingSpot.h"
@@ -22,6 +23,11 @@ ParkingLot::ParkingLot(QWidget *parent) : QGraphicsView(parent) {
     scene -> addItem(parking_spot_1);
     setScene(scene);
 
+    QPropertyAnimation* anim = new QPropertyAnimation(parking_spot_1, "pos");
+    anim->setDuration(1000);
+    anim->setStartValue(QPoint(0, 0));
+    anim->setEndValue(QPoint(100, 20));
+    anim->start();
 
     // WITH HBOX AS QWIDGET:
     // layout = new QHBoxLayout(this);

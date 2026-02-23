@@ -8,13 +8,14 @@
 // class QWidget;
 #include <QGraphicsItem>
 #include <string>
+#include <QGraphicsWidget>
 
 
-class ParkingSpotSensor : public QGraphicsItem {
+class ParkingSpotSensor : public QGraphicsWidget {
 public:
     std::string sensorId;
     bool enabled;
-    ParkingSpotSensor(std::string id, QGraphicsItem *parent);
+    ParkingSpotSensor(std::string id, QGraphicsWidget *parent);
 
     void enable(); // from sad
     void disable(); // from sad

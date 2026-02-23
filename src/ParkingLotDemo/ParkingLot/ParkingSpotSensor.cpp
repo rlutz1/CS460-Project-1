@@ -6,7 +6,7 @@
 
 #include <qpainter.h>
 
-ParkingSpotSensor::ParkingSpotSensor(std::string id, QGraphicsItem * parent) : QGraphicsItem(parent) {
+ParkingSpotSensor::ParkingSpotSensor(std::string id, QGraphicsWidget *parent) : QGraphicsWidget(parent) {
     // setParentItem(parent);
     this -> sensorId = id;
     this -> enabled = true;
