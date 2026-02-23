@@ -6,6 +6,7 @@
 #define CS460_PROJECT_1_PARKINGLOT_H
 
 #include <QObject>
+#include <QPushButton>
 #include <string>
 class Mediator;
 
@@ -18,10 +19,13 @@ public:
 
     void add_output_stream(Mediator* pmc);
     void hardware_update(std::string str);
-    public slots:
+    void add_component(void* component);
+
+    public slots: // slots for signals to send to!
         void send_signal();
 private:
     Mediator* mediator;
+    QPushButton* button;
 };
 // } // ParkingLot
 

@@ -18,6 +18,7 @@ class Mediator;
         void send_directive(std::string update); // TODO: this is TEMPORARY! for testing.
     private:
         Mediator* mediator;
+        std::string update;
     };
 // } // PMS
 

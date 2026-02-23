@@ -9,17 +9,20 @@
 
 int run_parking_lot(int argc, char *argv[]) {
 
+    QApplication a(argc, argv);
+    QPushButton button("Sensor Trigger", nullptr);
+    button.resize(200, 100);
+
     ParkingManagementController pmc;
     ParkingLot parker;
     Mediator mediator(&parker, &pmc);
     std::cout << "Parking Lot Making\n";
     parker.add_output_stream(&mediator);
+    parker.add_component(&button);
     pmc.add_output_stream(&mediator);
     // pl.send_signal();
 
-    QApplication a(argc, argv);
-    QPushButton button("Sensor Trigger", nullptr);
-    button.resize(200, 100);
+
     QObject::connect(&button, &QPushButton::clicked, &parker, &ParkingLot::send_signal);
 
     button.show();

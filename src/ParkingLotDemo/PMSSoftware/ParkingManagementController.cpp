@@ -10,10 +10,13 @@
 
 
 // namespace PMS {
-ParkingManagementController::ParkingManagementController() = default;
+ParkingManagementController::ParkingManagementController() {
+    this -> update = "1";
+};
 
 void ParkingManagementController::add_output_stream(Mediator* m) {
     this -> mediator = m;
+    this -> update = "1";
 } // end method
 
 // TODO: only point of this right now is to print something out to confirm comms
@@ -23,6 +26,7 @@ void ParkingManagementController::send_directive(std::string update) {
 
 void ParkingManagementController::receive_signal(std::string str) {
     std::cout << "PMC: Received Signal: " << str << "\n";
-    send_directive("FROM PMC: Received the signal.");
+    send_directive(this -> update);
+    this -> update = "2";
 } // end method
 // } // PMS
