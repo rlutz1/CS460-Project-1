@@ -8,24 +8,15 @@
 #include <QPainter>
 #include <QPropertyAnimation>
 
-class CustomPause : public QPauseAnimation {
-public:
-    CustomPause(int msecs, QObject *parent = nullptr)
-        : QPauseAnimation(msecs, parent) {}
 
-    signals:
-        void test() {}
-
-protected:
-
-
-
-    void updateCurrentTime(int currentTime) override {
-        // Custom logic during the pause
-        emit test();
-        QPauseAnimation::updateCurrentTime(currentTime);
-    }
-};
+// CustomPause::CustomPause(int msecs, QObject *parent) : QPauseAnimation(msecs, parent) {}
+//     // CustomPause::test() {}
+//
+// void CustomPause::updateCurrentTime(int currentTime) {
+//     // Custom logic during the pause
+//     emit test();
+//     QPauseAnimation::updateCurrentTime(currentTime);
+// }
 
 
 
@@ -51,10 +42,11 @@ QSequentialAnimationGroup* Vehicle::gen_animation_group(float x_dest, float y_de
     park_anim-> setEasingCurve(QEasingCurve::InCubic);
     park_anim->setStartValue(QPoint(x_dest, -50));
     park_anim->setEndValue(QPoint(x_dest, y_dest));
+    QObject::connect(park_anim, &QPropertyAnimation::finished, this, &Vehicle::simple);
     // enter_anim->start();
 
-    CustomPause pause(1000, this);
-    QObject::connect(&pause, &CustomPause::test, this, &Vehicle::simple);
+    // CustomPause pause(1000, this);
+    // QObject::connect(&pause, &CustomPause::test, this, &Vehicle::simple);
 
     QPropertyAnimation* unpark_anim = new QPropertyAnimation(this, "pos");
     unpark_anim->setDuration(1000);

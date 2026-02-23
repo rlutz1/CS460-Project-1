@@ -25,7 +25,16 @@ protected:
 
 };
 
-
+// class CustomPause : public QPauseAnimation {
+// public:
+//     CustomPause(int msecs, QObject *parent);
+//
+//     signals:
+//         void test();
+//
+// protected:
+//     void updateCurrentTime(int currentTime) override;
+// };
 
 
 #endif //CS460_PROJECT_1_VEHICLE_H
