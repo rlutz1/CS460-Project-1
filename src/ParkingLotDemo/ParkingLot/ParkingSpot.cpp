@@ -19,10 +19,12 @@ ParkingSpot::ParkingSpot() {
 }
 
 ParkingSpot::ParkingSpot(std::string spotId) {
-    ultrasonic_sensor = new ParkingSpotSensor(spotId + "|Sensor 1");
-    weight_sensor = new ParkingSpotSensor(spotId + "|Sensor 2");
+    setPos(0, -300);
+    ultrasonic_sensor = new ParkingSpotSensor(spotId + "|Sensor 1", this);
+    weight_sensor = new ParkingSpotSensor(spotId + "|Sensor 2", this);
     available = true; // TODO MAYBE
     this -> spotId = spotId;
+    setZValue(100);
     // setStyleSheet("background-color: black; border: medium dashed blue;");
     // setMaximumSize(QSize(50, 100));
 
@@ -45,6 +47,6 @@ void ParkingSpot::paint(QPainter *painter,
     const QStyleOptionGraphicsItem *option,
     QWidget *widget) {
     painter->setPen(QPen(Qt::black));
-    painter->setBrush(QBrush(Qt::green));
-    painter->drawRect(QRectF(0, -200, 50, 100));
+    painter->setBrush(QBrush(Qt::gray));
+    painter->drawRect(QRectF(pos().x(), pos().y(), 50, 100));
 }

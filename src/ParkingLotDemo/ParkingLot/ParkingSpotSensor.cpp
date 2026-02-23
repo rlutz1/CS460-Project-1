@@ -4,9 +4,13 @@
 
 #include "ParkingSpotSensor.h"
 
-ParkingSpotSensor::ParkingSpotSensor(std::string id) {
+#include <qpainter.h>
+
+ParkingSpotSensor::ParkingSpotSensor(std::string id, QGraphicsItem * parent) : QGraphicsItem(parent) {
+    // setParentItem(parent);
     this -> sensorId = id;
     this -> enabled = true;
+    setPos(parent->pos().x(), parent->pos().y()); // this makes it's orgin relative to the parent
 }
 
 void ParkingSpotSensor::enable() {
@@ -15,4 +19,20 @@ void ParkingSpotSensor::enable() {
 
 void ParkingSpotSensor::disable() {
     this -> enabled = false;
+}
+
+// REQUIRED FOR GRAPHICS ITEM
+QRectF ParkingSpotSensor::boundingRect() const {
+    qreal penWidth = 1;
+    return QRectF(-10 - penWidth / 2, -10 - penWidth / 2,
+                  20 + penWidth, 20 + penWidth);
+}
+
+// REQUIRED FOR GRAPHICS ITEM
+void ParkingSpotSensor::paint(QPainter *painter,
+    const QStyleOptionGraphicsItem *option,
+    QWidget *widget) {
+    painter->setPen(QPen(Qt::black));
+    painter->setBrush(QBrush(Qt::black));
+    painter->drawEllipse(QRectF(20, 45, 10, 10));
 }
