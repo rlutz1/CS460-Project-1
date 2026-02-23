@@ -14,21 +14,31 @@
 #include "ParkingSpot.h"
 
 // namespace ParkingLot {
-ParkingLot::ParkingLot(QWidget *parent) : QWidget(parent) {
+ParkingLot::ParkingLot(QWidget *parent) : QGraphicsView(parent) {
 
-    layout = new QHBoxLayout(this);
-    setLayout(layout);
-    // QPushButton *button = new QPushButton("testing", this);
-    // button->resize(200, 200); // this is not necessary
-    ParkingSpot* parking_spot_1 = new ParkingSpot("Spot 1", this);
-    ParkingSpot* parking_spot_2 = new ParkingSpot("Spot 2", this);
-    ParkingSpot* parking_spot_3 = new ParkingSpot("Spot 3", this);
-    parking_spots = {parking_spot_1, parking_spot_2, parking_spot_3};
-    for (ParkingSpot* parking_spot : parking_spots) {
-        layout->addWidget(parking_spot);
-    }
+    scene = new QGraphicsScene;
+    // myPopulateScene(&scene);
+    // QGraphicsRectItem *rect = scene.addRect(QRectF(0, 0, 100, 100));
+    // QGraphicsItem *item = scene.itemAt(50, 50, QTransform());
+    scene -> addRect(QRectF(50, 50, 100, 200), QPen(Qt::black), QBrush(Qt::green));
+    // QGraphicsView view(&scene);
+    setScene(scene);
+    // view.show();
 
-    std::cout << parking_spot_3->x();
+    // WITH HBOX AS QWIDGET:
+    // layout = new QHBoxLayout(this);
+    // setLayout(layout);
+    // // QPushButton *button = new QPushButton("testing", this);
+    // // button->resize(200, 200); // this is not necessary
+    // ParkingSpot* parking_spot_1 = new ParkingSpot("Spot 1", this);
+    // ParkingSpot* parking_spot_2 = new ParkingSpot("Spot 2", this);
+    // ParkingSpot* parking_spot_3 = new ParkingSpot("Spot 3", this);
+    // parking_spots = {parking_spot_1, parking_spot_2, parking_spot_3};
+    // for (ParkingSpot* parking_spot : parking_spots) {
+    //     layout->addWidget(parking_spot);
+    // }
+    //
+    // std::cout << parking_spot_3->x();
 
 };
 

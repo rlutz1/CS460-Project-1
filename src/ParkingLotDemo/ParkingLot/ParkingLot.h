@@ -7,6 +7,7 @@
 
 
 #include <QPushButton>
+#include <QGraphicsView>
 #include <string>
 #include <vector>
 
@@ -14,7 +15,7 @@ class Mediator;
 class ParkingSpot;
 
 // namespace ParkingLot {
-class ParkingLot : public QWidget {
+class ParkingLot : public QGraphicsView {
 
 public:
     ParkingLot(QWidget *parent);
@@ -28,6 +29,7 @@ public:
 private:
     Mediator* mediator;
     QLayout *layout;
+    QGraphicsScene *scene;
     // QPushButton* button;
     std::list<ParkingSpot*> parking_spots; // TODO: sizeof issue?
 
