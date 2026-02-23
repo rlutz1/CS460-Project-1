@@ -46,5 +46,5 @@ void ParkingSpot::paint(QPainter *painter,
     QWidget *widget) {
     painter->setPen(QPen(Qt::black));
     painter->setBrush(QBrush(Qt::green));
-    painter->drawRect(QRectF(0, 0, 100, 200));
+    painter->drawRect(QRectF(0, -200, 50, 100));
 }
