@@ -23,7 +23,7 @@ void ParkingLot::hardware_update(std::string str) {
         this -> button -> setStyleSheet("background-color: red; color: white;");
     } else {
         this -> button -> setStyleSheet("");
-    }8i
+    }
 } // end method
 
 void ParkingLot::add_component(void* component) {

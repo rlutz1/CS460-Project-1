@@ -4,10 +4,12 @@
 
 #ifndef CS460_PROJECT_1_PARKINGSPOTSENSOR_H
 #define CS460_PROJECT_1_PARKINGSPOTSENSOR_H
+#include <qwidget.h>
+// class QWidget;
 #include <string>
 
 
-class ParkingSpotSensor {
+class ParkingSpotSensor : public QWidget {
 public:
     std::string ID;
     bool enabled;

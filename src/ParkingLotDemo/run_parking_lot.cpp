@@ -1,5 +1,7 @@
 #include <iostream>
 #include <QApplication>
+#include <QMainWindow>
+#include <QVBoxLayout>
 #include <QPushButton>
 #include <QObject>
 #include <QSequentialAnimationGroup>
@@ -11,23 +13,36 @@
 int run_parking_lot(int argc, char *argv[]) {
 
     QApplication a(argc, argv);
+
+    QMainWindow* mainWindow = new QMainWindow();
+    QWidget* mainLayout = new QWidget(mainWindow);
+    QVBoxLayout* layout = new QVBoxLayout(mainLayout);
+    mainLayout -> setLayout(layout);
+
+    // ParkingLot parking_lot;
+    // layout -> addWidget((QWidget*) &parking_lot);
+
+
     QPushButton button("Sensor Trigger", nullptr);
     button.resize(200, 100);
+    layout -> addWidget(&button);
 
-    ParkingManagementController pmc;
-    ParkingLot parker;
-    Mediator mediator(&parker, &pmc);
-    std::cout << "Parking Lot Making\n";
-    parker.add_output_stream(&mediator);
-    parker.add_component(&button);
-    pmc.add_output_stream(&mediator);
+    // ParkingManagementController pmc;
+    // Mediator mediator(&parking_lot, &pmc);
+    // std::cout << "Parking Lot Making\n";
+    // parking_lot.add_output_stream(&mediator);
+    // parking_lot.add_component(&button);
+    // pmc.add_output_stream(&mediator);
+
     // pl.send_signal();
-    QSequentialAnimationGroup group;
+    // QSequentialAnimationGroup group;
 
-    QObject::connect(&button, &QPushButton::clicked, &parker, &ParkingLot::send_signal);
+    // QObject::connect(&button, &QPushButton::clicked, &parking_lot, &ParkingLot::send_signal);
 
-    button.show();
-
+    // mainWindow
+    // button.show();
+    mainWindow -> setCentralWidget(mainLayout);
+    mainWindow -> show();
 
 
 

@@ -28,6 +28,10 @@ add_executable(CS460_Project_1
         ParkingLotDemo/ParkingLot/ParkingSpot.h
         ParkingLotDemo/ParkingLot/ParkingSpotSensor.cpp
         ParkingLotDemo/ParkingLot/ParkingSpotSensor.h
+        ParkingLotDemo/ParkingLot/ParkingSpotLED.cpp
+        ParkingLotDemo/ParkingLot/ParkingSpotLED.h
+        ParkingLotDemo/ParkingLot/Vehicle.cpp
+        ParkingLotDemo/ParkingLot/Vehicle.h
 )
 target_link_libraries(CS460_Project_1
         Qt::Core

@@ -4,10 +4,11 @@
 
 #ifndef CS460_PROJECT_1_PARKINGSPOT_H
 #define CS460_PROJECT_1_PARKINGSPOT_H
+#include <qwidget.h>
 
 class ParkingSpotSensor;
 
-class ParkingSpot {
+class ParkingSpot : public QWidget{
 public:
     ParkingSpotSensor* ultrasonic_sensor;
     ParkingSpotSensor* weight_sensor;

@@ -8,7 +8,10 @@
 
 #include <QPushButton>
 #include <string>
+#include <vector>
+
 class Mediator;
+class ParkingSpot;
 
 // namespace ParkingLot {
 class ParkingLot : public QObject {
@@ -26,6 +29,7 @@ public:
 private:
     Mediator* mediator;
     QPushButton* button;
+    std::list<ParkingSpot*> parking_spots; // TODO: sizeof issue?
 };
 // } // ParkingLot
 
