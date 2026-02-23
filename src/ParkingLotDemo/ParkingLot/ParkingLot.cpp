@@ -33,4 +33,6 @@ void ParkingLot::add_component(void* component) {
 void ParkingLot::send_signal() {
     this -> mediator -> send_to_PMC("FROM PL: signal triggered!");
 } // end method
+
+// ParkingLot::
 // } // ParkingLot

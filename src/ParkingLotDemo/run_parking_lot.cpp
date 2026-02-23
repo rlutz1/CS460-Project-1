@@ -19,8 +19,8 @@ int run_parking_lot(int argc, char *argv[]) {
     QVBoxLayout* layout = new QVBoxLayout(mainLayout);
     mainLayout -> setLayout(layout);
 
-    // ParkingLot parking_lot;
-    // layout -> addWidget((QWidget*) &parking_lot);
+    ParkingLot parking_lot;
+    layout -> addWidget((QWidget*) &parking_lot);
 
 
     QPushButton button("Sensor Trigger", nullptr);

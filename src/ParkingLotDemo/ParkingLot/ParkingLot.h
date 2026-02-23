@@ -14,7 +14,7 @@ class Mediator;
 class ParkingSpot;
 
 // namespace ParkingLot {
-class ParkingLot : public QObject {
+class ParkingLot : public QWidget {
 
 public:
     ParkingLot();
@@ -30,6 +30,9 @@ private:
     Mediator* mediator;
     QPushButton* button;
     std::list<ParkingSpot*> parking_spots; // TODO: sizeof issue?
+
+protected:
+    // QSize sizeHint() const override;
 };
 // } // ParkingLot
 
