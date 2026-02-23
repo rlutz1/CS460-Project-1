@@ -3,23 +3,26 @@
 //
 
 #include "ParkingLot.h"
+#include "../Mediator/Mediator.h"
+#include <iostream>
 
-namespace ParkingLot {
-    ParkingLot::ParkingLot() = default;
+// namespace ParkingLot {
+ParkingLot::ParkingLot() = default;
 
-    ParkingLot::ParkingLot(PMS::ParkingManagementController pmc) {
-        signal_output_stream = pmc;
-    } // end constructor
+ParkingLot::ParkingLot(Mediator* m) {
+    this -> mediator = m;
+} // end constructor
 
-    void ParkingLot::add_output_stream(PMS::ParkingManagementController pmc) {
-        signal_output_stream = pmc;
-    } // end method
+void ParkingLot::add_output_stream(Mediator* m) {
+    this -> mediator = m;
+} // end method
 
-    void ParkingLot::hardware_update(std::string str) {
+void ParkingLot::hardware_update(std::string str) {
+    std::cout << "PL: Received Update to Hardware: \n";
+    std::cout << str;
+} // end method
 
-    } // end method
-
-    void ParkingLot::send_signal() {
-        signal_output_stream.receive_signal("FROM PL: signal triggered!");
-    } // end method
-} // ParkingLot
+void ParkingLot::send_signal() {
+    this -> mediator -> send_to_PMC("FROM PL: signal triggered!");
+} // end method
+// } // ParkingLot

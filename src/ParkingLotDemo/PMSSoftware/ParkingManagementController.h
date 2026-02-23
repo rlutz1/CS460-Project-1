@@ -6,21 +6,21 @@
 #define CS460_PROJECT_1_PARKINGMANAGEMENTCONTROLLER_H
 
 #include <string>
-#include "../ParkingLot/ParkingLot.h"
+// #include "../Mediator/Mediator.h"
+class Mediator;
 
-namespace PMS {
+// namespace PMS {
     class ParkingManagementController {
     public:
         ParkingManagementController();
 
-        void add_output_stream(ParkingLot::ParkingLot);
+        void add_output_stream(Mediator* pl);
         void receive_signal(std::string str);
-    private:
-        ParkingLot::ParkingLot hardware_output_stream;
-
         void send_directive(std::string update); // TODO: this is TEMPORARY! for testing.
+    private:
+        Mediator* mediator;
     };
-} // PMS
+// } // PMS
 
 
 #endif //CS460_PROJECT_1_PARKINGMANAGEMENTCONTROLLER_H

@@ -22,6 +22,8 @@ add_executable(CS460_Project_1
         ParkingLotDemo/PMSSoftware/ParkingManagementController.h
         ParkingLotDemo/ParkingLot/ParkingLot.cpp
         ParkingLotDemo/ParkingLot/ParkingLot.h
+        ParkingLotDemo/Mediator/Mediator.cpp
+        ParkingLotDemo/Mediator/Mediator.h
 )
 target_link_libraries(CS460_Project_1
         Qt::Core
