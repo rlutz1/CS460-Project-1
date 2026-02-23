@@ -17,13 +17,11 @@
 ParkingLot::ParkingLot(QWidget *parent) : QGraphicsView(parent) {
 
     scene = new QGraphicsScene;
-    // myPopulateScene(&scene);
-    // QGraphicsRectItem *rect = scene.addRect(QRectF(0, 0, 100, 100));
-    // QGraphicsItem *item = scene.itemAt(50, 50, QTransform());
-    scene -> addRect(QRectF(50, 50, 100, 200), QPen(Qt::black), QBrush(Qt::green));
-    // QGraphicsView view(&scene);
+    // scene -> addRect(QRectF(50, 50, 100, 200), QPen(Qt::black), QBrush(Qt::green));
+    ParkingSpot* parking_spot_1 = new ParkingSpot("Spot 1");
+    scene -> addItem(parking_spot_1);
     setScene(scene);
-    // view.show();
+
 
     // WITH HBOX AS QWIDGET:
     // layout = new QHBoxLayout(this);
