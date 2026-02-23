@@ -33,14 +33,18 @@ ParkingSpot::ParkingSpot(std::string spotId) {
 //     return QSize(50, 100);
 // }
 
+// REQUIRED FOR GRAPHICS ITEM
 QRectF ParkingSpot::boundingRect() const {
     qreal penWidth = 1;
     return QRectF(-10 - penWidth / 2, -10 - penWidth / 2,
                   20 + penWidth, 20 + penWidth);
 }
 
+// REQUIRED FOR GRAPHICS ITEM
 void ParkingSpot::paint(QPainter *painter,
     const QStyleOptionGraphicsItem *option,
     QWidget *widget) {
-    painter->drawRoundedRect(-10, -10, 20, 20, 5, 5);
+    painter->setPen(QPen(Qt::black));
+    painter->setBrush(QBrush(Qt::green));
+    painter->drawRect(QRectF(0, 0, 100, 200));
 }
