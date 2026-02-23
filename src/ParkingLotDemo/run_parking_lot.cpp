@@ -2,6 +2,7 @@
 #include <QApplication>
 #include <QPushButton>
 #include <QObject>
+#include <QSequentialAnimationGroup>
 #include "../run_demo.h"
 #include "Mediator/Mediator.h"
 #include "ParkingLot/ParkingLot.h"
@@ -21,7 +22,7 @@ int run_parking_lot(int argc, char *argv[]) {
     parker.add_component(&button);
     pmc.add_output_stream(&mediator);
     // pl.send_signal();
-
+    QSequentialAnimationGroup group;
 
     QObject::connect(&button, &QPushButton::clicked, &parker, &ParkingLot::send_signal);
 

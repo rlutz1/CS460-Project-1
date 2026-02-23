@@ -5,7 +5,7 @@
 #ifndef CS460_PROJECT_1_PARKINGLOT_H
 #define CS460_PROJECT_1_PARKINGLOT_H
 
-#include <QObject>
+
 #include <QPushButton>
 #include <string>
 class Mediator;
