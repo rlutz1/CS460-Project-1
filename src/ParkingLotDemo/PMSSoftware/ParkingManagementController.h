@@ -14,7 +14,7 @@ class Mediator;
         ParkingManagementController();
 
         void add_output_stream(Mediator* pl);
-        void receive_signal(std::string str);
+        void receive_signal(std::string update);
         void send_directive(std::string update); // TODO: this is TEMPORARY! for testing.
     private:
         Mediator* mediator;

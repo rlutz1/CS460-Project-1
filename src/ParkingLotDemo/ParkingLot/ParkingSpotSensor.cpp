@@ -34,5 +34,5 @@ void ParkingSpotSensor::paint(QPainter *painter,
     QWidget *widget) {
     painter->setPen(QPen(Qt::black));
     painter->setBrush(QBrush(Qt::black));
-    painter->drawEllipse(QRectF(20, 0, 10, 10));
+    painter->drawEllipse(QRectF(parentWidget()->x(), parentWidget()->y(), 10, 10));
 }

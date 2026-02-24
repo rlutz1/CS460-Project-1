@@ -9,20 +9,24 @@
 #include <QPauseAnimation>
 #include <QSequentialAnimationGroup>
 
+#include "ParkingLot.h"
+
 
 class Vehicle : public QGraphicsWidget {
 public:
     std::string vehicleId;
-    Vehicle(std::string vehicleId);
+    std::string destId;
+    Vehicle(std::string vehicleId, ParkingLot* parent, std::string destId);
     QSequentialAnimationGroup* gen_animation_group(float x_dest, float y_dest);
-public slots:
-    void trigger_vehicle_parked();
-    void trigger_vehicle_left();
+
 protected:
     // QSize sizeHint() const override;
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
            QWidget *widget) override;
+
+private:
+    ParkingLot* parent;
 
 };
 

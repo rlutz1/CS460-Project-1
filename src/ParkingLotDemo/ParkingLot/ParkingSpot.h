@@ -13,17 +13,16 @@
 class ParkingSpotSensor;
 
 class ParkingSpot : public QGraphicsWidget {// TODO REMOVE QOBJECT! TESTING ONLY!
-    // Q_OBJECT
-    // Q_PROPERTY(QPointF pos READ pos WRITE setPos)
 
 public:
     ParkingSpot();
     // ParkingSpot(std::string spotId, QWidget *parent);
-    ParkingSpot(std::string spotId);
+    ParkingSpot(std::string spotId, QPoint pos);
     ParkingSpotSensor* ultrasonic_sensor;
     ParkingSpotSensor* weight_sensor;
     bool available; // TODO MAYBE
     std::string spotId;
+    QPoint pos;
 
 protected:
     // QSize sizeHint() const override;

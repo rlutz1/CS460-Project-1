@@ -3,7 +3,7 @@
 //
 
 #include "Vehicle.h"
-
+// #include "ParkingLot.h"
 #include <iostream>
 #include <QPainter>
 #include <QPropertyAnimation>
@@ -21,9 +21,11 @@
 
 
 
-Vehicle::Vehicle(std::string vehicleId) {
+Vehicle::Vehicle(std::string vehicleId, ParkingLot* parent, std::string destId) {
     // setPos(0, 0);
     this -> vehicleId = vehicleId;
+    this -> destId = destId;
+    this -> parent = parent;
     setZValue(100);
 }
 
@@ -42,7 +44,8 @@ QSequentialAnimationGroup* Vehicle::gen_animation_group(float x_dest, float y_de
     park_anim-> setEasingCurve(QEasingCurve::InCubic);
     park_anim->setStartValue(QPoint(x_dest, -50));
     park_anim->setEndValue(QPoint(x_dest, y_dest));
-    connect(park_anim, &QPropertyAnimation::finished, this, &Vehicle::trigger_vehicle_parked);
+    // connect(park_anim, &QPropertyAnimation::finished, parent, &ParkingLot::trigger_vehicle_parked(this->vehicleId, true));
+    connect(park_anim, &QPropertyAnimation::finished, parent, [this]() { parent->trigger_vehicle_parked(this->destId, true); });
     // enter_anim->start();
 
     // CustomPause pause(1000, this);
@@ -53,19 +56,20 @@ QSequentialAnimationGroup* Vehicle::gen_animation_group(float x_dest, float y_de
     unpark_anim-> setEasingCurve(QEasingCurve::InCubic);
     unpark_anim->setStartValue(QPoint(x_dest, y_dest));
     unpark_anim->setEndValue(QPoint(x_dest, -50));
-    connect(unpark_anim, &QPropertyAnimation::finished, this, &Vehicle::trigger_vehicle_left);
+    connect(unpark_anim, &QPropertyAnimation::finished, parent, [this]() { parent->trigger_vehicle_left(this->destId, true); });
 
     QPropertyAnimation* exit_anim = new QPropertyAnimation(this, "pos");
     exit_anim->setDuration(1000);
     exit_anim-> setEasingCurve(QEasingCurve::InCubic);
     exit_anim->setStartValue(QPoint(x_dest, -50));
     exit_anim->setEndValue(QPoint(-50, -50));
-
+    // std::cout<<"vehicleId: "<<vehicleId<<std::endl;
     group->addAnimation(enter_anim);
     group->addAnimation(park_anim);
     group->addPause(1000);
     group->addAnimation(unpark_anim);
     group->addAnimation(exit_anim);
+    // std::cout<<"vehicleId: "<<vehicleId<<std::endl;
     return group;
 }
 
@@ -76,13 +80,7 @@ QRectF Vehicle::boundingRect() const {
                   20 + penWidth, 20 + penWidth);
 }
 
-void Vehicle::trigger_vehicle_parked() {
-    std::cout << this -> vehicleId << " parked." << std::endl;
-}
 
-void Vehicle::trigger_vehicle_left() {
-    std::cout << this -> vehicleId << " has left." << std::endl;
-}
 
 // REQUIRED FOR GRAPHICS ITEM
 void Vehicle::paint(QPainter *painter,
