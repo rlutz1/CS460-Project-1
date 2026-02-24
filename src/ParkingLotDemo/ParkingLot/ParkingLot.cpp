@@ -5,10 +5,6 @@
 #include "ParkingLot.h"
 #include "../Mediator/Mediator.h"
 #include <iostream>
-#include <QHBoxLayout>
-#include <QVBoxLayout>
-#include <QGridLayout>
-#include <QPushButton>
 #include <QPropertyAnimation>
 #include <QStackedLayout>
 #include <QParallelAnimationGroup>
@@ -27,23 +23,10 @@ ParkingLot::ParkingLot(QWidget *parent) : QGraphicsView(parent) {
     for (ParkingSpot* parking_spot : parking_spots) {
         scene -> addItem(parking_spot);
     }
+    this -> setRenderHint(QPainter::Antialiasing);
+    scene -> setBackgroundBrush(Qt::transparent);
+    this -> setAttribute(Qt::WA_TranslucentBackground);
     setScene(scene);
-
-    // WITH HBOX AS QWIDGET:
-    // layout = new QHBoxLayout(this);
-    // setLayout(layout);
-    // // QPushButton *button = new QPushButton("testing", this);
-    // // button->resize(200, 200); // this is not necessary
-    // ParkingSpot* parking_spot_1 = new ParkingSpot("Spot 1", this);
-    // ParkingSpot* parking_spot_2 = new ParkingSpot("Spot 2", this);
-    // ParkingSpot* parking_spot_3 = new ParkingSpot("Spot 3", this);
-    // parking_spots = {parking_spot_1, parking_spot_2, parking_spot_3};
-    // for (ParkingSpot* parking_spot : parking_spots) {
-    //     layout->addWidget(parking_spot);
-    // }
-    //
-    // std::cout << parking_spot_3->x();
-
 };
 
 void ParkingLot::add_output_stream(Mediator* m) {
@@ -51,21 +34,35 @@ void ParkingLot::add_output_stream(Mediator* m) {
 } // end method
 
 void ParkingLot::hardware_update(std::string update) {
-    // std::cout << "PL: Received Update to Hardware: "<< str << "\n";
+    std::cout << "PL: Received Update to Hardware. "<< "\n";
     // TESTING ONLY
     std::string delimiter = "|"; // hardcoded
-    std::string notification = update.substr(1, update.find(delimiter)); // notification is special key
+    std::string notification = update.substr(update.find(delimiter) + 1, update.length()); // notification is special key
+    std::string id = update.substr(0, update.find(delimiter));
     if (notification == "OCCUPIED_CHANGE_COLOR") {
         // update LED to red
+        // this is some really stupid code, and i'm aware, for some demonstration of concept *sobs*
+        for (ParkingSpot *ps: parking_spots) {
+            std::cout << ps->spotId << " " << id << std::endl;
+            if (ps->spotId == id) {
+                ps->update_led("OCCUPIED");
+                break;
+            }
+        }
 
     } else if (notification == "AVAILABLE_CHANGE_COLOR") {
         // update LED to available color
+        for (ParkingSpot *ps: parking_spots) {
+            if (ps->spotId == id) {
+                ps->update_led("AVAILABLE");
+                ps->available = true;
+                break;
+            }
+        }
     }
+    // this -> update();
+    this -> scene -> update(); // NEEEEED! this to fully repaint components
 } // end method
-
-// void ParkingLot::add_component(void* component) {
-//     this -> button = (QPushButton*) component;
-// }
 
 void ParkingLot::send_signal(std::string update) {
     this -> mediator -> send_to_PMC(update);
@@ -74,7 +71,7 @@ void ParkingLot::send_signal(std::string update) {
 void ParkingLot::run_demo() {
     demo_manager = new DemoManager(this);
     demo_manager -> init();
-    demo_manager -> run(3);
+    demo_manager -> run(2);
 }
 
 void ParkingLot::stop_demo() {
@@ -92,8 +89,12 @@ void ParkingLot::trigger_vehicle_left(std::string spotId, bool vehicle_detected)
     this->send_signal(spotId + "|UNPARKED");
 }
 
+void ParkingLot::add_to_scene(QGraphicsWidget* widget) {
+    scene -> addItem(widget);
+}
+
 QSize ParkingLot::sizeHint() const {
-    return QSize(500, 400);
+    return QSize(1000, 500);
 }
 
 /// ============================================================
@@ -112,8 +113,8 @@ void DemoManager::run(int n_vehicles) {
     std::cout << "running demo..." << std::endl;
 
     QParallelAnimationGroup* group = new QParallelAnimationGroup;
-    Vehicle* vehicle; bool assigned;
-    for (int i = 0; i < n_vehicles; i++) { // quick and dirty, better ways
+    Vehicle* vehicle = nullptr; bool assigned;
+    for (int i = 1; i <= n_vehicles; i++) { // quick and dirty, better ways
         assigned = false;
         for (ParkingSpot* ps : parent->get_parking_spots()) {
             if (ps->available) {
@@ -121,15 +122,15 @@ void DemoManager::run(int n_vehicles) {
                 // std::cout << "here1" << std::endl;
                 ps->available = false;
                 // std::cout << "here2" << std::endl;
-                group->addAnimation(vehicle -> gen_animation_group(ps->pos.x(), ps->pos.y()));
+                group->addAnimation(vehicle -> gen_animation_group(ps->pos.x(), ps->pos.y(), i * 1000));
                 // std::cout << "here3" << std::endl;
                 // std::cout << ps->x() << ps->y() << std::endl;
                 assigned = true;
                 break;
             }
         }
-        if (assigned) {
-            parent->get_scene()->addItem(vehicle);
+        if (assigned && vehicle) {
+            parent->add_to_scene(vehicle);
             // std::cout << "here4" << std::endl;
         }
 

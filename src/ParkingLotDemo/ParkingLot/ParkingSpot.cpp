@@ -26,6 +26,12 @@ ParkingSpot::ParkingSpot(std::string spotId, QPoint pos) {
     this->spotId = spotId;
     this->pos = pos;
     setZValue(1);
+
+    available_color = Qt::green;
+    occupied_color = Qt::red;
+    unavailable_color = Qt::darkYellow;
+
+    brush = QBrush(available_color);
     // setStyleSheet("background-color: black; border: medium dashed blue;");
     // setMaximumSize(QSize(50, 100));
 
@@ -35,6 +41,18 @@ ParkingSpot::ParkingSpot(std::string spotId, QPoint pos) {
 // QSize ParkingSpot::sizeHint() const {
 //     return QSize(50, 100);
 // }
+
+void ParkingSpot::update_led(std::string state) {
+    if (state == "AVAILABLE") {
+        brush = QBrush(available_color);
+    } else if (state == "OCCUPIED") {
+        brush = QBrush(occupied_color);
+    } else if (state == "UNAVAILABLE") {
+        brush = QBrush(unavailable_color);
+    }
+
+    // this -> update(); // updating entire scene seems to be the way.
+}
 
 // REQUIRED FOR GRAPHICS ITEM
 QRectF ParkingSpot::boundingRect() const {
@@ -48,7 +66,7 @@ void ParkingSpot::paint(QPainter *painter,
     const QStyleOptionGraphicsItem *option,
     QWidget *widget) {
     painter->setPen(QPen(Qt::black));
-    painter->setBrush(QBrush(Qt::gray));
+    painter->setBrush(brush);
     painter->drawRect(QRectF(pos.x(), pos.y(), 50, 100));
 }
 

@@ -17,7 +17,7 @@ public:
     std::string vehicleId;
     std::string destId;
     Vehicle(std::string vehicleId, ParkingLot* parent, std::string destId);
-    QSequentialAnimationGroup* gen_animation_group(float x_dest, float y_dest);
+    QSequentialAnimationGroup* gen_animation_group(float x_dest, float y_dest, int delay);
 
 protected:
     // QSize sizeHint() const override;

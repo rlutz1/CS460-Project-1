@@ -23,6 +23,12 @@ public:
     bool available; // TODO MAYBE
     std::string spotId;
     QPoint pos;
+    QBrush brush;
+    QColor available_color;
+    QColor occupied_color;
+    QColor unavailable_color;
+
+    void update_led(std::string state);
 
 protected:
     // QSize sizeHint() const override;

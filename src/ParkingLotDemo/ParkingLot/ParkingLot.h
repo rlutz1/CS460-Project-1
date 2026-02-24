@@ -26,6 +26,7 @@ public:
     void hardware_update(std::string str);
     void add_component(void* component);
     void send_signal(std::string update);
+    void add_to_scene(QGraphicsWidget* widget);
 
     public slots: // slots for signals to send to!
         void run_demo();
@@ -39,16 +40,13 @@ private:
     QGraphicsScene *scene;
     std::list<ParkingSpot*> parking_spots; // TODO: sizeof issue?
 public:
-    [[nodiscard]] QGraphicsScene * get_scene() const {
-        return scene;
-    }
 
     [[nodiscard]] std::list<ParkingSpot *> get_parking_spots() const {
         return parking_spots;
     }
 
 protected:
-    QSize sizeHint() const override;
+    QSize sizeHint() const override; // this is for controlling basic size of animation view
 };
 
 class DemoManager {
