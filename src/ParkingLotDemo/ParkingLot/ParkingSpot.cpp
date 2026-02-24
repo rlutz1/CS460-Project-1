@@ -57,8 +57,8 @@ void ParkingSpot::update_led(std::string state) {
 // REQUIRED FOR GRAPHICS ITEM
 QRectF ParkingSpot::boundingRect() const {
     qreal penWidth = 1;
-    return QRectF(-10 - penWidth / 2, -10 - penWidth / 2,
-                  20 + penWidth, 20 + penWidth);
+    return QRectF(0 , 0,
+                  49, 99);
 }
 
 // REQUIRED FOR GRAPHICS ITEM

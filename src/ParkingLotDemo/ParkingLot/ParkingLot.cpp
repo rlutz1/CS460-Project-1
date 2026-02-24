@@ -136,7 +136,7 @@ void DemoManager::run(int n_vehicles) {
 
     }
 
-
+    group->setLoopCount(-1);
     group->start();
     // std::cout << "here5" << std::endl;
     // group.duration(-1);
