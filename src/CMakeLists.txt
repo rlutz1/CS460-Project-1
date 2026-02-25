@@ -25,6 +25,9 @@ add_executable(CS460_Project_1
         PMS/run_demo.cpp
         PMS/run_demo.h
         PMS/Initialization.h
+        PMS/PMC/ParkingManagementController.cpp
+        PMS/PMC/ParkingManagementController.h
+        PMS/PMSGUI/DemoManager.cpp
 
 )
 

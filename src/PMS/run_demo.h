@@ -11,10 +11,11 @@ using std::vector;
 #include "Definitions/Identifiers.h" // this works, but trying to avoid headers in headers
 struct InitializationPackage;
 struct NumParkingLotComponents;
-
+class DemoManager;
+class QWidget;
 
 int run_demo(int argc, char *argv[]);
-void initWindow();
+void initWindow(QWidget& mainWindow, DemoManager& manager);
 InitializationPackage genInitPackage();
 GateId initGateId(GateType type);
 vector<SpotId> initSpotIds(NumParkingLotComponents numbers);

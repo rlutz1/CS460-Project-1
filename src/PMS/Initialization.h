@@ -6,6 +6,7 @@
 #define CS460_PROJECT_1_INITIALIZATION_H
 
 #include <vector>
+#include "Definitions/Identifiers.h"
 using std::vector;
 
 struct SpotId;

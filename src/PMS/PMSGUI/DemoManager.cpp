@@ -3,3 +3,8 @@
 //
 
 #include "DemoManager.h"
+#include "../Initialization.h"
+
+DemoManager::DemoManager(InitializationPackage initPackage) {
+    // TODO
+}

@@ -3,3 +3,8 @@
 //
 
 #include "ParkingManagementController.h"
+#include "../Initialization.h"
+
+ParkingManagementController::ParkingManagementController(InitializationPackage initPackage) {
+    // TODO
+}

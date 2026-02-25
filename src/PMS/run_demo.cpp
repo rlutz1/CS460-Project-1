@@ -12,6 +12,8 @@
 #include "Initialization.h"
 
 #include <vector>
+
+#include "PMC/ParkingManagementController.h"
 using std::vector;
 
 // #include "PMSSoftware/ParkingManagementController.h"
@@ -21,31 +23,32 @@ using std::vector;
 
 // main access point to boot up the demo -- gui and backend both
 int run_demo(int argc, char *argv[]) {
-
     QApplication a(argc, argv);
     InitializationPackage initPackage = genInitPackage(); // initialize config info for both front and backend
-    // initialize the front end
-    // initialize the backend
-    // initialize sink? or unnecessary step
-    // initWindow(); // initialize the window
-
+    DemoManager demoManager(initPackage); // initialize the front end
+    ParkingManagementController pmc(initPackage); // initialize the backend
+    // initialize sink? or unnecessary step -- leaving for eliud for now
+    QWidget mainWindow;
+    initWindow(mainWindow, demoManager); // initialize the window
+    mainWindow.show();
     return QApplication::exec();
 }
 
-void initWindow(DemoManager &manager) {
+void initWindow(QWidget& mainWindow, DemoManager& manager) {
     // setup main window layout
-    QWidget mainLayout;
-    QVBoxLayout layout(&mainLayout);
-    mainLayout.setLayout(&layout);
+    // QWidget mainWindow;
+    mainWindow.setMinimumSize(QSize(500, 500));
+    QVBoxLayout layout(&mainWindow);
+    mainWindow.setLayout(&layout);
     // todo: add mainLayout as parent layout to gui container for lot
 
-    QPushButton button("Start Demo", &mainLayout);
+    QPushButton button("Start Demo", &mainWindow);
     // TODO: next line
     // QObject::connect(&button, &QPushButton::clicked, &parking_lot, &ParkingLot::run_demo);
 
     // layout.addWidget(manager); // TODO: ensure this works, giving me type grief
     layout.addWidget(&button);
-    mainLayout.show();
+    // mainWindow.show();
 }
 
 
