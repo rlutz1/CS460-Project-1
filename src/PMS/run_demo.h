@@ -4,7 +4,8 @@
 
 #ifndef CS460_PROJECT_1_RUN_DEMO_H
 #define CS460_PROJECT_1_RUN_DEMO_H
-#include "Initialization.h"
+// #include "Initialization.h"
+struct InitializationPackage;
 
 int run_demo(int argc, char *argv[]);
 void initWindow();

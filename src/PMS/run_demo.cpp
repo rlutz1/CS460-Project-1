@@ -8,6 +8,8 @@
 #include "run_demo.h"
 // #include "Mediator/Mediator.h"
 #include "PMSGUI/DemoManager.h"
+#include "Definitions/Identifiers.h"
+#include "Initialization.h"
 // #include "PMSSoftware/ParkingManagementController.h"
 // #include "ParkingLot/ParkingSpot.h"
 
@@ -19,7 +21,7 @@ int run_demo(int argc, char *argv[]) {
     // initialize the front end
     // initialize the backend
     // initialize sink? or unnecessary step
-    initWindow(); // initialize the window
+    // initWindow(); // initialize the window
 
     return QApplication::exec();
 }
@@ -50,6 +52,9 @@ InitializationPackage initConfig() {
         .entranceGates = 1,
         .exitGates = 1
     };
+
+    InitializationPackage initPackage{};
+    return initPackage;
 
 
 }
