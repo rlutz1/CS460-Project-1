@@ -20,7 +20,11 @@ find_package(Qt6 COMPONENTS
         REQUIRED)
 
 #TODO: add your executables along the way . i.e. add_executable(<projName>  <sourceFiles>)
-add_executable(CS460_Project_1)
+add_executable(CS460_Project_1
+        main.cpp
+        main.h
+
+)
 
 
 target_link_libraries(CS460_Project_1
