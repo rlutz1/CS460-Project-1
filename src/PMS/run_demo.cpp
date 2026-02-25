@@ -18,16 +18,17 @@ using std::vector;
 // main access point to boot up the demo -- gui and backend both
 int run_demo(int argc, char *argv[]) {
     QApplication a(argc, argv);
+    QWidget mainWindow;
 
     InitializationPackage initPackage = genInitPackage(); // initialize config info for both front and backend
-    DemoManager demoManager(initPackage); // initialize the front end
+    DemoManager demoManager(&mainWindow, initPackage); // initialize the front end
     ParkingManagementController pmc(initPackage); // initialize the backend
     // initialize sink? or unnecessary step -- leaving for eliud for now
 
     // init the main window
     // there are issues with scoping of the following,
     // so it's here to avoid leaking and crashing on exit
-    QWidget mainWindow;
+
     mainWindow.setMinimumSize(QSize(1400, 600));
     QVBoxLayout layout(&mainWindow);
     mainWindow.setLayout(&layout);

@@ -4,9 +4,9 @@
 
 #ifndef CS460_PROJECT_1_GATE_H
 #define CS460_PROJECT_1_GATE_H
+#include <QGraphicsWidget>;
 
-
-class GateGUI {
+class GateGUI : QGraphicsWidget {
 };
 
 

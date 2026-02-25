@@ -4,9 +4,9 @@
 
 #ifndef CS460_PROJECT_1_PARKINGFLOOR_H
 #define CS460_PROJECT_1_PARKINGFLOOR_H
+#include <QGraphicsWidget>;
 
-
-class ParkingFloorGUI {
+class ParkingFloorGUI : QGraphicsWidget {
 };
 
 

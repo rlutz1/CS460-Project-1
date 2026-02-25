@@ -4,9 +4,9 @@
 
 #ifndef CS460_PROJECT_1_SPIKES_H
 #define CS460_PROJECT_1_SPIKES_H
+#include <QGraphicsWidget>;
 
-
-class SpikesGUI {
+class SpikesGUI : QGraphicsWidget {
 };
 
 

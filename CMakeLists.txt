@@ -30,6 +30,12 @@ add_executable(CS460_Project_1
         src/PMS/PMSGUI/DemoManager.cpp
         src/Admin/run_admin.cpp
         src/Admin/run_admin.h
+        src/PMS/PMSGUI/ParkingLot/ParkingLotGUI.cpp
+        src/PMS/PMSGUI/ParkingLot/ParkingLotGUI.h
+        src/PMS/PMSGUI/ParkingLot/ParkingSpotGUI.cpp
+        src/PMS/PMSGUI/ParkingLot/ParkingSpotGUI.h
+        src/PMS/PMSGUI/ParkingLot/ParkingFloorGUI.cpp
+        src/PMS/PMSGUI/ParkingLot/ParkingFloorGUI.h
 )
 
 

@@ -4,9 +4,9 @@
 
 #ifndef CS460_PROJECT_1_PARKINGSPOT_H
 #define CS460_PROJECT_1_PARKINGSPOT_H
+#include <QGraphicsWidget>;
 
-
-class ParkingSpotGUI {
+class ParkingSpotGUI : QGraphicsWidget {
 };
 
 

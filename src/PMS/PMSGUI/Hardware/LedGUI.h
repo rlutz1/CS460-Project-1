@@ -4,9 +4,9 @@
 
 #ifndef CS460_PROJECT_1_LEDGUI_H
 #define CS460_PROJECT_1_LEDGUI_H
+#include <QGraphicsWidget>;
 
-
-class LedGUI {
+class LedGUI : QGraphicsWidget {
 };
 
 
