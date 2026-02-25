@@ -5,13 +5,19 @@
 #ifndef CS460_PROJECT_1_RUN_DEMO_H
 #define CS460_PROJECT_1_RUN_DEMO_H
 
+#include <vector>
+using std::vector;
+
 #include "Definitions/Identifiers.h" // this works, but trying to avoid headers in headers
 struct InitializationPackage;
+struct NumParkingLotComponents;
 
 
 int run_demo(int argc, char *argv[]);
 void initWindow();
-InitializationPackage initConfig();
+InitializationPackage genInitPackage();
 GateId initGateId(GateType type);
+vector<SpotId> initSpotIds(NumParkingLotComponents numbers);
+void initSpotIterator(vector<SpotId>& spotIds, string prefix, char numSpots, FloorId floorId, SpotType type);
 
 #endif //CS460_PROJECT_1_RUN_DEMO_H

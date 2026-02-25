@@ -17,11 +17,13 @@ using std::vector;
 // #include "PMSSoftware/ParkingManagementController.h"
 // #include "ParkingLot/ParkingSpot.h"
 
+
+
 // main access point to boot up the demo -- gui and backend both
 int run_demo(int argc, char *argv[]) {
 
     QApplication a(argc, argv);
-    InitializationPackage initPackage = initConfig(); // initialize config info for both front and backend
+    InitializationPackage initPackage = genInitPackage(); // initialize config info for both front and backend
     // initialize the front end
     // initialize the backend
     // initialize sink? or unnecessary step
@@ -47,16 +49,8 @@ void initWindow(DemoManager &manager) {
 }
 
 
-
-// char normalSpotsFloor2;
-// char handicapSpotsFloor1;
-// char handicapSpotsFloor2;
-// char evSpotsFloor1;
-// char evSpotsFloor2;
-// char motorcycleSpotsFloor1;
-// char motorcycleSpotsFloor2;
-
-InitializationPackage initConfig() {
+//
+InitializationPackage genInitPackage() {
     // CONSTANTS, DO NOT CHANGE
     NumParkingLotComponents lotNumbers {
         .totalNormalSpots = 28,
@@ -95,6 +89,7 @@ InitializationPackage initConfig() {
     // wrap everything into a single package
     InitializationPackage initPackage{
         .numbers = lotNumbers,
+        .spotIds = spotIds,
         .entranceGateId = entranceGateId,
         .exitGateId = exitGateId,
     };
@@ -133,51 +128,72 @@ GateId initGateId(GateType type) {
     }
 }
 
-// struct FloorId {
-//     string uniqueId;
-// };
-//
-// // a sensor identifier
-// struct SensorId {
-//     string uniqueId;
-//     string parentSpotId;
-// };
-//
-// // a spot identifier
-// struct SpotId {
-//     string uniqueId;
-//     enum SpotType type;
-//     FloorId floorId;
-//     SensorId ultrasonicId;
-//     SensorId weightId;
-// };
-
+// initialize the spot ids into a simple vector for iteration
+// by both back and front end
 vector<SpotId> initSpotIds(NumParkingLotComponents numbers) {
-    // char totalNumSpots =
-    //     numbers.normalSpots + numbers.handicapSpots + numbers.evSpots + numbers.motorcycleSpots;
     vector<SpotId> spotIds;
+
     // init floor ids
     FloorId floor1Id {.uniqueId = "floor1"};
     FloorId floor2Id {.uniqueId = "floor2"};
 
     // ready enums
-    enum SpotType normalType = NORMAL;
-    enum SpotType handicapType = HANDICAP;
-    enum SpotType evType = EV;
-    enum SpotType motorcycleType = MOTORCYCLE;
+    SpotType normalType = NORMAL;
+    SpotType handicapType = HANDICAP;
+    SpotType evType = EV;
+    SpotType motorcycleType = MOTORCYCLE;
 
-    for (int i = 1; i <= numbers.normalSpotsFloor1; i++) {
-        string spotId = "N_" + floor1Id.uniqueId + "_spot" + std::to_string(i);
+    // INIT NORMALS -- FLOOR 1 & 2
+    initSpotIterator(spotIds, "N", numbers.normalSpotsFloor1, floor1Id, normalType);
+    initSpotIterator(spotIds, "N", numbers.normalSpotsFloor2, floor2Id, normalType);
+
+    // INIT HANDICAP -- FLOOR 1 & 2
+    initSpotIterator(spotIds, "H", numbers.handicapSpotsFloor1, floor1Id, handicapType);
+    initSpotIterator(spotIds, "H", numbers.handicapSpotsFloor2, floor2Id, handicapType);
+
+    // INIT EV -- FLOOR 1 & 2
+    initSpotIterator(spotIds, "EV", numbers.evSpotsFloor1, floor1Id, evType);
+    initSpotIterator(spotIds, "EV", numbers.evSpotsFloor2, floor2Id, evType);
+
+    // INIT MOTORCYCLE -- FLOOR 1 & 2
+    initSpotIterator(spotIds, "M", numbers.motorcycleSpotsFloor1, floor1Id, motorcycleType);
+    initSpotIterator(spotIds, "M", numbers.motorcycleSpotsFloor2, floor2Id, motorcycleType);
+
+    return spotIds;
+}
+
+// helper function to not have 20 copy pasted loops
+void initSpotIterator
+    (
+    vector<SpotId>& spotIds,
+    string prefix,
+    char numSpots,
+    FloorId floorId,
+    SpotType type
+    )
+{
+
+    for (int i = 1; i <= numSpots; i++) {
+        string spotId = prefix + "_" + floorId.uniqueId + "_spot" + std::to_string(i);
         spotIds.push_back(
           SpotId {
               .uniqueId = spotId,
-              .type = normalType,
+              .type = type,
+              .floorId = floorId,
               .ultrasonicId = SensorId {.uniqueId = "ultrasonic", .parentSpotId = spotId},
               .weightId = SensorId {.uniqueId = "weight", .parentSpotId = spotId}
           }
         );
     }
-
-
-
 }
+
+// only used for confirmation
+// void printInit(InitializationPackage package) {
+//     for (SpotId id : package.spotIds) {
+//         std::cout << id.uniqueId << std::endl;
+//     }
+//
+//     std::cout << package.entranceGateId.uniqueId << std::endl;
+//     std::cout << package.exitGateId.uniqueId << std::endl;
+//     std::cout << package.exitGateId.initOpenId.uniqueId << std::endl;
+// }
