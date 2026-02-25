@@ -20,7 +20,17 @@ find_package(Qt6 COMPONENTS
         REQUIRED)
 
 #TODO: add your executables along the way . i.e. add_executable(<projName>  <sourceFiles>)
-add_executable(CS460_Project_1)
+add_executable(CS460_Project_1
+        main.cpp
+        PMS/run_demo.cpp
+        PMS/run_demo.h
+        PMS/Initialization.h
+        PMS/PMC/ParkingManagementController.cpp
+        PMS/PMC/ParkingManagementController.h
+        PMS/PMSGUI/DemoManager.cpp
+        Admin/run_admin.cpp
+        Admin/run_admin.h
+)
 
 
 target_link_libraries(CS460_Project_1
