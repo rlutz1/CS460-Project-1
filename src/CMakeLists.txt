@@ -22,7 +22,9 @@ find_package(Qt6 COMPONENTS
 #TODO: add your executables along the way . i.e. add_executable(<projName>  <sourceFiles>)
 add_executable(CS460_Project_1
         main.cpp
-        main.h
+        PMS/run_demo.cpp
+        PMS/run_demo.h
+        PMS/Initialization.h
 
 )
 

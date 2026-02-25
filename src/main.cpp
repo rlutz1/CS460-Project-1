@@ -1,5 +1,5 @@
 
-#include "main.h"
+#include "PMS/run_demo.h"
 #include <string>
 #include <iostream>
 
@@ -9,7 +9,7 @@ using std::string;
 int main(int argc, char *argv[]) {
     if (((string)argv[1]).compare("-d") == 0) {
         cout << "Booting up parking demo..." << std::endl;
-        // run_parking_lot(argc, argv);
+        run_demo(argc, argv);
     } else {
         cout << "Booting up admin app..." << std::endl;
         // run_admin(argc, argv);

@@ -6,7 +6,7 @@
 #define CS460_PROJECT_1_DEMOMANAGER_H
 
 
-class DemoManager {
+class DemoManager : QWidget {
 };
 
 
