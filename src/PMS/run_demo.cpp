@@ -22,11 +22,7 @@ int run_demo(int argc, char *argv[]) {
     DemoManager demoManager(initPackage); // initialize the front end
     ParkingManagementController pmc(initPackage); // initialize the backend
     // initialize sink? or unnecessary step -- leaving for eliud for now
-    return initWindow(demoManager, argc, argv); // initialize the window
-}
 
-// main driver to create the outside window containing the demo pieces
-int initWindow(DemoManager& manager, int argc, char *argv[]) {
     QApplication application(argc, argv);
     // setup main window layout
     QWidget mainWindow;
@@ -48,6 +44,13 @@ int initWindow(DemoManager& manager, int argc, char *argv[]) {
     // TODO: availability display
     mainWindow.show();
     return QApplication::exec();
+
+    // return initWindow(demoManager, argc, argv); // initialize the window
+}
+
+// main driver to create the outside window containing the demo pieces
+int initWindow(DemoManager& manager, int argc, char *argv[]) {
+
 }
 
 

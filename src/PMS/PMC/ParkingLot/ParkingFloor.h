@@ -6,7 +6,7 @@
 #define CS460_PROJECT_1_PARKINGFLOOR_H
 
 
-class ParkingFloorGUI {
+class ParkingFloor {
 };
 
 

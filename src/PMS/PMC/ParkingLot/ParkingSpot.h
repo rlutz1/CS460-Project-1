@@ -6,7 +6,7 @@
 #define CS460_PROJECT_1_PARKINGSPOT_H
 
 
-class ParkingSpotGUI {
+class ParkingSpot {
 };
 
 
