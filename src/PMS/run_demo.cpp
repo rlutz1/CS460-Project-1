@@ -10,16 +10,10 @@
 #include "PMSGUI/DemoManager.h"
 #include "Definitions/Identifiers.h"
 #include "Initialization.h"
-
+#include "PMC/ParkingManagementController.h"
 #include <vector>
 
-#include "PMC/ParkingManagementController.h"
 using std::vector;
-
-// #include "PMSSoftware/ParkingManagementController.h"
-// #include "ParkingLot/ParkingSpot.h"
-
-
 
 // main access point to boot up the demo -- gui and backend both
 int run_demo(int argc, char *argv[]) {
@@ -28,31 +22,37 @@ int run_demo(int argc, char *argv[]) {
     DemoManager demoManager(initPackage); // initialize the front end
     ParkingManagementController pmc(initPackage); // initialize the backend
     // initialize sink? or unnecessary step -- leaving for eliud for now
-    QWidget mainWindow;
-    initWindow(mainWindow, demoManager); // initialize the window
-    mainWindow.show();
-    return QApplication::exec();
+    return initWindow(demoManager, argc, argv); // initialize the window
 }
 
-void initWindow(QWidget& mainWindow, DemoManager& manager) {
+// main driver to create the outside window containing the demo pieces
+int initWindow(DemoManager& manager, int argc, char *argv[]) {
+    QApplication application(argc, argv);
     // setup main window layout
-    // QWidget mainWindow;
-    mainWindow.setMinimumSize(QSize(500, 500));
+    QWidget mainWindow;
+    mainWindow.setMinimumSize(QSize(1400, 600));
     QVBoxLayout layout(&mainWindow);
     mainWindow.setLayout(&layout);
     // todo: add mainLayout as parent layout to gui container for lot
 
-    QPushButton button("Start Demo", &mainWindow);
-    // TODO: next line
+    QPushButton startSimpleDemoButton("Start Simple Demo", &mainWindow); // TODO disable both on click, enable stop
+    QPushButton startChaosDemoButton("Start Chaos Demo", &mainWindow); // TODO disable both on click, enable stop
+    QPushButton stopDemoButton("Start Chaos Demo", &mainWindow);// TODO disable this, enable both demo buttons
+    // TODO: next line, connections for all
     // QObject::connect(&button, &QPushButton::clicked, &parking_lot, &ParkingLot::run_demo);
 
     // layout.addWidget(manager); // TODO: ensure this works, giving me type grief
-    layout.addWidget(&button);
-    // mainWindow.show();
+    layout.addWidget(&startSimpleDemoButton);
+    layout.addWidget(&startChaosDemoButton);
+    layout.addWidget(&stopDemoButton);
+    // TODO: availability display
+    mainWindow.show();
+    return QApplication::exec();
 }
 
 
-//
+// generate the initialization package for both
+// front and back end
 InitializationPackage genInitPackage() {
     // CONSTANTS, DO NOT CHANGE
     NumParkingLotComponents lotNumbers {
@@ -81,7 +81,7 @@ InitializationPackage genInitPackage() {
     };
 
     // init the gate ids
-    enum GateType gate = ENTRANCE;
+    GateType gate = ENTRANCE;
     GateId entranceGateId = initGateId(gate);
     gate = EXIT;
     GateId exitGateId = initGateId(gate);

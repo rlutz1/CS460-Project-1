@@ -15,7 +15,7 @@ class DemoManager;
 class QWidget;
 
 int run_demo(int argc, char *argv[]);
-void initWindow(QWidget& mainWindow, DemoManager& manager);
+int initWindow(DemoManager& manager, int argc, char *argv[]);
 InitializationPackage genInitPackage();
 GateId initGateId(GateType type);
 vector<SpotId> initSpotIds(NumParkingLotComponents numbers);

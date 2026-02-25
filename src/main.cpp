@@ -1,5 +1,6 @@
 
 #include "PMS/run_demo.h"
+#include "Admin/run_admin.h"
 #include <string>
 #include <iostream>
 
@@ -12,6 +13,6 @@ int main(int argc, char *argv[]) {
         run_demo(argc, argv);
     } else {
         cout << "Booting up admin app..." << std::endl;
-        // run_admin(argc, argv);
+        run_admin(argc, argv);
     } // end if
 } // end main
