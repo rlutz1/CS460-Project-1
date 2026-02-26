@@ -13,6 +13,8 @@
 #include "PMC/ParkingManagementController.h"
 #include <vector>
 
+#include "PMSGUI/Availability/AvailabilityGUI.h"
+
 using std::vector;
 
 #define WINDOW_WIDTH 1400
@@ -24,14 +26,13 @@ int run_demo(int argc, char *argv[]) {
     QWidget mainWindow;
 
     InitializationPackage initPackage = genInitPackage(); // initialize config info for both front and backend
-    DemoManager demoManager(&mainWindow, initPackage); // initialize the front end
+    DemoManager demoManager(&mainWindow, initPackage, WINDOW_WIDTH, WINDOW_HEIGHT); // initialize the front end
     ParkingManagementController pmc(initPackage); // initialize the backend
     // initialize sink? or unnecessary step -- leaving for eliud for now
 
     // init the main window
     // there are issues with scoping of the following,
     // so it's here to avoid leaking and crashing on exit
-
     mainWindow.setMinimumSize(QSize(WINDOW_WIDTH, WINDOW_HEIGHT));
     QVBoxLayout layout(&mainWindow);
     mainWindow.setLayout(&layout);

@@ -12,6 +12,7 @@
 #include "../Hardware/SpikesGUI.h"
 
 class EntranceGateGUI : QGraphicsWidget {
+    Q_OBJECT;
 
 public:
     EntranceGateGUI(QGraphicsScene& scene, GateId id);

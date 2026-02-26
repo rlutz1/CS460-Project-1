@@ -7,6 +7,7 @@
 #include <QGraphicsWidget>
 
 class SpikesGUI : QGraphicsWidget {
+    Q_OBJECT;
 public:
     SpikesGUI();
 };

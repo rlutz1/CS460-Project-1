@@ -20,13 +20,12 @@ struct GateId;
 
 using std::map;
 
-
 // demo manager -- container for the graphic view and initiating the
 // stop and start of demos.
 class DemoManager : public QGraphicsView {
     Q_OBJECT;
 public:
-    DemoManager(QWidget* parent, InitializationPackage initPackage);
+    DemoManager(QWidget* parent, InitializationPackage initPackage, int width, int height);
 
 public slots: // slots for signals to send to!
     void runSimpleDemo();

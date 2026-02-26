@@ -12,6 +12,7 @@
 class QGraphicsScene;
 
 class GateGUI : QGraphicsWidget {
+    Q_OBJECT;
 
 public:
     GateGUI(QGraphicsScene& scene, InitializationPackage& initPackage);

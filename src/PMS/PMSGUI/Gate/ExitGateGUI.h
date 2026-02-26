@@ -13,6 +13,7 @@
 #include "../Hardware/SpikesGUI.h"
 
 class ExitGateGUI : QGraphicsWidget {
+    Q_OBJECT;
 public:
     ExitGateGUI(QGraphicsScene& scene, GateId id);
 

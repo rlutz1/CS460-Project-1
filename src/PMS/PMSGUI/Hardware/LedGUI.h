@@ -7,6 +7,7 @@
 #include <QGraphicsWidget>
 
 class LedGUI : QGraphicsWidget {
+    Q_OBJECT;
 
 public:
     LedGUI();

@@ -7,6 +7,11 @@
 #include <QGraphicsWidget>
 
 class ParkingSpotGUI : QGraphicsWidget {
+    Q_OBJECT;
+protected:
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+           QWidget *widget) override;
 };
 
 

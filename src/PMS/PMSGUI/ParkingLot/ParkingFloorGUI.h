@@ -11,8 +11,16 @@
 #include "../../Definitions/Identifiers.h"
 
 class ParkingFloorGUI : QGraphicsWidget {
+    Q_OBJECT;
 public:
-    ParkingFloorGUI(QGraphicsScene& scene, InitializationPackage& initPackage);
+    ParkingFloorGUI(QGraphicsScene& scene, InitializationPackage& initPackage, FloorId floorId);
+
+    FloorId floorId;
+
+protected:
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+           QWidget *widget) override;
 };
 
 

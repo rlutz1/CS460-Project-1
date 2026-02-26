@@ -14,8 +14,12 @@
 
 // this constructor initializes the parking lot, which is the wrapper
 // of the whole visual.
-DemoManager::DemoManager(QWidget* parent, InitializationPackage initPackage) : parkingLot(scene, initPackage), QGraphicsView(parent) {
-    this->setMinimumSize(QSize(parent->size()));
+DemoManager::DemoManager(QWidget* parent, InitializationPackage initPackage, int width, int height) :
+    parkingLot(scene, initPackage),
+    QGraphicsView(parent) {
+    this->setMinimumSize(QSize(width, height));
+    SizeAndLocation lotSL {.x = 0, .y = 0, .width = width, .height = height};
+    parkingLot.sl = lotSL;
     scene.addItem((QGraphicsWidget*) &parkingLot);
     setScene(&scene);
 }

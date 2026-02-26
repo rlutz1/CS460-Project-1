@@ -7,6 +7,14 @@
 #include <QGraphicsWidget>
 
 class VehicleGUI : QGraphicsWidget {
+
+public:
+    VehicleGUI();
+
+protected:
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+           QWidget *widget) override;
 };
 
 
