@@ -106,7 +106,7 @@ InitializationPackage genInitPackage() {
     GateId exitGateId = initGateId(gate);
 
     // init floor ids
-    FloorId floor1Id {.uniqueId = "floor1"};
+    FloorId floor1Id {.uniqueId = "floor1"}; // let roxanne know if you change this at all
     FloorId floor2Id {.uniqueId = "floor2"};
     vector<FloorId> floorIds;
     floorIds.push_back(floor1Id); floorIds.push_back(floor2Id);

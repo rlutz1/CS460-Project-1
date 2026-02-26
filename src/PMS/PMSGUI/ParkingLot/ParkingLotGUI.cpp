@@ -23,9 +23,17 @@ gate(scene, initPackage) {
     // init floors
     for (FloorId id: initPackage.floorIds) {
         ParkingFloorGUI floor(scene, initPackage, id);
+        if (id.uniqueId.compare("floor1") == 0  ) { // dirty, i know, but doable since we will not change
+            // floor.sl = {.x = -400, .y = 300, .width = 400, .height = 600};
+            floor.sl = {.x = 0, .y = 0, .width = 400, .height = 600};
+        } else {
+            floor.sl = {.x = 0, .y = 0, .width = 700, .height = 600};
+        }
         parkingFloors.push_back(&floor);
         scene.addItem((QGraphicsWidget*) &floor);
     } // end loop
+
+
     setZValue(0); // hard coded, needs to be underneath ALL
 } // end constructor
 
@@ -41,9 +49,10 @@ QRectF ParkingLotGUI::boundingRect() const {
 void ParkingLotGUI::paint(QPainter *painter,
     const QStyleOptionGraphicsItem *option,
     QWidget *widget) {
-    painter->setBackground(Qt::transparent);
-    painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
-    painter->setPen(QPen(Qt::black));
-    painter->setBrush(QBrush(Qt::darkGray));
-    painter->drawRect(QRectF(sl.x, sl.y, sl.width, sl.height));
+    // painter->setBackground(Qt::transparent);
+    // // painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
+    // painter->setPen(QPen(Qt::black));
+    // // painter->setBrush(QBrush(Qt::darkGray));
+    // painter->setBrush(QBrush(Qt::transparent));
+    // painter->drawRect(QRectF(sl.x, sl.y, sl.width, sl.height));
 }

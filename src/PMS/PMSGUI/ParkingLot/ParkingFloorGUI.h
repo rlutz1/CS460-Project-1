@@ -9,6 +9,7 @@
 
 #include "../../Initialization.h"
 #include "../../Definitions/Identifiers.h"
+#include "../GUIStructs/GUIStructs.h"
 
 class ParkingFloorGUI : QGraphicsWidget {
     Q_OBJECT;
@@ -16,6 +17,7 @@ public:
     ParkingFloorGUI(QGraphicsScene& scene, InitializationPackage& initPackage, FloorId floorId);
 
     FloorId floorId;
+    SizeAndLocation sl;
 
 protected:
     QRectF boundingRect() const override;

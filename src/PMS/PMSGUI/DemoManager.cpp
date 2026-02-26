@@ -18,8 +18,7 @@ DemoManager::DemoManager(QWidget* parent, InitializationPackage initPackage, int
     parkingLot(scene, initPackage),
     QGraphicsView(parent) {
     this->setMinimumSize(QSize(width, height));
-    SizeAndLocation lotSL {.x = 0, .y = 0, .width = width, .height = height};
-    parkingLot.sl = lotSL;
+    parkingLot.sl = {.x = 0, .y = 0, .width = width, .height = height};
     scene.addItem((QGraphicsWidget*) &parkingLot);
     setScene(&scene);
 }
