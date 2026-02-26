@@ -22,12 +22,10 @@ class ParkingLotGUI : QGraphicsWidget {
 public:
     ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initPackage);
 private:
-    // map<string, ParkingSpotGUI> parkingSpots; // TODO
+    map<SpotId, ParkingFloorGUI*> parkingFloors; // TODO
     // map<string, GateGUI> gates;
-    vector<ParkingFloorGUI*> parkingFloors;
-    // vector<GateGUI> gates;
+    // vector<ParkingFloorGUI*> parkingFloors;
     GateGUI gate;
-    // AvailabilityGUI availabilityDisplay;
 };
 
 

@@ -15,6 +15,7 @@
 // this constructor initializes the parking lot, which is the wrapper
 // of the whole visual.
 DemoManager::DemoManager(QWidget* parent, InitializationPackage initPackage) : parkingLot(scene, initPackage), QGraphicsView(parent) {
+    this->setMinimumSize(QSize(parent->size()));
     scene.addItem((QGraphicsWidget*) &parkingLot);
     setScene(&scene);
 }

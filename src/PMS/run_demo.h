@@ -17,7 +17,7 @@ class QWidget;
 int run_demo(int argc, char *argv[]);
 InitializationPackage genInitPackage();
 GateId initGateId(GateType type);
-vector<SpotId> initSpotIds(NumParkingLotComponents numbers);
+vector<SpotId> initSpotIds(NumParkingLotComponents numbers, const FloorId &floor1Id, const FloorId floor2Id);
 void initSpotIterator(vector<SpotId>& spotIds, string prefix, char numSpots, FloorId floorId, SpotType type);
 
 #endif //CS460_PROJECT_1_RUN_DEMO_H

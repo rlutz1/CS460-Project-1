@@ -104,8 +104,14 @@ InitializationPackage genInitPackage() {
     gate = EXIT;
     GateId exitGateId = initGateId(gate);
 
+    // init floor ids
+    FloorId floor1Id {.uniqueId = "floor1"};
+    FloorId floor2Id {.uniqueId = "floor2"};
+    vector<FloorId> floorIds;
+    floorIds.push_back(floor1Id); floorIds.push_back(floor2Id);
+
     // init the spot ids
-    vector<SpotId> spotIds = initSpotIds(lotNumbers);
+    vector<SpotId> spotIds = initSpotIds(lotNumbers, floor1Id, floor2Id);
 
     // wrap everything into a single package
     InitializationPackage initPackage{
@@ -113,6 +119,7 @@ InitializationPackage genInitPackage() {
         .spotIds = spotIds,
         .entranceGateId = entranceGateId,
         .exitGateId = exitGateId,
+        .floorIds = floorIds
     };
     return initPackage;
 }
@@ -151,12 +158,8 @@ GateId initGateId(GateType type) {
 
 // initialize the spot ids into a simple vector for iteration
 // by both back and front end
-vector<SpotId> initSpotIds(NumParkingLotComponents numbers) {
+vector<SpotId> initSpotIds(NumParkingLotComponents numbers, const FloorId &floor1Id, const FloorId floor2Id) {
     vector<SpotId> spotIds;
-
-    // init floor ids
-    FloorId floor1Id {.uniqueId = "floor1"};
-    FloorId floor2Id {.uniqueId = "floor2"};
 
     // ready enums
     SpotType normalType = NORMAL;
