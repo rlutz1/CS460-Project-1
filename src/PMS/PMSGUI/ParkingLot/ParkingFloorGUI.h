@@ -18,11 +18,16 @@ public:
 
     FloorId floorId;
     WidgetMeta wm;
+    vector<ParkingSpotGUI*> parkingSpots;
 
 protected:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
            QWidget *widget) override;
+
+private:
+    void initFloor(QGraphicsScene& scene, InitializationPackage& initPackage);
+    void initFirstFloor(QGraphicsScene& scene, InitializationPackage& initPackage);
 };
 
 

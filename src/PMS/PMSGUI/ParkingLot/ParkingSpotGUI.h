@@ -14,6 +14,7 @@ class ParkingSpotGUI : QGraphicsWidget {
 public:
     ParkingSpotGUI(QGraphicsScene& scene, InitializationPackage& initPackage, SpotId spotId, WidgetMeta widgetMeta);
 
+    SpotId spotId;
     WidgetMeta wm;
 
 protected:

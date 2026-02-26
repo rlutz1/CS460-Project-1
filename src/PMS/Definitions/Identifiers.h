@@ -25,10 +25,6 @@ enum GateType {
 // a floor identifier
 struct FloorId {
     string uniqueId;
-    // maybe for mapping...
-    // constexpr bool operator()(FloorId a, FloorId b) const {
-    //     return (a.uniqueId[) < (b.uniqueId);
-    // }
 };
 
 // a sensor identifier
@@ -40,7 +36,7 @@ struct SensorId {
 // a spot identifier
 struct SpotId {
     string uniqueId;
-    enum SpotType type;
+    SpotType type;
     FloorId floorId;
     SensorId ultrasonicId;
     SensorId weightId;

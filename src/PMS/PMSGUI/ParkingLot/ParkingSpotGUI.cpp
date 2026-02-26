@@ -9,11 +9,11 @@
 
 
 ParkingSpotGUI::ParkingSpotGUI(QGraphicsScene& scene, InitializationPackage& initPackage, SpotId spotId, WidgetMeta widgetMeta) :
-    wm(widgetMeta){
+    spotId(spotId),
+    wm(widgetMeta) {
     // set visual data
     resize(wm.width, wm.height);
-    // setPos(wm.x, wm.y);
-    setZValue(wm.zPos); // hard coded, needs to be underneath ALL
+    setZValue(wm.zPos);
 
     scene.addItem(this);
 

@@ -25,7 +25,6 @@ ParkingLotGUI::ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initP
     // set visual data
     // setGeometry(wm.x, wm.y, wm.width, wm.height);
     resize(wm.width, wm.height);
-    // setPos(wm.x, wm.y);
     setZValue(wm.zPos); // hard coded, needs to be underneath ALL
 
     std::cout << wm.x << wm.y << wm.width << wm.height << std::endl;
@@ -46,7 +45,7 @@ ParkingLotGUI::ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initP
             scene,
             initPackage,
             id,
-{.x = wm.x + 700, .y = wm.y, .width = wm.width / initPackage.numbers.floors, .height = wm.height,  .color = Qt::lightGray, .zPos = (wm.zPos + 1)}
+{.x = wm.x + wm.width / initPackage.numbers.floors, .y = wm.y, .width = wm.width / initPackage.numbers.floors, .height = wm.height,  .color = Qt::lightGray, .zPos = (wm.zPos + 1)}
             );
         }
         parkingFloors.push_back(floor);
