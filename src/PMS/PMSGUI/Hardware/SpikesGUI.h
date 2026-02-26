@@ -6,11 +6,20 @@
 #define CS460_PROJECT_1_SPIKES_H
 #include <QGraphicsWidget>
 
+#include "../GUIStructs/GUIStructs.h"
+
 class SpikesGUI : QGraphicsWidget {
     Q_OBJECT;
 public:
-    SpikesGUI();
-};
+    SpikesGUI(QGraphicsScene& scene, WidgetMeta widgetMeta);
 
+    WidgetMeta wm;
+
+protected:
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+           QWidget *widget) override;
+};
+.
 
 #endif //CS460_PROJECT_1_SPIKES_H

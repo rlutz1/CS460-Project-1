@@ -6,10 +6,22 @@
 #define CS460_PROJECT_1_SENSOR_H
 #include <QGraphicsWidget>
 
+#include "../../Definitions/Identifiers.h"
+#include "../GUIStructs/GUIStructs.h"
+
 class SensorGUI : QGraphicsWidget{
     Q_OBJECT;
 public:
-    SensorGUI();
+    SensorGUI(QGraphicsScene& scene, SensorId id, WidgetMeta widgetMeta);
+
+    WidgetMeta wm;
+    SensorId sensorId;
+
+protected:
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+           QWidget *widget) override;
+
 };
 
 
