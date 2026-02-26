@@ -12,16 +12,24 @@
 #include "../Hardware/SensorGUI.h"
 #include "../Hardware/SpikesGUI.h"
 
+#include "../GUIStructs/GUIStructs.h"
+
 class ExitGateGUI : QGraphicsWidget {
     Q_OBJECT;
 public:
-    ExitGateGUI(QGraphicsScene& scene, GateId id);
+    ExitGateGUI(QGraphicsScene& scene, InitializationPackage& initPackage, GateId id, WidgetMeta widgetMeta);
 
+    WidgetMeta wm;
     GateId id;
     LedGUI led;
     SensorGUI initOpenSensor;
     SensorGUI stayOpenSensor;
     SpikesGUI spikes;
+
+protected:
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+           QWidget *widget) override;
 };
 
 

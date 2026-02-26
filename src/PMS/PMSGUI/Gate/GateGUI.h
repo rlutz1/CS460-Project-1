@@ -9,17 +9,24 @@
 #include "ExitGateGUI.h"
 #include "../../Initialization.h"
 #include "../../Definitions/Identifiers.h"
+#include "../GUIStructs/GUIStructs.h"
 class QGraphicsScene;
 
 class GateGUI : QGraphicsWidget {
     Q_OBJECT;
 
 public:
-    GateGUI(QGraphicsScene& scene, InitializationPackage& initPackage);
+    GateGUI(QGraphicsScene& scene, InitializationPackage& initPackage, WidgetMeta widgetMeta);
 
+    WidgetMeta wm;
 private:
     EntranceGateGUI entranceGate;
     ExitGateGUI exitGate;
+
+protected:
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+           QWidget *widget) override;
 
 };
 
