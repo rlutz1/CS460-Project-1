@@ -26,8 +26,9 @@ protected:
            QWidget *widget) override;
 
 private:
-    void initFloor(QGraphicsScene& scene, InitializationPackage& initPackage);
+    void initGenFloor(QGraphicsScene& scene, InitializationPackage& initPackage);
     void initFirstFloor(QGraphicsScene& scene, InitializationPackage& initPackage);
+    // void initSpots(InitializationPackage& initPackage); // TODO: for separating the above monsters
 };
 
 
