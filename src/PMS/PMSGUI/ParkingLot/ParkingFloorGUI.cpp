@@ -10,10 +10,6 @@
 using std::cout;
 using std::stack;
 
-// quick use only. may expand usage later.
-struct Point {
-    int x; int y;
-};
 
 
 
