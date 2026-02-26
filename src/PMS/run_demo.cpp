@@ -13,36 +13,58 @@
 #include "PMC/ParkingManagementController.h"
 #include <vector>
 
+#include "PMSGUI/Availability/AvailabilityGUI.h"
+
 using std::vector;
+
+#define WINDOW_WIDTH 1400
+#define WINDOW_HEIGHT 600
 
 // main access point to boot up the demo -- gui and backend both
 int run_demo(int argc, char *argv[]) {
     QApplication a(argc, argv);
+    QWidget mainWindow;
 
     InitializationPackage initPackage = genInitPackage(); // initialize config info for both front and backend
-    DemoManager demoManager(initPackage); // initialize the front end
+    DemoManager demoManager(&mainWindow, initPackage, WINDOW_WIDTH, WINDOW_HEIGHT); // initialize the front end
     ParkingManagementController pmc(initPackage); // initialize the backend
     // initialize sink? or unnecessary step -- leaving for eliud for now
 
     // init the main window
     // there are issues with scoping of the following,
     // so it's here to avoid leaking and crashing on exit
-    QWidget mainWindow;
-    mainWindow.setMinimumSize(QSize(1400, 600));
+    mainWindow.setMinimumSize(QSize(WINDOW_WIDTH + 100, WINDOW_HEIGHT + 200));
     QVBoxLayout layout(&mainWindow);
     mainWindow.setLayout(&layout);
-    // todo: add mainLayout as parent layout to gui container for lot
+
+    // layout for bottom part of window
+    QWidget bottomContainer;
+    QHBoxLayout bottomLayout(&bottomContainer);
+
+    // layout for stacking the bottons on left sid
+    QWidget buttonContainer;
+    QVBoxLayout buttonLayout(&buttonContainer);
 
     QPushButton startSimpleDemoButton("Start Simple Demo", &mainWindow); // TODO disable both on click, enable stop
     QPushButton startChaosDemoButton("Start Chaos Demo", &mainWindow); // TODO disable both on click, enable stop
-    QPushButton stopDemoButton("Start Chaos Demo", &mainWindow);// TODO disable this, enable both demo buttons
+    QPushButton stopDemoButton("Stop Demo", &mainWindow);// TODO disable this, enable both demo buttons
     // TODO: next line, connections for all
     // QObject::connect(&button, &QPushButton::clicked, &parking_lot, &ParkingLot::run_demo);
 
-    // layout.addWidget(manager); // TODO: ensure this works, giving me type grief
-    layout.addWidget(&startSimpleDemoButton);
-    layout.addWidget(&startChaosDemoButton);
-    layout.addWidget(&stopDemoButton);
+    buttonLayout.addWidget(&startSimpleDemoButton);
+    buttonLayout.addWidget(&startChaosDemoButton);
+    buttonLayout.addWidget(&stopDemoButton);
+
+    // for displaying availability -> a vanilla widget
+    AvailabilityGUI availabilityDisplay;
+
+    // add to the bottom layout: buttons and availbility display
+    bottomLayout.addWidget(&buttonContainer);
+    bottomLayout.addWidget((QWidget*) &availabilityDisplay);
+
+    // adding main two containers to the UI
+    layout.addWidget(&demoManager);
+    layout.addWidget(&bottomContainer);
     mainWindow.show();
     return QApplication::exec();
 }
@@ -82,8 +104,14 @@ InitializationPackage genInitPackage() {
     gate = EXIT;
     GateId exitGateId = initGateId(gate);
 
+    // init floor ids
+    FloorId floor1Id {.uniqueId = "floor1"}; // let roxanne know if you change this at all
+    FloorId floor2Id {.uniqueId = "floor2"};
+    vector<FloorId> floorIds;
+    floorIds.push_back(floor1Id); floorIds.push_back(floor2Id);
+
     // init the spot ids
-    vector<SpotId> spotIds = initSpotIds(lotNumbers);
+    vector<SpotId> spotIds = initSpotIds(lotNumbers, floor1Id, floor2Id);
 
     // wrap everything into a single package
     InitializationPackage initPackage{
@@ -91,6 +119,7 @@ InitializationPackage genInitPackage() {
         .spotIds = spotIds,
         .entranceGateId = entranceGateId,
         .exitGateId = exitGateId,
+        .floorIds = floorIds
     };
     return initPackage;
 }
@@ -129,12 +158,8 @@ GateId initGateId(GateType type) {
 
 // initialize the spot ids into a simple vector for iteration
 // by both back and front end
-vector<SpotId> initSpotIds(NumParkingLotComponents numbers) {
+vector<SpotId> initSpotIds(NumParkingLotComponents numbers, const FloorId &floor1Id, const FloorId floor2Id) {
     vector<SpotId> spotIds;
-
-    // init floor ids
-    FloorId floor1Id {.uniqueId = "floor1"};
-    FloorId floor2Id {.uniqueId = "floor2"};
 
     // ready enums
     SpotType normalType = NORMAL;

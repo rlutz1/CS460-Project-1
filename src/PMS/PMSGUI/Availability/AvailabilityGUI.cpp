@@ -3,3 +3,7 @@
 //
 
 #include "AvailabilityGUI.h"
+
+AvailabilityGUI::AvailabilityGUI() {
+
+}

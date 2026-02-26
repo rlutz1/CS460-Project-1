@@ -36,6 +36,7 @@ struct InitializationPackage {
     vector<SpotId> spotIds;
     GateId entranceGateId;
     GateId exitGateId;
+    vector<FloorId> floorIds;
 };
 
 #endif //CS460_PROJECT_1_INITIALIZATION_H
