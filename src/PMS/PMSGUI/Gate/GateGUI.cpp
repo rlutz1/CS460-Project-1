@@ -3,3 +3,18 @@
 //
 
 #include "GateGUI.h"
+
+#include <QGraphicsScene>
+#include <QGraphicsWidget>
+
+
+
+GateGUI::GateGUI(QGraphicsScene &scene, InitializationPackage &initPackage) :
+    entranceGate(scene, initPackage.entranceGateId),
+    exitGate(scene, initPackage.exitGateId)
+    {
+
+    scene.addItem((QGraphicsWidget*) &exitGate);
+    scene.addItem((QGraphicsWidget*) &entranceGate);
+}
+

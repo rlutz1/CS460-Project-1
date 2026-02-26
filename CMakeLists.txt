@@ -36,6 +36,12 @@ add_executable(CS460_Project_1
         src/PMS/PMSGUI/ParkingLot/ParkingSpotGUI.h
         src/PMS/PMSGUI/ParkingLot/ParkingFloorGUI.cpp
         src/PMS/PMSGUI/ParkingLot/ParkingFloorGUI.h
+        src/PMS/PMSGUI/Gate/GateGUI.cpp
+        src/PMS/PMSGUI/Gate/GateGUI.h
+        src/PMS/PMSGUI/Gate/EntranceGateGUI.cpp
+        src/PMS/PMSGUI/Gate/EntranceGateGUI.h
+        src/PMS/PMSGUI/Gate/ExitGateGUI.cpp
+        src/PMS/PMSGUI/Gate/ExitGateGUI.h
 )
 
 

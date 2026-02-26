@@ -4,7 +4,7 @@
 
 #ifndef CS460_PROJECT_1_SENSOR_H
 #define CS460_PROJECT_1_SENSOR_H
-#include <QGraphicsWidget>;
+#include <QGraphicsWidget>
 
 class SensorGUI : QGraphicsWidget{
 };

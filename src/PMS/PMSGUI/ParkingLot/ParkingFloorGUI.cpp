@@ -3,3 +3,7 @@
 //
 
 #include "ParkingFloorGUI.h"
+
+ParkingFloorGUI::ParkingFloorGUI(QGraphicsScene &scene, InitializationPackage &initPackage) {
+
+}

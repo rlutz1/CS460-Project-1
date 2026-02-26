@@ -4,7 +4,7 @@
 
 #ifndef CS460_PROJECT_1_VEHICLE_H
 #define CS460_PROJECT_1_VEHICLE_H
-#include <QGraphicsWidget>;
+#include <QGraphicsWidget>
 
 class VehicleGUI : QGraphicsWidget {
 };

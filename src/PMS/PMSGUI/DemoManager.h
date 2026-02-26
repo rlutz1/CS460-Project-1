@@ -8,16 +8,15 @@
 #include <map>
 #include <QGraphicsView>
 
+#include "VehicleGUI.h"
 #include "ParkingLot/ParkingLotGUI.h"
-// class ParkingLotGUI;
-class QGraphicsScene;
+#include "../Initialization.h"
 
-#include "ParkingLot/ParkingLotGUI.h"
-// #include "ParkingLot/ParkingFloorGUI.h"
+class QGraphicsScene;
 class GateGUI;
 struct SpotId;
 struct GateId;
-#include "../Initialization.h";
+
 
 using std::map;
 
@@ -37,7 +36,7 @@ public slots: // slots for signals to send to!
 private:
     QGraphicsScene scene;
     ParkingLotGUI parkingLot;
-
+    vector<VehicleGUI*> vehicles;
 
     void initGraphicsMetadata();
 };

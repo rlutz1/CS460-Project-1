@@ -6,16 +6,16 @@
 #include "../Initialization.h"
 #include <QPoint>
 
+
 #include "ParkingLot/ParkingLotGUI.h"
 
 #define Y_ENTRY_TRACK (-100)
 #define Y_EXIT_TRACK 100
-#define Y_TOP_LOTS 300
-#define Y_BOTTOM_LOTS (-200)
-#define Y_GATE_CENTER 0
 
-
-DemoManager::DemoManager(QWidget* parent, InitializationPackage initPackage) : parkingLot(scene), QGraphicsView(parent) {
+// this constructor initializes the parking lot, which is the wrapper
+// of the whole visual.
+DemoManager::DemoManager(QWidget* parent, InitializationPackage initPackage) : parkingLot(scene, initPackage), QGraphicsView(parent) {
+    scene.addItem((QGraphicsWidget*) &parkingLot);
     setScene(&scene);
 }
 
