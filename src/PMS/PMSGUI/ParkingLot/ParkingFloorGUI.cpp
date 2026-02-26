@@ -99,25 +99,25 @@ void ParkingFloorGUI::initFirstFloor(QGraphicsScene& scene, InitializationPackag
             if (id.type == MOTORCYCLE) {
                 Point pt = motorcyclePlacements.top();
                 motorcyclePlacements.pop();
-                widgetMeta = {.x = pt.x, .y = pt.y, .width = spotWidth, .height = spotHeight, .color = Qt::yellow, .zPos = wm.zPos + 1};
+                widgetMeta = {.x = pt.x, .y = pt.y, .width = spotWidth, .height = spotHeight, .color = Qt::gray, .zPos = wm.zPos + 1};
             }
 
             if (id.type == NORMAL) {
                 Point pt = normalPlacements.top();
                 normalPlacements.pop();
-                widgetMeta = {.x = pt.x, .y = pt.y, .width = spotWidth, .height = spotHeight, .color = Qt::white, .zPos = wm.zPos + 1};
+                widgetMeta = {.x = pt.x, .y = pt.y, .width = spotWidth, .height = spotHeight, .color = Qt::gray, .zPos = wm.zPos + 1};
             }
 
             if (id.type == EV) {
                 Point pt = evPlacements.top();
                 evPlacements.pop();
-                widgetMeta = {.x = pt.x, .y = pt.y, .width = spotWidth, .height = spotHeight, .color = Qt::darkYellow, .zPos = wm.zPos + 1};
+                widgetMeta = {.x = pt.x, .y = pt.y, .width = spotWidth, .height = spotHeight, .color = Qt::gray, .zPos = wm.zPos + 1};
             }
 
             if (id.type == HANDICAP) {
                 Point pt = handicapPlacements.top();
                 handicapPlacements.pop();
-                widgetMeta = {.x = pt.x, .y = pt.y, .width = widerSpotWidth, .height = spotHeight, .color = Qt::blue, .zPos = wm.zPos + 1};
+                widgetMeta = {.x = pt.x, .y = pt.y, .width = widerSpotWidth, .height = spotHeight, .color = Qt::gray, .zPos = wm.zPos + 1};
             }
             ParkingSpotGUI* parkingSpot = new ParkingSpotGUI(
                 scene,
@@ -171,18 +171,18 @@ void ParkingFloorGUI::initGenFloor(QGraphicsScene& scene, InitializationPackage&
             if (id.type == NORMAL) {
                 Point pt = normalPlacements.top();
                 normalPlacements.pop();
-                widgetMeta = {.x = pt.x, .y = pt.y, .width = spotWidth, .height = spotHeight, .color = Qt::white, .zPos = wm.zPos + 1};
+                widgetMeta = {.x = pt.x, .y = pt.y, .width = spotWidth, .height = spotHeight, .color = Qt::gray, .zPos = wm.zPos + 1};
             }
             if (id.type == EV) {
                 Point pt = evPlacements.top();
                 evPlacements.pop();
-                widgetMeta = {.x = pt.x, .y = pt.y, .width = spotWidth, .height = spotHeight, .color = Qt::darkYellow, .zPos = wm.zPos + 1};
+                widgetMeta = {.x = pt.x, .y = pt.y, .width = spotWidth, .height = spotHeight, .color = Qt::gray, .zPos = wm.zPos + 1};
             }
 
             if (id.type == HANDICAP) {
                 Point pt = handicapPlacements.top();
                 handicapPlacements.pop();
-                widgetMeta = {.x = pt.x, .y = pt.y, .width = widerSpotWidth, .height = spotHeight, .color = Qt::blue, .zPos = wm.zPos + 1};
+                widgetMeta = {.x = pt.x, .y = pt.y, .width = widerSpotWidth, .height = spotHeight, .color = Qt::gray, .zPos = wm.zPos + 1};
             }
 
             ParkingSpotGUI* parkingSpot = new ParkingSpotGUI(
