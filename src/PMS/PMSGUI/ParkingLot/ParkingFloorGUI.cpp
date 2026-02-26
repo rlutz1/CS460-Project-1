@@ -15,9 +15,9 @@ ParkingFloorGUI::ParkingFloorGUI(QGraphicsScene& scene, InitializationPackage& i
         cout << "what the fuck" << std::endl;
     }
     cout << floorId.uniqueId << std::endl;
-    setPos(sl.x, sl.y);
+    setPos(wm.x, wm.y);
     setZValue(1);
-    resize(sl.width, sl.height);
+    resize(wm.width, wm.height);
     // setVisible(true);
     // this->show();
     scene.addItem(this);
@@ -31,8 +31,8 @@ ParkingFloorGUI::ParkingFloorGUI(QGraphicsScene& scene, InitializationPackage& i
 // REQUIRED FOR GRAPHICS ITEM
 QRectF ParkingFloorGUI::boundingRect() const {
     qreal penWidth = 1;
-    return QRectF(sl.x, sl.y, // this is BETTER
-                  sl.width, sl.height);
+    return QRectF(wm.x, wm.y, // this is BETTER
+                  wm.width, wm.height);
 }
 
 // REQUIRED FOR GRAPHICS ITEM
@@ -41,9 +41,8 @@ void ParkingFloorGUI::paint(QPainter *painter,
                             QWidget *widget) {
     cout << floorId.uniqueId << " painting" << std::endl;
     // painter->setBackground(Qt::transparent);
-    // painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
+    painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
     painter->setPen(QPen(Qt::black));
-    painter->setBrush(QBrush(sl.color));
-    // painter->drawRect(QRectF(sl.x, sl.y, sl.width, sl.height));
+    painter->setBrush(QBrush(wm.color));
     painter->drawRect(boundingRect());
 }

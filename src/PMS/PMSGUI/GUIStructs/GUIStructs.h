@@ -14,6 +14,7 @@ struct WidgetMeta {
     int width;
     int height;
     QColor color;
+    int zPos;
 };
 
 #endif //CS460_PROJECT_1_GUISTRUCTS_H
