@@ -9,12 +9,29 @@
 
 using std::cout;
 
+void initFirstFloor() {
+
+}
+
+void initFloor() {
+
+}
+
 ParkingFloorGUI::ParkingFloorGUI(QGraphicsScene& scene, InitializationPackage& initPackage, FloorId floorId, WidgetMeta widgetMeta) :
     floorId(floorId),
     wm(widgetMeta) {
-    setPos(wm.x, wm.y);
+    // visual data
+    // setPos(wm.x, wm.y);
     setZValue(wm.zPos);
     resize(wm.width, wm.height);
+
+    // init parking lots
+    if (floorId.uniqueId.compare("floor1") == 0) {
+        initFirstFloor();
+    } else {
+        initFloor();
+    }
+
     scene.addItem(this);
 }
 

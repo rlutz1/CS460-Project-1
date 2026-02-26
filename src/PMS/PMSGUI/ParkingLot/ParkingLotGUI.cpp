@@ -23,9 +23,11 @@ ParkingLotGUI::ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initP
     gate(scene, initPackage),
     wm(widgetMeta) {
     // set visual data
+    // setGeometry(wm.x, wm.y, wm.width, wm.height);
     resize(wm.width, wm.height);
-    setPos(wm.x, wm.y);
+    // setPos(wm.x, wm.y);
     setZValue(wm.zPos); // hard coded, needs to be underneath ALL
+
     std::cout << wm.x << wm.y << wm.width << wm.height << std::endl;
 
     // init floors
@@ -37,14 +39,14 @@ ParkingLotGUI::ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initP
             scene,
             initPackage,
             id,
-{.x = wm.x + 150, .y = wm.y, .width = 400, .height = wm.height,  .color = Qt::lightGray, .zPos = (wm.zPos + 1)}
+{.x = wm.x + 300, .y = wm.y, .width = 400, .height = wm.height,  .color = Qt::lightGray, .zPos = (wm.zPos + 1)}
             );
         } else {
             floor = new ParkingFloorGUI(
             scene,
             initPackage,
             id,
-{.x = wm.x + ((wm.width / initPackage.numbers.floors) / 2), .y = wm.y, .width = wm.width / initPackage.numbers.floors, .height = wm.height,  .color = Qt::lightGray, .zPos = (wm.zPos + 1)}
+{.x = wm.x + 700, .y = wm.y, .width = wm.width / initPackage.numbers.floors, .height = wm.height,  .color = Qt::lightGray, .zPos = (wm.zPos + 1)}
             );
         }
         parkingFloors.push_back(floor);
@@ -65,7 +67,7 @@ QRectF ParkingLotGUI::boundingRect() const {
 void ParkingLotGUI::paint(QPainter *painter,
     const QStyleOptionGraphicsItem *option,
     QWidget *widget) {
-    std::cout <<  "painting lot" << std::endl;
+    // std::cout <<  "painting lot" << std::endl;
     // painter->setBackground(Qt::transparent);
     painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
     painter->setPen(QPen(Qt::black));
