@@ -31,7 +31,7 @@ ParkingFloorGUI::ParkingFloorGUI(QGraphicsScene& scene, InitializationPackage& i
 // REQUIRED FOR GRAPHICS ITEM
 QRectF ParkingFloorGUI::boundingRect() const {
     qreal penWidth = 1;
-    return QRectF(0, 0, // this is BETTER
+    return QRectF(sl.x, sl.y, // this is BETTER
                   sl.width, sl.height);
 }
 
@@ -43,7 +43,7 @@ void ParkingFloorGUI::paint(QPainter *painter,
     // painter->setBackground(Qt::transparent);
     // painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
     painter->setPen(QPen(Qt::black));
-    painter->setBrush(QBrush(Qt::darkBlue));
+    painter->setBrush(QBrush(sl.color));
     // painter->drawRect(QRectF(sl.x, sl.y, sl.width, sl.height));
     painter->drawRect(boundingRect());
 }

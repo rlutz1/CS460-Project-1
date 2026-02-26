@@ -19,10 +19,9 @@ using std::cout;
 // this constructor initializes the parking lot, which is the wrapper
 // of the whole visual.
 DemoManager::DemoManager(QWidget* parent, InitializationPackage initPackage, int width, int height) :
-    parkingLot(scene, initPackage),
+    parkingLot(scene, initPackage, {.x = 0, .y = 0, .width = width, .height = height, .color = Qt::darkGray}),
     QGraphicsView(parent) {
     this->setMinimumSize(QSize(width, height));
-    parkingLot.sl = {.x = 0, .y = 0, .width = width, .height = height};
     // scene.addItem((QGraphicsWidget*) &parkingLot);
     cout << "we got this far..." << std::endl;
     setScene(&scene);

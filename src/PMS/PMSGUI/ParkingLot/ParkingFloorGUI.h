@@ -17,7 +17,7 @@ public:
     ParkingFloorGUI(QGraphicsScene& scene, InitializationPackage& initPackage, FloorId floorId);
 
     FloorId floorId;
-    SizeAndLocation sl;
+    WidgetMeta sl;
 
 protected:
     QRectF boundingRect() const override;

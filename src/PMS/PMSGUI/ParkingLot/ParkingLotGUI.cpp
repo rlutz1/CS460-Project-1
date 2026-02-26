@@ -19,17 +19,18 @@
 
 
 
-ParkingLotGUI::ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initPackage) :
-gate(scene, initPackage) {
+ParkingLotGUI::ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initPackage, WidgetMeta sl) :
+    gate(scene, initPackage),
+    sl(sl) {
     // init floors
     for (FloorId id: initPackage.floorIds) {
         // the scene object will delete ALL ITEMS on deconstruction. no cleanup required from us.
         ParkingFloorGUI* floor = new ParkingFloorGUI(scene, initPackage, id);
         if (id.uniqueId.compare("floor1") == 0  ) { // dirty, i know, but doable since we will not change
-            floor->sl = {.x = -400, .y = 300, .width = 400, .height = 600};
+            floor->sl = {.x = 300, .y = 0, .width = 400, .height = 600, .color = Qt::lightGray};
             // floor->sl = {.x = 0, .y = 0, .width = 400, .height = 600};
         } else {
-            floor->sl = {.x = 0, .y = 0, .width = 700, .height = 600};
+            floor->sl = {.x = 700, .y = 0, .width = 700, .height = 600,  .color = Qt::lightGray};
         }
         parkingFloors.push_back(floor);
     } // end loop
@@ -56,7 +57,7 @@ void ParkingLotGUI::paint(QPainter *painter,
     painter->setBackground(Qt::transparent);
     painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
     painter->setPen(QPen(Qt::black));
-    painter->setBrush(QBrush(Qt::darkGray));
+    painter->setBrush(QBrush(sl.color));
     // painter->setBrush(QBrush(Qt::transparent));
     painter->drawRect(QRectF(sl.x, sl.y, sl.width, sl.height));
 }

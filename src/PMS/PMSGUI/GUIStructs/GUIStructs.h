@@ -8,11 +8,12 @@
 
 // for ease of use to pass this to child widgets
 // only for use on front end
-struct SizeAndLocation {
+struct WidgetMeta {
     int x;
     int y;
     int width;
     int height;
+    QColor color;
 };
 
 #endif //CS460_PROJECT_1_GUISTRUCTS_H
