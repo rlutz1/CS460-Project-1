@@ -19,25 +19,38 @@
 
 
 
-ParkingLotGUI::ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initPackage, WidgetMeta wm) :
+ParkingLotGUI::ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initPackage, WidgetMeta widgetMeta) :
     gate(scene, initPackage),
-    wm(wm) {
-    // init floors
-    for (FloorId id: initPackage.floorIds) {
-        // the scene object will delete ALL ITEMS on deconstruction. no cleanup required from us.
-        ParkingFloorGUI* floor = new ParkingFloorGUI(scene, initPackage, id);
-        if (id.uniqueId.compare("floor1") == 0  ) { // dirty, i know, but doable since we will not change
-            floor->wm = {.x = 300, .y = 0, .width = 400, .height = 600, .color = Qt::lightGray, .zPos = wm.zPos + 1};
-        } else {
-            floor->wm = {.x = 700, .y = 0, .width = 700, .height = 600,  .color = Qt::lightGray, .zPos = wm.zPos + 1};
-        }
-        parkingFloors.push_back(floor);
-    } // end loop
-
+    wm(widgetMeta) {
     // set visual data
     resize(wm.width, wm.height);
     setPos(wm.x, wm.y);
     setZValue(wm.zPos); // hard coded, needs to be underneath ALL
+    std::cout << wm.x << wm.y << wm.width << wm.height << std::endl;
+
+    // init floors
+    ParkingFloorGUI* floor;
+    for (FloorId id: initPackage.floorIds) {
+        // the scene object will delete ALL ITEMS on deconstruction. no cleanup required from us.
+        if (id.uniqueId.compare("floor1") == 0) { // dirty, i know, but doable since we will not change
+            floor = new ParkingFloorGUI(
+            scene,
+            initPackage,
+            id,
+{.x = wm.x + 150, .y = wm.y, .width = 400, .height = wm.height,  .color = Qt::lightGray, .zPos = (wm.zPos + 1)}
+            );
+        } else {
+            floor = new ParkingFloorGUI(
+            scene,
+            initPackage,
+            id,
+{.x = wm.x + ((wm.width / initPackage.numbers.floors) / 2), .y = wm.y, .width = wm.width / initPackage.numbers.floors, .height = wm.height,  .color = Qt::lightGray, .zPos = (wm.zPos + 1)}
+            );
+        }
+        parkingFloors.push_back(floor);
+    } // end loop
+
+
     scene.addItem(this); // add myself to the scene
 } // end constructor
 

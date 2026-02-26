@@ -14,7 +14,7 @@
 class ParkingFloorGUI : QGraphicsWidget {
     Q_OBJECT;
 public:
-    ParkingFloorGUI(QGraphicsScene& scene, InitializationPackage& initPackage, FloorId floorId);
+    ParkingFloorGUI(QGraphicsScene& scene, InitializationPackage& initPackage, FloorId floorId, WidgetMeta widgetMeta);
 
     FloorId floorId;
     WidgetMeta wm;

@@ -9,23 +9,13 @@
 
 using std::cout;
 
-ParkingFloorGUI::ParkingFloorGUI(QGraphicsScene& scene, InitializationPackage& initPackage, FloorId floorId) :
-    floorId(floorId) {
-    if (!&scene) {
-        cout << "what the fuck" << std::endl;
-    }
-    cout << floorId.uniqueId << std::endl;
+ParkingFloorGUI::ParkingFloorGUI(QGraphicsScene& scene, InitializationPackage& initPackage, FloorId floorId, WidgetMeta widgetMeta) :
+    floorId(floorId),
+    wm(widgetMeta) {
     setPos(wm.x, wm.y);
-    setZValue(1);
+    setZValue(wm.zPos);
     resize(wm.width, wm.height);
-    // setVisible(true);
-    // this->show();
     scene.addItem(this);
-    // this->update();
-
-
-
-
 }
 
 // REQUIRED FOR GRAPHICS ITEM

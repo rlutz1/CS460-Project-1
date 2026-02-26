@@ -22,7 +22,7 @@ using std::map; // this may not work, remove if so
 class ParkingLotGUI : QGraphicsWidget {
     Q_OBJECT;
 public:
-    ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initPackage, WidgetMeta wm);
+    ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initPackage, WidgetMeta widgetMeta);
 
     WidgetMeta wm;
     vector<ParkingFloorGUI*> parkingFloors;
