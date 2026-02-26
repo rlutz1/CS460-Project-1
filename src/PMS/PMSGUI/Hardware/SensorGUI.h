@@ -7,6 +7,8 @@
 #include <QGraphicsWidget>
 
 class SensorGUI : QGraphicsWidget{
+public:
+    SensorGUI();
 };
 
 

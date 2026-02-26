@@ -8,13 +8,19 @@
 
 #include "../../Initialization.h"
 #include "../../Definitions/Identifiers.h"
+#include "../Hardware/LedGUI.h"
+#include "../Hardware/SensorGUI.h"
+#include "../Hardware/SpikesGUI.h"
 
 class ExitGateGUI : QGraphicsWidget {
 public:
     ExitGateGUI(QGraphicsScene& scene, GateId id);
 
     GateId id;
-
+    LedGUI led;
+    SensorGUI initOpenSensor;
+    SensorGUI stayOpenSensor;
+    SpikesGUI spikes;
 };
 
 

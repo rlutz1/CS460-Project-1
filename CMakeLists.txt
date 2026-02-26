@@ -42,6 +42,12 @@ add_executable(CS460_Project_1
         src/PMS/PMSGUI/Gate/EntranceGateGUI.h
         src/PMS/PMSGUI/Gate/ExitGateGUI.cpp
         src/PMS/PMSGUI/Gate/ExitGateGUI.h
+        src/PMS/PMSGUI/Hardware/SpikesGUI.cpp
+        src/PMS/PMSGUI/Hardware/SpikesGUI.h
+        src/PMS/PMSGUI/Hardware/SensorGUI.cpp
+        src/PMS/PMSGUI/Hardware/SensorGUI.h
+        src/PMS/PMSGUI/Hardware/LedGUI.cpp
+        src/PMS/PMSGUI/Hardware/LedGUI.h
 )
 
 

@@ -3,3 +3,7 @@
 //
 
 #include "SensorGUI.h"
+
+SensorGUI::SensorGUI() {
+
+}

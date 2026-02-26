@@ -7,6 +7,9 @@
 #include <QGraphicsWidget>
 #include "../../Initialization.h"
 #include "../../Definitions/Identifiers.h"
+#include "../Hardware/LedGUI.h"
+#include "../Hardware/SensorGUI.h"
+#include "../Hardware/SpikesGUI.h"
 
 class EntranceGateGUI : QGraphicsWidget {
 
@@ -14,6 +17,11 @@ public:
     EntranceGateGUI(QGraphicsScene& scene, GateId id);
 
     GateId id;
+    LedGUI led;
+    SensorGUI initOpenSensor;
+    SensorGUI stayOpenSensor;
+    SpikesGUI spikes;
+
 };
 
 

@@ -3,3 +3,7 @@
 //
 
 #include "LedGUI.h"
+
+LedGUI::LedGUI() {
+
+}
