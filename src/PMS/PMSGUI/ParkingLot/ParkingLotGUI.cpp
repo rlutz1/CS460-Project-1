@@ -26,6 +26,7 @@ gate(scene, initPackage) {
         parkingFloors.push_back(&floor);
         scene.addItem((QGraphicsWidget*) &floor);
     } // end loop
+    setZValue(0); // hard coded, needs to be underneath ALL
 } // end constructor
 
 
@@ -33,7 +34,7 @@ gate(scene, initPackage) {
 QRectF ParkingLotGUI::boundingRect() const {
     qreal penWidth = 1;
     return QRectF(0, 0, // this is BETTER
-                  14, 14);
+                  sl.width - penWidth, sl.height - penWidth);
 }
 
 // REQUIRED FOR GRAPHICS ITEM
@@ -41,9 +42,8 @@ void ParkingLotGUI::paint(QPainter *painter,
     const QStyleOptionGraphicsItem *option,
     QWidget *widget) {
     painter->setBackground(Qt::transparent);
-    // painter->setRenderHint(QPainter::Antialiasing);
     painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
     painter->setPen(QPen(Qt::black));
-    painter->setBrush(QBrush(Qt::blue));
-    painter->drawRect(QRectF(0, 0, 15, 15));
+    painter->setBrush(QBrush(Qt::darkGray));
+    painter->drawRect(QRectF(sl.x, sl.y, sl.width, sl.height));
 }

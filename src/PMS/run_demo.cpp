@@ -33,7 +33,7 @@ int run_demo(int argc, char *argv[]) {
     // init the main window
     // there are issues with scoping of the following,
     // so it's here to avoid leaking and crashing on exit
-    mainWindow.setMinimumSize(QSize(WINDOW_WIDTH, WINDOW_HEIGHT));
+    mainWindow.setMinimumSize(QSize(WINDOW_WIDTH + 100, WINDOW_HEIGHT + 200));
     QVBoxLayout layout(&mainWindow);
     mainWindow.setLayout(&layout);
     // todo: add mainLayout as parent layout to gui container for lot
