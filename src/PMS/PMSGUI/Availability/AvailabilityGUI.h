@@ -5,8 +5,11 @@
 #ifndef CS460_PROJECT_1_AVAILABILITYGUI_H
 #define CS460_PROJECT_1_AVAILABILITYGUI_H
 
+#include <QWidget>
 
-class AvailabilityGUI {
+class AvailabilityGUI : QWidget {
+public:
+    AvailabilityGUI();
 };
 
 
