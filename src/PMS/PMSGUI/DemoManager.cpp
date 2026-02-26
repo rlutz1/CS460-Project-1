@@ -31,6 +31,7 @@ DemoManager::DemoManager(QWidget* parent, InitializationPackage initPackage, int
 
 // run many vehicles with pseudorandomness
 void DemoManager::runChaosDemo() {
+    // TODO: below is copied from old code for ref
     // std::cout << "running demo..." << std::endl;
     //
     // QParallelAnimationGroup* group = new QParallelAnimationGroup;

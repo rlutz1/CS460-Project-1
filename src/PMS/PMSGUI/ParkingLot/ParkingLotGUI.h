@@ -33,16 +33,6 @@ protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
            QWidget *widget) override;
 
-private:
-    // QGraphicsScene* scene;
-
-
-private:
-    // map<FloorId, ParkingFloorGUI*> parkingFloors; // TODO
-    // map<string, GateGUI> gates;
-    // vector<ParkingFloorGUI*> parkingFloors;
-    // GateGUI gate;
-
 };
 
 

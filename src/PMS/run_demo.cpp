@@ -24,7 +24,6 @@ using std::vector;
 int run_demo(int argc, char *argv[]) {
     QApplication a(argc, argv);
     QWidget mainWindow;
-    // QObject::connect(&a, SIGNAL(aboutToQuit()), &mainWindow, SLOT(closing())); // TODO: i MAY need to write some cleanup tasks
 
     InitializationPackage initPackage = genInitPackage(); // initialize config info for both front and backend
     DemoManager demoManager(&mainWindow, initPackage, WINDOW_WIDTH, WINDOW_HEIGHT); // initialize the front end
@@ -37,7 +36,6 @@ int run_demo(int argc, char *argv[]) {
     mainWindow.setMinimumSize(QSize(WINDOW_WIDTH + 100, WINDOW_HEIGHT + 200));
     QVBoxLayout layout(&mainWindow);
     mainWindow.setLayout(&layout);
-    // todo: add mainLayout as parent layout to gui container for lot
 
     // layout for bottom part of window
     QWidget bottomContainer;
