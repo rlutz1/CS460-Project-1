@@ -16,9 +16,9 @@ class ParkingSpotGUI : QGraphicsWidget {
 public:
     ParkingSpotGUI(QGraphicsScene& scene, InitializationPackage& initPackage, SpotId spotId, WidgetMeta widgetMeta);
 
-    LedGUI led;
-    SensorGUI ultrasonicSensor;
-    SensorGUI weightSensor;
+    LedGUI* led;
+    // SensorGUI ultrasonicSensor;
+    // SensorGUI weightSensor;
     SpotId spotId;
     WidgetMeta wm;
 

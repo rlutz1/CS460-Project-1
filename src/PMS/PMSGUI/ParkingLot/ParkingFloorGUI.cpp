@@ -172,36 +172,48 @@ void ParkingFloorGUI::initGenFloor(QGraphicsScene& scene, InitializationPackage&
     // generate the new spots
     for (SpotId id : initPackage.spotIds) {
         if (id.floorId.uniqueId != "floor1") { // for general floors
-            ParkingSpotGUI* parkingSpot = new ParkingSpotGUI(
-            scene,
-            initPackage,
-            id,
-            {.x = wm.x, .y = wm.y, .width = spotWidth, .height = spotHeight, .color = Qt::white, .zPos = wm.zPos + 1}
-            );
+            WidgetMeta widgetMeta;
+            // ParkingSpotGUI* parkingSpot = new ParkingSpotGUI(
+            // scene,
+            // initPackage,
+            // id,
+            // {.x = wm.x, .y = wm.y, .width = spotWidth, .height = spotHeight, .color = Qt::white, .zPos = wm.zPos + 1}
+            // );
 
             if (id.type == NORMAL) {
                 Point pt = normalPlacements.top();
                 normalPlacements.pop();
                 // cout << pt.x << " " << pt.y << std::endl;
-                parkingSpot->wm.x = pt.x;
-                parkingSpot->wm.y = pt.y;
+                // parkingSpot->wm.x = pt.x;
+                // parkingSpot->wm.y = pt.y;
+                widgetMeta = {.x = pt.x, .y = pt.y, .width = spotWidth, .height = spotHeight, .color = Qt::white, .zPos = wm.zPos + 1};
                 // cout << parkingSpot->wm.x << " " << parkingSpot->wm.y << std::endl;
             }
             if (id.type == EV) {
-                parkingSpot->wm.color = Qt::darkYellow;
+                // parkingSpot->wm.color = Qt::darkYellow;
                 Point pt = evPlacements.top();
                 evPlacements.pop();
-                parkingSpot->wm.x = pt.x;
-                parkingSpot->wm.y = pt.y;
+                // parkingSpot->wm.x = pt.x;
+                // parkingSpot->wm.y = pt.y;
+                widgetMeta = {.x = pt.x, .y = pt.y, .width = spotWidth, .height = spotHeight, .color = Qt::darkYellow, .zPos = wm.zPos + 1};
+
             }
             if (id.type == HANDICAP) {
-                parkingSpot->wm.width = widerSpotWidth;
-                parkingSpot->wm.color = Qt::blue;
+                // parkingSpot->wm.width = widerSpotWidth;
+                // parkingSpot->wm.color = Qt::blue;
                 Point pt = handicapPlacements.top();
                 handicapPlacements.pop();
-                parkingSpot->wm.x = pt.x;
-                parkingSpot->wm.y = pt.y;
+                // parkingSpot->wm.x = pt.x;
+                // parkingSpot->wm.y = pt.y;
+                widgetMeta = {.x = pt.x, .y = pt.y, .width = widerSpotWidth, .height = spotHeight, .color = Qt::blue, .zPos = wm.zPos + 1};
             }
+
+            ParkingSpotGUI* parkingSpot = new ParkingSpotGUI(
+                scene,
+                initPackage,
+                id,
+                widgetMeta
+            );
             parkingSpots.push_back(parkingSpot);
         }
     }
