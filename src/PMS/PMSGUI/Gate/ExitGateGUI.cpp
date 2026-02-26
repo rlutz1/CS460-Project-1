@@ -7,7 +7,25 @@
 #include <QPainter>
 
 ExitGateGUI::ExitGateGUI(QGraphicsScene& scene, InitializationPackage& initPackage, GateId id, WidgetMeta widgetMeta) :
+led(
+    scene,
+    {.x = wm.x + (wm.width / 2), .y = wm.y, .width = 25, .height = 25, .color = Qt::gray, .zPos = (wm.zPos + 1)}
+    ),
+initOpenSensor(
+    scene,
+    id.initOpenId,
+    {.x = wm.x + wm.width + (wm.width / 2), .y = wm.y, .width = 25, .height = 25, .color = Qt::black, .zPos = (wm.zPos + 1)}
 
+    ),
+stayOpenSensor(
+    scene,
+    id.stayOpenId,
+    {.x = wm.x - 50, .y = wm.y, .width = 25, .height = 25, .color = Qt::black, .zPos = (wm.zPos + 1)}
+    ),
+spikes(
+    scene,
+    {.x = wm.x + wm.width + (wm.width / 2) + wm.width, .y = wm.y, .width = 25, .height = 100, .color = Qt::magenta, .zPos = (wm.zPos + 1)}
+    ),
     id(id),
     wm(widgetMeta) {
 
