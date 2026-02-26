@@ -8,6 +8,7 @@
 #include <QGraphicsWidget>
 #include "ParkingFloorGUI.h"
 #include "../Gate/GateGUI.h"
+#include "../Availability/AvailabilityGUI.h"
 #include "../../Initialization.h"
 #include "../../Definitions/Identifiers.h"
 class QGraphicsScene;
@@ -26,6 +27,7 @@ private:
     vector<ParkingFloorGUI*> parkingFloors;
     // vector<GateGUI> gates;
     GateGUI gate;
+    // AvailabilityGUI availabilityDisplay;
 };
 
 

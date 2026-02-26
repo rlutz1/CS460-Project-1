@@ -48,6 +48,8 @@ add_executable(CS460_Project_1
         src/PMS/PMSGUI/Hardware/SensorGUI.h
         src/PMS/PMSGUI/Hardware/LedGUI.cpp
         src/PMS/PMSGUI/Hardware/LedGUI.h
+        src/PMS/PMSGUI/Availability/AvailabilityGUI.cpp
+        src/PMS/PMSGUI/Availability/AvailabilityGUI.h
 )
 
 

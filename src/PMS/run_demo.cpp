@@ -15,6 +15,9 @@
 
 using std::vector;
 
+#define WINDOW_WIDTH 1400
+#define WINDOW_HEIGHT 600
+
 // main access point to boot up the demo -- gui and backend both
 int run_demo(int argc, char *argv[]) {
     QApplication a(argc, argv);
@@ -29,10 +32,18 @@ int run_demo(int argc, char *argv[]) {
     // there are issues with scoping of the following,
     // so it's here to avoid leaking and crashing on exit
 
-    mainWindow.setMinimumSize(QSize(1400, 600));
+    mainWindow.setMinimumSize(QSize(WINDOW_WIDTH, WINDOW_HEIGHT));
     QVBoxLayout layout(&mainWindow);
     mainWindow.setLayout(&layout);
     // todo: add mainLayout as parent layout to gui container for lot
+
+    // layout for bottom part of window
+    QWidget bottomContainer;
+    QHBoxLayout bottomLayout(&bottomContainer);
+
+    // layout for stacking the bottons on left sid
+    QWidget buttonContainer;
+    QVBoxLayout buttonLayout(&buttonContainer);
 
     QPushButton startSimpleDemoButton("Start Simple Demo", &mainWindow); // TODO disable both on click, enable stop
     QPushButton startChaosDemoButton("Start Chaos Demo", &mainWindow); // TODO disable both on click, enable stop
@@ -40,10 +51,20 @@ int run_demo(int argc, char *argv[]) {
     // TODO: next line, connections for all
     // QObject::connect(&button, &QPushButton::clicked, &parking_lot, &ParkingLot::run_demo);
 
-    // layout.addWidget(manager); // TODO: ensure this works, giving me type grief
-    layout.addWidget(&startSimpleDemoButton);
-    layout.addWidget(&startChaosDemoButton);
-    layout.addWidget(&stopDemoButton);
+    buttonLayout.addWidget(&startSimpleDemoButton);
+    buttonLayout.addWidget(&startChaosDemoButton);
+    buttonLayout.addWidget(&stopDemoButton);
+
+    // for displaying availability -> a vanilla widget
+    AvailabilityGUI availabilityDisplay;
+
+    // add to the bottom layout: buttons and availbility display
+    bottomLayout.addWidget(&buttonContainer);
+    bottomLayout.addWidget((QWidget*) &availabilityDisplay);
+
+    // adding main two containers to the UI
+    layout.addWidget(&demoManager);
+    layout.addWidget(&bottomContainer);
     mainWindow.show();
     return QApplication::exec();
 }

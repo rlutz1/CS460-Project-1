@@ -17,7 +17,8 @@
 
 
 
-ParkingLotGUI::ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initPackage) : gate(scene, initPackage) {
+ParkingLotGUI::ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initPackage) :
+gate(scene, initPackage) {
 
     // init floors
     for (int i = 0; i < initPackage.numbers.floors; i++) {
