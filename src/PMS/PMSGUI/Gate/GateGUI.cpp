@@ -26,8 +26,6 @@ GateGUI::GateGUI(QGraphicsScene& scene, InitializationPackage& initPackage, Widg
     setZValue(wm.zPos);
 
     scene.addItem(this);
-    // scene.addItem((QGraphicsWidget*) &exitGate);
-    // scene.addItem((QGraphicsWidget*) &entranceGate);
 }
 
 

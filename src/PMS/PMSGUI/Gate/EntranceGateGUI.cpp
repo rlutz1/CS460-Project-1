@@ -32,10 +32,6 @@ EntranceGateGUI::EntranceGateGUI(QGraphicsScene& scene, InitializationPackage& i
     setZValue(wm.zPos);
 
     scene.addItem(this);
-    // scene.addItem((QGraphicsWidget*) &led);
-    // scene.addItem((QGraphicsWidget*) &initOpenSensor);
-    // scene.addItem((QGraphicsWidget*) &stayOpenSensor);
-    // scene.addItem((QGraphicsWidget*) &spikes);
 }
 
 // REQUIRED FOR GRAPHICS ITEM
