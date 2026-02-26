@@ -10,7 +10,7 @@
 #include "../../Initialization.h"
 #include "../../Definitions/Identifiers.h"
 #include "../GUIStructs/GUIStructs.h"
-class QGraphicsScene;
+#include <QGraphicsScene>
 
 class GateGUI : QGraphicsWidget {
     Q_OBJECT;

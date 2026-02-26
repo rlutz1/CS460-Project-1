@@ -20,7 +20,10 @@
 
 
 ParkingLotGUI::ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initPackage, WidgetMeta widgetMeta) :
-    gate(scene, initPackage),
+    gate(
+        scene,
+        initPackage,
+        {.x = wm.x, .y = wm.y + 150, .width = 300, .height = 300, .color = Qt::black, .zPos = (wm.zPos + 1)}),
     wm(widgetMeta) {
     // set visual data
     // setGeometry(wm.x, wm.y, wm.width, wm.height);

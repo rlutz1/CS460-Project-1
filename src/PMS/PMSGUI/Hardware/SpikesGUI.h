@@ -20,6 +20,6 @@ protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
            QWidget *widget) override;
 };
-.
+
 
 #endif //CS460_PROJECT_1_SPIKES_H

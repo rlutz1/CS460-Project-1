@@ -8,6 +8,7 @@
 
 EntranceGateGUI::EntranceGateGUI(QGraphicsScene& scene, InitializationPackage& initPackage, GateId id, WidgetMeta widgetMeta) :
 
+
     id(id),
     wm(widgetMeta) {
 
