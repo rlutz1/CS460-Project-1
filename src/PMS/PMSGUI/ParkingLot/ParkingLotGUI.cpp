@@ -22,24 +22,20 @@
 ParkingLotGUI::ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initPackage) :
 gate(scene, initPackage) {
     // init floors
-
-    resize(sl.width, sl.height);
     for (FloorId id: initPackage.floorIds) {
+        // the scene object will delete ALL ITEMS on deconstruction. no cleanup required from us.
         ParkingFloorGUI* floor = new ParkingFloorGUI(scene, initPackage, id);
         if (id.uniqueId.compare("floor1") == 0  ) { // dirty, i know, but doable since we will not change
-            // floor.sl = {.x = -400, .y = 300, .width = 400, .height = 600};
-            floor->sl = {.x = 0, .y = 0, .width = 400, .height = 600};
+            floor->sl = {.x = -400, .y = 300, .width = 400, .height = 600};
+            // floor->sl = {.x = 0, .y = 0, .width = 400, .height = 600};
         } else {
             floor->sl = {.x = 0, .y = 0, .width = 700, .height = 600};
         }
         parkingFloors.push_back(floor);
-        // this -> scene -> addItem((QGraphicsWidget*) &floor); // TODO
-        // scene.addItem((QGraphicsWidget*) &floor); // TODO
     } // end loop
-    // ParkingFloorGUI floor(scene, initPackage, {.uniqueId = "TEST"}); // not incurring an additional call
-    // parkingFloors.push_back(&floor);
 
-    setPos(0, 0);
+    resize(sl.width, sl.height);
+    setPos(sl.x, sl.y);
     setZValue(0); // hard coded, needs to be underneath ALL
     scene.addItem(this); // TODO: this still works! so this is not necessarily the issue, passing it
 } // end constructor

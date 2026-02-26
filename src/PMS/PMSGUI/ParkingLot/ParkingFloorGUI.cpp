@@ -15,13 +15,13 @@ ParkingFloorGUI::ParkingFloorGUI(QGraphicsScene& scene, InitializationPackage& i
         cout << "what the fuck" << std::endl;
     }
     cout << floorId.uniqueId << std::endl;
-    setPos(0, 0);
-    setZValue(100);
+    setPos(sl.x, sl.y);
+    setZValue(1);
     resize(sl.width, sl.height);
-    setVisible(true);
-    this->show();
+    // setVisible(true);
+    // this->show();
     scene.addItem(this);
-    this->update();
+    // this->update();
 
 
 
@@ -32,7 +32,7 @@ ParkingFloorGUI::ParkingFloorGUI(QGraphicsScene& scene, InitializationPackage& i
 QRectF ParkingFloorGUI::boundingRect() const {
     qreal penWidth = 1;
     return QRectF(0, 0, // this is BETTER
-                  50, 50);
+                  sl.width, sl.height);
 }
 
 // REQUIRED FOR GRAPHICS ITEM

@@ -25,12 +25,6 @@ DemoManager::DemoManager(QWidget* parent, InitializationPackage initPackage, int
     parkingLot.sl = {.x = 0, .y = 0, .width = width, .height = height};
     // scene.addItem((QGraphicsWidget*) &parkingLot);
     cout << "we got this far..." << std::endl;
-    // for (ParkingFloorGUI* floor : parkingLot.parkingFloors) {
-    //     cout << "something" << std::endl;
-    //     // scene.addItem((QGraphicsWidget*) floor);
-    // }
-    // parkingFloors = &(parkingLot.parkingFloors);
-    this -> show();
     setScene(&scene);
 }
 
