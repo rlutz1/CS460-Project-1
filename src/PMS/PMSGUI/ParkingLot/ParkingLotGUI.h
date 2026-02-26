@@ -25,18 +25,23 @@ public:
     ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initPackage);
 
     SizeAndLocation sl;
+    vector<ParkingFloorGUI*> parkingFloors;
+    GateGUI gate;
 
 protected:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
            QWidget *widget) override;
 
+private:
+    // QGraphicsScene* scene;
+
 
 private:
     // map<FloorId, ParkingFloorGUI*> parkingFloors; // TODO
     // map<string, GateGUI> gates;
-    vector<ParkingFloorGUI*> parkingFloors;
-    GateGUI gate;
+    // vector<ParkingFloorGUI*> parkingFloors;
+    // GateGUI gate;
 
 };
 

@@ -3,8 +3,12 @@
 //
 
 #include "DemoManager.h"
+
+#include <iostream>
+
 #include "../Initialization.h"
 #include <QPoint>
+using std::cout;
 
 
 #include "ParkingLot/ParkingLotGUI.h"
@@ -19,7 +23,14 @@ DemoManager::DemoManager(QWidget* parent, InitializationPackage initPackage, int
     QGraphicsView(parent) {
     this->setMinimumSize(QSize(width, height));
     parkingLot.sl = {.x = 0, .y = 0, .width = width, .height = height};
-    scene.addItem((QGraphicsWidget*) &parkingLot);
+    // scene.addItem((QGraphicsWidget*) &parkingLot);
+    cout << "we got this far..." << std::endl;
+    // for (ParkingFloorGUI* floor : parkingLot.parkingFloors) {
+    //     cout << "something" << std::endl;
+    //     // scene.addItem((QGraphicsWidget*) floor);
+    // }
+    // parkingFloors = &(parkingLot.parkingFloors);
+    this -> show();
     setScene(&scene);
 }
 

@@ -35,6 +35,7 @@ public slots: // slots for signals to send to!
 private:
     QGraphicsScene scene;
     ParkingLotGUI parkingLot;
+    vector<ParkingFloorGUI*>* parkingFloors;
     vector<VehicleGUI*> vehicles;
 
     void initGraphicsMetadata();
