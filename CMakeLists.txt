@@ -30,12 +30,27 @@ add_executable(CS460_Project_1
         src/PMS/PMSGUI/DemoManager.cpp
         src/Admin/run_admin.cpp
         src/Admin/run_admin.h
-        src/PMS/PMC/ParkingLot/ParkingLot.cpp
-        src/PMS/PMC/ParkingLot/ParkingLot.h
-        src/PMS/PMC/ParkingLot/ParkingSpotController.cpp
-        src/PMS/PMC/ParkingLot/ParkingFloor.cpp
-        src/PMS/PMC/Gate/CentralGateController.cpp
-        src/PMS/PMC/Gate/GateController.cpp
+        src/PMS/PMSGUI/ParkingLot/ParkingLotGUI.cpp
+        src/PMS/PMSGUI/ParkingLot/ParkingLotGUI.h
+        src/PMS/PMSGUI/ParkingLot/ParkingSpotGUI.cpp
+        src/PMS/PMSGUI/ParkingLot/ParkingSpotGUI.h
+        src/PMS/PMSGUI/ParkingLot/ParkingFloorGUI.cpp
+        src/PMS/PMSGUI/ParkingLot/ParkingFloorGUI.h
+        src/PMS/PMSGUI/Gate/GateGUI.cpp
+        src/PMS/PMSGUI/Gate/GateGUI.h
+        src/PMS/PMSGUI/Gate/EntranceGateGUI.cpp
+        src/PMS/PMSGUI/Gate/EntranceGateGUI.h
+        src/PMS/PMSGUI/Gate/ExitGateGUI.cpp
+        src/PMS/PMSGUI/Gate/ExitGateGUI.h
+        src/PMS/PMSGUI/Hardware/SpikesGUI.cpp
+        src/PMS/PMSGUI/Hardware/SpikesGUI.h
+        src/PMS/PMSGUI/Hardware/SensorGUI.cpp
+        src/PMS/PMSGUI/Hardware/SensorGUI.h
+        src/PMS/PMSGUI/Hardware/LedGUI.cpp
+        src/PMS/PMSGUI/Hardware/LedGUI.h
+        src/PMS/PMSGUI/Availability/AvailabilityGUI.cpp
+        src/PMS/PMSGUI/Availability/AvailabilityGUI.h
+        src/PMS/PMSGUI/GUIStructs/GUIStructs.h
 )
 
 

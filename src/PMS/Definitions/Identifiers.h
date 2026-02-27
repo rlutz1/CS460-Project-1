@@ -36,7 +36,7 @@ struct SensorId {
 // a spot identifier
 struct SpotId {
     string uniqueId;
-    enum SpotType type;
+    SpotType type;
     FloorId floorId;
     SensorId ultrasonicId;
     SensorId weightId;
