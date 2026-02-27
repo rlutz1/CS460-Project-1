@@ -51,6 +51,8 @@ add_executable(CS460_Project_1
         src/PMS/PMSGUI/Availability/AvailabilityGUI.cpp
         src/PMS/PMSGUI/Availability/AvailabilityGUI.h
         src/PMS/PMSGUI/GUIStructs/GUIStructs.h
+        src/PMS/PMC/Gate/CentralGateController.cpp
+        src/PMS/PMC/Gate/GateController.cpp
 )
 
 
