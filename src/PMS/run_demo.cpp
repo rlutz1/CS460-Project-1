@@ -24,11 +24,15 @@ using std::vector;
 int run_demo(int argc, char *argv[]) {
     QApplication a(argc, argv);
     QWidget mainWindow;
+    // layout for bottom part of window
+    QWidget bottomContainer(&mainWindow);
+    QHBoxLayout bottomLayout(&bottomContainer);
+
 
     InitializationPackage initPackage = genInitPackage(); // initialize config info for both front and backend
 
     // for displaying availability -> a vanilla widget
-    AvailabilityGUI availabilityDisplay(&mainWindow, initPackage);
+    AvailabilityGUI availabilityDisplay(&bottomContainer, initPackage);
 
     DemoManager demoManager(&mainWindow, initPackage, WINDOW_WIDTH, WINDOW_HEIGHT, availabilityDisplay); // initialize the front end
     ParkingManagementController pmc(initPackage); // initialize the backend
@@ -41,12 +45,9 @@ int run_demo(int argc, char *argv[]) {
     QVBoxLayout layout(&mainWindow);
     mainWindow.setLayout(&layout);
 
-    // layout for bottom part of window
-    QWidget bottomContainer;
-    QHBoxLayout bottomLayout(&bottomContainer);
 
     // layout for stacking the bottons on left sid
-    QWidget buttonContainer;
+    QWidget buttonContainer(&bottomContainer);
     QVBoxLayout buttonLayout(&buttonContainer);
 
     QPushButton startSimpleDemoButton("Start Simple Demo", &mainWindow); // TODO disable both on click, enable stop
