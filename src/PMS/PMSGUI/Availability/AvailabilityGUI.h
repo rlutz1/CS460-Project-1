@@ -4,6 +4,7 @@
 
 #ifndef CS460_PROJECT_1_AVAILABILITYGUI_H
 #define CS460_PROJECT_1_AVAILABILITYGUI_H
+#include <QGridLayout>
 #include <QLabel>
 #include <QWidget>
 
@@ -12,6 +13,8 @@ struct InitializationPackage;
 class AvailabilityGUI : QWidget {
 public:
     AvailabilityGUI(QWidget* parent, InitializationPackage initPackage);
+
+    QGridLayout layout;
 
     QLabel headerTotalAvail;
     QLabel headerFloor1Avail;
@@ -38,6 +41,9 @@ public:
     QLabel floor2AvailMotorcycle;
 
     QLabel log;
+
+protected:
+    QSize sizeHint() const override;
 
 };
 
