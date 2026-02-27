@@ -73,7 +73,7 @@ void DemoManager::runSimpleDemo() {
     currAnimation.stop(); // stop the animation (should be controlling with button enables, however)
     currAnimation.clear(); // remove and delete all animations in group
     for (VehicleGUI* vehicle : activeVehicles) { // cleanup our end.
-        delete vehicle;
+        ((QObject*)vehicle)->deleteLater();
     }
     activeVehicles.clear(); // clear out the vector
     VehicleGUI* vehicle = new VehicleGUI(

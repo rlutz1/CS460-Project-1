@@ -8,31 +8,6 @@
 
 #include "../../Initialization.h"
 
-// QLabel headerTotalAvail;
-// QLabel headerFloor1Avail;
-// QLabel ;
-// QLabel ;
-// QLabel ;
-// QLabel ;
-// QLabel ;
-// QLabel ;
-//
-// QLabel ;
-// QLabel ;
-// QLabel ;
-// QLabel ;
-//
-// QLabel ;
-// QLabel ;
-// QLabel ;
-// QLabel ;
-//
-// QLabel ;
-// QLabel ;
-// QLabel ;
-// QLabel ;
-//
-// QLabel ;
 
 AvailabilityGUI::AvailabilityGUI(QWidget* parent, InitializationPackage initPackage) :
     QWidget(parent),
