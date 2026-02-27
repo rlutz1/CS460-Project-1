@@ -15,8 +15,8 @@ using std::cout;
 
 #include "ParkingLot/ParkingLotGUI.h"
 
-#define Y_ENTRY_TRACK (-100)
-#define Y_EXIT_TRACK 100
+#define Y_ENTRY_TRACK 400
+#define Y_EXIT_TRACK 200
 
 // this constructor initializes the parking lot, which is the wrapper
 // of the whole visual.
@@ -74,12 +74,53 @@ void DemoManager::runSimpleDemo() {
     for (VehicleGUI* vehicle : activeVehicles) { // cleanup our end.
         delete vehicle;
     }
+
+
+    // QEasingCurve movementType;
+    // int approachGateTime;
+    // int throughGateTime;
+    // int xFirstEntryGateSensor;
+    // int xSecondEntryGateSensor;
+    // int xFirstExitGateSensor;
+    // int xSecondExitGateSensor;
+    //
+    // int yEntryTrack;
+    // int yExitTrack;
+    //
+    // int xSpot;
+    // int ySpot;
+    //
+    // int generalMovementTime;
+    // int parkPauseTime;
+    // int parkTime;
+
     activeVehicles.clear(); // clear out the vector
-    VehicleGUI* vehicle = new VehicleGUI(); // single vehicle
-    currAnimation.addAnimation(vehicle->genAnimation()); // get this animation
-    currAnimation.setLoopCount(1); // single iteration (this is default)
+    VehicleGUI* vehicle = new VehicleGUI(
+            scene,
+            {.x = 0, .y = Y_ENTRY_TRACK, .width = 25, .height = 25, .color = Qt::darkMagenta, .zPos = 100},
+            {
+                .movementType = QEasingCurve::OutCubic,
+                .approachGateTime = 1000,
+                .throughGateTime = 1000,
+                .xFirstEntryGateSensor = parkingLot.gate.entranceGate.initOpenSensor.wm.x,
+                .xSecondEntryGateSensor = parkingLot.gate.entranceGate.stayOpenSensor.wm.x,
+                .xFirstExitGateSensor = parkingLot.gate.exitGate.initOpenSensor.wm.x,
+                .xSecondExitGateSensor = parkingLot.gate.exitGate.stayOpenSensor.wm.x,
+                .yEntryTrack = Y_ENTRY_TRACK,
+                .yExitTrack = Y_EXIT_TRACK,
+                .xSpot = parkingLot.parkingFloors[1]->parkingSpots[0]->wm.x,
+                .ySpot = parkingLot.parkingFloors[1]->parkingSpots[0]->wm.y,
+                .generalMovementTime = 1000,
+                .parkPauseTime = 1000,
+                .parkTime = 1000
+            }
+            ); // single vehicle
     activeVehicles.push_back(vehicle); // add to active vehicles
+    currAnimation.addAnimation(vehicle->animationGroup); // get this animation
+    // vehicle->ani
+    currAnimation.setLoopCount(1); // single iteration (this is default)
     currAnimation.start(); // start animation
+    // TODO: need to clean up on full finish!
 }
 
 // stop all animations, clear to initial state.
