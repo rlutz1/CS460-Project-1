@@ -55,6 +55,9 @@ add_executable(CS460_Project_1
         src/PMS/PMC/ParkingLot/ParkingFloor.cpp
         src/PMS/PMC/ParkingLot/ParkingLot.cpp
         src/PMS/PMC/ParkingLot/ParkingSpotController.cpp
+        src/PMS/PMC/Gate/CentralGateController.h
+        src/PMS/PMC/Gate/CentralGateController.cpp
+        src/PMS/PMC/Gate/GateController.cpp
 )
 
 
