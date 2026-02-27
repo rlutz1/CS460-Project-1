@@ -56,7 +56,7 @@ int run_demo(int argc, char *argv[]) {
     buttonLayout.addWidget(&stopDemoButton);
 
     // for displaying availability -> a vanilla widget
-    AvailabilityGUI availabilityDisplay;
+    AvailabilityGUI availabilityDisplay(&mainWindow, initPackage);
 
     // add to the bottom layout: buttons and availbility display
     bottomLayout.addWidget(&buttonContainer);

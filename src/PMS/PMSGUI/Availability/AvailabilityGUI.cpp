@@ -3,8 +3,10 @@
 //
 
 #include "AvailabilityGUI.h"
+#include "../../Initialization.h"
 
-AvailabilityGUI::AvailabilityGUI() {
-    //
+AvailabilityGUI::AvailabilityGUI(QWidget* parent, InitializationPackage initPackage) : QWidget(parent) {
+
+
 
 }
