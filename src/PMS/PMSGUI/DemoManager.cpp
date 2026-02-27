@@ -20,12 +20,13 @@ using std::cout;
 
 // this constructor initializes the parking lot, which is the wrapper
 // of the whole visual.
-DemoManager::DemoManager(QWidget* parent, InitializationPackage initPackage, int width, int height) :
+DemoManager::DemoManager(QWidget* parent, InitializationPackage initPackage, int width, int height, AvailabilityGUI& availabilityDisplay) :
     parkingLot(
         scene,
         initPackage,
         {.x = 0, .y = 0, .width = width, .height = height, .color = Qt::darkGray, .zPos = 0}
         ),
+    availabilityDisplay(&availabilityDisplay),
     QGraphicsView(parent) {
     this->setMinimumSize(QSize(width, height));
     setScene(&scene);
@@ -93,7 +94,8 @@ void DemoManager::runSimpleDemo() {
                 .generalMovementTime = 2000,
                 .parkPauseTime = 1000,
                 .parkTime = 1000
-            }
+            },
+            this
             ); // single vehicle
     activeVehicles.push_back(vehicle); // add to active vehicles
     currAnimation.addAnimation(vehicle->animationGroup); // get this animation
@@ -102,6 +104,7 @@ void DemoManager::runSimpleDemo() {
     currAnimation.start(); // start animation
     // TODO: need to clean up on full finish!
 }
+
 
 // stop all animations, clear to initial state.
 void DemoManager::stopDemo() {
@@ -123,3 +126,9 @@ void DemoManager::initGraphicsMetadata() {
     scene.setBackgroundBrush(Qt::transparent);
     setAttribute(Qt::WA_TranslucentBackground);
 }
+
+
+// for testing that i can change the values from here on anim finished
+// void DemoManager::test() {
+//     availabilityDisplay->floor1AvailEv.setText("blah");
+// }

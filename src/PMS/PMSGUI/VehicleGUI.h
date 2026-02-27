@@ -7,7 +7,10 @@
 #include <QGraphicsWidget>
 #include <QSequentialAnimationGroup>
 #include <QEasingCurve>
+
+#include "DemoManager.h"
 #include "GUIStructs/GUIStructs.h"
+class DemoManager;
 
 struct AnimationMeta {
     QEasingCurve movementType;
@@ -34,8 +37,9 @@ class VehicleGUI : QGraphicsWidget {
 
 public:
     QSequentialAnimationGroup* animationGroup;
+    DemoManager* demoManager;
 
-    VehicleGUI(QGraphicsScene& scene, WidgetMeta widgetMeta, AnimationMeta animMeta);
+    VehicleGUI(QGraphicsScene& scene, WidgetMeta widgetMeta, AnimationMeta animMeta, DemoManager* demoManager);
 protected:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,

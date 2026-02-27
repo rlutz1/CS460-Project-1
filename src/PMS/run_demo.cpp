@@ -26,7 +26,11 @@ int run_demo(int argc, char *argv[]) {
     QWidget mainWindow;
 
     InitializationPackage initPackage = genInitPackage(); // initialize config info for both front and backend
-    DemoManager demoManager(&mainWindow, initPackage, WINDOW_WIDTH, WINDOW_HEIGHT); // initialize the front end
+
+    // for displaying availability -> a vanilla widget
+    AvailabilityGUI availabilityDisplay(&mainWindow, initPackage);
+
+    DemoManager demoManager(&mainWindow, initPackage, WINDOW_WIDTH, WINDOW_HEIGHT, availabilityDisplay); // initialize the front end
     ParkingManagementController pmc(initPackage); // initialize the backend
     // initialize sink? or unnecessary step -- leaving for eliud for now
 
@@ -54,9 +58,6 @@ int run_demo(int argc, char *argv[]) {
     buttonLayout.addWidget(&startSimpleDemoButton);
     buttonLayout.addWidget(&startChaosDemoButton);
     buttonLayout.addWidget(&stopDemoButton);
-
-    // for displaying availability -> a vanilla widget
-    AvailabilityGUI availabilityDisplay(&mainWindow, initPackage);
 
     // add to the bottom layout: buttons and availbility display
     bottomLayout.addWidget(&buttonContainer);

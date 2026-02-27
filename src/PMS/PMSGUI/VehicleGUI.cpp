@@ -7,8 +7,12 @@
 #include <QPainter>
 #include <QPropertyAnimation>
 #include <QGraphicsScene>
+#include <QObject>
 
-VehicleGUI::VehicleGUI(QGraphicsScene& scene, WidgetMeta widgetMeta, AnimationMeta animationMeta) :
+#include "DemoManager.h"
+
+VehicleGUI::VehicleGUI(QGraphicsScene& scene, WidgetMeta widgetMeta, AnimationMeta animationMeta, DemoManager* demoManager) :
+    demoManager(demoManager),
     wm(widgetMeta) {
     resize(wm.width, wm.height);
     setZValue(wm.zPos);
@@ -25,7 +29,7 @@ void VehicleGUI::initAnimation(AnimationMeta animMeta) {
     approachEntryGate-> setEasingCurve(animMeta.movementType);
     approachEntryGate->setStartValue(QPoint(0, animMeta.yEntryTrack));
     approachEntryGate->setEndValue(QPoint(animMeta.xFirstEntryGateSensor, animMeta.yEntryTrack));
-    // enter_anim->start();
+    // QObject::connect(approachEntryGate, &QPropertyAnimation::finished, demoManager, &DemoManager::test);
 
     QPropertyAnimation* passSecondEntrySensor = new QPropertyAnimation(this, "pos");
     passSecondEntrySensor->setDuration(animMeta.throughGateTime);

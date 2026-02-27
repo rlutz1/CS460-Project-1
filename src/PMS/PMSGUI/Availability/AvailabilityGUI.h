@@ -19,6 +19,7 @@ public:
     QLabel headerTotalAvail;
     QLabel headerFloor1Avail;
     QLabel headerFloor2Avail;
+    QLabel headerInTransit;
     QLabel headerNormalType;
     QLabel headerHandicapType;
     QLabel headerEvType;
@@ -39,6 +40,8 @@ public:
     QLabel floor2AvailHandicap;
     QLabel floor2AvailEv;
     QLabel floor2AvailMotorcycle;
+
+    QLabel inTransit;
 
     QLabel log;
 

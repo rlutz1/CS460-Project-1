@@ -45,22 +45,25 @@ AvailabilityGUI::AvailabilityGUI(QWidget* parent, InitializationPackage initPack
     headerEvType("EV", this),
     headerMotorcycleType("MOTORCYCLE", this),
     headerLog("MESSAGE", this),
+    headerInTransit("IN TRANSIT", this),
 
     // these are for the count updates
-    totalAvailNormal(QString(initPackage.numbers.totalNormalSpots), this),
-    totalAvailHandicap(QString(initPackage.numbers.totalHandicapSpots), this),
-    totalAvailEv(QString(initPackage.numbers.totalEvSpots), this),
-    totalAvailMotorcycle(QString(initPackage.numbers.totalMotorcycleSpots), this),
+    totalAvailNormal(QString::number(initPackage.numbers.totalNormalSpots), this),
+    totalAvailHandicap(QString::number(initPackage.numbers.totalHandicapSpots), this),
+    totalAvailEv(QString::number(initPackage.numbers.totalEvSpots), this),
+    totalAvailMotorcycle(QString::number(initPackage.numbers.totalMotorcycleSpots), this),
 
-    floor1AvailNormal(QString(initPackage.numbers.normalSpotsFloor1), this),
-    floor1AvailHandicap(QString(initPackage.numbers.handicapSpotsFloor1), this),
-    floor1AvailEv(QString(initPackage.numbers.evSpotsFloor1), this),
-    floor1AvailMotorcycle(QString(initPackage.numbers.motorcycleSpotsFloor1), this),
+    floor1AvailNormal(QString::number(initPackage.numbers.normalSpotsFloor1), this),
+    floor1AvailHandicap(QString::number(initPackage.numbers.handicapSpotsFloor1), this),
+    floor1AvailEv(QString::number(initPackage.numbers.evSpotsFloor1), this),
+    floor1AvailMotorcycle(QString::number(initPackage.numbers.motorcycleSpotsFloor1), this),
 
-    floor2AvailNormal(QString(initPackage.numbers.normalSpotsFloor2), this),
-    floor2AvailHandicap(QString(initPackage.numbers.handicapSpotsFloor2), this),
-    floor2AvailEv(QString(initPackage.numbers.evSpotsFloor2), this),
-    floor2AvailMotorcycle(QString(initPackage.numbers.motorcycleSpotsFloor2), this),
+    floor2AvailNormal(QString::number(initPackage.numbers.normalSpotsFloor2), this),
+    floor2AvailHandicap(QString::number(initPackage.numbers.handicapSpotsFloor2), this),
+    floor2AvailEv(QString::number(initPackage.numbers.evSpotsFloor2), this),
+    floor2AvailMotorcycle(QString::number(initPackage.numbers.motorcycleSpotsFloor2), this),
+
+    inTransit(QString::number(0), this),
 
     log("LOT OPEN", this),
 
@@ -72,6 +75,7 @@ AvailabilityGUI::AvailabilityGUI(QWidget* parent, InitializationPackage initPack
     layout.addWidget(&headerTotalAvail, 1, 0);
     layout.addWidget(&headerFloor1Avail, 2, 0);
     layout.addWidget(&headerFloor2Avail, 3, 0);
+    layout.addWidget(&headerInTransit, 4, 0);
 
     layout.addWidget(&headerNormalType, 0, 1);
     layout.addWidget(&headerHandicapType, 0, 2);
@@ -92,6 +96,8 @@ AvailabilityGUI::AvailabilityGUI(QWidget* parent, InitializationPackage initPack
     layout.addWidget(&floor2AvailHandicap, 3, 2);
     layout.addWidget(&floor2AvailEv, 3, 3);
     layout.addWidget(&floor2AvailMotorcycle, 3, 4);
+
+    layout.addWidget(&inTransit, 4, 1);
 
     layout.addWidget(&headerLog, 5, 0);
     layout.addWidget(&log, 5, 1);

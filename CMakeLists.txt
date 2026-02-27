@@ -28,6 +28,7 @@ add_executable(CS460_Project_1
         src/PMS/PMC/ParkingManagementController.cpp
         src/PMS/PMC/ParkingManagementController.h
         src/PMS/PMSGUI/DemoManager.cpp
+        src/PMS/PMSGUI/DemoManager.h
         src/Admin/run_admin.cpp
         src/Admin/run_admin.h
         src/PMS/PMSGUI/ParkingLot/ParkingLotGUI.cpp
