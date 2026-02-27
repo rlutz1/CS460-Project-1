@@ -74,43 +74,23 @@ void DemoManager::runSimpleDemo() {
     for (VehicleGUI* vehicle : activeVehicles) { // cleanup our end.
         delete vehicle;
     }
-
-
-    // QEasingCurve movementType;
-    // int approachGateTime;
-    // int throughGateTime;
-    // int xFirstEntryGateSensor;
-    // int xSecondEntryGateSensor;
-    // int xFirstExitGateSensor;
-    // int xSecondExitGateSensor;
-    //
-    // int yEntryTrack;
-    // int yExitTrack;
-    //
-    // int xSpot;
-    // int ySpot;
-    //
-    // int generalMovementTime;
-    // int parkPauseTime;
-    // int parkTime;
-
     activeVehicles.clear(); // clear out the vector
     VehicleGUI* vehicle = new VehicleGUI(
             scene,
-            {.x = 0, .y = Y_ENTRY_TRACK, .width = 25, .height = 25, .color = Qt::darkMagenta, .zPos = 100},
+            {.x = 0, .y = parkingLot.gate.entranceGate.wm.x, .width = 25, .height = 25, .color = Qt::darkMagenta, .zPos = 100},
             {
                 .movementType = QEasingCurve::OutCubic,
                 .approachGateTime = 1000,
                 .throughGateTime = 1000,
                 .xFirstEntryGateSensor = parkingLot.gate.entranceGate.initOpenSensor.wm.x,
                 .xSecondEntryGateSensor = parkingLot.gate.entranceGate.stayOpenSensor.wm.x,
-                .xFirstExitGateSensor = parkingLot.gate.exitGate.initOpenSensor.wm.x,
+                .xFirstExitGateSensor = parkingLot.gate.exitGate.initOpenSensor.wm.x, // TODO: somethings off here
                 .xSecondExitGateSensor = parkingLot.gate.exitGate.stayOpenSensor.wm.x,
-                .yEntryTrack = Y_ENTRY_TRACK,
-                .yExitTrack = Y_EXIT_TRACK,
+                .yEntryTrack = parkingLot.gate.entranceGate.wm.x,
+                .yExitTrack = parkingLot.gate.exitGate.wm.x,
                 .xSpot = parkingLot.parkingFloors[1]->parkingSpots[0]->wm.x,
                 .ySpot = parkingLot.parkingFloors[1]->parkingSpots[0]->wm.y,
-                .generalMovementTime = 1000,
+                .generalMovementTime = 2000,
                 .parkPauseTime = 1000,
                 .parkTime = 1000
             }

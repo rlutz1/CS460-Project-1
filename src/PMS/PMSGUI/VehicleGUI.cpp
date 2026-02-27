@@ -10,6 +10,9 @@
 
 VehicleGUI::VehicleGUI(QGraphicsScene& scene, WidgetMeta widgetMeta, AnimationMeta animationMeta) :
     wm(widgetMeta) {
+    resize(wm.width, wm.height);
+    setZValue(wm.zPos);
+
     initAnimation(animationMeta);
     scene.addItem(this);
 }
@@ -42,7 +45,7 @@ void VehicleGUI::initAnimation(AnimationMeta animMeta) {
     park->setDuration(animMeta.parkTime);
     park-> setEasingCurve(animMeta.movementType);
     park->setStartValue(QPoint(animMeta.xSpot, animMeta.yEntryTrack));
-    park->setEndValue(QPoint(animMeta.xSpot, animMeta.ySpot));
+    park->setEndValue(QPoint(animMeta.xSpot, animMeta.ySpot - 50));
 
     QPropertyAnimation* unpark = new QPropertyAnimation(this, "pos");
     unpark->setDuration(animMeta.parkTime);
