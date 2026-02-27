@@ -7,6 +7,7 @@
 
 #include <map>
 #include <QGraphicsView>
+#include <QParallelAnimationGroup>
 
 #include "VehicleGUI.h"
 #include "ParkingLot/ParkingLotGUI.h"
@@ -35,6 +36,8 @@ public slots: // slots for signals to send to!
 private:
     QGraphicsScene scene;
     ParkingLotGUI parkingLot;
+    QParallelAnimationGroup currAnimation;
+    vector<VehicleGUI*> activeVehicles;
 
     void initGraphicsMetadata();
 };

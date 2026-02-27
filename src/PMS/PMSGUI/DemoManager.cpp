@@ -8,6 +8,8 @@
 
 #include "../Initialization.h"
 #include <QPoint>
+#include <QParallelAnimationGroup>
+#include <QSequentialAnimationGroup>
 using std::cout;
 
 
@@ -67,12 +69,31 @@ void DemoManager::runChaosDemo() {
 
 // run exactly 1 vehicle through entry, park, and exit.
 void DemoManager::runSimpleDemo() {
-    // TODO
+    currAnimation.stop(); // stop the animation (should be controlling with button enables, however)
+    currAnimation.clear(); // remove and delete all animations in group
+    for (VehicleGUI* vehicle : activeVehicles) { // cleanup our end.
+        delete vehicle;
+    }
+    activeVehicles.clear(); // clear out the vector
+    VehicleGUI* vehicle = new VehicleGUI(); // single vehicle
+    currAnimation.addAnimation(vehicle->genAnimation()); // get this animation
+    currAnimation.setLoopCount(1); // single iteration (this is default)
+    activeVehicles.push_back(vehicle); // add to active vehicles
+    currAnimation.start(); // start animation
 }
 
 // stop all animations, clear to initial state.
 void DemoManager::stopDemo() {
     // TODO
+    // clean up task. need to test, but putting here for the moment.
+    // closing window will also take care of this since they are
+    // items in the scene.
+    currAnimation.stop(); // stop the animation (should be controlling with button enables, however)
+    currAnimation.clear(); //
+    for (VehicleGUI* vehicle : activeVehicles) {
+        delete vehicle;
+    }
+    // TODO: reset lot components to initial state.
 }
 
 // metadata things for smoothing animations/painting
