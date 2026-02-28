@@ -7,6 +7,8 @@
 #include <QGraphicsWidget>
 #include "../GUIStructs/GUIStructs.h"
 #include "../../Initialization.h"
+#include "../Hardware/LedGUI.h"
+#include "../Hardware/SensorGUI.h"
 
 class ParkingSpotGUI : QGraphicsWidget {
     Q_OBJECT;
@@ -14,6 +16,12 @@ class ParkingSpotGUI : QGraphicsWidget {
 public:
     ParkingSpotGUI(QGraphicsScene& scene, InitializationPackage& initPackage, SpotId spotId, WidgetMeta widgetMeta);
 
+    QColor availableColor;
+    QColor occupiedColor;
+    QColor unavailableColor;
+    LedGUI* led;
+    SensorGUI* ultrasonicSensor;
+    SensorGUI* weightSensor;
     SpotId spotId;
     WidgetMeta wm;
 

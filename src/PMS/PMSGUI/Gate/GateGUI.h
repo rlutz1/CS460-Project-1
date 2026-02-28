@@ -19,9 +19,11 @@ public:
     GateGUI(QGraphicsScene& scene, InitializationPackage& initPackage, WidgetMeta widgetMeta);
 
     WidgetMeta wm;
-private:
     EntranceGateGUI entranceGate;
     ExitGateGUI exitGate;
+
+private:
+
 
 protected:
     QRectF boundingRect() const override;

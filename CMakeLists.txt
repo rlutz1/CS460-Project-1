@@ -51,6 +51,9 @@ add_executable(CS460_Project_1
         src/PMS/PMSGUI/Availability/AvailabilityGUI.cpp
         src/PMS/PMSGUI/Availability/AvailabilityGUI.h
         src/PMS/PMSGUI/GUIStructs/GUIStructs.h
+        src/PMS/PMSGUI/VehicleGUI.cpp
+        src/PMS/PMSGUI/VehicleGUI.h
+        src/PMS/PMSGUI/VehicleGUI.cpp
         src/PMS/PMC/ParkingLot/ParkingFloor.h
         src/PMS/PMC/ParkingLot/ParkingFloor.cpp
         src/PMS/PMC/ParkingLot/ParkingLot.cpp

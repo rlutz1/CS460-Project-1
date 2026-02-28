@@ -8,22 +8,25 @@
 
 #include "../Initialization.h"
 #include <QPoint>
+#include <QParallelAnimationGroup>
+#include <QSequentialAnimationGroup>
 using std::cout;
 
 
 #include "ParkingLot/ParkingLotGUI.h"
 
-#define Y_ENTRY_TRACK (-100)
-#define Y_EXIT_TRACK 100
+#define Y_ENTRY_TRACK 400
+#define Y_EXIT_TRACK 200
 
 // this constructor initializes the parking lot, which is the wrapper
 // of the whole visual.
-DemoManager::DemoManager(QWidget* parent, InitializationPackage initPackage, int width, int height) :
+DemoManager::DemoManager(QWidget* parent, InitializationPackage initPackage, int width, int height, AvailabilityGUI& availabilityDisplay) :
     parkingLot(
         scene,
         initPackage,
         {.x = 0, .y = 0, .width = width, .height = height, .color = Qt::darkGray, .zPos = 0}
         ),
+    availabilityDisplay(&availabilityDisplay),
     QGraphicsView(parent) {
     this->setMinimumSize(QSize(width, height));
     setScene(&scene);
@@ -67,12 +70,54 @@ void DemoManager::runChaosDemo() {
 
 // run exactly 1 vehicle through entry, park, and exit.
 void DemoManager::runSimpleDemo() {
-    // TODO
+    currAnimation.stop(); // stop the animation (should be controlling with button enables, however)
+    currAnimation.clear(); // remove and delete all animations in group
+    for (VehicleGUI* vehicle : activeVehicles) { // cleanup our end.
+        ((QObject*)vehicle)->deleteLater();
+    }
+    activeVehicles.clear(); // clear out the vector
+    VehicleGUI* vehicle = new VehicleGUI(
+            scene,
+            {.x = 0, .y = parkingLot.gate.entranceGate.wm.x, .width = 25, .height = 25, .color = Qt::darkMagenta, .zPos = 100},
+            {
+                .movementType = QEasingCurve::OutCubic,
+                .approachGateTime = 1000,
+                .throughGateTime = 1000,
+                .xFirstEntryGateSensor = parkingLot.gate.entranceGate.initOpenSensor.wm.x,
+                .xSecondEntryGateSensor = parkingLot.gate.entranceGate.stayOpenSensor.wm.x,
+                .xFirstExitGateSensor = parkingLot.gate.exitGate.initOpenSensor.wm.x, // TODO: somethings off here
+                .xSecondExitGateSensor = parkingLot.gate.exitGate.stayOpenSensor.wm.x,
+                .yEntryTrack = parkingLot.gate.entranceGate.wm.x,
+                .yExitTrack = parkingLot.gate.exitGate.wm.x,
+                .xSpot = parkingLot.parkingFloors[1]->parkingSpots[0]->wm.x,
+                .ySpot = parkingLot.parkingFloors[1]->parkingSpots[0]->wm.y,
+                .generalMovementTime = 2000,
+                .parkPauseTime = 1000,
+                .parkTime = 1000
+            },
+            this
+            ); // single vehicle
+    activeVehicles.push_back(vehicle); // add to active vehicles
+    currAnimation.addAnimation(vehicle->animationGroup); // get this animation
+    // vehicle->ani
+    currAnimation.setLoopCount(1); // single iteration (this is default)
+    currAnimation.start(); // start animation
+    // TODO: need to clean up on full finish!
 }
+
 
 // stop all animations, clear to initial state.
 void DemoManager::stopDemo() {
     // TODO
+    // clean up task. need to test, but putting here for the moment.
+    // closing window will also take care of this since they are
+    // items in the scene.
+    currAnimation.stop(); // stop the animation (should be controlling with button enables, however)
+    currAnimation.clear(); //
+    for (VehicleGUI* vehicle : activeVehicles) {
+        delete vehicle;
+    }
+    // TODO: reset lot components to initial state.
 }
 
 // metadata things for smoothing animations/painting
@@ -81,3 +126,9 @@ void DemoManager::initGraphicsMetadata() {
     scene.setBackgroundBrush(Qt::transparent);
     setAttribute(Qt::WA_TranslucentBackground);
 }
+
+
+// for testing that i can change the values from here on anim finished
+// void DemoManager::test() {
+//     availabilityDisplay->floor1AvailEv.setText("blah");
+// }

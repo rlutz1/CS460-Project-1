@@ -15,7 +15,6 @@ initOpenSensor(
     scene,
     id.initOpenId,
     {.x = wm.x + wm.width + (wm.width / 2), .y = wm.y, .width = 25, .height = 25, .color = Qt::black, .zPos = (wm.zPos + 1)}
-
     ),
 stayOpenSensor(
     scene,
