@@ -5,9 +5,11 @@
 #ifndef CS460_PROJECT_1_GATECONTROLLER_H
 #define CS460_PROJECT_1_GATECONTROLLER_H
 #include "GateController.h"
-#include "../ParkingManagementController.h"
+
 #include "../../Definitions/Identifiers.h"
 
+
+class ParkingManagementController;
 
 class CentralGateController
 {

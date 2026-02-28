@@ -4,6 +4,9 @@
 
 #include "CentralGateController.h"
 
+#include "../ParkingManagementController.h"
+
+
 //TODO: implmeent logic for GateController <-> PMC communication.
 
 void CentralGateController::moveGate(GateId gateId, bool toOpen) {
