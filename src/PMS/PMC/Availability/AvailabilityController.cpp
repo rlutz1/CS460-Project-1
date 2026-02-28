@@ -5,12 +5,17 @@
 #include "AvailabilityController.h"
 
 
-// TODO: thought to return total availability since there's no inputs needed from availability display
 void AvailabilityController::updateAvailabilityTracking(SpotType spotType, int floor, bool toIncrement) {
+        bool lotGotFull = false;
         if ( toIncrement ) {
                 availabilityDisplay->increaseAvailabilityCount(spotType, floor);
         }else {
-                availabilityDisplay->decreaseAvailabilityCount(spotType, floor);
+                lotGotFull = availabilityDisplay->decreaseAvailabilityCount(spotType, floor);
+        }
+
+        if ( lotGotFull ) {
+                // signal to PMC : to change log message to FULL.
+                // otherwise so it can keep changing it to AVAILABLE (to reset previous FULL messages).
         }
 }
 
