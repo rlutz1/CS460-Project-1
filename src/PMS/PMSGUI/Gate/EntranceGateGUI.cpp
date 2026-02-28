@@ -63,8 +63,9 @@ void EntranceGateGUI::signalGateClose() {
 
     // PMS said to close gate:
 
+    // same animation as close but backwards.
 
-    // end with giviing PMS a successful Entry message.
+    // end with giving PMS a successful Exit message (to be done at the finish of the animation after it has passed 2nd sensor).
 
 }
 
@@ -76,6 +77,11 @@ void EntranceGateGUI::signalGateOpen() {
     opacityEffect->setOpacity(1);
     spikes.setGraphicsEffect(opacityEffect);
     // PMS said to open gate:
+
+    // TODO: figure out issue with Signal 11:SIGSEV on my computer for gui debugging) & test car frame signals with this.
+    // start LED flashing for the gate lights
+    // slide gate (y position) slowly upwards.
+
 
 
 }

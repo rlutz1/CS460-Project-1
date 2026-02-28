@@ -15,7 +15,7 @@
 #include "../GUIStructs/GUIStructs.h"
 #include "../PMSGUIInterfaces/ISensorDataSink.h"
 
-class EntranceGateGUI : QGraphicsWidget, public IGateInstructionSink {
+class EntranceGateGUI : public QGraphicsWidget, public IGateInstructionSink {
     Q_OBJECT;
 
 public:
