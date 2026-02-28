@@ -11,7 +11,7 @@
 #include "../../Definitions/Identifiers.h"
 #include "../GUIStructs/GUIStructs.h"
 
-class ParkingFloorGUI : QGraphicsWidget {
+class ParkingFloorGUI : public QGraphicsWidget {
     Q_OBJECT;
 public:
     ParkingFloorGUI(QGraphicsScene& scene, InitializationPackage& initPackage, FloorId floorId, WidgetMeta widgetMeta);
