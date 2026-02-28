@@ -8,9 +8,11 @@
 #include <QLabel>
 #include <QWidget>
 
+#include "../../PMC/PMCInterfaces/IAvailabilityInstructionSink.h"
+
 struct InitializationPackage;
 
-class AvailabilityGUI : QWidget {
+class AvailabilityGUI : public QWidget, public IAvailabilityInstructionSink {
 public:
     AvailabilityGUI(QWidget* parent, InitializationPackage initPackage);
 
@@ -44,6 +46,16 @@ public:
     QLabel inTransit;
 
     QLabel log;
+
+    void increaseCount(QLabel& count);
+    void decreaseCount(QLabel& countLabel);
+
+    // IAvailabilityIntructionSink.h
+    void increaseInTransitCount() override;
+    void decreaseInTransitCount() override;
+    void increaseAvailabilityCount(SpotType spotType, int floor) override;
+    void decreaseAvailabilityCount(SpotType spotType, int floor) override;
+    void setLogMsg(std::string) override;
 
 protected:
     QSize sizeHint() const override;

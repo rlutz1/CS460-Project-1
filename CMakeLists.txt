@@ -61,6 +61,8 @@ add_executable(CS460_Project_1
         src/PMS/PMC/Gate/CentralGateController.h
         src/PMS/PMC/Gate/CentralGateController.cpp
         src/PMS/PMC/Gate/GateController.cpp
+        src/PMS/PMC/PMCInterfaces/IAvailabilityInstructionSink.h
+        src/PMS/PMC/Availability/AvailabilityController.cpp
 )
 
 
