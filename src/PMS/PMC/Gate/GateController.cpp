@@ -27,25 +27,37 @@ void GateController::NotSensedVehicled(SensorId sensorID) {
 }
 
 void GateController::open() {
-    gateHardware->signalGateOpen();
+	if (gateHardware) {
+		gateHardware->signalGateOpen();
+	}
 }
 
 void GateController::close() {
-    gateHardware->signalGateClose();
-    // emit signal of successful entrance/exit:
-    if ( gateId.type == ENTRANCE ) {
-        centralGateController->notifySuccessfulEntry(gateId);
-    }else if ( gateId.type == EXIT ) {
-        centralGateController->notifySuccessfulExit(gateId);
-    }
+	if (gateHardware) {
+		gateHardware->signalGateClose();
+	}
+	// Notify central controller of successful entry/exit
+	if (centralGateController) {
+		if (gateId.type == ENTRANCE) {
+			centralGateController->notifySuccessfulEntry(gateId);
+		} else if (gateId.type == EXIT) {
+			centralGateController->notifySuccessfulExit(gateId);
+		}
+	}
 }
 
 void GateController::setGateHardware(IGateInstructionSink& newGateHardware) {
-    *gateHardware = newGateHardware;
+    //*gateHardware = newGateHardware;
+	// I think you want to assign the address, not the dereference null (I could be so wrong,
+	// uncomment the other one if I am)
+	gateHardware = &newGateHardware;
 }
 
 void GateController::setCentralGateController(CentralGateController& newCentGateController) {
-    *centralGateController = newCentGateController;
+   // *centralGateController = newCentGateController;
+   // I think you want to assign the address, not the dereference null (I could be so wrong,
+   // uncomment the other one if I am)
+	centralGateController = &newCentGateController;
 }
 
 void GateController::setGateId(GateId newGateId) {
