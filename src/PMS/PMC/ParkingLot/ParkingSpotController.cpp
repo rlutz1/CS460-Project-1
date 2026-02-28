@@ -7,7 +7,9 @@
 
 // Initializing a ParkingSpotController object
 ParkingSpotController::ParkingSpotController(const SpotId& id, ParkingFloor& floor) : id(id), floor(floor),
-state(State::AVAILABLE), weightDetected(false), ultrasonicDetected(false) {}
+	state(State::AVAILABLE), weightDetected(false), ultrasonicDetected(false)
+{
+}
 
 void ParkingSpotController::updateSpotAvailability(const SensorId& sensor, bool vehicleDetected)
 {
@@ -15,16 +17,17 @@ void ParkingSpotController::updateSpotAvailability(const SensorId& sensor, bool 
 	if (sensor.uniqueId == id.ultrasonicId.uniqueId)
 	{
 		ultrasonicDetected = vehicleDetected;
-	} else if (sensor.uniqueId == id.floorId.uniqueId)
+	}
+	else if (sensor.uniqueId == id.floorId.uniqueId)
 	{
 		weightDetected = vehicleDetected;
-	} else
+	}
+	else
 	{
 		// The sensor doesn't belong to this spot (should ignore)
 		return;
 	}
 	updateStateFromSensors();
-
 }
 
 void ParkingSpotController::updateStateFromSensors()
@@ -43,8 +46,10 @@ void ParkingSpotController::updateStateFromSensors()
 }
 
 // TODO: Something for admin override forcing unavailable (might be useless)
-void ParkingSpotController::forceUnavailable() {
-	if (state != State::UNAVAILABLE) {
+void ParkingSpotController::forceUnavailable()
+{
+	if (state != State::UNAVAILABLE)
+	{
 		State oldState = state;
 		state = State::UNAVAILABLE;
 		//floor.notifySpotStateChanged(id.type, oldState, state);
@@ -52,4 +57,3 @@ void ParkingSpotController::forceUnavailable() {
 }
 
 // Might need methods for configuring sensors here idkK
-

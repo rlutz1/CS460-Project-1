@@ -17,17 +17,19 @@ class ParkingLot;
 class ParkingFloor
 {
 public:
-	enum class State {
+	enum class State
+	{
 		OPEN,
 		FULL
 	};
+
 	ParkingFloor(const FloorId& id, ParkingLot& lot);
 	// This should get the number of available spots of a give type on this floor which is stated in the SAD
 	int getCurrentAvailableCount(SpotType type) const;
 
 	// This should be called by a spot when its state changes (i.e. AVAILABLE <-> OCCUPIED/UNAVAILABLE)
 	void notifySpotStateChanged(SpotType type, ParkingSpotController::State oldState,
-		ParkingSpotController::State newState);
+	                            ParkingSpotController::State newState);
 
 	// This is called when a spot's type changes, and it should adjust the counts
 	void notifySpotTypeChanged(SpotType oldType, SpotType newType, ParkingSpotController::State currentState);
@@ -40,10 +42,12 @@ public:
 	{
 		return state;
 	}
+
 	const FloorId& getId() const
 	{
 		return id;
 	}
+
 private:
 	FloorId id;
 	ParkingLot& lot;
