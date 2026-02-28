@@ -5,6 +5,7 @@
 #include "EntranceGateGUI.h"
 #include <QGraphicsScene>
 #include <QPainter>
+#include <QGraphicsOpacityEffect> // only used in this class so far.
 
 EntranceGateGUI::EntranceGateGUI(QGraphicsScene& scene, InitializationPackage& initPackage, GateId id, WidgetMeta widgetMeta) :
     led(
@@ -50,4 +51,31 @@ void EntranceGateGUI::paint(QPainter *painter,
     painter->setBrush(QBrush(wm.color));
     // painter->setBrush(QBrush(Qt::transparent));
     painter->drawRect(boundingRect());
+}
+
+void EntranceGateGUI::signalGateClose() {
+    // PMS said to lower spikes :
+    // TODO: verify that opacity is the way to show that spikes are raised/lowered.
+    // opacityEffect should last as long as `spikes` is alives
+    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(&spikes);
+    opacityEffect->setOpacity(0.5);
+    spikes.setGraphicsEffect(opacityEffect);
+
+    // PMS said to close gate:
+
+
+    // end with giviing PMS a successful Entry message.
+
+}
+
+void EntranceGateGUI::signalGateOpen() {
+    // PMS said to raise spikes:
+    // TODO: verify that opacity is the way to show that spikes are raised/lowered.
+    // opacityEffect should last as long as `spikes` is alives
+    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(&spikes);
+    opacityEffect->setOpacity(1);
+    spikes.setGraphicsEffect(opacityEffect);
+    // PMS said to open gate:
+
+
 }
