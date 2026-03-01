@@ -28,6 +28,39 @@ public:
 	}
 };
 
+// Added a simple display sink that prints availability updates
+class ConsoleDisplaySink : public IAvailabilityInstructionSink {
+public:
+	void increaseAvailabilityCount(SpotType type, int floor) override {
+		std::cout << "[DISPLAY] Floor " << floor << " " << spotTypeToString(type)
+				  << " availability increased.\n";
+	}
+	void decreaseAvailabilityCount(SpotType type, int floor) override {
+		std::cout << "[DISPLAY] Floor " << floor << " " << spotTypeToString(type)
+				  << " availability decreased.\n";
+	}
+	// This should match the interface by value
+	void setLogMsg(std::string msg) override {
+		std::cout << "[DISPLAY] Message: " << msg << "\n";
+	}
+	void increaseInTransitCount() override {
+		std::cout << "[DISPLAY] In‑transit count increased.\n";
+	}
+	void decreaseInTransitCount() override {
+		std::cout << "[DISPLAY] In‑transit count decreased.\n";
+	}
+private:
+	std::string spotTypeToString(SpotType t) {
+		switch(t) {
+		case NORMAL: return "Normal";
+		case HANDICAP: return "Handicap";
+		case EV: return "EV";
+		case MOTORCYCLE: return "Motorcycle";
+		default: return "Unknown";
+		}
+	}
+};
+
 class ParkingManagementController
 {
 public:
@@ -42,6 +75,7 @@ public:
 	void successfulEntry(GateId gateId);
 	// The exit gate is closed after vehicle passed
 	void successfulExit(GateId gateId);
+	void handleSensorTrigger(const SensorId& sensor, bool detected);
 
 	void updateLogMessage(const std::string& msg);
 
