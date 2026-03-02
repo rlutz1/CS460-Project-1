@@ -7,6 +7,7 @@
 #include <QGraphicsWidget>
 #include <QSequentialAnimationGroup>
 #include <QEasingCurve>
+#include <QPropertyAnimation>
 
 #include "DemoManager.h"
 #include "GUIStructs/GUIStructs.h"
@@ -40,6 +41,16 @@ public:
     DemoManager* demoManager;
 
     VehicleGUI(QGraphicsScene& scene, WidgetMeta widgetMeta, AnimationMeta animMeta, DemoManager* demoManager);
+
+    QPropertyAnimation* approachEntryGate;
+    QPropertyAnimation* passSecondEntrySensor;
+    QPropertyAnimation* findSpot;
+    QPropertyAnimation* park;
+    QPropertyAnimation* unpark;
+    QPropertyAnimation* moveToExitTrack;
+    QPropertyAnimation* approachExitGate;
+    QPropertyAnimation* passSecondExitSensor;
+    QPropertyAnimation* exit;
 protected:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
