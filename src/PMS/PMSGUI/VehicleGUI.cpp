@@ -103,6 +103,7 @@ void VehicleGUI::initAnimation(AnimationMeta animMeta) {
     animationGroup.addAnimation(&passSecondExitSensor);
     animationGroup.addPause(ACTION_PAUSE);
     animationGroup.addAnimation(&exit);
+    animationGroup.setLoopCount(-1);
 
 }
 

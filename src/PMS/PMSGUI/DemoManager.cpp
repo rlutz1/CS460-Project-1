@@ -39,12 +39,10 @@ void DemoManager::runChaosDemo() {
     // std::uniform_int_distribution<std::mt19937::result_type> floor(0, 1);
     // std::uniform_int_distribution<std::mt19937::result_type> floor1Spots(0,parkingLot.parkingFloors[0]->parkingSpots.size()); // distribution in range [1, 6]
     // dist(rng);
+    int numCars = 13;
+    int delay = 1000;
 
-    int numCarsWave1 = 3;
-    int numCarsWave2 = 4;
-    int delay = 2000;
-
-    for (int i = 0; i < numCarsWave1; i++) {
+    for (int i = 0; i < numCars; i++) {
         VehicleGUI* vehicle = new VehicleGUI(
             scene,
             {.x = parkingLot.wm.x, .y = parkingLot.wm.y, .width = 25, .height = 25, .color = Qt::darkMagenta, .zPos = 100},
@@ -69,42 +67,43 @@ void DemoManager::runChaosDemo() {
             },
             this
             ); // single vehicle
-        delay += 3000;
+        delay += 4000;
         // cout << parkingLot.parkingFloors[1]->parkingSpots[15]->wm.y << std::endl;
         activeVehicles.push_back(vehicle); // add to active vehicles
+        // vehicle->animationGroup.setLoopCount(-1);
         currAnimation.addAnimation(&(vehicle->animationGroup)); // get this animation
     }
 
-    for (int i = numCarsWave2 - 1; i >= 0; i--) {
-        VehicleGUI* vehicle = new VehicleGUI(
-            scene,
-            {.x = parkingLot.wm.x, .y = parkingLot.wm.y, .width = 25, .height = 25, .color = Qt::darkMagenta, .zPos = 100},
-            {
-                .entryDelay = delay,
-                .movementType = QEasingCurve::OutCubic,
-                .approachGateTime = 1000,
-                .throughGateTime = 1000,
-                .xFirstEntryGateSensor = parkingLot.gate.entranceGate.initOpenSensor.wm.x + 25,
-                .xSecondEntryGateSensor = parkingLot.gate.entranceGate.stayOpenSensor.wm.x + 25,
-                .xFirstExitGateSensor = parkingLot.gate.exitGate.initOpenSensor.wm.x - 25,
-                .xSecondExitGateSensor = parkingLot.gate.exitGate.stayOpenSensor.wm.x - 25,
-                .yEntryTrack = parkingLot.gate.entranceGate.wm.y + 50,
-                // .yEntryTrack = 400,
-                .yExitTrack = parkingLot.gate.exitGate.wm.y + 50,
-                // .yExitTrack = 200,
-                .xSpot = parkingLot.parkingFloors[i % 2]->parkingSpots[i]->wm.x + 12,
-                .ySpot = parkingLot.parkingFloors[i % 2]->parkingSpots[i]->wm.y + 40,
-                .generalMovementTime = 2000,
-                .parkPauseTime = 1000,
-                .parkTime = 1000
-            },
-            this
-            ); // single vehicle
-        delay += 3000;
-        // cout << parkingLot.parkingFloors[1]->parkingSpots[15]->wm.y << std::endl;
-        activeVehicles.push_back(vehicle); // add to active vehicles
-        currAnimation.addAnimation(&(vehicle->animationGroup)); // get this animation
-    }
+    // for (int i = numCarsWave2 - 1; i >= 0; i--) {
+    //     VehicleGUI* vehicle = new VehicleGUI(
+    //         scene,
+    //         {.x = parkingLot.wm.x, .y = parkingLot.wm.y, .width = 25, .height = 25, .color = Qt::darkMagenta, .zPos = 100},
+    //         {
+    //             .entryDelay = delay,
+    //             .movementType = QEasingCurve::OutCubic,
+    //             .approachGateTime = 1000,
+    //             .throughGateTime = 1000,
+    //             .xFirstEntryGateSensor = parkingLot.gate.entranceGate.initOpenSensor.wm.x + 25,
+    //             .xSecondEntryGateSensor = parkingLot.gate.entranceGate.stayOpenSensor.wm.x + 25,
+    //             .xFirstExitGateSensor = parkingLot.gate.exitGate.initOpenSensor.wm.x - 25,
+    //             .xSecondExitGateSensor = parkingLot.gate.exitGate.stayOpenSensor.wm.x - 25,
+    //             .yEntryTrack = parkingLot.gate.entranceGate.wm.y + 50,
+    //             // .yEntryTrack = 400,
+    //             .yExitTrack = parkingLot.gate.exitGate.wm.y + 50,
+    //             // .yExitTrack = 200,
+    //             .xSpot = parkingLot.parkingFloors[i % 2]->parkingSpots[i]->wm.x + 12,
+    //             .ySpot = parkingLot.parkingFloors[i % 2]->parkingSpots[i]->wm.y + 40,
+    //             .generalMovementTime = 2000,
+    //             .parkPauseTime = 1000,
+    //             .parkTime = 1000
+    //         },
+    //         this
+    //         ); // single vehicle
+    //     delay += 3000;
+    //     // cout << parkingLot.parkingFloors[1]->parkingSpots[15]->wm.y << std::endl;
+    //     activeVehicles.push_back(vehicle); // add to active vehicles
+    //     currAnimation.addAnimation(&(vehicle->animationGroup)); // get this animation
+    // }
 
 
     // vehicle->ani
