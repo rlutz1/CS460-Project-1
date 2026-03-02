@@ -54,11 +54,13 @@ public:
     void increaseInTransitCount() override;
     void decreaseInTransitCount() override;
     void increaseAvailabilityCount(SpotType spotType, int floor) override;
-    void decreaseAvailabilityCount(SpotType spotType, int floor) override;
+    bool decreaseAvailabilityCount(SpotType spotType, int floor) override;
     void setLogMsg(std::string) override;
 
 protected:
     QSize sizeHint() const override;
+private:
+    int getLotTotalAvailable();
 
 };
 

@@ -18,7 +18,7 @@ class IAvailabilityInstructionSink{
     virtual void increaseInTransitCount() = 0;
     virtual void decreaseInTransitCount() = 0;
     virtual void increaseAvailabilityCount(SpotType spotType, int floor) = 0;
-    virtual void decreaseAvailabilityCount(SpotType spotType, int floor) = 0;
+    virtual bool decreaseAvailabilityCount(SpotType spotType, int floor) = 0;
 
     virtual void setLogMsg(std::string) = 0;
 };

@@ -12,7 +12,7 @@
 #include "../GUIStructs/GUIStructs.h"
 #include <QGraphicsScene>
 
-class GateGUI : QGraphicsWidget {
+class GateGUI : public QGraphicsWidget {
     Q_OBJECT;
 
 public:

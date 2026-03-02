@@ -32,13 +32,18 @@ public:
     void signalGateClose() override;
     void signalGateOpen() override;
 
+public slots:
+    void vehicleOnEntranceGateInductionSensor();
+    void vehiclePassedSecondEntranceGateSensor();
+
+
 protected:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
            QWidget *widget) override;
 
 private:
-    ISensorDataSink* gateSensorDataSink;
+    ISensorDataSink* gateSensorController;
 };
 
 

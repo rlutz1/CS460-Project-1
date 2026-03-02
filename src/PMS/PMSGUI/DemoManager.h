@@ -30,6 +30,9 @@ class DemoManager : public QGraphicsView {
 public:
     DemoManager(QWidget* parent, InitializationPackage initPackage, int width, int height, AvailabilityGUI& availabilityDisplay);
 
+    // public for signal easier signal relaying between vehicle and different parking lot components
+    ParkingLotGUI parkingLot;
+
 public slots: // slots for signals to send to!
     void runSimpleDemo();
     void runChaosDemo();
@@ -38,7 +41,6 @@ public slots: // slots for signals to send to!
 
 private:
     QGraphicsScene scene;
-    ParkingLotGUI parkingLot;
     QParallelAnimationGroup currAnimation;
     vector<VehicleGUI*> activeVehicles;
     AvailabilityGUI* availabilityDisplay;

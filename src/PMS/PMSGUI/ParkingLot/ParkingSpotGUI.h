@@ -10,7 +10,7 @@
 #include "../Hardware/LedGUI.h"
 #include "../Hardware/SensorGUI.h"
 
-class ParkingSpotGUI : QGraphicsWidget {
+class ParkingSpotGUI : public QGraphicsWidget {
     Q_OBJECT;
 
 public:
