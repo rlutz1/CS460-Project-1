@@ -27,6 +27,7 @@ VehicleGUI::VehicleGUI(QGraphicsScene& scene, WidgetMeta widgetMeta, AnimationMe
     exit(this, "pos")
 {
     resize(wm.width, wm.height);
+    setPos(0, animationMeta.yEntryTrack); // careful with this, enure it works every time! can cause issues!
     setZValue(wm.zPos);
 
     initAnimation(animationMeta);
@@ -87,6 +88,7 @@ void VehicleGUI::initAnimation(AnimationMeta animMeta) {
     exit.setEndValue(QPoint(0, animMeta.yExitTrack));
 
     // group all animations
+    animationGroup.addPause(animMeta.entryDelay);
     animationGroup.addAnimation(&approachEntryGate);
     animationGroup.addPause(ACTION_PAUSE);
     animationGroup.addAnimation(&passSecondEntrySensor);

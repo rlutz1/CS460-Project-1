@@ -55,6 +55,7 @@ int run_demo(int argc, char *argv[]) {
     QPushButton stopDemoButton("Stop Demo", &buttonContainer);// TODO disable this, enable both demo buttons
     // TODO: next line, connections for all
     QObject::connect(&startSimpleDemoButton, &QPushButton::clicked, &demoManager, &DemoManager::runSimpleDemo);
+    QObject::connect(&startChaosDemoButton, &QPushButton::clicked, &demoManager, &DemoManager::runChaosDemo);
     QObject::connect(&stopDemoButton, &QPushButton::clicked, &demoManager, &DemoManager::stopDemo);
 
     buttonLayout.addWidget(&startSimpleDemoButton);

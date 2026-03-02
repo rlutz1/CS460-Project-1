@@ -14,6 +14,8 @@
 class DemoManager;
 
 struct AnimationMeta {
+    int entryDelay;
+
     QEasingCurve movementType;
     int approachGateTime;
     int throughGateTime;
@@ -37,12 +39,10 @@ struct AnimationMeta {
 class VehicleGUI : QGraphicsWidget {
 
 public:
-    QSequentialAnimationGroup animationGroup;
-    DemoManager* demoManager;
-
     VehicleGUI(QGraphicsScene& scene, WidgetMeta widgetMeta, AnimationMeta animMeta, DemoManager* demoManager);
     // ~VehicleGUI() override;
-
+    DemoManager* demoManager;
+    QSequentialAnimationGroup animationGroup;
     QPropertyAnimation approachEntryGate;
     QPropertyAnimation passSecondEntrySensor;
     QPropertyAnimation findSpot;
