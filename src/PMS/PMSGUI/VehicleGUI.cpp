@@ -37,33 +37,27 @@ void VehicleGUI::initAnimation(AnimationMeta animMeta) {
     passSecondEntrySensor->setDuration(animMeta.throughGateTime);
     passSecondEntrySensor-> setEasingCurve(animMeta.movementType);
     passSecondEntrySensor->setStartValue(QPoint(animMeta.xFirstEntryGateSensor, animMeta.yEntryTrack));
-    passSecondEntrySensor->setEndValue(QPoint(animMeta.xSecondEntryGateSensor + 50, animMeta.yEntryTrack));
+    passSecondEntrySensor->setEndValue(QPoint(animMeta.xSecondEntryGateSensor, animMeta.yEntryTrack));
     // connect(park_anim, &QPropertyAnimation::finished, parent, &ParkingLot::trigger_vehicle_parked(this->vehicleId, true));
     // connect(park_anim, &QPropertyAnimation::finished, parent, [this]() { parent->trigger_vehicle_parked(this->destId, true); });
 
     findSpot = new QPropertyAnimation(this, "pos");
     findSpot->setDuration(animMeta.generalMovementTime);
     findSpot-> setEasingCurve(animMeta.movementType);
-    findSpot->setStartValue(QPoint(animMeta.xSecondEntryGateSensor + 50, animMeta.yEntryTrack));
+    findSpot->setStartValue(QPoint(animMeta.xSecondEntryGateSensor, animMeta.yEntryTrack));
     findSpot->setEndValue(QPoint(animMeta.xSpot, animMeta.yEntryTrack));
 
     park = new QPropertyAnimation(this, "pos");
     park->setDuration(animMeta.parkTime);
     park-> setEasingCurve(animMeta.movementType);
     park->setStartValue(QPoint(animMeta.xSpot, animMeta.yEntryTrack));
-    park->setEndValue(QPoint(animMeta.xSpot, animMeta.ySpot - 50));
+    park->setEndValue(QPoint(animMeta.xSpot, animMeta.ySpot));
 
     unpark = new QPropertyAnimation(this, "pos");
     unpark->setDuration(animMeta.parkTime);
     unpark-> setEasingCurve(animMeta.movementType);
     unpark->setStartValue(QPoint(animMeta.xSpot, animMeta.ySpot));
-    unpark->setEndValue(QPoint(animMeta.xSpot, animMeta.yEntryTrack));
-
-    moveToExitTrack = new QPropertyAnimation(this, "pos");
-    moveToExitTrack->setDuration(animMeta.generalMovementTime);
-    moveToExitTrack-> setEasingCurve(animMeta.movementType);
-    moveToExitTrack->setStartValue(QPoint(animMeta.xSpot, animMeta.yEntryTrack));
-    moveToExitTrack->setEndValue(QPoint(animMeta.xSpot, animMeta.yExitTrack));
+    unpark->setEndValue(QPoint(animMeta.xSpot, animMeta.yExitTrack));
 
     approachExitGate = new QPropertyAnimation(this, "pos");
     approachExitGate->setDuration(animMeta.generalMovementTime);
@@ -75,12 +69,12 @@ void VehicleGUI::initAnimation(AnimationMeta animMeta) {
     passSecondExitSensor->setDuration(animMeta.throughGateTime);
     passSecondExitSensor-> setEasingCurve(animMeta.movementType);
     passSecondExitSensor->setStartValue(QPoint(animMeta.xFirstExitGateSensor, animMeta.yExitTrack));
-    passSecondExitSensor->setEndValue(QPoint(animMeta.xSecondExitGateSensor + 50, animMeta.yExitTrack));
+    passSecondExitSensor->setEndValue(QPoint(animMeta.xSecondExitGateSensor, animMeta.yExitTrack));
 
     exit = new QPropertyAnimation(this, "pos");
     exit->setDuration(animMeta.generalMovementTime);
     exit-> setEasingCurve(animMeta.movementType);
-    exit->setStartValue(QPoint(animMeta.xSecondExitGateSensor + 50, animMeta.yExitTrack));
+    exit->setStartValue(QPoint(animMeta.xSecondExitGateSensor, animMeta.yExitTrack));
     exit->setEndValue(QPoint(0, animMeta.yExitTrack));
 
     // group all animations
@@ -92,7 +86,7 @@ void VehicleGUI::initAnimation(AnimationMeta animMeta) {
     group->addAnimation(park);
     group->addPause(animMeta.parkPauseTime);
     group->addAnimation(unpark);
-    group->addAnimation(moveToExitTrack);
+    group->addPause(ACTION_PAUSE);
     group->addAnimation(approachExitGate);
     group->addPause(ACTION_PAUSE);
     group->addAnimation(passSecondExitSensor);

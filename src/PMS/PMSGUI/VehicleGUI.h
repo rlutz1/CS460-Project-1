@@ -47,7 +47,6 @@ public:
     QPropertyAnimation* findSpot;
     QPropertyAnimation* park;
     QPropertyAnimation* unpark;
-    QPropertyAnimation* moveToExitTrack;
     QPropertyAnimation* approachExitGate;
     QPropertyAnimation* passSecondExitSensor;
     QPropertyAnimation* exit;

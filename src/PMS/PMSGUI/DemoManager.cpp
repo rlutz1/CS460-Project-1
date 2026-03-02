@@ -73,25 +73,28 @@ void DemoManager::runSimpleDemo() {
     stopDemo();
     VehicleGUI* vehicle = new VehicleGUI(
             scene,
-            {.x = 0, .y = parkingLot.gate.entranceGate.wm.x, .width = 25, .height = 25, .color = Qt::darkMagenta, .zPos = 100},
+            {.x = parkingLot.wm.x, .y = parkingLot.wm.y, .width = 25, .height = 25, .color = Qt::darkMagenta, .zPos = 100},
             {
                 .movementType = QEasingCurve::OutCubic,
                 .approachGateTime = 1000,
                 .throughGateTime = 1000,
-                .xFirstEntryGateSensor = parkingLot.gate.entranceGate.initOpenSensor.wm.x,
-                .xSecondEntryGateSensor = parkingLot.gate.entranceGate.stayOpenSensor.wm.x,
-                .xFirstExitGateSensor = parkingLot.gate.exitGate.initOpenSensor.wm.x, // TODO: somethings off here
-                .xSecondExitGateSensor = parkingLot.gate.exitGate.stayOpenSensor.wm.x,
-                .yEntryTrack = parkingLot.gate.entranceGate.wm.x,
-                .yExitTrack = parkingLot.gate.exitGate.wm.x,
-                .xSpot = parkingLot.parkingFloors[1]->parkingSpots[0]->wm.x,
-                .ySpot = parkingLot.parkingFloors[1]->parkingSpots[0]->wm.y,
+                .xFirstEntryGateSensor = parkingLot.gate.entranceGate.initOpenSensor.wm.x + 25,
+                .xSecondEntryGateSensor = parkingLot.gate.entranceGate.stayOpenSensor.wm.x + 25,
+                .xFirstExitGateSensor = parkingLot.gate.exitGate.initOpenSensor.wm.x - 25,
+                .xSecondExitGateSensor = parkingLot.gate.exitGate.stayOpenSensor.wm.x - 25,
+                .yEntryTrack = parkingLot.gate.entranceGate.wm.y + 50,
+                // .yEntryTrack = 400,
+                .yExitTrack = parkingLot.gate.exitGate.wm.y + 50,
+                // .yExitTrack = 200,
+                .xSpot = parkingLot.parkingFloors[1]->parkingSpots[1]->wm.x + 12,
+                .ySpot = parkingLot.parkingFloors[1]->parkingSpots[1]->wm.y + 40,
                 .generalMovementTime = 2000,
                 .parkPauseTime = 1000,
                 .parkTime = 1000
             },
             this
             ); // single vehicle
+    cout << parkingLot.parkingFloors[1]->parkingSpots[15]->wm.y << std::endl;
     activeVehicles.push_back(vehicle); // add to active vehicles
     currAnimation.addAnimation(vehicle->animationGroup); // get this animation
     // vehicle->ani
