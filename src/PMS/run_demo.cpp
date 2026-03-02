@@ -50,11 +50,12 @@ int run_demo(int argc, char *argv[]) {
     QWidget buttonContainer(&bottomContainer);
     QVBoxLayout buttonLayout(&buttonContainer);
 
-    QPushButton startSimpleDemoButton("Start Simple Demo", &mainWindow); // TODO disable both on click, enable stop
-    QPushButton startChaosDemoButton("Start Chaos Demo", &mainWindow); // TODO disable both on click, enable stop
-    QPushButton stopDemoButton("Stop Demo", &mainWindow);// TODO disable this, enable both demo buttons
+    QPushButton startSimpleDemoButton("Start Simple Demo", &buttonContainer); // TODO disable both on click, enable stop
+    QPushButton startChaosDemoButton("Start Chaos Demo", &buttonContainer); // TODO disable both on click, enable stop
+    QPushButton stopDemoButton("Stop Demo", &buttonContainer);// TODO disable this, enable both demo buttons
     // TODO: next line, connections for all
     QObject::connect(&startSimpleDemoButton, &QPushButton::clicked, &demoManager, &DemoManager::runSimpleDemo);
+    QObject::connect(&stopDemoButton, &QPushButton::clicked, &demoManager, &DemoManager::stopDemo);
 
     buttonLayout.addWidget(&startSimpleDemoButton);
     buttonLayout.addWidget(&startChaosDemoButton);
