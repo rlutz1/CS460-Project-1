@@ -70,12 +70,7 @@ void DemoManager::runChaosDemo() {
 
 // run exactly 1 vehicle through entry, park, and exit.
 void DemoManager::runSimpleDemo() {
-    currAnimation.stop(); // stop the animation (should be controlling with button enables, however)
-    currAnimation.clear(); // remove and delete all animations in group
-    for (VehicleGUI* vehicle : activeVehicles) { // cleanup our end.
-        ((QObject*)vehicle)->deleteLater();
-    }
-    activeVehicles.clear(); // clear out the vector
+    stopDemo();
     VehicleGUI* vehicle = new VehicleGUI(
             scene,
             {.x = 0, .y = parkingLot.gate.entranceGate.wm.x, .width = 25, .height = 25, .color = Qt::darkMagenta, .zPos = 100},
@@ -108,15 +103,12 @@ void DemoManager::runSimpleDemo() {
 
 // stop all animations, clear to initial state.
 void DemoManager::stopDemo() {
-    // TODO
-    // clean up task. need to test, but putting here for the moment.
-    // closing window will also take care of this since they are
-    // items in the scene.
     currAnimation.stop(); // stop the animation (should be controlling with button enables, however)
-    currAnimation.clear(); //
-    for (VehicleGUI* vehicle : activeVehicles) {
-        delete vehicle;
+    currAnimation.clear(); // remove and delete all animations in group
+    for (VehicleGUI* vehicle : activeVehicles) { // cleanup our end.
+        ((QObject*)vehicle)->deleteLater();
     }
+    activeVehicles.clear(); // clear out the vector
     // TODO: reset lot components to initial state.
 }
 
