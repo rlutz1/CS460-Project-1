@@ -41,6 +41,7 @@ public:
     DemoManager* demoManager;
 
     VehicleGUI(QGraphicsScene& scene, WidgetMeta widgetMeta, AnimationMeta animMeta, DemoManager* demoManager);
+    // ~VehicleGUI() override;
 
     QPropertyAnimation* approachEntryGate;
     QPropertyAnimation* passSecondEntrySensor;

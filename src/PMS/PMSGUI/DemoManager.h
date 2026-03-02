@@ -36,6 +36,9 @@ public slots: // slots for signals to send to!
     void stopDemo();
     // void test(); // testing animation connection
 
+// protected:
+//     void closeEvent(QCloseEvent *event) override;
+
 private:
     QGraphicsScene scene;
     ParkingLotGUI parkingLot;

@@ -94,7 +94,7 @@ void DemoManager::runSimpleDemo() {
             },
             this
             ); // single vehicle
-    cout << parkingLot.parkingFloors[1]->parkingSpots[15]->wm.y << std::endl;
+    // cout << parkingLot.parkingFloors[1]->parkingSpots[15]->wm.y << std::endl;
     activeVehicles.push_back(vehicle); // add to active vehicles
     currAnimation.addAnimation(vehicle->animationGroup); // get this animation
     // vehicle->ani
@@ -103,11 +103,10 @@ void DemoManager::runSimpleDemo() {
     // TODO: need to clean up on full finish!
 }
 
-
 // stop all animations, clear to initial state.
 void DemoManager::stopDemo() {
     currAnimation.stop(); // stop the animation (should be controlling with button enables, however)
-    currAnimation.clear(); // remove and delete all animations in group
+    currAnimation.clear(); // clear the vehicle animations
     for (VehicleGUI* vehicle : activeVehicles) { // cleanup our end.
         ((QObject*)vehicle)->deleteLater();
     }
@@ -122,6 +121,12 @@ void DemoManager::initGraphicsMetadata() {
     setAttribute(Qt::WA_TranslucentBackground);
 }
 
+// // potential override for final cleanups
+// void DemoManager::closeEvent(QCloseEvent *event) {
+//     event->accept();
+//     cout << "closing.." << std::endl;
+//     stopDemo();
+// }
 
 // for testing that i can change the values from here on anim finished
 // void DemoManager::test() {

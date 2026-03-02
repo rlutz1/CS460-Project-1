@@ -15,13 +15,20 @@
 
 VehicleGUI::VehicleGUI(QGraphicsScene& scene, WidgetMeta widgetMeta, AnimationMeta animationMeta, DemoManager* demoManager) :
     demoManager(demoManager),
-    wm(widgetMeta) {
+    wm(widgetMeta)
+{
     resize(wm.width, wm.height);
     setZValue(wm.zPos);
 
     initAnimation(animationMeta);
     scene.addItem(this);
 }
+
+// VehicleGUI::~VehicleGUI() {
+//     animationGroup->stop();
+//     animationGroup->clear();
+//     // animationGroup->deleteLater();
+// }
 
 void VehicleGUI::initAnimation(AnimationMeta animMeta) {
     QSequentialAnimationGroup* group = new QSequentialAnimationGroup;
