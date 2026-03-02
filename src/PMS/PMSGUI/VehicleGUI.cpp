@@ -11,6 +11,8 @@
 
 #include "DemoManager.h"
 
+#define ACTION_PAUSE 1000
+
 VehicleGUI::VehicleGUI(QGraphicsScene& scene, WidgetMeta widgetMeta, AnimationMeta animationMeta, DemoManager* demoManager) :
     demoManager(demoManager),
     wm(widgetMeta) {
@@ -83,18 +85,18 @@ void VehicleGUI::initAnimation(AnimationMeta animMeta) {
 
     // group all animations
     group->addAnimation(approachEntryGate);
-    group->addPause(2000);
+    group->addPause(ACTION_PAUSE);
     group->addAnimation(passSecondEntrySensor);
-    group->addPause(2000);
+    group->addPause(ACTION_PAUSE);
     group->addAnimation(findSpot);
     group->addAnimation(park);
     group->addPause(animMeta.parkPauseTime);
     group->addAnimation(unpark);
     group->addAnimation(moveToExitTrack);
     group->addAnimation(approachExitGate);
-    group->addPause(2000);
+    group->addPause(ACTION_PAUSE);
     group->addAnimation(passSecondExitSensor);
-    group->addPause(2000);
+    group->addPause(ACTION_PAUSE);
     group->addAnimation(exit);
 
     animationGroup = group;
