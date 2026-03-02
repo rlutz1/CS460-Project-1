@@ -71,6 +71,7 @@ void DemoManager::runChaosDemo() {
 // run exactly 1 vehicle through entry, park, and exit.
 void DemoManager::runSimpleDemo() {
     stopDemo();
+    cout << "stop past" << std::endl;
     VehicleGUI* vehicle = new VehicleGUI(
             scene,
             {.x = parkingLot.wm.x, .y = parkingLot.wm.y, .width = 25, .height = 25, .color = Qt::darkMagenta, .zPos = 100},
@@ -96,7 +97,7 @@ void DemoManager::runSimpleDemo() {
             ); // single vehicle
     // cout << parkingLot.parkingFloors[1]->parkingSpots[15]->wm.y << std::endl;
     activeVehicles.push_back(vehicle); // add to active vehicles
-    currAnimation.addAnimation(vehicle->animationGroup); // get this animation
+    currAnimation.addAnimation(&(vehicle->animationGroup)); // get this animation
     // vehicle->ani
     currAnimation.setLoopCount(1); // single iteration (this is default)
     currAnimation.start(); // start animation
@@ -106,7 +107,7 @@ void DemoManager::runSimpleDemo() {
 // stop all animations, clear to initial state.
 void DemoManager::stopDemo() {
     currAnimation.stop(); // stop the animation (should be controlling with button enables, however)
-    currAnimation.clear(); // clear the vehicle animations
+    // currAnimation.clear(); // clear the vehicle animations, only when dynamically allocated
     for (VehicleGUI* vehicle : activeVehicles) { // cleanup our end.
         ((QObject*)vehicle)->deleteLater();
     }

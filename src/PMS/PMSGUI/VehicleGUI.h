@@ -37,20 +37,20 @@ struct AnimationMeta {
 class VehicleGUI : QGraphicsWidget {
 
 public:
-    QSequentialAnimationGroup* animationGroup;
+    QSequentialAnimationGroup animationGroup;
     DemoManager* demoManager;
 
     VehicleGUI(QGraphicsScene& scene, WidgetMeta widgetMeta, AnimationMeta animMeta, DemoManager* demoManager);
     // ~VehicleGUI() override;
 
-    QPropertyAnimation* approachEntryGate;
-    QPropertyAnimation* passSecondEntrySensor;
-    QPropertyAnimation* findSpot;
-    QPropertyAnimation* park;
-    QPropertyAnimation* unpark;
-    QPropertyAnimation* approachExitGate;
-    QPropertyAnimation* passSecondExitSensor;
-    QPropertyAnimation* exit;
+    QPropertyAnimation approachEntryGate;
+    QPropertyAnimation passSecondEntrySensor;
+    QPropertyAnimation findSpot;
+    QPropertyAnimation park;
+    QPropertyAnimation unpark;
+    QPropertyAnimation approachExitGate;
+    QPropertyAnimation passSecondExitSensor;
+    QPropertyAnimation exit;
 protected:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
