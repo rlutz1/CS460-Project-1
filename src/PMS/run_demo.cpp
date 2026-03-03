@@ -65,7 +65,7 @@ int run_demo(int argc, char *argv[]) {
     bottomLayout.addWidget(&buttonContainer);
     bottomLayout.addWidget((QWidget*) &availabilityDisplay);
 
-    ParkingManagementController pmc(initPackage); // initialize the backend
+    ParkingManagementController pmc(initPackage, availabilityDisplay); // initialize the backend
 
     // adding main two containers to the UI
     layout.addWidget(&demoManager);

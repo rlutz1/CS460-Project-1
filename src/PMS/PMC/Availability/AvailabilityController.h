@@ -12,7 +12,7 @@
 
 class AvailabilityController {
     public:
-    AvailabilityController();
+    AvailabilityController(IAvailabilityInstructionSink* ptr);
     ~AvailabilityController() = default;
     void updateAvailabilityTracking(SpotType spotType, int floor, bool toIncrement);
     void updateLogMessage(const std::string& logMsg);
