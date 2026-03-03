@@ -6,15 +6,20 @@
 #define CS460_PROJECT_1_PARKINGLOT_H
 
 #include "../../Definitions/Identifiers.h"
-#include "ParkingFloor.h"
 #include "../../../PMS/Initialization.h"
+#include "ParkingSpotController.h"
 #include <vector>
 #include <map>
 #include <memory>
 
+class ParkingSpotController;
+
+class ParkingFloor;
+
 class ParkingLot
 {
 public:
+	~ParkingLot();
 	enum class State
 	{
 		OPEN,

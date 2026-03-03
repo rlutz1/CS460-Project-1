@@ -5,8 +5,8 @@
 #include "ParkingManagementController.h"
 #include "../Initialization.h"
 
-ParkingManagementController::ParkingManagementController(InitializationPackage initPackage) : lot(initPackage),
-	totalSpots(0), vehiclesInside(0)
+ParkingManagementController::ParkingManagementController(const InitializationPackage& initPackage)
+	: lot(initPackage), totalSpots(0), vehiclesInside(0)
 {
 	// This should calculate the total spots from the initialization numbers
 	const auto& nums = initPackage.numbers;
