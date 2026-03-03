@@ -29,11 +29,12 @@ class DemoManager : public QGraphicsView {
     Q_OBJECT;
 public:
     DemoManager(QWidget* parent, InitializationPackage initPackage, int width, int height, AvailabilityGUI& availabilityDisplay);
-
+    // void newParker(VehicleGUI* vehicle);
 public slots: // slots for signals to send to!
     void runSimpleDemo();
     void runChaosDemo();
     void stopDemo();
+
     // void test(); // testing animation connection
 
 // protected:

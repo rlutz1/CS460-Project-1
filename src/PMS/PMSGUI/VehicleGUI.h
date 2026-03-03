@@ -11,10 +11,12 @@
 
 #include "DemoManager.h"
 #include "GUIStructs/GUIStructs.h"
+#include <QPauseAnimation>
 class DemoManager;
 
 struct AnimationMeta {
     int entryDelay;
+    int exitDelay;
 
     QEasingCurve movementType;
     int approachGateTime;
@@ -43,6 +45,7 @@ public:
     // ~VehicleGUI() override;
     DemoManager* demoManager;
     QSequentialAnimationGroup animationGroup;
+    QPauseAnimation offsetPause;
     QPropertyAnimation approachEntryGate;
     QPropertyAnimation passSecondEntrySensor;
     QPropertyAnimation findSpot;
@@ -60,6 +63,7 @@ private:
     WidgetMeta wm;
 
     void initAnimation(AnimationMeta animMeta);
+    void removePause(int x, int y);
 };
 
 

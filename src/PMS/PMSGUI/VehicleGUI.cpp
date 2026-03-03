@@ -3,13 +3,14 @@
 //
 
 #include "VehicleGUI.h"
-
+#include <iostream>
 #include <QPainter>
 #include <QPropertyAnimation>
 #include <QGraphicsScene>
 #include <QObject>
-
+#include <QTimer>
 #include "DemoManager.h"
+#include "../run_demo.h"
 
 #define ACTION_PAUSE 1000
 
@@ -40,8 +41,44 @@ VehicleGUI::VehicleGUI(QGraphicsScene& scene, WidgetMeta widgetMeta, AnimationMe
 //     // animationGroup->deleteLater();
 // }
 
+void VehicleGUI::removePause(int x, int y) {
+    offsetPause.setDuration(0);
+    // if (animationGroup.animationAt(0) == &offsetPause) {
+    //     // int currTime = animationGroup.currentTime();
+    //     animationGroup.pause();
+    //     // setPos(x, y);
+    //     // animationGroup.removeAnimation(&offsetPause);
+    //
+    //     animationGroup.clear();
+    //     animationGroup.addAnimation(&approachEntryGate);
+    //     animationGroup.addPause(ACTION_PAUSE);
+    //     animationGroup.addAnimation(&passSecondEntrySensor);
+    //     animationGroup.addPause(ACTION_PAUSE);
+    //     animationGroup.addAnimation(&findSpot);
+    //     animationGroup.addPause(ACTION_PAUSE);
+    //     animationGroup.addAnimation(&park);
+    //     animationGroup.addPause(2000);
+    //     animationGroup.addAnimation(&unpark);
+    //     animationGroup.addPause(ACTION_PAUSE);
+    //     animationGroup.addAnimation(&approachExitGate);
+    //     animationGroup.addPause(ACTION_PAUSE);
+    //     animationGroup.addAnimation(&passSecondExitSensor);
+    //     animationGroup.addPause(ACTION_PAUSE);
+    //     animationGroup.addAnimation(&exit);
+    //     // animationGroup.setCurrentTime(0);
+    //     // std::cout << "balh" << std::endl;
+    //     // animationGroup.start();
+    //     animationGroup.resume();
+    //     // animationGroup.setCurrentTime(currTime);
+    // }
+    // offsetPause.setDuration(0);
+
+}
+
 void VehicleGUI::initAnimation(AnimationMeta animMeta) {
     // QSequentialAnimationGroup* group = new QSequentialAnimationGroup;
+
+    offsetPause.setDuration(animMeta.entryDelay);
 
     approachEntryGate.setDuration(animMeta.approachGateTime);
     approachEntryGate.setEasingCurve(animMeta.movementType);
@@ -52,48 +89,51 @@ void VehicleGUI::initAnimation(AnimationMeta animMeta) {
 
     passSecondEntrySensor.setDuration(animMeta.throughGateTime);
     passSecondEntrySensor.setEasingCurve(animMeta.movementType);
-    passSecondEntrySensor.setStartValue(QPoint(animMeta.xFirstEntryGateSensor, animMeta.yEntryTrack));
+    // passSecondEntrySensor.setStartValue(QPoint(animMeta.xFirstEntryGateSensor, animMeta.yEntryTrack));
     passSecondEntrySensor.setEndValue(QPoint(animMeta.xSecondEntryGateSensor, animMeta.yEntryTrack));
     // connect(park_anim, &QPropertyAnimation::finished, parent, &ParkingLot::trigger_vehicle_parked(this->vehicleId, true));
     // connect(park_anim, &QPropertyAnimation::finished, parent, [this]() { parent->trigger_vehicle_parked(this.destId, true); });
 
     findSpot.setDuration(animMeta.generalMovementTime);
     findSpot.setEasingCurve(animMeta.movementType);
-    findSpot.setStartValue(QPoint(animMeta.xSecondEntryGateSensor, animMeta.yEntryTrack));
+    // findSpot.setStartValue(QPoint(animMeta.xSecondEntryGateSensor, animMeta.yEntryTrack));
     findSpot.setEndValue(QPoint(animMeta.xSpot, animMeta.yEntryTrack));
 
     park.setDuration(animMeta.parkTime);
     park.setEasingCurve(animMeta.movementType);
-    park.setStartValue(QPoint(animMeta.xSpot, animMeta.yEntryTrack));
+    // park.setStartValue(QPoint(animMeta.xSpot, animMeta.yEntryTrack));
     park.setEndValue(QPoint(animMeta.xSpot, animMeta.ySpot));
 
     unpark.setDuration(animMeta.parkTime);
     unpark.setEasingCurve(animMeta.movementType);
-    unpark.setStartValue(QPoint(animMeta.xSpot, animMeta.ySpot));
+    // unpark.setStartValue(QPoint(animMeta.xSpot, animMeta.ySpot));
     unpark.setEndValue(QPoint(animMeta.xSpot, animMeta.yExitTrack));
 
     approachExitGate.setDuration(animMeta.generalMovementTime);
     approachExitGate.setEasingCurve(animMeta.movementType);
-    approachExitGate.setStartValue(QPoint(animMeta.xSpot, animMeta.yExitTrack));
+    // approachExitGate.setStartValue(QPoint(animMeta.xSpot, animMeta.yExitTrack));
     approachExitGate.setEndValue(QPoint(animMeta.xFirstExitGateSensor, animMeta.yExitTrack));
 
     passSecondExitSensor.setDuration(animMeta.throughGateTime);
     passSecondExitSensor.setEasingCurve(animMeta.movementType);
-    passSecondExitSensor.setStartValue(QPoint(animMeta.xFirstExitGateSensor, animMeta.yExitTrack));
+    // passSecondExitSensor.setStartValue(QPoint(animMeta.xFirstExitGateSensor, animMeta.yExitTrack));
     passSecondExitSensor.setEndValue(QPoint(animMeta.xSecondExitGateSensor, animMeta.yExitTrack));
 
     exit.setDuration(animMeta.generalMovementTime);
     exit.setEasingCurve(animMeta.movementType);
-    exit.setStartValue(QPoint(animMeta.xSecondExitGateSensor, animMeta.yExitTrack));
+    // exit.setStartValue(QPoint(animMeta.xSecondExitGateSensor, animMeta.yExitTrack));
     exit.setEndValue(QPoint(0, animMeta.yExitTrack));
 
+
     // group all animations
-    animationGroup.addPause(animMeta.entryDelay);
+    // animationGroup.addPause(animMeta.entryDelay);
+    animationGroup.addAnimation(&offsetPause);
     animationGroup.addAnimation(&approachEntryGate);
     animationGroup.addPause(ACTION_PAUSE);
     animationGroup.addAnimation(&passSecondEntrySensor);
     animationGroup.addPause(ACTION_PAUSE);
     animationGroup.addAnimation(&findSpot);
+    animationGroup.addPause(ACTION_PAUSE);
     animationGroup.addAnimation(&park);
     animationGroup.addPause(animMeta.parkPauseTime);
     animationGroup.addAnimation(&unpark);
@@ -103,7 +143,23 @@ void VehicleGUI::initAnimation(AnimationMeta animMeta) {
     animationGroup.addAnimation(&passSecondExitSensor);
     animationGroup.addPause(ACTION_PAUSE);
     animationGroup.addAnimation(&exit);
-    animationGroup.setLoopCount(-1);
+    // animationGroup.addPause(animMeta.exitDelay);
+    // connect(&exit, &QPropertyAnimation::finished, this, [this, animMeta]() { removePause(0, animMeta.yEntryTrack); });
+
+    // connect(&animationGroup, &QSequentialAnimationGroup::currentLoopChanged, this, [this](int loop) {
+    //    if (loop == 1) {
+    //        offsetPause.setDuration(0);
+    //    }
+    // });
+    // animationGroup.setLoopCount(-1);
+    // animationGroup.start();
+    // if (animMeta.entryDelay > 0) {
+    //     animationGroup.pause();
+    //     QTimer::singleShot(animMeta.entryDelay, this, [this]() {
+    //         animationGroup.resume();
+    //     });
+    // }
+
 
 }
 
