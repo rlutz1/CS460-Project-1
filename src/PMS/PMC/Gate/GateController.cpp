@@ -3,9 +3,7 @@
 //
 
 #include "GateController.h"
-
 #include "../PMCInterfaces/IGateInstructionSink.h"
-
 #include "CentralGateController.h"
 
 void GateController::SensedVehicle(SensorId sensorID) {

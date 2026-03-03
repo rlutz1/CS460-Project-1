@@ -4,6 +4,7 @@
 
 #include "AvailabilityController.h"
 
+AvailabilityController::AvailabilityController() = default;
 
 void AvailabilityController::updateAvailabilityTracking(SpotType spotType, int floor, bool toIncrement) {
         bool lotGotFull = false;

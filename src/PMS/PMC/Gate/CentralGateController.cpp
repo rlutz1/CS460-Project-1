@@ -6,6 +6,7 @@
 #include "../ParkingManagementController.h"
 #include <iostream>
 
+CentralGateController::CentralGateController() = default;
 
 //TODO: implement logic for GateController <-> PMC communication.
 

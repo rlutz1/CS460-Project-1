@@ -10,11 +10,10 @@
 
 class CentralGateController;
 
-
 class GateController : public ISensorDataSink
 {
 public:
-    GateController();
+	GateController() = default;
     ~GateController() = default;
 
     // IsensorDataSink
