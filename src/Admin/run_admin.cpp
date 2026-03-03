@@ -1,21 +1,26 @@
 #include <QApplication>
 #include <QVBoxLayout>
 #include <QPushButton>
-
 #include <QComboBox>
-#include <QDebug>
+
+#include "AdminUserInterface.h"
 
 
 // driver for admin app, something strange
 int run_admin(int argc, char *argv[]) {
     QApplication a(argc, argv);
-    QWidget mainWindow;
-    QVBoxLayout layout(&mainWindow);
-    mainWindow.setLayout(&layout);
-    QPushButton button("admin app!", &mainWindow);
-    layout.addWidget(&button);
-    mainWindow.show();
 
+    AdminUserInterface userInterface;
+    userInterface.setWindowTitle("Admin Login");
+    userInterface.show();
+    a.exec();
+
+    if (!userInterface.isLoginSuccessful())
+    {
+        return 0;
+    }
+
+    QWidget mainWindow;
     QComboBox *options = new QComboBox();
     options -> addItem("Make Unavailable");
     options -> addItem("Make Available");
@@ -31,6 +36,6 @@ int run_admin(int argc, char *argv[]) {
     // confirmLayout.addWidget(parking);
     confirmLayout.addWidget(&confirmButton);
     mainWindow.setLayout(&confirmLayout);
-
-    return QApplication::exec();
+    mainWindow.show();
+    return a.exec();
 }
