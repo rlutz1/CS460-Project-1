@@ -121,7 +121,6 @@ void ParkingFloorGUI::initFirstFloor(QGraphicsScene& scene, InitializationPackag
             }
             ParkingSpotGUI* parkingSpot = new ParkingSpotGUI(
                 scene,
-                initPackage,
                 id,
                 widgetMeta
             );
@@ -187,7 +186,6 @@ void ParkingFloorGUI::initGenFloor(QGraphicsScene& scene, InitializationPackage&
 
             ParkingSpotGUI* parkingSpot = new ParkingSpotGUI(
                 scene,
-                initPackage,
                 id,
                 widgetMeta
             );
