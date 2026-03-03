@@ -116,9 +116,7 @@ void DemoManager::runSimpleDemo() {
                 .xFirstExitGateSensor = parkingLot.gate.exitGate.initOpenSensor.wm.x - 25,
                 .xSecondExitGateSensor = parkingLot.gate.exitGate.stayOpenSensor.wm.x - 25,
                 .yEntryTrack = parkingLot.gate.entranceGate.wm.y + 50,
-                // .yEntryTrack = 400,
                 .yExitTrack = parkingLot.gate.exitGate.wm.y + 50,
-                // .yExitTrack = 200,
                 .xSpot = parkingLot.parkingFloors[1]->parkingSpots[1]->wm.x + 12,
                 .ySpot = parkingLot.parkingFloors[1]->parkingSpots[1]->wm.y + 40,
                 .generalMovementTime = 2000,
@@ -127,7 +125,7 @@ void DemoManager::runSimpleDemo() {
             },
             this
             ); // single vehicle
-    // cout << parkingLot.parkingFloors[1]->parkingSpots[15]->wm.y << std::endl;
+
     activeVehicles.push_back(vehicle); // add to active vehicles
     vehicle->animationGroup.setLoopCount(1);// single iteration (this is default)
     currAnimation.addAnimation(&(vehicle->animationGroup)); // get this animation
