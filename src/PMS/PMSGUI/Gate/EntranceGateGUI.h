@@ -43,7 +43,7 @@ protected:
            QWidget *widget) override;
 
 private:
-    ISensorDataSink* gateSensorController;
+    ISensorDataSink* pmc;
 };
 
 
