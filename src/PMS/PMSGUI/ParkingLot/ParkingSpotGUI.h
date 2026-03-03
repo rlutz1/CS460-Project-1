@@ -14,7 +14,7 @@ class ParkingSpotGUI : public QGraphicsWidget {
     Q_OBJECT;
 
 public:
-    ParkingSpotGUI(QGraphicsScene& scene, InitializationPackage& initPackage, SpotId spotId, WidgetMeta widgetMeta);
+    ParkingSpotGUI(QGraphicsScene& scene, SpotId spotId, WidgetMeta widgetMeta);
 
     QColor currColor;
     QColor availableColor;

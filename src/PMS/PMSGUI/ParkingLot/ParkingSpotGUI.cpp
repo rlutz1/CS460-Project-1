@@ -8,7 +8,7 @@
 #include <QPainter>
 
 
-ParkingSpotGUI::ParkingSpotGUI(QGraphicsScene& scene, InitializationPackage& initPackage, SpotId spotId, WidgetMeta widgetMeta) :
+ParkingSpotGUI::ParkingSpotGUI(QGraphicsScene& scene, SpotId spotId, WidgetMeta widgetMeta) :
     spotId(spotId),
     wm(widgetMeta),
     occupiedColor(Qt::red),
