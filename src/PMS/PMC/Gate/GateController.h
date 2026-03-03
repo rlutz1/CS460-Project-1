@@ -21,14 +21,12 @@ public:
     void open();
     void close();
     void setGateHardware(IGateInstructionSink& gateHardware);
-    void setGateId(GateId gateId);
 
 private:
     // TODO (Future for demo construction):
     // set/connect this manually after initializing hardware (gui) component.
     // many need to make sink(i.e. hardware) public.
     IGateInstructionSink* gateHardware = nullptr;
-    GateId gateId;
 };
 
 

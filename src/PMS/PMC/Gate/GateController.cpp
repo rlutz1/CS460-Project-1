@@ -28,8 +28,3 @@ void GateController::setGateHardware(IGateInstructionSink& newGateHardware) {
 	gateHardware = &newGateHardware;
 }
 
-
-void GateController::setGateId(GateId newGateId) {
-    gateId = newGateId;
-}
-

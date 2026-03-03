@@ -20,8 +20,8 @@ public:
     void moveGate(GateId gateId, bool toOpen);
 
 private:
-    GateController* entranceGateController = nullptr;
-    GateController* exitGateController = nullptr;
+    GateController entranceGateController;
+    GateController exitGateController;
 };
 
 
