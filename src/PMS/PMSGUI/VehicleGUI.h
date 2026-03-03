@@ -16,7 +16,6 @@ class DemoManager;
 
 struct AnimationMeta {
     int entryDelay;
-    int exitDelay;
 
     QEasingCurve movementType;
     int approachGateTime;
