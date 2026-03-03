@@ -33,10 +33,9 @@ int run_demo(int argc, char *argv[]) {
 
     // for displaying availability -> a vanilla widget
     AvailabilityGUI availabilityDisplay(&bottomContainer, initPackage);
-
     DemoManager demoManager(&mainWindow, initPackage, WINDOW_WIDTH, WINDOW_HEIGHT, availabilityDisplay); // initialize the front end
-    ParkingManagementController pmc(initPackage); // initialize the backend
-    // initialize sink? or unnecessary step -- leaving for eliud for now
+
+   // initialize sink? or unnecessary step -- leaving for eliud for now
 
     // init the main window
     // there are issues with scoping of the following,
@@ -65,6 +64,8 @@ int run_demo(int argc, char *argv[]) {
     // add to the bottom layout: buttons and availbility display
     bottomLayout.addWidget(&buttonContainer);
     bottomLayout.addWidget((QWidget*) &availabilityDisplay);
+
+    ParkingManagementController pmc(initPackage); // initialize the backend
 
     // adding main two containers to the UI
     layout.addWidget(&demoManager);

@@ -13,7 +13,7 @@ LedGUI::LedGUI(QGraphicsScene& scene, WidgetMeta widgetMeta) :
     resize(wm.width, wm.height);
     setZValue(wm.zPos);
 
-    scene.addItem(this);
+    // scene.addItem(this);
 
 }
 

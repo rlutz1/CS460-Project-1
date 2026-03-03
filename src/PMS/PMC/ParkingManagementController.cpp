@@ -15,7 +15,6 @@ ParkingManagementController::ParkingManagementController(const InitializationPac
 	// Using purely constructors to build them
 	// (to avoid temporary objects that don't
 	// live through the lifetime of the program).
-
 	availabilityDisplay.updateLogMessage("System Ready");
 
 

@@ -16,6 +16,32 @@ using std::cout;
 #include "ParkingLot/ParkingLotGUI.h"
 #include <random>
 
+void DemoManager::initScene() {
+    scene.addItem(&parkingLot);
+    for (ParkingFloorGUI* floor : parkingLot.parkingFloors) {
+        scene.addItem(floor);
+        for (ParkingSpotGUI* spot : floor->parkingSpots) {
+            scene.addItem(spot);
+            scene.addItem(spot->led);
+            scene.addItem(spot->ultrasonicSensor);
+            scene.addItem(spot->weightSensor);
+        }
+    }
+    scene.addItem(&parkingLot.gate);
+    scene.addItem(&parkingLot.gate.entranceGate);
+    scene.addItem(&parkingLot.gate.entranceGate.led);
+    scene.addItem(&parkingLot.gate.entranceGate.initOpenSensor);
+    scene.addItem(&parkingLot.gate.entranceGate.stayOpenSensor);
+    scene.addItem(&parkingLot.gate.entranceGate.spikes);
+    scene.addItem(&parkingLot.gate.exitGate);
+    scene.addItem(&parkingLot.gate.exitGate.led);
+    scene.addItem(&parkingLot.gate.exitGate.initOpenSensor);
+    scene.addItem(&parkingLot.gate.exitGate.stayOpenSensor);
+    scene.addItem(&parkingLot.gate.exitGate.spikes);
+
+    // scene.addItem(availabilityDisplay);
+}
+
 // this constructor initializes the parking lot, which is the wrapper
 // of the whole visual.
 DemoManager::DemoManager(QWidget* parent, InitializationPackage initPackage, int width, int height, AvailabilityGUI& availabilityDisplay) :
@@ -27,7 +53,10 @@ DemoManager::DemoManager(QWidget* parent, InitializationPackage initPackage, int
     availabilityDisplay(&availabilityDisplay),
     QGraphicsView(parent) {
     this->setMinimumSize(QSize(width, height));
+    initScene();
     setScene(&scene);
+
+
 }
 
 // run many vehicles with pseudorandomness

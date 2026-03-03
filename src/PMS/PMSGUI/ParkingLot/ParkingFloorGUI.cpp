@@ -28,7 +28,7 @@ ParkingFloorGUI::ParkingFloorGUI(QGraphicsScene& scene, InitializationPackage& i
         initGenFloor(scene, initPackage);
     }
 
-    scene.addItem(this);
+    // scene.addItem(this);
 }
 
 // REQUIRED FOR GRAPHICS ITEM

@@ -55,7 +55,7 @@ ParkingLotGUI::ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initP
     } // end loop
 
 
-    scene.addItem(this); // add myself to the scene
+    // scene.addItem(this); // add myself to the scene
 } // end constructor
 
 

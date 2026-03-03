@@ -42,7 +42,7 @@ void VehicleGUI::initAnimation(AnimationMeta animMeta) {
     approachEntryGate.setEasingCurve(animMeta.movementType);
     approachEntryGate.setStartValue(QPoint(0, animMeta.yEntryTrack));
     approachEntryGate.setEndValue(QPoint(animMeta.xFirstEntryGateSensor, animMeta.yEntryTrack));
-    QObject::connect(approachEntryGate, &QPropertyAnimation::finished,
+    QObject::connect(&approachEntryGate, &QPropertyAnimation::finished,
        &demoManager->parkingLot.gate.entranceGate, &EntranceGateGUI::vehicleOnEntranceGateInductionSensor);
 
     // make sure gate is open.
@@ -50,7 +50,7 @@ void VehicleGUI::initAnimation(AnimationMeta animMeta) {
     passSecondEntrySensor.setDuration(animMeta.throughGateTime);
     passSecondEntrySensor.setEasingCurve(animMeta.movementType);
     passSecondEntrySensor.setEndValue(QPoint(animMeta.xSecondEntryGateSensor, animMeta.yEntryTrack));
-    QObject::connect(passSecondEntrySensor, &QPropertyAnimation::finished,
+    QObject::connect(&passSecondEntrySensor, &QPropertyAnimation::finished,
         &demoManager->parkingLot.gate.entranceGate, &EntranceGateGUI::vehiclePassedSecondEntranceGateSensor);
 
     findSpot.setDuration(animMeta.generalMovementTime);
@@ -68,13 +68,13 @@ void VehicleGUI::initAnimation(AnimationMeta animMeta) {
     approachExitGate.setDuration(animMeta.generalMovementTime);
     approachExitGate.setEasingCurve(animMeta.movementType);
     approachExitGate.setEndValue(QPoint(animMeta.xFirstExitGateSensor, animMeta.yExitTrack));
-    QObject::connect(approachExitGate, &QPropertyAnimation::finished,
+    QObject::connect(&approachExitGate, &QPropertyAnimation::finished,
         &demoManager->parkingLot.gate.exitGate, &ExitGateGUI::vehicleOnExitGateInductionSensor);
 
     passSecondExitSensor.setDuration(animMeta.throughGateTime);
     passSecondExitSensor.setEasingCurve(animMeta.movementType);
     passSecondExitSensor.setEndValue(QPoint(animMeta.xSecondExitGateSensor, animMeta.yExitTrack));
-    QObject::connect(passSecondExitSensor, &QPropertyAnimation::finished,
+    QObject::connect(&passSecondExitSensor, &QPropertyAnimation::finished,
           &demoManager->parkingLot.gate.exitGate, &ExitGateGUI::vehiclePassedSecondExitGateSensor);
 
 

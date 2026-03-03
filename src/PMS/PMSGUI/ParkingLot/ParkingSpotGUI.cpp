@@ -51,7 +51,8 @@ ParkingSpotGUI::ParkingSpotGUI(QGraphicsScene& scene, InitializationPackage& ini
         spotId.weightId,
         {.x = wm.x + (wm.width / 2) - 5, .y = wm.y + wm.height - 10, .width = 10, .height = 10, .color = Qt::black, .zPos = (widgetMeta.zPos + 1)}
         );
-    scene.addItem(this);
+    // scene.addItem((QGraphicsWidget*)&led);
+    // scene.addItem(this);
 
 }
 

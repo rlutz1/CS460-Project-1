@@ -14,14 +14,13 @@ class AvailabilityController {
     public:
     AvailabilityController();
     ~AvailabilityController() = default;
-
     void updateAvailabilityTracking(SpotType spotType, int floor, bool toIncrement);
     void updateLogMessage(const std::string& logMsg);
     void updateInTransit(bool toIcrement);
 
     void setAvailabilityDisplay(IAvailabilityInstructionSink& newAvailabilityDisplay);
 private:
-    IAvailabilityInstructionSink* availabilityDisplay;
+    IAvailabilityInstructionSink* availabilityDisplaySink;
 };
 
 

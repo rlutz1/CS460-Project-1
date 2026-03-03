@@ -64,6 +64,7 @@ add_executable(CS460_Project_1
         src/PMS/PMC/PMCInterfaces/IAvailabilityInstructionSink.h
         src/PMS/PMC/Availability/AvailabilityController.cpp
         src/PMS/PMSGUI/PMSGUIInterfaces/IInductionSensorDataSink.h
+        src/PMS/PMC/PMCInterfaces/IGateInstructionSink.h
 )
 
 

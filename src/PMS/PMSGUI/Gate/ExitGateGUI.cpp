@@ -31,7 +31,7 @@ spikes(
     resize(wm.width, wm.height);
     setZValue(wm.zPos);
 
-    scene.addItem(this);
+    // scene.addItem(this);
 }
 
 // REQUIRED FOR GRAPHICS ITEM

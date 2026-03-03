@@ -9,9 +9,9 @@ AvailabilityController::AvailabilityController() = default;
 void AvailabilityController::updateAvailabilityTracking(SpotType spotType, int floor, bool toIncrement) {
         bool lotGotFull = false;
         if ( toIncrement ) {
-                availabilityDisplay->increaseAvailabilityCount(spotType, floor);
+                availabilityDisplaySink->increaseAvailabilityCount(spotType, floor);
         }else {
-                lotGotFull = availabilityDisplay->decreaseAvailabilityCount(spotType, floor);
+                lotGotFull = availabilityDisplaySink->decreaseAvailabilityCount(spotType, floor);
         }
 
         if ( lotGotFull ) {
@@ -21,17 +21,17 @@ void AvailabilityController::updateAvailabilityTracking(SpotType spotType, int f
 }
 
 void AvailabilityController::updateLogMessage(const std::string& logMsg) {
-        availabilityDisplay->setLogMsg(logMsg);
+        availabilityDisplaySink->setLogMsg(logMsg);
 }
 
 void AvailabilityController::updateInTransit(bool toIcrement) {
         if ( toIcrement ) {
-                availabilityDisplay->increaseInTransitCount();
+                availabilityDisplaySink->increaseInTransitCount();
         }else {
-                availabilityDisplay->decreaseInTransitCount();
+                availabilityDisplaySink->decreaseInTransitCount();
         }
 }
 
 void AvailabilityController::setAvailabilityDisplay(IAvailabilityInstructionSink& newAvailabilityDisplay) {
-        availabilityDisplay = &newAvailabilityDisplay;
+        availabilityDisplaySink = &newAvailabilityDisplay;
 }
