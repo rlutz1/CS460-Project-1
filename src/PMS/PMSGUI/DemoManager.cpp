@@ -53,7 +53,7 @@ void DemoManager::runChaosDemo() {
     int delay = 0;
 
     for (int i = 0; i < numCars; i++) {
-        delay += 4000;
+
         VehicleGUI* vehicle = new VehicleGUI(
         scene,
         {.x = parkingLot.wm.x, .y = parkingLot.wm.y, .width = 25, .height = 25, .color = Qt::darkMagenta, .zPos = 100},
@@ -78,7 +78,7 @@ void DemoManager::runChaosDemo() {
             true
             ); // run the vehicle at a timing offset
 
-
+        delay += 4000;
         activeVehicles.push_back(vehicle); // add to active vehicles`
         currAnimation.addAnimation(&vehicle->animationGroup); // add to the parallel parent animation
     } // end loop
