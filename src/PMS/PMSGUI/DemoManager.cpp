@@ -48,10 +48,10 @@ void DemoManager::runChaosDemo() {
     stopDemo(); // clean out whatever's there
 
     int numCars = 3;
-    int delay = 1000;
+    int delay = 0;
 
     for (int i = 0; i < numCars; i++) {
-        VehicleGUI* vehicleFirstRun = new VehicleGUI(
+        VehicleGUI* vehicle = new VehicleGUI(
             scene,
             {.x = parkingLot.wm.x, .y = parkingLot.wm.y, .width = 25, .height = 25, .color = Qt::darkMagenta, .zPos = 100},
             {
@@ -71,46 +71,16 @@ void DemoManager::runChaosDemo() {
                 .parkPauseTime = 1000,
                 .parkTime = 1000
             },
-            this
+            this,
+            true
             ); // run the vehicle at a timing offset
-        VehicleGUI* vehicleNormalRun = new VehicleGUI(
-            scene,
-            {.x = parkingLot.wm.x, .y = parkingLot.wm.y, .width = 25, .height = 25, .color = Qt::darkMagenta, .zPos = 100},
-            {
-                .entryDelay = 0,
-                .movementType = QEasingCurve::OutCubic,
-                .approachGateTime = 1000,
-                .throughGateTime = 1000,
-                .xFirstEntryGateSensor = parkingLot.gate.entranceGate.initOpenSensor.wm.x + 25,
-                .xSecondEntryGateSensor = parkingLot.gate.entranceGate.stayOpenSensor.wm.x + 25,
-                .xFirstExitGateSensor = parkingLot.gate.exitGate.initOpenSensor.wm.x - 25,
-                .xSecondExitGateSensor = parkingLot.gate.exitGate.stayOpenSensor.wm.x - 25,
-                .yEntryTrack = parkingLot.gate.entranceGate.wm.y + 50,
-                .yExitTrack = parkingLot.gate.exitGate.wm.y + 50,
-                .xSpot = parkingLot.parkingFloors[i % 2]->parkingSpots[i]->wm.x + 12,
-                .ySpot = parkingLot.parkingFloors[i % 2]->parkingSpots[i]->wm.y + 40,
-                .generalMovementTime = 2000,
-                .parkPauseTime = 1000,
-                .parkTime = 1000
-            },
-            this
-            ); // normal running after offset
         delay += 4000;
 
-        activeVehicles.push_back(vehicleFirstRun); // add to active vehicles`
-        activeVehicles.push_back(vehicleNormalRun); // add to active vehicles
-
-        QSequentialAnimationGroup* runner = new QSequentialAnimationGroup; // TODO: memory!
-        vehicleFirstRun->animationGroup.setLoopCount(1); // only once
-        vehicleNormalRun->animationGroup.setLoopCount(-1); // iterate forever
-
-        runner->addAnimation(&(vehicleFirstRun->animationGroup));
-        runner->addAnimation(&(vehicleNormalRun->animationGroup));
-        currAnimation.addAnimation(runner); // add to the parallel parent animation
-    }
-
+        activeVehicles.push_back(vehicle); // add to active vehicles`
+        currAnimation.addAnimation(&vehicle->animationGroup); // add to the parallel parent animation
+    } // end loop
     currAnimation.start();
-}
+} // end method
 
 // run exactly 1 vehicle through entry, park, and exit.
 void DemoManager::runSimpleDemo() {
@@ -136,7 +106,8 @@ void DemoManager::runSimpleDemo() {
                 .parkPauseTime = 1000,
                 .parkTime = 1000
             },
-            this
+            this,
+            false
             ); // single vehicle
 
     activeVehicles.push_back(vehicle); // add to active vehicles

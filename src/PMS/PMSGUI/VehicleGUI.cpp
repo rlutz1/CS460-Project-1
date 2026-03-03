@@ -14,10 +14,18 @@
 
 #define ACTION_PAUSE 1000
 
-VehicleGUI::VehicleGUI(QGraphicsScene& scene, WidgetMeta widgetMeta, AnimationMeta animationMeta, DemoManager* demoManager) :
+VehicleGUI::VehicleGUI(
+    QGraphicsScene& scene,
+    WidgetMeta widgetMeta,
+    AnimationMeta animationMeta,
+    DemoManager* demoManager,
+    bool chaos
+    ) :
     demoManager(demoManager),
     wm(widgetMeta),
     animationGroup(this),
+    initialAnimation(this),
+    ongoingAnimation(this),
     approachEntryGate (this, "pos"),
     passSecondEntrySensor(this, "pos"),
     findSpot(this, "pos"),
@@ -31,27 +39,44 @@ VehicleGUI::VehicleGUI(QGraphicsScene& scene, WidgetMeta widgetMeta, AnimationMe
     setPos(0, animationMeta.yEntryTrack); // careful with this, enure it works every time! can cause issues!
     setZValue(wm.zPos);
 
-    initAnimation(animationMeta);
+    initAnimation(animationMeta, chaos);
     scene.addItem(this);
 }
 
-void VehicleGUI::initAnimation(AnimationMeta animMeta) {
-    offsetPause.setDuration(animMeta.entryDelay); // for controlling flow of multiple vehicles
+void VehicleGUI::initSignals() {
+    // initialize the open entry gate signal connection
+    connect(&approachEntryGate, &QPropertyAnimation::finished,
+       &demoManager->parkingLot.gate.entranceGate, &EntranceGateGUI::vehicleOnEntranceGateInductionSensor);
+
+    // initialize the vehicle has passed through the entry gate successfully signal
+    connect(&passSecondEntrySensor, &QPropertyAnimation::finished,
+        &demoManager->parkingLot.gate.entranceGate, &EntranceGateGUI::vehiclePassedSecondEntranceGateSensor);
+
+    // TODO: parking, unparking signals
+
+    // initialize the open exit gate signal connection
+    connect(&approachExitGate, &QPropertyAnimation::finished,
+        &demoManager->parkingLot.gate.exitGate, &ExitGateGUI::vehicleOnExitGateInductionSensor);
+
+    // initialize the vehicle has passed through the exit gate successfully signal
+    connect(&passSecondExitSensor, &QPropertyAnimation::finished,
+          &demoManager->parkingLot.gate.exitGate, &ExitGateGUI::vehiclePassedSecondExitGateSensor);
+}
+
+void VehicleGUI::initAnimation(AnimationMeta animMeta, bool chaos) {
+
+    initSignals(); // initialize the signal connections to these animations
+
+    offsetPause.setDuration(animMeta.entryDelay); // for controlling start flow
 
     approachEntryGate.setDuration(animMeta.approachGateTime);
     approachEntryGate.setEasingCurve(animMeta.movementType);
     approachEntryGate.setStartValue(QPoint(0, animMeta.yEntryTrack));
     approachEntryGate.setEndValue(QPoint(animMeta.xFirstEntryGateSensor, animMeta.yEntryTrack));
-    QObject::connect(&approachEntryGate, &QPropertyAnimation::finished,
-       &demoManager->parkingLot.gate.entranceGate, &EntranceGateGUI::vehicleOnEntranceGateInductionSensor);
-
-    // make sure gate is open.
 
     passSecondEntrySensor.setDuration(animMeta.throughGateTime);
     passSecondEntrySensor.setEasingCurve(animMeta.movementType);
     passSecondEntrySensor.setEndValue(QPoint(animMeta.xSecondEntryGateSensor, animMeta.yEntryTrack));
-    QObject::connect(&passSecondEntrySensor, &QPropertyAnimation::finished,
-        &demoManager->parkingLot.gate.entranceGate, &EntranceGateGUI::vehiclePassedSecondEntranceGateSensor);
 
     findSpot.setDuration(animMeta.generalMovementTime);
     findSpot.setEasingCurve(animMeta.movementType);
@@ -68,38 +93,59 @@ void VehicleGUI::initAnimation(AnimationMeta animMeta) {
     approachExitGate.setDuration(animMeta.generalMovementTime);
     approachExitGate.setEasingCurve(animMeta.movementType);
     approachExitGate.setEndValue(QPoint(animMeta.xFirstExitGateSensor, animMeta.yExitTrack));
-    QObject::connect(&approachExitGate, &QPropertyAnimation::finished,
-        &demoManager->parkingLot.gate.exitGate, &ExitGateGUI::vehicleOnExitGateInductionSensor);
 
     passSecondExitSensor.setDuration(animMeta.throughGateTime);
     passSecondExitSensor.setEasingCurve(animMeta.movementType);
     passSecondExitSensor.setEndValue(QPoint(animMeta.xSecondExitGateSensor, animMeta.yExitTrack));
-    QObject::connect(&passSecondExitSensor, &QPropertyAnimation::finished,
-          &demoManager->parkingLot.gate.exitGate, &ExitGateGUI::vehiclePassedSecondExitGateSensor);
-
 
     exit.setDuration(animMeta.generalMovementTime);
     exit.setEasingCurve(animMeta.movementType);
     exit.setEndValue(QPoint(0, animMeta.yExitTrack));
 
     // group all animations
-    animationGroup.addAnimation(&offsetPause);
-    animationGroup.addAnimation(&approachEntryGate);
-    animationGroup.addPause(ACTION_PAUSE);
-    animationGroup.addAnimation(&passSecondEntrySensor);
-    animationGroup.addPause(ACTION_PAUSE);
-    animationGroup.addAnimation(&findSpot);
-    animationGroup.addPause(ACTION_PAUSE);
-    animationGroup.addAnimation(&park);
-    animationGroup.addPause(animMeta.parkPauseTime);
-    animationGroup.addAnimation(&unpark);
-    animationGroup.addPause(ACTION_PAUSE);
-    animationGroup.addAnimation(&approachExitGate);
-    animationGroup.addPause(ACTION_PAUSE);
-    animationGroup.addAnimation(&passSecondExitSensor);
-    animationGroup.addPause(ACTION_PAUSE);
-    animationGroup.addAnimation(&exit);
-}
+    initialAnimation.addAnimation(&offsetPause);
+    initialAnimation.addAnimation(&approachEntryGate);
+    initialAnimation.addPause(ACTION_PAUSE);
+    initialAnimation.addAnimation(&passSecondEntrySensor);
+    initialAnimation.addPause(ACTION_PAUSE);
+    initialAnimation.addAnimation(&findSpot);
+    initialAnimation.addPause(ACTION_PAUSE);
+    initialAnimation.addAnimation(&park);
+    initialAnimation.addPause(animMeta.parkPauseTime);
+    initialAnimation.addAnimation(&unpark);
+    initialAnimation.addPause(ACTION_PAUSE);
+    initialAnimation.addAnimation(&approachExitGate);
+    initialAnimation.addPause(ACTION_PAUSE);
+    initialAnimation.addAnimation(&passSecondExitSensor);
+    initialAnimation.addPause(ACTION_PAUSE);
+    initialAnimation.addAnimation(&exit);
+    initialAnimation.setLoopCount(1);
+
+    animationGroup.addAnimation(&initialAnimation);
+
+    // if we're running through the vehicle without end
+    if (chaos) {
+        ongoingAnimation.addAnimation(&approachEntryGate);
+        ongoingAnimation.addPause(ACTION_PAUSE);
+        ongoingAnimation.addAnimation(&passSecondEntrySensor);
+        ongoingAnimation.addPause(ACTION_PAUSE);
+        ongoingAnimation.addAnimation(&findSpot);
+        ongoingAnimation.addPause(ACTION_PAUSE);
+        ongoingAnimation.addAnimation(&park);
+        ongoingAnimation.addPause(animMeta.parkPauseTime);
+        ongoingAnimation.addAnimation(&unpark);
+        ongoingAnimation.addPause(ACTION_PAUSE);
+        ongoingAnimation.addAnimation(&approachExitGate);
+        ongoingAnimation.addPause(ACTION_PAUSE);
+        ongoingAnimation.addAnimation(&passSecondExitSensor);
+        ongoingAnimation.addPause(ACTION_PAUSE);
+        ongoingAnimation.addAnimation(&exit);
+
+        ongoingAnimation.setLoopCount(-1);
+        animationGroup.addAnimation(&ongoingAnimation);
+    } // end if
+
+} // end method
 
 // REQUIRED FOR GRAPHICS ITEM
 QRectF VehicleGUI::boundingRect() const {

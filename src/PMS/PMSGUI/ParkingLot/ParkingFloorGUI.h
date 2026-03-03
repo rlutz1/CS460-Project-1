@@ -18,7 +18,7 @@ public:
 
     FloorId floorId;
     WidgetMeta wm;
-    vector<ParkingSpotGUI*> parkingSpots;
+    vector<ParkingSpotGUI*> parkingSpots; // TODO: try unique_ptr
 
     void reset();
 

@@ -40,10 +40,19 @@ struct AnimationMeta {
 class VehicleGUI : public QGraphicsWidget {
 
 public:
-    VehicleGUI(QGraphicsScene& scene, WidgetMeta widgetMeta, AnimationMeta animMeta, DemoManager* demoManager);
+    VehicleGUI(
+        QGraphicsScene& scene,
+        WidgetMeta widgetMeta,
+        AnimationMeta animMeta,
+        DemoManager* demoManager,
+        bool chaos
+        );
     // ~VehicleGUI() override;
     DemoManager* demoManager;
     QSequentialAnimationGroup animationGroup;
+    QSequentialAnimationGroup initialAnimation;
+    QSequentialAnimationGroup ongoingAnimation;
+
     QPauseAnimation offsetPause;
     QPropertyAnimation approachEntryGate;
     QPropertyAnimation passSecondEntrySensor;
@@ -61,7 +70,8 @@ protected:
 private:
     WidgetMeta wm;
 
-    void initAnimation(AnimationMeta animMeta);
+    void initAnimation(AnimationMeta animMeta, bool chaos);
+    void initSignals();
     void removePause(int x, int y);
 };
 

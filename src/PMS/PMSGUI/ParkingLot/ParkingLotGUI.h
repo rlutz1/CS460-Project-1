@@ -25,7 +25,7 @@ public:
     ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initPackage, WidgetMeta widgetMeta);
 
     WidgetMeta wm;
-    vector<ParkingFloorGUI*> parkingFloors;
+    vector<ParkingFloorGUI*> parkingFloors; // TODO: try unique_ptr
     GateGUI gate;
 
     void reset();
