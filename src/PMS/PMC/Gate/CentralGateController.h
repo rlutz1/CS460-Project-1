@@ -14,7 +14,7 @@ class ParkingManagementController;
 class CentralGateController
 {
 public:
-    CentralGateController();
+    CentralGateController(IGateInstructionSink* entranceGate, IGateInstructionSink* exitGate);
     ~CentralGateController() = default;
     // for the gates to be notified
     void moveGate(GateId gateId, bool toOpen);

@@ -6,9 +6,9 @@
 #include "../ParkingManagementController.h"
 #include <iostream>
 
-CentralGateController::CentralGateController() :
-	entranceGateController(),
-	exitGateController()
+CentralGateController::CentralGateController(IGateInstructionSink* entranceGate, IGateInstructionSink* exitGate) :
+	entranceGateController(entranceGate),
+	exitGateController(exitGate)
 {
 }
 

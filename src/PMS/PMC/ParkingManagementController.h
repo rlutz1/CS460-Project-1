@@ -15,6 +15,8 @@
 #include "../PMC/PMCInterfaces/IAvailabilityInstructionSink.h"
 #include "../PMSGUI/Availability/AvailabilityGUI.h"
 
+class DemoManager;
+
 // A simple hardware sink that prints to console (for demo purposes)
 class ConsoleGateHardware : public IGateInstructionSink
 {
@@ -67,7 +69,11 @@ private:
 class ParkingManagementController : public IInductionSensorDataSink
 {
 public:
-	ParkingManagementController(const InitializationPackage& initPackage, const AvailabilityGUI& availPtr);
+	ParkingManagementController(
+		const InitializationPackage& initPackage,
+		const IAvailabilityInstructionSink& availPtr,
+		const DemoManager& demoManager
+		);
 	// IInductionSensorDataSink
 	// When a vehicle us detected at gate (entry or exit)
 	void vehicleSensed(GateId gateId) override;

@@ -4,10 +4,19 @@
 
 #include "ParkingManagementController.h"
 #include "../Initialization.h"
+#include "../PMSGUI/DemoManager.h"
 #include "../PMSGUI/Availability/AvailabilityGUI.h"
 
-ParkingManagementController::ParkingManagementController(const InitializationPackage& initPackage, const AvailabilityGUI& availPtr)
-	: lot(initPackage), totalSpots(0), vehiclesInside(0), centralGate(), availabilityDisplay((IAvailabilityInstructionSink*) &availPtr)
+ParkingManagementController::ParkingManagementController(
+	const InitializationPackage& initPackage,
+	const IAvailabilityInstructionSink& availPtr,
+	const DemoManager& demoManager
+	)
+	: lot(initPackage),
+      totalSpots(0),
+      vehiclesInside(0),
+	  centralGate((IGateInstructionSink*) &(demoManager.parkingLot.gate.entranceGate), (IGateInstructionSink*) &(demoManager.parkingLot.gate.exitGate)),
+      availabilityDisplay((IAvailabilityInstructionSink*) &availPtr)
 {
 	// This should calculate the total spots from the initialization numbers
 	const auto& nums = initPackage.numbers;

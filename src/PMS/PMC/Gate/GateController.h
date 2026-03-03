@@ -14,7 +14,7 @@ class CentralGateController;
 class GateController
 {
 public:
-	GateController() = default;
+	GateController(IGateInstructionSink* gate);
     ~GateController() = default;
 
     // GateController

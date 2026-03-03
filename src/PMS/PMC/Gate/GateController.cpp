@@ -7,7 +7,9 @@
 #include "CentralGateController.h"
 
 
-
+GateController::GateController(IGateInstructionSink* gate) {
+	setGateHardware(*gate);
+}
 
 void GateController::open() {
 	if (gateHardware) {
