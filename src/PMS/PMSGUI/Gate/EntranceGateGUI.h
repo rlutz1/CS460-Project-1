@@ -23,6 +23,10 @@ class EntranceGateGUI : public QGraphicsWidget, public IGateInstructionSink {
 public:
     EntranceGateGUI(QGraphicsScene& scene, InitializationPackage& initPackage, GateId id, WidgetMeta widgetMeta);
 
+    QColor currColor;
+    QColor openGateIndicator;
+    QColor closedGateIndicator;
+
     WidgetMeta wm;
     GateId id;
     LedGUI led;

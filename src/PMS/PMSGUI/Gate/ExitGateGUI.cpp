@@ -26,7 +26,10 @@ ExitGateGUI::ExitGateGUI(QGraphicsScene& scene, InitializationPackage& initPacka
         {.x = wm.x + wm.width + (wm.width / 2) + wm.width, .y = wm.y, .width = 25, .height = 100, .color = Qt::magenta, .zPos = (wm.zPos + 1)}
         ),
         id(id),
-        wm(widgetMeta)
+        wm(widgetMeta),
+    currColor(Qt::red),
+    openGateIndicator(Qt::green),
+    closedGateIndicator(Qt::red)
 {
     resize(wm.width, wm.height);
     setZValue(wm.zPos);
@@ -45,9 +48,9 @@ void ExitGateGUI::signalGateClose() {
     spikes.setGraphicsEffect(opacityEffect);
 
     // PMS said to close gate:
-
     // same animation as open but backwards.
-
+    currColor = closedGateIndicator;
+    update();
     // end with giving PMS a successful Exit message (to be done at the finsih of the animation after it has passed 2nd sensor)
 }
 
@@ -59,7 +62,8 @@ void ExitGateGUI::signalGateOpen() {
     opacityEffect->setOpacity(1);
     spikes.setGraphicsEffect(opacityEffect);
     // PMS said to open gate:
-
+    currColor = openGateIndicator;
+    update();
     // TODO: figure out issue with Signal 11:SIGSEV on my computer for gui debugging) & test car frame signals with this.
     // start LED flashing for the gate lights
     // slide gate (y position) slowly upwards.
@@ -92,7 +96,7 @@ void ExitGateGUI::paint(QPainter *painter,
     // painter->setBackground(Qt::transparent);
     painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
     painter->setPen(QPen(Qt::black));
-    painter->setBrush(QBrush(wm.color));
+    painter->setBrush(QBrush(currColor));
     // painter->setBrush(QBrush(Qt::transparent));
     painter->drawRect(boundingRect());
 }
