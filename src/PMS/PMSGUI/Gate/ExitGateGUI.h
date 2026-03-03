@@ -13,8 +13,12 @@
 #include "../Hardware/SpikesGUI.h"
 
 #include "../GUIStructs/GUIStructs.h"
+#include "../../PMC/PMCInterfaces/IGateInstructionSink.h"
+#include "../PMSGUIInterfaces/IInductionSensorDataSink.h"
 
-class ExitGateGUI : QGraphicsWidget {
+#include <QGraphicsOpacityEffect> // only used in this class so far.
+
+class ExitGateGUI : public QGraphicsWidget, public IGateInstructionSink {
     Q_OBJECT;
 public:
     ExitGateGUI(QGraphicsScene& scene, InitializationPackage& initPackage, GateId id, WidgetMeta widgetMeta);
@@ -26,10 +30,19 @@ public:
     SensorGUI stayOpenSensor;
     SpikesGUI spikes;
 
+    // IGateInstructionSink
+    void signalGateClose() override;
+    void signalGateOpen() override;
+
+public slots:
+    void vehicleOnExitGateInductionSensor();
+    void vehiclePassedSecondExitGateSensor();
+
 protected:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
            QWidget *widget) override;
+    IInductionSensorDataSink* pmc;
 };
 
 

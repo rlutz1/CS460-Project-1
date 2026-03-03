@@ -28,7 +28,6 @@ add_executable(CS460_Project_1
         src/PMS/PMC/ParkingManagementController.cpp
         src/PMS/PMC/ParkingManagementController.h
         src/PMS/PMSGUI/DemoManager.cpp
-        src/PMS/PMSGUI/DemoManager.h
         src/Admin/run_admin.cpp
         src/Admin/run_admin.h
         src/PMS/PMSGUI/ParkingLot/ParkingLotGUI.cpp
@@ -55,6 +54,16 @@ add_executable(CS460_Project_1
         src/PMS/PMSGUI/VehicleGUI.cpp
         src/PMS/PMSGUI/VehicleGUI.h
         src/PMS/PMSGUI/VehicleGUI.cpp
+        src/PMS/PMC/ParkingLot/ParkingFloor.h
+        src/PMS/PMC/ParkingLot/ParkingFloor.cpp
+        src/PMS/PMC/ParkingLot/ParkingLot.cpp
+        src/PMS/PMC/ParkingLot/ParkingSpotController.cpp
+        src/PMS/PMC/Gate/CentralGateController.h
+        src/PMS/PMC/Gate/CentralGateController.cpp
+        src/PMS/PMC/Gate/GateController.cpp
+        src/PMS/PMC/PMCInterfaces/IAvailabilityInstructionSink.h
+        src/PMS/PMC/Availability/AvailabilityController.cpp
+        src/PMS/PMSGUI/PMSGUIInterfaces/IInductionSensorDataSink.h
 )
 
 

@@ -52,3 +52,46 @@ void ExitGateGUI::paint(QPainter *painter,
     painter->drawRect(boundingRect());
 }
 
+
+void ExitGateGUI::signalGateClose() {
+    // PMS said to lower spikes :
+    // TODO: verify that opacity is the way to show that spikes are raised/lowered.
+    // opacityEffect should last as long as `spikes` is alives
+    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(&spikes);
+    opacityEffect->setOpacity(0.5);
+    spikes.setGraphicsEffect(opacityEffect);
+
+    // PMS said to close gate:
+
+    // same animation as open but backwards.
+
+    // end with giving PMS a successful Exit message (to be done at the finsih of the animation after it has passed 2nd sensor)
+}
+
+void ExitGateGUI::signalGateOpen() {
+    // PMS said to raise spikes:
+    // TODO: verify that opacity is the way to show that spikes are raised/lowered.
+    // opacityEffect should last as long as `spikes` is alives
+    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(&spikes);
+    opacityEffect->setOpacity(1);
+    spikes.setGraphicsEffect(opacityEffect);
+    // PMS said to open gate:
+
+    // TODO: figure out issue with Signal 11:SIGSEV on my computer for gui debugging) & test car frame signals with this.
+    // start LED flashing for the gate lights
+    // slide gate (y position) slowly upwards.
+}
+
+// sequence of "probing" events (where we probe our "devices" to see that our PMC backend works correctly)
+// FOLLOWS the vehicle animation sequence so far.
+void ExitGateGUI::vehicleOnExitGateInductionSensor() {
+    pmc->vehicleSensed(id);
+}
+
+// sequence of "probing" events (where we probe our "devices" to see that our PMC backend works correctly)
+// FOLLOWS the vehicle animation sequence so far.
+void ExitGateGUI::vehiclePassedSecondExitGateSensor() {
+    // should do nothing (here for consistency)
+    pmc->vehicleAbsent(id);
+    pmc->successfulExit();
+}

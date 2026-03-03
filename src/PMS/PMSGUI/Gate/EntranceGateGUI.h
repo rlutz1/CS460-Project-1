@@ -7,13 +7,15 @@
 #include <QGraphicsWidget>
 #include "../../Initialization.h"
 #include "../../Definitions/Identifiers.h"
+#include "../../PMC/PMCInterfaces/IGateInstructionSink.h"
 #include "../Hardware/LedGUI.h"
 #include "../Hardware/SensorGUI.h"
 #include "../Hardware/SpikesGUI.h"
 
 #include "../GUIStructs/GUIStructs.h"
+#include "../PMSGUIInterfaces/IInductionSensorDataSink.h"
 
-class EntranceGateGUI : QGraphicsWidget {
+class EntranceGateGUI : public QGraphicsWidget, public IGateInstructionSink {
     Q_OBJECT;
 
 public:
@@ -26,11 +28,22 @@ public:
     SensorGUI stayOpenSensor;
     SpikesGUI spikes;
 
+    // IGateInstructionSink
+    void signalGateClose() override;
+    void signalGateOpen() override;
+
+public slots:
+    void vehicleOnEntranceGateInductionSensor();
+    void vehiclePassedSecondEntranceGateSensor();
+
+
 protected:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
            QWidget *widget) override;
 
+private:
+    IInductionSensorDataSink* pmc;
 };
 
 

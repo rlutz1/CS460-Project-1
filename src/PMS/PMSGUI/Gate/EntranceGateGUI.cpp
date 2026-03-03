@@ -5,6 +5,7 @@
 #include "EntranceGateGUI.h"
 #include <QGraphicsScene>
 #include <QPainter>
+#include <QGraphicsOpacityEffect> // only used in this class so far.
 
 EntranceGateGUI::EntranceGateGUI(QGraphicsScene& scene, InitializationPackage& initPackage, GateId id, WidgetMeta widgetMeta) :
     led(
@@ -50,4 +51,52 @@ void EntranceGateGUI::paint(QPainter *painter,
     painter->setBrush(QBrush(wm.color));
     // painter->setBrush(QBrush(Qt::transparent));
     painter->drawRect(boundingRect());
+}
+
+void EntranceGateGUI::signalGateClose() {
+    // PMS said to lower spikes :
+    // TODO: verify that opacity is the way to show that spikes are raised/lowered.
+    // opacityEffect should last as long as `spikes` is alives
+    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(&spikes);
+    opacityEffect->setOpacity(0.5);
+    spikes.setGraphicsEffect(opacityEffect);
+
+    // PMS said to close gate:
+
+    // same animation as close but backwards.
+
+    // end with giving PMS a successful Exit message (to be done at the finish of the animation after it has passed 2nd sensor).
+
+}
+
+void EntranceGateGUI::signalGateOpen() {
+    // PMS said to raise spikes:
+    // TODO: verify that opacity is the way to show that spikes are raised/lowered.
+    // opacityEffect should last as long as `spikes` is alives
+    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(&spikes);
+    opacityEffect->setOpacity(1);
+    spikes.setGraphicsEffect(opacityEffect);
+    // PMS said to open gate:
+
+    // start LED flashing for the gate lights
+    // slide gate (y position) slowly upwards.
+
+
+
+}
+
+
+
+// sequence of "probing" events (where we probe our "devices" to see that our PMC backend works correctly)
+// FOLLOWS the vehicle animation sequence so far.
+void EntranceGateGUI::vehicleOnEntranceGateInductionSensor() {
+    pmc->vehicleSensed(id);
+}
+
+
+// sequence of "probing" events (where we probe our "devices" to see that our PMC backend works correctly)
+// FOLLOWS the vehicle animation sequence so far.
+void EntranceGateGUI::vehiclePassedSecondEntranceGateSensor() {
+    pmc->vehicleAbsent(id);
+    pmc->successfulEntry();
 }

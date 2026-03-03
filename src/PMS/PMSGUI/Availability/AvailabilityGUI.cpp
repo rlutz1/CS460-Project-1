@@ -78,6 +78,142 @@ AvailabilityGUI::AvailabilityGUI(QWidget* parent, InitializationPackage initPack
     layout.addWidget(&log, 5, 1);
 }
 
+void AvailabilityGUI::increaseCount(QLabel& countLabel) {
+    QString newCount(countLabel.text());
+    int tempCount = newCount.toInt();
+    tempCount++;
+    newCount.setNum(tempCount);
+    countLabel.setText(newCount);
+}
+
+void AvailabilityGUI::decreaseCount(QLabel& countLabel) {
+    QString newCount(countLabel.text());
+    int tempCount = newCount.toInt();
+    tempCount--;
+    newCount.setNum(tempCount);
+    countLabel.setText(newCount);
+}
+
+void AvailabilityGUI::increaseInTransitCount() {
+    increaseCount(inTransit);
+}
+
+void AvailabilityGUI::decreaseInTransitCount() {
+    decreaseCount(inTransit);
+}
+
+
+
+void AvailabilityGUI::increaseAvailabilityCount(SpotType spotType, int floor) {
+    switch (spotType) {
+        case NORMAL:
+            if (floor == 1) {
+                increaseCount(floor1AvailNormal);
+            }else if (floor == 2) {
+                increaseCount(floor2AvailNormal);
+            }
+            increaseCount(totalAvailNormal);
+            break;
+        case EV:
+            if (floor == 1) {
+                increaseCount(floor1AvailEv);
+            }else if (floor == 2) {
+                increaseCount(floor2AvailEv);
+            }
+            increaseCount(totalAvailEv);
+            break;
+        case HANDICAP:
+            if (floor == 1) {
+                increaseCount(floor1AvailHandicap);
+            }else if (floor == 2) {
+                increaseCount(floor2AvailHandicap);
+            }
+            increaseCount(totalAvailHandicap);
+            break;
+        case MOTORCYCLE:
+            if (floor == 1) {
+                increaseCount(floor1AvailMotorcycle);
+            }else if (floor == 2) {
+                increaseCount(floor2AvailMotorcycle);
+            }
+            increaseCount(totalAvailMotorcycle);
+            break;
+    }
+
+}
+
+/**
+ * Decreases the availability count for specific floor and spot type.
+ * @param spotType type of spot
+ * @param floor floor number
+ * @return true if Lot is Unavailable; otherwise false.
+ */
+bool AvailabilityGUI::decreaseAvailabilityCount(SpotType spotType, int floor) {
+    switch (spotType) {
+        case NORMAL:
+            if (floor == 1) {
+                decreaseCount(floor1AvailNormal);
+            }else if (floor == 2) {
+                decreaseCount(floor2AvailNormal);
+            }
+            decreaseCount(totalAvailNormal);
+            break;
+        case EV:
+            if (floor == 1) {
+                decreaseCount(floor1AvailEv);
+            }else if (floor == 2) {
+                decreaseCount(floor2AvailEv);
+            }
+            decreaseCount(totalAvailEv);
+            break;
+        case HANDICAP:
+            if (floor == 1) {
+                decreaseCount(floor1AvailHandicap);
+            }else if (floor == 2) {
+                decreaseCount(floor2AvailHandicap);
+            }
+            decreaseCount(totalAvailHandicap);
+            break;
+        case MOTORCYCLE:
+            if (floor == 1) {
+                decreaseCount(floor1AvailMotorcycle);
+            }else if (floor == 2) {
+                decreaseCount(floor2AvailMotorcycle);
+            }
+            decreaseCount(totalAvailMotorcycle);
+            break;
+    }
+
+    // check if full
+    bool lotIsFullyUnavailable = getLotTotalAvailable() == 0;
+
+    if ( lotIsFullyUnavailable ) {
+        return true;
+    }
+
+    return false;
+}
+
+
+
+void AvailabilityGUI::setLogMsg(std::string newLogMsg) {
+    QString qnewLogMsg;
+    qnewLogMsg.append(newLogMsg);
+
+    log.setText(qnewLogMsg);
+}
+
 QSize AvailabilityGUI::sizeHint() const {
     return QSize(500, 500);
+}
+
+int AvailabilityGUI::getLotTotalAvailable() {
+    int totalLotAvailability = 0;
+
+    totalLotAvailability += totalAvailNormal.text().toInt();
+    totalLotAvailability += totalAvailEv.text().toInt();
+    totalLotAvailability += totalAvailHandicap.text().toInt();
+    totalLotAvailability += totalAvailMotorcycle.text().toInt();
+
+    return totalLotAvailability;
 }

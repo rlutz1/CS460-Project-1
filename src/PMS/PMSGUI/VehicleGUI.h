@@ -37,7 +37,7 @@ struct AnimationMeta {
     // int gateOpenDelay; // this should be constant
 };
 
-class VehicleGUI : QGraphicsWidget {
+class VehicleGUI : public QGraphicsWidget {
 
 public:
     VehicleGUI(QGraphicsScene& scene, WidgetMeta widgetMeta, AnimationMeta animMeta, DemoManager* demoManager);

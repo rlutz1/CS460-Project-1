@@ -6,7 +6,7 @@
 #include <iostream>
 #include <QGraphicsScene>
 #include <QPainter>
-#include <Stack>
+#include <stack>
 using std::cout;
 using std::stack;
 
