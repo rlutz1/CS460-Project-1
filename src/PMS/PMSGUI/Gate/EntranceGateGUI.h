@@ -15,6 +15,8 @@
 #include "../GUIStructs/GUIStructs.h"
 #include "../PMSGUIInterfaces/IInductionSensorDataSink.h"
 
+class ParkingManagementController;
+
 class EntranceGateGUI : public QGraphicsWidget, public IGateInstructionSink {
     Q_OBJECT;
 
@@ -27,6 +29,8 @@ public:
     SensorGUI initOpenSensor;
     SensorGUI stayOpenSensor;
     SpikesGUI spikes;
+
+    void addSignalReceiver(IInductionSensorDataSink* pmc);
 
     // IGateInstructionSink
     void signalGateClose() override;

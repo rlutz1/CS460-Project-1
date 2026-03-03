@@ -12,6 +12,7 @@
 #include "VehicleGUI.h"
 #include "ParkingLot/ParkingLotGUI.h"
 #include "../Initialization.h"
+#include "../PMC/ParkingManagementController.h"
 #include "Availability/AvailabilityGUI.h"
 
 class QGraphicsScene;
@@ -28,10 +29,19 @@ using std::map;
 class DemoManager : public QGraphicsView {
     Q_OBJECT;
 public:
-    DemoManager(QWidget* parent, InitializationPackage initPackage, int width, int height, AvailabilityGUI& availabilityDisplay);
+    DemoManager(
+        QWidget* parent,
+        InitializationPackage initPackage,
+        int width,
+        int height,
+        AvailabilityGUI& availabilityDisplay
+        );
 
     // public for signal easier signal relaying between vehicle and different parking lot components
     ParkingLotGUI parkingLot;
+    void addSignalReceiver(ParkingManagementController* pmc);
+
+
 
 public slots: // slots for signals to send to!
     void runSimpleDemo();
@@ -44,8 +54,8 @@ private:
     QParallelAnimationGroup currAnimation;
     vector<VehicleGUI*> activeVehicles;
     AvailabilityGUI* availabilityDisplay;
-    void initScene();
 
+    void initScene();
     void initGraphicsMetadata();
 };
 

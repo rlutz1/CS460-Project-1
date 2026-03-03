@@ -27,35 +27,14 @@ EntranceGateGUI::EntranceGateGUI(QGraphicsScene& scene, InitializationPackage& i
         {.x = wm.x - wm.width - wm.width, .y = wm.y, .width = 25, .height = 100, .color = Qt::magenta, .zPos = (wm.zPos + 1)}
         ),
     id(id),
-    wm(widgetMeta) {
-
+    wm(widgetMeta)
+{
     resize(wm.width, wm.height);
     setZValue(wm.zPos);
-
-    // scene.addItem(&led);
-    // scene.addItem(&initOpenSensor);
-    // scene.addItem(&stayOpenSensor);
-    // scene.addItem(&spikes);
-
-    // scene.addItem(this);
 }
 
-// REQUIRED FOR GRAPHICS ITEM
-QRectF EntranceGateGUI::boundingRect() const {
-    return QRectF(wm.x, wm.y, // this is BETTER
-                  wm.width, wm.height);
-}
-
-// REQUIRED FOR GRAPHICS ITEM
-void EntranceGateGUI::paint(QPainter *painter,
-    const QStyleOptionGraphicsItem *option,
-    QWidget *widget) {
-    // painter->setBackground(Qt::transparent);
-    painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
-    painter->setPen(QPen(Qt::black));
-    painter->setBrush(QBrush(wm.color));
-    // painter->setBrush(QBrush(Qt::transparent));
-    painter->drawRect(boundingRect());
+void EntranceGateGUI::addSignalReceiver(IInductionSensorDataSink* receiver) {
+    pmc = receiver;
 }
 
 void EntranceGateGUI::signalGateClose() {
@@ -91,7 +70,6 @@ void EntranceGateGUI::signalGateOpen() {
 }
 
 
-
 // sequence of "probing" events (where we probe our "devices" to see that our PMC backend works correctly)
 // FOLLOWS the vehicle animation sequence so far.
 void EntranceGateGUI::vehicleOnEntranceGateInductionSensor() {
@@ -104,4 +82,22 @@ void EntranceGateGUI::vehicleOnEntranceGateInductionSensor() {
 void EntranceGateGUI::vehiclePassedSecondEntranceGateSensor() {
     pmc->vehicleAbsent(id);
     pmc->successfulEntry();
+}
+
+// REQUIRED FOR GRAPHICS ITEM
+QRectF EntranceGateGUI::boundingRect() const {
+    return QRectF(wm.x, wm.y, // this is BETTER
+                  wm.width, wm.height);
+}
+
+// REQUIRED FOR GRAPHICS ITEM
+void EntranceGateGUI::paint(QPainter *painter,
+    const QStyleOptionGraphicsItem *option,
+    QWidget *widget) {
+    // painter->setBackground(Qt::transparent);
+    painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
+    painter->setPen(QPen(Qt::black));
+    painter->setBrush(QBrush(wm.color));
+    // painter->setBrush(QBrush(Qt::transparent));
+    painter->drawRect(boundingRect());
 }

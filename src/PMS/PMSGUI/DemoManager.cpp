@@ -16,48 +16,31 @@ using std::cout;
 #include "ParkingLot/ParkingLotGUI.h"
 #include <random>
 
-void DemoManager::initScene() {
-    scene.addItem(&parkingLot);
-    for (ParkingFloorGUI* floor : parkingLot.parkingFloors) {
-        scene.addItem(floor);
-        for (ParkingSpotGUI* spot : floor->parkingSpots) {
-            scene.addItem(spot);
-            scene.addItem(spot->led);
-            scene.addItem(spot->ultrasonicSensor);
-            scene.addItem(spot->weightSensor);
-        }
-    }
-    scene.addItem(&parkingLot.gate);
-    scene.addItem(&parkingLot.gate.entranceGate);
-    scene.addItem(&parkingLot.gate.entranceGate.led);
-    scene.addItem(&parkingLot.gate.entranceGate.initOpenSensor);
-    scene.addItem(&parkingLot.gate.entranceGate.stayOpenSensor);
-    scene.addItem(&parkingLot.gate.entranceGate.spikes);
-    scene.addItem(&parkingLot.gate.exitGate);
-    scene.addItem(&parkingLot.gate.exitGate.led);
-    scene.addItem(&parkingLot.gate.exitGate.initOpenSensor);
-    scene.addItem(&parkingLot.gate.exitGate.stayOpenSensor);
-    scene.addItem(&parkingLot.gate.exitGate.spikes);
 
-    // scene.addItem(availabilityDisplay);
-}
-
-// this constructor initializes the parking lot, which is the wrapper
-// of the whole visual.
-DemoManager::DemoManager(QWidget* parent, InitializationPackage initPackage, int width, int height, AvailabilityGUI& availabilityDisplay) :
+/**
+ * this constructor initializes the parking lot, which is the wrapper
+ * of the whole visual aspect of the demo.
+ * this does not contain the availability display.
+ */
+DemoManager::DemoManager(
+    QWidget* parent,
+    InitializationPackage initPackage,
+    int width,
+    int height,
+    AvailabilityGUI& availabilityDisplay
+    ) :
     parkingLot(
         scene,
         initPackage,
         {.x = 0, .y = 0, .width = width, .height = height, .color = Qt::darkGray, .zPos = 0}
         ),
     availabilityDisplay(&availabilityDisplay),
-    QGraphicsView(parent) {
+    QGraphicsView(parent)
+{
     this->setMinimumSize(QSize(width, height));
     initScene();
     setScene(&scene);
-
-
-}
+} // end constructor
 
 // run many vehicles with pseudorandomness
 void DemoManager::runChaosDemo() {
@@ -173,12 +156,51 @@ void DemoManager::stopDemo() {
     // TODO: reset lot components to initial state.
 }
 
-// metadata things for smoothing animations/painting
+/**
+ * add the pmc receiver to all sensors that emit signals during process.
+ * @param pmc top level pmc to receive signals from sensors
+ */
+void DemoManager::addSignalReceiver(ParkingManagementController *pmc) {
+    parkingLot.gate.entranceGate.addSignalReceiver(pmc);
+    parkingLot.gate.exitGate.addSignalReceiver(pmc);
+} // end method
+
+/**
+ * metadata things for smoothing animations/painting
+ */
 void DemoManager::initGraphicsMetadata() {
     setRenderHint(QPainter::Antialiasing);
     scene.setBackgroundBrush(Qt::transparent);
     setAttribute(Qt::WA_TranslucentBackground);
-}
+} // end method
+
+/**
+ * add all items necessary to the scene of the
+ * graphics view.
+ */
+void DemoManager::initScene() {
+    scene.addItem(&parkingLot);
+    for (ParkingFloorGUI* floor : parkingLot.parkingFloors) {
+        scene.addItem(floor);
+        for (ParkingSpotGUI* spot : floor->parkingSpots) {
+            scene.addItem(spot);
+            scene.addItem(spot->led);
+            scene.addItem(spot->ultrasonicSensor);
+            scene.addItem(spot->weightSensor);
+        } // end loop
+    } // end loop
+    scene.addItem(&parkingLot.gate);
+    scene.addItem(&parkingLot.gate.entranceGate);
+    scene.addItem(&parkingLot.gate.entranceGate.led);
+    scene.addItem(&parkingLot.gate.entranceGate.initOpenSensor);
+    scene.addItem(&parkingLot.gate.entranceGate.stayOpenSensor);
+    scene.addItem(&parkingLot.gate.entranceGate.spikes);
+    scene.addItem(&parkingLot.gate.exitGate);
+    scene.addItem(&parkingLot.gate.exitGate.led);
+    scene.addItem(&parkingLot.gate.exitGate.initOpenSensor);
+    scene.addItem(&parkingLot.gate.exitGate.stayOpenSensor);
+    scene.addItem(&parkingLot.gate.exitGate.spikes);
+} // end method
 
 // TODO
 // // potential override for final cleanups

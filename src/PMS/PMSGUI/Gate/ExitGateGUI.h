@@ -18,6 +18,8 @@
 
 #include <QGraphicsOpacityEffect> // only used in this class so far.
 
+class ParkingManagementController;
+
 class ExitGateGUI : public QGraphicsWidget, public IGateInstructionSink {
     Q_OBJECT;
 public:
@@ -29,6 +31,8 @@ public:
     SensorGUI initOpenSensor;
     SensorGUI stayOpenSensor;
     SpikesGUI spikes;
+
+    void addSignalReceiver(IInductionSensorDataSink* pmc);
 
     // IGateInstructionSink
     void signalGateClose() override;

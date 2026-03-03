@@ -33,7 +33,13 @@ int run_demo(int argc, char *argv[]) {
 
     // for displaying availability -> a vanilla widget
     AvailabilityGUI availabilityDisplay(&bottomContainer, initPackage);
-    DemoManager demoManager(&mainWindow, initPackage, WINDOW_WIDTH, WINDOW_HEIGHT, availabilityDisplay); // initialize the front end
+    DemoManager demoManager(
+        &mainWindow,
+        initPackage,
+        WINDOW_WIDTH,
+        WINDOW_HEIGHT,
+        availabilityDisplay
+        ); // initialize the front end
 
    // initialize sink? or unnecessary step -- leaving for eliud for now
 
@@ -66,7 +72,7 @@ int run_demo(int argc, char *argv[]) {
     bottomLayout.addWidget((QWidget*) &availabilityDisplay);
 
     ParkingManagementController pmc(initPackage, availabilityDisplay, demoManager); // initialize the backend
-
+    demoManager.addSignalReceiver(&pmc);
     // adding main two containers to the UI
     layout.addWidget(&demoManager);
     layout.addWidget(&bottomContainer);
