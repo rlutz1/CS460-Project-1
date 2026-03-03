@@ -5,7 +5,6 @@
 #ifndef CS460_PROJECT_1_PARKINGMANAGEMENTCONTROLLER_H
 #define CS460_PROJECT_1_PARKINGMANAGEMENTCONTROLLER_H
 
-
 #include <iostream>
 #include "../Initialization.h"
 #include "../PMC/ParkingLot/ParkingLot.h"
@@ -28,7 +27,7 @@ public:
 	}
 };
 
-class ParkingManagementController
+class ParkingManagementController : public ISensorDataSink
 {
 public:
 	ParkingManagementController(const InitializationPackage& initPackage);
@@ -50,6 +49,11 @@ public:
 	int getVehiclesInside() const { return vehiclesInside; }
 	int getTotalSpots() const { return totalSpots; }
 	ParkingLot::State getLotState() const;
+
+
+	// ISensorDataSink
+	void SensedVehicle(SensorId sensorID) override;
+	void NotSensedVehicled(SensorId sensorID) override;
 
 private:
 	ParkingLot lot;

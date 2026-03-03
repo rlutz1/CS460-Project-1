@@ -41,3 +41,25 @@ ParkingManagementController::ParkingManagementController(InitializationPackage i
 
 	// TODO: Gate event handlers NEEDS to be implemented and called by the CentralGateController
 }
+
+
+/**
+ * TODO: change the old absent/present for these ones (merge them).
+ */
+// void ParkingManagementController::SensedVehicle(SensorId sensorID) {
+//     if ( sensorID.uniqueId == "entranceGateInitOpen" || sensorID.uniqueId == "exitGateInitOpen" ) {
+//         // signal to central gate controller about the sensor sensing vehicle -> open entrance/exit
+//         centralGateController->notifyVehicleSensed(gateId);
+//     } else if ( sensorID.uniqueId == "entranceGateStayOpen" || sensorID.uniqueId == "exitGateStayOpen" ) {
+//         vehicleWasAtInteriorSensor = true;
+//     }
+// }
+// void ParkingManagementController::NotSensedVehicled(SensorId sensorID) {
+//     // TODO: further implementation for actual sensor Ids for gates.
+//     if ( vehicleWasAtInteriorSensor
+//         && (sensorID.uniqueId == "entranceGateStayOpen" || sensorID.uniqueId == "exitGateStayOpen") ) {
+//         // signal to central gate controller about the exterior sensor not sensed anymore, i.e. passed -> close entrance/exit.
+//         centralGateController->notifyVehicleAbsent(gateId);
+//         vehicleWasAtInteriorSensor = false;
+//     }
+// }
