@@ -3,7 +3,11 @@
 //
 
 #include "ParkingLot.h"
+#include "ParkingFloor.h"
 #include <map>
+
+//Added to match call in header file
+ParkingLot::~ParkingLot() = default;
 
 ParkingLot::ParkingLot(const InitializationPackage& initPackage)
 {

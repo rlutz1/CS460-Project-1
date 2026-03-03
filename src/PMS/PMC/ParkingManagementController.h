@@ -11,6 +11,8 @@
 #include "../PMC/Gate/GateController.h"
 #include "../PMC/Gate/CentralGateController.h"
 #include "../PMC/Availability/AvailabilityController.h"
+#include "../PMC/PMCInterfaces/IGateInstructionSink.h"
+#include "../PMC/PMCInterfaces/IAvailabilityInstructionSink.h"
 
 // A simple hardware sink that prints to console (for demo purposes)
 class ConsoleGateHardware : public IGateInstructionSink
@@ -27,11 +29,44 @@ public:
 	}
 };
 
+// Added a simple display sink that prints availability updates
+class ConsoleDisplaySink : public IAvailabilityInstructionSink {
+public:
+	void increaseAvailabilityCount(SpotType type, int floor) override {
+		std::cout << "[DISPLAY] Floor " << floor << " " << spotTypeToString(type)
+				  << " availability increased.\n";
+	}
+	bool decreaseAvailabilityCount(SpotType type, int floor) override {
+		std::cout << "[DISPLAY] Floor " << floor << " " << spotTypeToString(type)
+				  << " availability decreased.\n";
+		return true;
+	}
+	void setLogMsg(std::string msg) override {
+		std::cout << "[DISPLAY] Message: " << msg << "\n";
+	}
+	void increaseInTransitCount() override {
+		std::cout << "[DISPLAY] In‑transit count increased.\n";
+	}
+	void decreaseInTransitCount() override {
+		std::cout << "[DISPLAY] In‑transit count decreased.\n";
+	}
+private:
+	std::string spotTypeToString(SpotType t) {
+		switch(t) {
+		case NORMAL: return "Normal";
+		case HANDICAP: return "Handicap";
+		case EV: return "EV";
+		case MOTORCYCLE: return "Motorcycle";
+		default: return "Unknown";
+		}
+	}
+};
+
+
 class ParkingManagementController : public ISensorDataSink
 {
 public:
 	ParkingManagementController(const InitializationPackage& initPackage);
-	ParkingManagementController(InitializationPackage initPackage);
 	// This should be called by the CentralGateController when the gate events occur
 	// When a vehicle us detected at gate (entry or exit)
 	void vehicleSensed(GateId gateId);
@@ -41,6 +76,7 @@ public:
 	void successfulEntry(GateId gateId);
 	// The exit gate is closed after vehicle passed
 	void successfulExit(GateId gateId);
+	void handleSensorTrigger(const SensorId& sensor, bool detected);
 
 	void updateLogMessage(const std::string& msg);
 

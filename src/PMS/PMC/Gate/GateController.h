@@ -14,7 +14,7 @@ class CentralGateController;
 class GateController
 {
 public:
-    GateController();
+	GateController() = default;
     ~GateController() = default;
 
     // GateController

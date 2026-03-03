@@ -3,24 +3,29 @@
 //
 
 #include "GateController.h"
-
 #include "../PMCInterfaces/IGateInstructionSink.h"
-
 #include "CentralGateController.h"
 
 
 
 
 void GateController::open() {
-    gateHardware->signalGateOpen();
+	if (gateHardware) {
+		gateHardware->signalGateOpen();
+	}
 }
 
 void GateController::close() {
-    gateHardware->signalGateClose();
+    if (gateHardware) {
+        gateHardware->signalGateClose();
+    }
 }
 
 void GateController::setGateHardware(IGateInstructionSink& newGateHardware) {
-    *gateHardware = newGateHardware;
+    //*gateHardware = newGateHardware;
+	// I think you want to assign the address, not the dereference null (I could be so wrong,
+	// uncomment the other one if I am)
+	gateHardware = &newGateHardware;
 }
 
 
