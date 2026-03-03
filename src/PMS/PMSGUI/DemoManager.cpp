@@ -155,6 +155,7 @@ void DemoManager::stopDemo() {
     }
     activeVehicles.clear(); // clear out the vector
     parkingLot.reset();
+    availabilityDisplay->reset();
     // TODO: reset lot components to initial state.
     // reset all lot components
     // reset the availability display

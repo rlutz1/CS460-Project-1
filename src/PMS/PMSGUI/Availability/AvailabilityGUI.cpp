@@ -11,6 +11,7 @@
 
 AvailabilityGUI::AvailabilityGUI(QWidget* parent, InitializationPackage initPackage) :
     QWidget(parent),
+    initPackage(initPackage),
     // these are headers for readability
     headerTotalAvail("LOT", this),
     headerFloor1Avail("FLOOR 1", this),
@@ -216,4 +217,26 @@ int AvailabilityGUI::getLotTotalAvailable() {
     totalLotAvailability += totalAvailMotorcycle.text().toInt();
 
     return totalLotAvailability;
+}
+
+void AvailabilityGUI::reset() {
+    // these are for the count updates
+    totalAvailNormal.setText(QString::number(initPackage.numbers.totalNormalSpots));
+    totalAvailHandicap.setText(QString::number(initPackage.numbers.totalHandicapSpots));
+    totalAvailEv.setText(QString::number(initPackage.numbers.totalEvSpots));
+    totalAvailMotorcycle.setText(QString::number(initPackage.numbers.totalMotorcycleSpots));
+
+    floor1AvailNormal.setText(QString::number(initPackage.numbers.normalSpotsFloor1));
+    floor1AvailHandicap.setText(QString::number(initPackage.numbers.handicapSpotsFloor1));
+    floor1AvailEv.setText(QString::number(initPackage.numbers.evSpotsFloor1));
+    floor1AvailMotorcycle.setText(QString::number(initPackage.numbers.motorcycleSpotsFloor1));
+
+    floor2AvailNormal.setText(QString::number(initPackage.numbers.normalSpotsFloor2));
+    floor2AvailHandicap.setText(QString::number(initPackage.numbers.handicapSpotsFloor2));
+    floor2AvailEv.setText(QString::number(initPackage.numbers.evSpotsFloor2));
+    floor2AvailMotorcycle.setText(QString::number(initPackage.numbers.motorcycleSpotsFloor2));
+
+    inTransit.setText(QString::number(0));
+
+    log.setText("LOT OPEN");
 }

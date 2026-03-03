@@ -58,14 +58,14 @@ void ParkingManagementController::successfulEntry() {
 	vehiclesInside++;
 	availabilityDisplay.updateInTransit(true);
 	int remaining = totalSpots - vehiclesInside;
-	availabilityDisplay.updateLogMessage(remaining > 0 ? "Spaces Available" : "FULL");
+	availabilityDisplay.updateLogMessage(remaining > 0 ? "LOT OPEN" : "FULL");
 }
 
 void ParkingManagementController::successfulExit() {
 	vehiclesInside--;
 	availabilityDisplay.updateInTransit(false);
 	int remaining = totalSpots - vehiclesInside;
-	availabilityDisplay.updateLogMessage(remaining > 0 ? "Spaces Available" : "FULL");
+	availabilityDisplay.updateLogMessage(remaining > 0 ? "LOT OPEN" : "FULL");
 }
 
 // This is where the parking spot sensor is handled

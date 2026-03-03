@@ -9,12 +9,14 @@
 #include <QWidget>
 
 #include "../../PMC/PMCInterfaces/IAvailabilityInstructionSink.h"
-
+#include "../../Initialization.h"
 struct InitializationPackage;
 
 class AvailabilityGUI : public QWidget, public IAvailabilityInstructionSink {
 public:
     AvailabilityGUI(QWidget* parent, InitializationPackage initPackage);
+
+    InitializationPackage initPackage;
 
     QGridLayout layout;
 
@@ -49,6 +51,7 @@ public:
 
     void increaseCount(QLabel& count);
     void decreaseCount(QLabel& countLabel);
+    void reset();
 
     // IAvailabilityIntructionSink.h
     void increaseInTransitCount() override;
