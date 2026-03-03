@@ -10,6 +10,10 @@
 using std::cout;
 using std::stack;
 
+// quick use only. may expand usage later.
+struct Point {
+    int x; int y;
+};
 
 
 
@@ -94,37 +98,43 @@ void ParkingFloorGUI::initFirstFloor(QGraphicsScene& scene, InitializationPackag
     // generate the new spots
     for (SpotId id : initPackage.spotIds) {
         if (id.floorId.uniqueId == "floor1") { // for general floors
-            WidgetMeta widgetMeta;
-
+            ParkingSpotGUI* parkingSpot = new ParkingSpotGUI(
+            scene,
+            initPackage,
+            id,
+            {.x = wm.x, .y = wm.y, .width = spotWidth, .height = spotHeight, .color = Qt::white, .zPos = wm.zPos + 1}
+            );
             if (id.type == MOTORCYCLE) {
+                parkingSpot->wm.color = Qt::yellow;
                 Point pt = motorcyclePlacements.top();
                 motorcyclePlacements.pop();
-                widgetMeta = {.x = pt.x, .y = pt.y, .width = spotWidth, .height = spotHeight, .color = Qt::gray, .zPos = wm.zPos + 1};
+                // cout << pt.x << " " << pt.y << std::endl;
+                parkingSpot->wm.x = pt.x;
+                parkingSpot->wm.y = pt.y;
             }
-
             if (id.type == NORMAL) {
                 Point pt = normalPlacements.top();
                 normalPlacements.pop();
-                widgetMeta = {.x = pt.x, .y = pt.y, .width = spotWidth, .height = spotHeight, .color = Qt::gray, .zPos = wm.zPos + 1};
+                // cout << pt.x << " " << pt.y << std::endl;
+                parkingSpot->wm.x = pt.x;
+                parkingSpot->wm.y = pt.y;
+                cout << parkingSpot->wm.x << " " << parkingSpot->wm.y << std::endl;
             }
-
             if (id.type == EV) {
+                parkingSpot->wm.color = Qt::darkYellow;
                 Point pt = evPlacements.top();
                 evPlacements.pop();
-                widgetMeta = {.x = pt.x, .y = pt.y, .width = spotWidth, .height = spotHeight, .color = Qt::gray, .zPos = wm.zPos + 1};
+                parkingSpot->wm.x = pt.x;
+                parkingSpot->wm.y = pt.y;
             }
-
             if (id.type == HANDICAP) {
+                parkingSpot->wm.width = widerSpotWidth;
+                parkingSpot->wm.color = Qt::blue;
                 Point pt = handicapPlacements.top();
                 handicapPlacements.pop();
-                widgetMeta = {.x = pt.x, .y = pt.y, .width = widerSpotWidth, .height = spotHeight, .color = Qt::gray, .zPos = wm.zPos + 1};
+                parkingSpot->wm.x = pt.x;
+                parkingSpot->wm.y = pt.y;
             }
-            ParkingSpotGUI* parkingSpot = new ParkingSpotGUI(
-                scene,
-                initPackage,
-                id,
-                widgetMeta
-            );
             parkingSpots.push_back(parkingSpot);
         }
     }
@@ -166,31 +176,36 @@ void ParkingFloorGUI::initGenFloor(QGraphicsScene& scene, InitializationPackage&
     // generate the new spots
     for (SpotId id : initPackage.spotIds) {
         if (id.floorId.uniqueId != "floor1") { // for general floors
-            WidgetMeta widgetMeta;
+            ParkingSpotGUI* parkingSpot = new ParkingSpotGUI(
+            scene,
+            initPackage,
+            id,
+            {.x = wm.x, .y = wm.y, .width = spotWidth, .height = spotHeight, .color = Qt::white, .zPos = wm.zPos + 1}
+            );
 
             if (id.type == NORMAL) {
                 Point pt = normalPlacements.top();
                 normalPlacements.pop();
-                widgetMeta = {.x = pt.x, .y = pt.y, .width = spotWidth, .height = spotHeight, .color = Qt::gray, .zPos = wm.zPos + 1};
+                // cout << pt.x << " " << pt.y << std::endl;
+                parkingSpot->wm.x = pt.x;
+                parkingSpot->wm.y = pt.y;
+                // cout << parkingSpot->wm.x << " " << parkingSpot->wm.y << std::endl;
             }
             if (id.type == EV) {
+                parkingSpot->wm.color = Qt::darkYellow;
                 Point pt = evPlacements.top();
                 evPlacements.pop();
-                widgetMeta = {.x = pt.x, .y = pt.y, .width = spotWidth, .height = spotHeight, .color = Qt::gray, .zPos = wm.zPos + 1};
+                parkingSpot->wm.x = pt.x;
+                parkingSpot->wm.y = pt.y;
             }
-
             if (id.type == HANDICAP) {
+                parkingSpot->wm.width = widerSpotWidth;
+                parkingSpot->wm.color = Qt::blue;
                 Point pt = handicapPlacements.top();
                 handicapPlacements.pop();
-                widgetMeta = {.x = pt.x, .y = pt.y, .width = widerSpotWidth, .height = spotHeight, .color = Qt::gray, .zPos = wm.zPos + 1};
+                parkingSpot->wm.x = pt.x;
+                parkingSpot->wm.y = pt.y;
             }
-
-            ParkingSpotGUI* parkingSpot = new ParkingSpotGUI(
-                scene,
-                initPackage,
-                id,
-                widgetMeta
-            );
             parkingSpots.push_back(parkingSpot);
         }
     }

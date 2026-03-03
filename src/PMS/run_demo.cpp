@@ -24,17 +24,9 @@ using std::vector;
 int run_demo(int argc, char *argv[]) {
     QApplication a(argc, argv);
     QWidget mainWindow;
-    // layout for bottom part of window
-    QWidget bottomContainer(&mainWindow);
-    QHBoxLayout bottomLayout(&bottomContainer);
-
 
     InitializationPackage initPackage = genInitPackage(); // initialize config info for both front and backend
-
-    // for displaying availability -> a vanilla widget
-    AvailabilityGUI availabilityDisplay(&bottomContainer, initPackage);
-
-    DemoManager demoManager(&mainWindow, initPackage, WINDOW_WIDTH, WINDOW_HEIGHT, availabilityDisplay); // initialize the front end
+    DemoManager demoManager(&mainWindow, initPackage, WINDOW_WIDTH, WINDOW_HEIGHT); // initialize the front end
     ParkingManagementController pmc(initPackage); // initialize the backend
     // initialize sink? or unnecessary step -- leaving for eliud for now
 
@@ -45,20 +37,26 @@ int run_demo(int argc, char *argv[]) {
     QVBoxLayout layout(&mainWindow);
     mainWindow.setLayout(&layout);
 
+    // layout for bottom part of window
+    QWidget bottomContainer;
+    QHBoxLayout bottomLayout(&bottomContainer);
 
     // layout for stacking the bottons on left sid
-    QWidget buttonContainer(&bottomContainer);
+    QWidget buttonContainer;
     QVBoxLayout buttonLayout(&buttonContainer);
 
     QPushButton startSimpleDemoButton("Start Simple Demo", &mainWindow); // TODO disable both on click, enable stop
     QPushButton startChaosDemoButton("Start Chaos Demo", &mainWindow); // TODO disable both on click, enable stop
     QPushButton stopDemoButton("Stop Demo", &mainWindow);// TODO disable this, enable both demo buttons
     // TODO: next line, connections for all
-    QObject::connect(&startSimpleDemoButton, &QPushButton::clicked, &demoManager, &DemoManager::runSimpleDemo);
+    // QObject::connect(&button, &QPushButton::clicked, &parking_lot, &ParkingLot::run_demo);
 
     buttonLayout.addWidget(&startSimpleDemoButton);
     buttonLayout.addWidget(&startChaosDemoButton);
     buttonLayout.addWidget(&stopDemoButton);
+
+    // for displaying availability -> a vanilla widget
+    AvailabilityGUI availabilityDisplay;
 
     // add to the bottom layout: buttons and availbility display
     bottomLayout.addWidget(&buttonContainer);

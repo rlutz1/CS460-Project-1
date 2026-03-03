@@ -15,6 +15,7 @@ initOpenSensor(
     scene,
     id.initOpenId,
     {.x = wm.x + wm.width + (wm.width / 2), .y = wm.y, .width = 25, .height = 25, .color = Qt::black, .zPos = (wm.zPos + 1)}
+
     ),
 stayOpenSensor(
     scene,
@@ -52,49 +53,3 @@ void ExitGateGUI::paint(QPainter *painter,
     painter->drawRect(boundingRect());
 }
 
-
-void ExitGateGUI::signalGateClose() {
-    // PMS said to lower spikes :
-    // TODO: verify that opacity is the way to show that spikes are raised/lowered.
-    // opacityEffect should last as long as `spikes` is alives
-    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(&spikes);
-    opacityEffect->setOpacity(0.5);
-    spikes.setGraphicsEffect(opacityEffect);
-
-    // PMS said to close gate:
-
-    // same animation as open but backwards.
-
-    // end with giving PMS a successful Exit message (to be done at the finsih of the animation after it has passed 2nd sensor)
-}
-
-void ExitGateGUI::signalGateOpen() {
-    // PMS said to raise spikes:
-    // TODO: verify that opacity is the way to show that spikes are raised/lowered.
-    // opacityEffect should last as long as `spikes` is alives
-    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(&spikes);
-    opacityEffect->setOpacity(1);
-    spikes.setGraphicsEffect(opacityEffect);
-    // PMS said to open gate:
-
-    // TODO: figure out issue with Signal 11:SIGSEV on my computer for gui debugging) & test car frame signals with this.
-    // start LED flashing for the gate lights
-    // slide gate (y position) slowly upwards.
-}
-
-// sequence of "probing" events (where we probe our "devices" to see that our PMC backend works correctly)
-// FOLLOWS the vehicle animation sequence so far.
-void ExitGateGUI::vehicleOnExitGateInductionSensor() {
-    gateSensorController->SensedVehicle(initOpenSensor.sensorId);
-}
-
-// sequence of "probing" events (where we probe our "devices" to see that our PMC backend works correctly)
-// FOLLOWS the vehicle animation sequence so far.
-void ExitGateGUI::vehiclePassedSecondExitGateSensor() {
-    // should do nothing (here for consistency)
-    gateSensorController->NotSensedVehicled(initOpenSensor.sensorId);
-    // should signal backend w Exit controller that the car was sensed on the stay-open sensor.
-    gateSensorController->SensedVehicle(stayOpenSensor.sensorId);
-    // should signal backend w Exit controller that the car left the stay-open sensor.
-    gateSensorController->NotSensedVehicled(stayOpenSensor.sensorId);
-}

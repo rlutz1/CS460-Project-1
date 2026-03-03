@@ -5,7 +5,6 @@
 #include "EntranceGateGUI.h"
 #include <QGraphicsScene>
 #include <QPainter>
-#include <QGraphicsOpacityEffect> // only used in this class so far.
 
 EntranceGateGUI::EntranceGateGUI(QGraphicsScene& scene, InitializationPackage& initPackage, GateId id, WidgetMeta widgetMeta) :
     led(
@@ -51,56 +50,4 @@ void EntranceGateGUI::paint(QPainter *painter,
     painter->setBrush(QBrush(wm.color));
     // painter->setBrush(QBrush(Qt::transparent));
     painter->drawRect(boundingRect());
-}
-
-void EntranceGateGUI::signalGateClose() {
-    // PMS said to lower spikes :
-    // TODO: verify that opacity is the way to show that spikes are raised/lowered.
-    // opacityEffect should last as long as `spikes` is alives
-    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(&spikes);
-    opacityEffect->setOpacity(0.5);
-    spikes.setGraphicsEffect(opacityEffect);
-
-    // PMS said to close gate:
-
-    // same animation as close but backwards.
-
-    // end with giving PMS a successful Exit message (to be done at the finish of the animation after it has passed 2nd sensor).
-
-}
-
-void EntranceGateGUI::signalGateOpen() {
-    // PMS said to raise spikes:
-    // TODO: verify that opacity is the way to show that spikes are raised/lowered.
-    // opacityEffect should last as long as `spikes` is alives
-    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(&spikes);
-    opacityEffect->setOpacity(1);
-    spikes.setGraphicsEffect(opacityEffect);
-    // PMS said to open gate:
-
-    // start LED flashing for the gate lights
-    // slide gate (y position) slowly upwards.
-
-
-
-}
-
-
-
-// sequence of "probing" events (where we probe our "devices" to see that our PMC backend workds correctly)
-// FOLLOWS the vehicle animation sequence so far.
-void EntranceGateGUI::vehicleOnEntranceGateInductionSensor() {
-    gateSensorController->SensedVehicle(initOpenSensor.sensorId);
-}
-
-
-// sequence of "probing" events (where we probe our "devices" to see that our PMC backend workds correctly)
-// FOLLOWS the vehicle animation sequence so far.
-void EntranceGateGUI::vehiclePassedSecondEntranceGateSensor() {
-    // should do nothing (here for consistency)
-    gateSensorController->NotSensedVehicled(initOpenSensor.sensorId);
-    // should signal backend w Entrance controller that the car was sensed on the stay-open sensor.
-    gateSensorController->SensedVehicle(stayOpenSensor.sensorId);
-    // should signal backend w Entrance controller that the car left the stay-open sensor.
-    gateSensorController->NotSensedVehicled(stayOpenSensor.sensorId);
 }

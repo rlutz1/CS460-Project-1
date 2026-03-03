@@ -12,18 +12,16 @@
 #include "../GUIStructs/GUIStructs.h"
 #include <QGraphicsScene>
 
-class GateGUI : public QGraphicsWidget {
+class GateGUI : QGraphicsWidget {
     Q_OBJECT;
 
 public:
     GateGUI(QGraphicsScene& scene, InitializationPackage& initPackage, WidgetMeta widgetMeta);
 
     WidgetMeta wm;
+private:
     EntranceGateGUI entranceGate;
     ExitGateGUI exitGate;
-
-private:
-
 
 protected:
     QRectF boundingRect() const override;

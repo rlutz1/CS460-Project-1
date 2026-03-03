@@ -9,7 +9,7 @@
 #include "../../Definitions/Identifiers.h"
 #include "../GUIStructs/GUIStructs.h"
 
-class SensorGUI : public QGraphicsWidget{
+class SensorGUI : QGraphicsWidget{
     Q_OBJECT;
 public:
     SensorGUI(QGraphicsScene& scene, SensorId id, WidgetMeta widgetMeta);

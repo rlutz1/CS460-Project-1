@@ -17,10 +17,4 @@ struct WidgetMeta {
     int zPos;
 };
 
-
-// quick use only. may expand usage later.
-struct Point {
-    int x; int y;
-};
-
 #endif //CS460_PROJECT_1_GUISTRUCTS_H

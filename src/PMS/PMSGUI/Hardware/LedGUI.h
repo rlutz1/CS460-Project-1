@@ -8,7 +8,7 @@
 
 #include "../GUIStructs/GUIStructs.h"
 
-class LedGUI : public QGraphicsWidget {
+class LedGUI : QGraphicsWidget {
     Q_OBJECT;
 
 public:

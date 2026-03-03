@@ -19,7 +19,7 @@ using std::map; // this may not work, remove if so
 
 // ParkingLot GUI has floors and gate. sets up those widgets
 // and adds to the scene.
-class ParkingLotGUI : public QGraphicsWidget {
+class ParkingLotGUI : QGraphicsWidget {
     Q_OBJECT;
 public:
     ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initPackage, WidgetMeta widgetMeta);

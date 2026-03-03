@@ -10,7 +10,7 @@
 // Hopefully will be a useful declaration for callback to floor
 class ParkingFloor;
 
-// TODO: I am going to leave this as a placeholder for the sensor configuration updates (might not need)
+// I am going to leave this as a placeholder for the sensor configuration updates (might not need)
 struct SensorUpdate
 {
 };
@@ -32,7 +32,7 @@ public:
 	// This called when a sensor triggers (weight or ultrasonic) outlined in the SAD
 	void updateSpotAvailability(const SensorId& sensor, bool vehicleDetected);
 
-	// TODO: This is the administrative override that I think Roxanne want Gabriel to focus on
+	// This is the administrative override that Roxanne want Gabriel to focus on
 	void forceUnavailable();
 
 	// The necessary Getters

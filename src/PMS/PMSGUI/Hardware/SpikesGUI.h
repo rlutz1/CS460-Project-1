@@ -8,7 +8,7 @@
 
 #include "../GUIStructs/GUIStructs.h"
 
-class SpikesGUI : public QGraphicsWidget {
+class SpikesGUI : QGraphicsWidget {
     Q_OBJECT;
 public:
     SpikesGUI(QGraphicsScene& scene, WidgetMeta widgetMeta);
