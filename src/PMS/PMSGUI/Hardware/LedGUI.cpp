@@ -8,13 +8,11 @@
 #include <QPainter>
 
 LedGUI::LedGUI(QGraphicsScene& scene, WidgetMeta widgetMeta) :
-    wm(widgetMeta) {
-
+    wm(widgetMeta),
+    currColor(wm.color)
+{
     resize(wm.width, wm.height);
     setZValue(wm.zPos);
-
-    // scene.addItem(this);
-
 }
 
 // REQUIRED FOR GRAPHICS ITEM
@@ -30,7 +28,12 @@ void LedGUI::paint(QPainter *painter,
     // painter->setBackground(Qt::transparent);
     painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
     painter->setPen(QPen(Qt::black));
-    painter->setBrush(QBrush(wm.color));
+    painter->setBrush(QBrush(currColor));
     // painter->setBrush(QBrush(Qt::transparent));
     painter->drawRect(boundingRect());
+}
+
+void LedGUI::reset(QColor color) {
+    currColor = color;
+    update();
 }

@@ -15,6 +15,9 @@ public:
     LedGUI(QGraphicsScene& scene, WidgetMeta widgetMeta);
 
     WidgetMeta wm;
+    QColor currColor;
+
+    void reset(QColor color);
 
 protected:
     QRectF boundingRect() const override;

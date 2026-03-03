@@ -195,3 +195,9 @@ void ParkingFloorGUI::initGenFloor(QGraphicsScene& scene, InitializationPackage&
         }
     }
 }
+
+void ParkingFloorGUI::reset() {
+    for (ParkingSpotGUI* parkingSpot : parkingSpots) {
+        parkingSpot->reset();
+    }
+}

@@ -28,6 +28,7 @@ public:
     vector<ParkingFloorGUI*> parkingFloors;
     GateGUI gate;
 
+    void reset();
 protected:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,

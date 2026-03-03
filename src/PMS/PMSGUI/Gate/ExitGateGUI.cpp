@@ -100,3 +100,9 @@ void ExitGateGUI::paint(QPainter *painter,
     // painter->setBrush(QBrush(Qt::transparent));
     painter->drawRect(boundingRect());
 }
+
+void ExitGateGUI::reset() {
+    currColor = closedGateIndicator;
+    update();
+    spikes.reset();
+}

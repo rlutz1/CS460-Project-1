@@ -54,6 +54,7 @@ private:
     QParallelAnimationGroup currAnimation;
     vector<VehicleGUI*> activeVehicles;
     AvailabilityGUI* availabilityDisplay;
+    // InitializationPackage initPackage;
 
     void initScene();
     void initGraphicsMetadata();

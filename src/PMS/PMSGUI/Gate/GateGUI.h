@@ -22,6 +22,8 @@ public:
     EntranceGateGUI entranceGate;
     ExitGateGUI exitGate;
 
+    void reset();
+
 private:
 
 

@@ -4,6 +4,7 @@
 
 #include "SpikesGUI.h"
 
+#include <QGraphicsOpacityEffect>
 #include <QGraphicsScene>
 #include <QPainter>
 
@@ -12,6 +13,10 @@ SpikesGUI::SpikesGUI(QGraphicsScene& scene, WidgetMeta widgetMeta) :
 
     resize(wm.width, wm.height);
     setZValue(wm.zPos);
+
+    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(this);
+    opacityEffect->setOpacity(0.5);
+    setGraphicsEffect(opacityEffect);
 
     // scene.addItem(this);
 }
@@ -32,4 +37,10 @@ void SpikesGUI::paint(QPainter *painter,
     painter->setBrush(QBrush(wm.color));
     // painter->setBrush(QBrush(Qt::transparent));
     painter->drawRect(boundingRect());
+}
+
+void SpikesGUI::reset() {
+    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(this);
+    opacityEffect->setOpacity(0.5);
+    setGraphicsEffect(opacityEffect);
 }

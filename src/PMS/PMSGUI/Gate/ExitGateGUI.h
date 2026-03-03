@@ -37,6 +37,7 @@ public:
     SpikesGUI spikes;
 
     void addSignalReceiver(IInductionSensorDataSink* pmc);
+    void reset();
 
     // IGateInstructionSink
     void signalGateClose() override;

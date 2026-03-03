@@ -35,6 +35,7 @@ DemoManager::DemoManager(
         {.x = 0, .y = 0, .width = width, .height = height, .color = Qt::darkGray, .zPos = 0}
         ),
     availabilityDisplay(&availabilityDisplay),
+    // initPackage(initPackage),
     QGraphicsView(parent)
 {
     this->setMinimumSize(QSize(width, height));
@@ -153,7 +154,10 @@ void DemoManager::stopDemo() {
         ((QObject*)vehicle)->deleteLater();
     }
     activeVehicles.clear(); // clear out the vector
+    parkingLot.reset();
     // TODO: reset lot components to initial state.
+    // reset all lot components
+    // reset the availability display
 }
 
 /**

@@ -106,3 +106,9 @@ void EntranceGateGUI::paint(QPainter *painter,
     // painter->setBrush(QBrush(Qt::transparent));
     painter->drawRect(boundingRect());
 }
+
+void EntranceGateGUI::reset() {
+    currColor = closedGateIndicator;
+    update();
+    spikes.reset();
+}

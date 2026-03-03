@@ -34,3 +34,8 @@ void SensorGUI::paint(QPainter *painter,
     // painter->setBrush(QBrush(Qt::transparent));
     painter->drawRect(boundingRect());
 }
+
+void SensorGUI::reset() {
+
+}
+

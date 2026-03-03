@@ -16,6 +16,7 @@ class ParkingSpotGUI : public QGraphicsWidget {
 public:
     ParkingSpotGUI(QGraphicsScene& scene, InitializationPackage& initPackage, SpotId spotId, WidgetMeta widgetMeta);
 
+    QColor currColor;
     QColor availableColor;
     QColor occupiedColor;
     QColor unavailableColor;
@@ -25,6 +26,7 @@ public:
     SpotId spotId;
     WidgetMeta wm;
 
+    void reset();
 protected:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,

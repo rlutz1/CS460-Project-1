@@ -73,3 +73,9 @@ void ParkingSpotGUI::paint(QPainter *painter,
     // painter->setBrush(QBrush(Qt::transparent));
     painter->drawRect(boundingRect());
 }
+
+void ParkingSpotGUI::reset() {
+    led->reset(availableColor);
+    ultrasonicSensor->reset();
+    weightSensor->reset();
+}

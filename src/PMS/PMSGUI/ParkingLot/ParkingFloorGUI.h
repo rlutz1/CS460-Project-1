@@ -20,6 +20,8 @@ public:
     WidgetMeta wm;
     vector<ParkingSpotGUI*> parkingSpots;
 
+    void reset();
+
 protected:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,

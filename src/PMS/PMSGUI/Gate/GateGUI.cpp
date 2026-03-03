@@ -47,3 +47,8 @@ void GateGUI::paint(QPainter *painter,
     painter->drawRect(boundingRect());
 }
 
+void GateGUI::reset() {
+    entranceGate.reset();
+    exitGate.reset();
+}
+

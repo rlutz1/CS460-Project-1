@@ -77,3 +77,11 @@ void ParkingLotGUI::paint(QPainter *painter,
     // painter->setBrush(QBrush(Qt::transparent));
     painter->drawRect(boundingRect());
 }
+
+void ParkingLotGUI::reset() {
+    for (ParkingFloorGUI* floor: parkingFloors) {
+        floor->reset();
+    }
+    gate.reset();
+
+}
