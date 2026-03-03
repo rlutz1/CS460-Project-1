@@ -26,6 +26,7 @@ VehicleGUI::VehicleGUI(
     animationGroup(this),
     initialAnimation(this),
     ongoingAnimation(this),
+    offsetPause(this),
     approachEntryGate (this, "pos"),
     passSecondEntrySensor(this, "pos"),
     findSpot(this, "pos"),
@@ -65,7 +66,7 @@ void VehicleGUI::initSignals() {
 
 void VehicleGUI::initAnimation(AnimationMeta animMeta, bool chaos) {
 
-    initSignals(); // initialize the signal connections to these animations
+
 
     offsetPause.setDuration(animMeta.entryDelay); // for controlling start flow
 
@@ -101,6 +102,8 @@ void VehicleGUI::initAnimation(AnimationMeta animMeta, bool chaos) {
     exit.setDuration(animMeta.generalMovementTime);
     exit.setEasingCurve(animMeta.movementType);
     exit.setEndValue(QPoint(0, animMeta.yExitTrack));
+
+    initSignals(); // initialize the signal connections to these animations
 
     // group all animations
     initialAnimation.addAnimation(&offsetPause);
