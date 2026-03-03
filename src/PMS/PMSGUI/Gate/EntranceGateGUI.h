@@ -13,7 +13,7 @@
 #include "../Hardware/SpikesGUI.h"
 
 #include "../GUIStructs/GUIStructs.h"
-#include "../PMSGUIInterfaces/ISensorDataSink.h"
+#include "../PMSGUIInterfaces/IInductionSensorDataSink.h"
 
 class EntranceGateGUI : public QGraphicsWidget, public IGateInstructionSink {
     Q_OBJECT;
@@ -43,7 +43,7 @@ protected:
            QWidget *widget) override;
 
 private:
-    ISensorDataSink* pmc;
+    IInductionSensorDataSink* pmc;
 };
 
 

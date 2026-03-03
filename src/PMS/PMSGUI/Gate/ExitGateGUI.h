@@ -14,7 +14,7 @@
 
 #include "../GUIStructs/GUIStructs.h"
 #include "../../PMC/PMCInterfaces/IGateInstructionSink.h"
-#include "../PMSGUIInterfaces/ISensorDataSink.h"
+#include "../PMSGUIInterfaces/IInductionSensorDataSink.h"
 
 #include <QGraphicsOpacityEffect> // only used in this class so far.
 
@@ -42,7 +42,7 @@ protected:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
            QWidget *widget) override;
-    ISensorDataSink* pmc;
+    IInductionSensorDataSink* pmc;
 };
 
 

@@ -90,18 +90,13 @@ void EntranceGateGUI::signalGateOpen() {
 // sequence of "probing" events (where we probe our "devices" to see that our PMC backend works correctly)
 // FOLLOWS the vehicle animation sequence so far.
 void EntranceGateGUI::vehicleOnEntranceGateInductionSensor() {
-    pmc->SensedVehicle(initOpenSensor.sensorId);
+    pmc->vehicleSensed(id);
 }
 
 
 // sequence of "probing" events (where we probe our "devices" to see that our PMC backend works correctly)
 // FOLLOWS the vehicle animation sequence so far.
 void EntranceGateGUI::vehiclePassedSecondEntranceGateSensor() {
-    // should do nothing (here for consistency)
-    pmc->NotSensedVehicled(initOpenSensor.sensorId);
-    // should signal backend PMC that the car was sensed on the stay-open sensor.
-    pmc->SensedVehicle(stayOpenSensor.sensorId);
-    // should signal backend PMC that the car left the stay-open sensor.
-    pmc->NotSensedVehicled(stayOpenSensor.sensorId);
-    // TODO: SIGNAL SUCCESS.
+    pmc->vehicleAbsent(id);
+    pmc->successfulEntry();
 }

@@ -5,7 +5,7 @@
 #ifndef CS460_PROJECT_1_ENTRANCEGATE_H
 #define CS460_PROJECT_1_ENTRANCEGATE_H
 
-#include "../../PMSGUI/PMSGUIInterfaces/ISensorDataSink.h"
+#include "../../PMSGUI/PMSGUIInterfaces/IInductionSensorDataSink.h"
 #include "../PMCInterfaces/IGateInstructionSink.h"
 
 class CentralGateController;

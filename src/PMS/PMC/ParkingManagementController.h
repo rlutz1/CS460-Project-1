@@ -63,19 +63,19 @@ private:
 };
 
 
-class ParkingManagementController : public ISensorDataSink
+class ParkingManagementController : public IInductionSensorDataSink
 {
 public:
 	ParkingManagementController(const InitializationPackage& initPackage);
-	// This should be called by the CentralGateController when the gate events occur
+	// IInductionSensorDataSink
 	// When a vehicle us detected at gate (entry or exit)
-	void vehicleSensed(GateId gateId);
+	void vehicleSensed(GateId gateId) override;
 	// When a vehicle has passed through gate
-	void vehicleAbsent(GateId gateId);
-	// The entry gate is closed after vehicle passed
-	void successfulEntry(GateId gateId);
-	// The exit gate is closed after vehicle passed
-	void successfulExit(GateId gateId);
+	void vehicleAbsent(GateId gateId) override;
+	void successfulEntry() override;
+	void successfulExit() override;
+
+
 	void handleSensorTrigger(const SensorId& sensor, bool detected);
 
 	void updateLogMessage(const std::string& msg);
@@ -85,11 +85,6 @@ public:
 	int getVehiclesInside() const { return vehiclesInside; }
 	int getTotalSpots() const { return totalSpots; }
 	ParkingLot::State getLotState() const;
-
-
-	// ISensorDataSink
-	void SensedVehicle(SensorId sensorID) override;
-	void NotSensedVehicled(SensorId sensorID) override;
 
 private:
 	ParkingLot lot;

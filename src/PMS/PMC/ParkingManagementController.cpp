@@ -45,14 +45,14 @@ void ParkingManagementController::vehicleAbsent(GateId gateId) {
 	centralGate.moveGate(gateId, false);
 }
 
-void ParkingManagementController::successfulEntry(GateId) {
+void ParkingManagementController::successfulEntry() {
 	vehiclesInside++;
 	availabilityDisplay.updateInTransit(true);
 	int remaining = totalSpots - vehiclesInside;
 	availabilityDisplay.updateLogMessage(remaining > 0 ? "Spaces Available" : "FULL");
 }
 
-void ParkingManagementController::successfulExit(GateId) {
+void ParkingManagementController::successfulExit() {
 	vehiclesInside--;
 	availabilityDisplay.updateInTransit(false);
 	int remaining = totalSpots - vehiclesInside;
@@ -90,23 +90,6 @@ ParkingSpotController* ParkingManagementController::findSpotBySensor(const Senso
 	return nullptr;
 }
 
-/**
- * TODO: change the old absent/present for these ones (merge them).
- */
-// void ParkingManagementController::SensedVehicle(SensorId sensorID) {
-//     if ( sensorID.uniqueId == "entranceGateInitOpen" || sensorID.uniqueId == "exitGateInitOpen" ) {
-//         // signal to central gate controller about the sensor sensing vehicle -> open entrance/exit
-//         centralGateController->notifyVehicleSensed(gateId);
-//     } else if ( sensorID.uniqueId == "entranceGateStayOpen" || sensorID.uniqueId == "exitGateStayOpen" ) {
-//         vehicleWasAtInteriorSensor = true;
-//     }
-// }
-// void ParkingManagementController::NotSensedVehicled(SensorId sensorID) {
-//     // TODO: further implementation for actual sensor Ids for gates.
-//     if ( vehicleWasAtInteriorSensor
-//         && (sensorID.uniqueId == "entranceGateStayOpen" || sensorID.uniqueId == "exitGateStayOpen") ) {
-//         // signal to central gate controller about the exterior sensor not sensed anymore, i.e. passed -> close entrance/exit.
-//         centralGateController->notifyVehicleAbsent(gateId);
-//         vehicleWasAtInteriorSensor = false;
-//     }
-// }
+
+
+
