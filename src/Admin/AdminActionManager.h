@@ -1,19 +1,20 @@
 #ifndef CS460_PROJECT_1_ADMINACTIONMANAGER_H
 #define CS460_PROJECT_1_ADMINACTIONMANAGER_H
 
-#include <QWidget>
 #include <QPushButton>
 #include <QComboBox>
+#include <QMainWindow>
 
-class AdminActionManager : public QWidget{
+class AdminActionManager : public QMainWindow{
     Q_OBJECT
 
 public:
     explicit AdminActionManager(QWidget *parent = 0);
     QString optionSelected() {return options->currentText();};
+    bool canLogout() const {return logout;};
 
 private slots:
-    void handleAvailability(bool, QString);
+    void handleAvailability();
     void handleLogout();
 
 private:
@@ -21,6 +22,8 @@ private:
     QComboBox *parking;
     QPushButton *confirmButton;
     QPushButton *logoutButton;
+
+    bool logout;
 };
 
 

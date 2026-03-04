@@ -4,6 +4,7 @@
 #include <QComboBox>
 
 #include "AdminUserInterface.h"
+#include "AdminActionManager.h"
 
 
 // driver for admin app, something strange
@@ -11,7 +12,6 @@ int run_admin(int argc, char *argv[]) {
     QApplication a(argc, argv);
 
     AdminUserInterface userInterface;
-    userInterface.setWindowTitle("Admin Login");
     userInterface.show();
     a.exec();
 
@@ -20,31 +20,8 @@ int run_admin(int argc, char *argv[]) {
         return 0;
     }
 
-    QWidget mainWindow;
-    mainWindow.setWindowTitle("Main Page");
-    mainWindow.setFixedSize(600, 200);
-    QComboBox *options = new QComboBox();
-    options -> addItem("Make Unavailable");
-    options -> addItem("Make Available");
-    QString optionSelected = options->currentText();
-
-    QComboBox *parking = new QComboBox();
-    parking -> addItem("ID001");
-    parking -> addItem("ID002");
-    parking -> addItem("ID003");
-    // for (const std::string& spot : spotIds)
-    // {
-    //     parking->addItem(spot.uniqueId, QVariant::fromValue(spot));
-    // }
-
-    QPushButton confirmButton("confirm");
-    QHBoxLayout confirmLayout;
-
-    confirmLayout.addWidget(options);
-    confirmLayout.addWidget(parking);
-    confirmLayout.addWidget(&confirmButton);
-    mainWindow.setLayout(&confirmLayout);
-    mainWindow.show();
+    AdminActionManager mainPage;
+    mainPage.show();
 
     return a.exec();
 }

@@ -1,15 +1,14 @@
 #include "AdminUserInterface.h"
 
-#include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QMessageBox>
 #include <QLabel>
 #include <QWidget>
-#include <QProcess>
 
 AdminUserInterface::AdminUserInterface(QWidget* parent) : QMainWindow(parent)
 {
     setFixedSize(300, 75);
+    setWindowTitle("Admin Login");
     QWidget* centralWidget = new QWidget();
     QHBoxLayout* layout = new QHBoxLayout(centralWidget);
     loginSuccessful = false;
