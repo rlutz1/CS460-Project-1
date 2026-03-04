@@ -145,7 +145,6 @@ void DemoManager::stopDemo() {
  */
 void DemoManager::addSignalReceiver(std::shared_ptr<ParkingManagementController> pmc) const {
 
-    // std::shared_ptr<ParkingManagementController> ptr(pmc);
     parkingLot->gate->entranceGate->pmc = pmc;
     parkingLot->gate->exitGate->pmc = pmc;
 

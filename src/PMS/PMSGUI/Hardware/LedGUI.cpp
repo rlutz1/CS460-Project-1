@@ -15,6 +15,16 @@ LedGUI::LedGUI(QGraphicsScene& scene, WidgetMeta widgetMeta) :
     setZValue(wm.zPos);
 }
 
+/**
+ * the method matching the color change method sig
+ * in our SAD.
+ * @param color to change to
+ */
+void LedGUI::color(QColor color) {
+    currColor = color;
+    update();
+}
+
 // REQUIRED FOR GRAPHICS ITEM
 QRectF LedGUI::boundingRect() const {
     return QRectF(wm.x, wm.y, // this is BETTER
@@ -25,11 +35,9 @@ QRectF LedGUI::boundingRect() const {
 void LedGUI::paint(QPainter *painter,
     const QStyleOptionGraphicsItem *option,
     QWidget *widget) {
-    // painter->setBackground(Qt::transparent);
     painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
     painter->setPen(QPen(Qt::black));
     painter->setBrush(QBrush(currColor));
-    // painter->setBrush(QBrush(Qt::transparent));
     painter->drawRect(boundingRect());
 }
 

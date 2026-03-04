@@ -37,6 +37,7 @@ public:
     // IParkingSpotHardwareSink
     void markSpotAvailable() override;
     void markSpotUnavailable() override;
+    void markSpotOccupied() override;
 
     std::shared_ptr<IParkingSpotSensorDataSink> pmc;
 public slots:

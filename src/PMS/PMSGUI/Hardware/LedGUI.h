@@ -18,6 +18,7 @@ public:
     QColor currColor;
 
     void reset(QColor color);
+    void color(QColor color);
 
 protected:
     QRectF boundingRect() const override;

@@ -10,6 +10,7 @@ class IParkingSpotHardwareSink {
     ~IParkingSpotHardwareSink() = default;
 
     virtual void markSpotAvailable() = 0;
+    virtual void markSpotOccupied() = 0;
     virtual void markSpotUnavailable() = 0;
 };
 
