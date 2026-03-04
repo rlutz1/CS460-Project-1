@@ -12,6 +12,8 @@
 
 #include "../../PMC/PMCInterfaces//IParkingSpotHardwareSink.h"
 
+class IParkingSpotSensorDataSink;
+
 class ParkingSpotGUI : public QGraphicsWidget, public IParkingSpotHardwareSink {
     Q_OBJECT;
 
@@ -34,6 +36,7 @@ public:
     void markSpotAvailable() override;
     void markSpotUnavailable() override;
 
+    std::weak_ptr<IParkingSpotSensorDataSink> pmc;
 public slots:
     void signalVehicleParkedOnSpot();
     void signalVehicleLeftParkingSpot();

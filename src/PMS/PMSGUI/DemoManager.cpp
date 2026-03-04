@@ -148,7 +148,14 @@ void DemoManager::addSignalReceiver(std::shared_ptr<ParkingManagementController>
     // std::shared_ptr<ParkingManagementController> ptr(pmc);
     parkingLot->gate->entranceGate->pmc = pmc;
     parkingLot->gate->exitGate->pmc = pmc;
+
+    for (auto& floor: parkingLot->parkingFloors) {
+        for (auto& parkingSpot: floor->parkingSpots) {
+            parkingSpot->pmc = pmc;
+        }
+    }
 } // end method
+
 
 /**
  * metadata things for smoothing animations/painting

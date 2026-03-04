@@ -69,16 +69,30 @@ void ParkingManagementController::successfulExit() {
 }
 
 void ParkingManagementController::vehicleParked(SpotId spotId) {
-	// TODO:
-	// signal availability dislay to decrment in-transit count by 1.
-	// signal availability display what type to decrement available.
+	availabilityDisplay.updateInTransit(false);
+
+	// hardcoded values based on run_demo.cpp constraint of 2 floors.
+	int floorNum;
+	if (spotId.floorId.uniqueId == "floor1") {
+		floorNum = 1;
+	}else if (spotId.floorId.uniqueId == "floor1"){
+		floorNum = 2;
+	}
+	availabilityDisplay.updateAvailabilityTracking(spotId.type, floorNum, false);
 	// signal spotId parking spot to be UNavailable.
 }
 
 void ParkingManagementController::vehicleUnparked(SpotId spotId) {
-	// TODO:
-	// signal availability dislay to increment in-transit count by 1.
-	// signal availability display what type to increment available.
+	availabilityDisplay.updateInTransit(true);
+
+	// hardcoded values based on run_demo.cpp constraint of 2 floors.
+	int floorNum;
+	if (spotId.floorId.uniqueId == "floor1") {
+		floorNum = 1;
+	}else if (spotId.floorId.uniqueId == "floor1"){
+		floorNum = 2;
+	}
+	availabilityDisplay.updateAvailabilityTracking(spotId.type, floorNum, true);
 	// signal spotId parking spot to be available.
 }
 

@@ -59,11 +59,11 @@ void VehicleGUI::initSignals() {
 
     // initialize the vehicle parking in a spot ->vehicleParked signal
     connect(&park, &QPropertyAnimation::finished,
-        demoManager->parkingLot.parkingFloors[cachedFloorToParkIn]
+        demoManager->parkingLot->parkingFloors[cachedFloorToParkIn]
         ->parkingSpots[cachedParkSpotIndexFromFloor], &ParkingSpotGUI::signalVehicleParkedOnSpot);
     // initialize the vehicle leaving in a spot -> vehicleLeft signal
-    connect(&park, &QPropertyAnimation::finished,
-        demoManager->parkingLot.parkingFloors[cachedFloorToParkIn]
+    connect(&unpark, &QPropertyAnimation::finished,
+        demoManager->parkingLot->parkingFloors[cachedFloorToParkIn]
         ->parkingSpots[cachedParkSpotIndexFromFloor], &ParkingSpotGUI::signalVehicleLeftParkingSpot);
 
     // initialize the vehicle left a spot vehicleUnparked signal
