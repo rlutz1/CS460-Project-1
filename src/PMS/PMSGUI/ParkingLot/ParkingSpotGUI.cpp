@@ -89,15 +89,9 @@ void ParkingSpotGUI::markSpotUnavailable() {
 
 
 void ParkingSpotGUI::signalVehicleParkedOnSpot() {
-    // if-statement with lock to check for it being alive reference and method-callable.
-    if (std::shared_ptr<IParkingSpotSensorDataSink> tempPmcRef = pmc.lock()) {
-        tempPmcRef->vehicleParked(spotId);
-    }
+    pmc->vehicleParked(spotId);
 }
 
 void ParkingSpotGUI::signalVehicleLeftParkingSpot() {
-    // if-statement with lock to check for it being alive reference and method-callable.
-    if (std::shared_ptr<IParkingSpotSensorDataSink> tempPmcRef = pmc.lock()) {
-        tempPmcRef->vehicleUnparked(spotId);
-    }
+    pmc->vehicleUnparked(spotId);
 }

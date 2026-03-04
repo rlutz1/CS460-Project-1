@@ -36,7 +36,7 @@ public:
     void markSpotAvailable() override;
     void markSpotUnavailable() override;
 
-    std::weak_ptr<IParkingSpotSensorDataSink> pmc;
+    std::shared_ptr<IParkingSpotSensorDataSink> pmc;
 public slots:
     void signalVehicleParkedOnSpot();
     void signalVehicleLeftParkingSpot();
