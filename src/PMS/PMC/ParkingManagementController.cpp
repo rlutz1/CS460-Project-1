@@ -6,13 +6,18 @@
 #include "../Initialization.h"
 #include "../PMSGUI/DemoManager.h"
 #include "../PMSGUI/Availability/AvailabilityGUI.h"
+// #include ""
 
 ParkingManagementController::ParkingManagementController(
 	const InitializationPackage& initPackage,
 	const IAvailabilityInstructionSink& availPtr,
 	const DemoManager& demoManager
 	)
-	: lot(initPackage, demoManager),
+	: lot(
+		initPackage,
+		demoManager.parkingLot->parkingFloors[0]->parkingSpots,
+		demoManager.parkingLot->parkingFloors[1]->parkingSpots
+		),
       totalSpots(0),
       vehiclesInside(0),
 	  centralGate(demoManager.parkingLot->gate->entranceGate, demoManager.parkingLot->gate->exitGate),

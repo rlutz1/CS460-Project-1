@@ -6,10 +6,17 @@
 #include "ParkingFloor.h"
 #include <map>
 
+#include "../../PMSGUI/ParkingLot/ParkingSpotGUI.h"
+#include "../PMCInterfaces/IParkingSpotHardwareSink.h"
+
 //Added to match call in header file
 ParkingLot::~ParkingLot() = default;
 
-ParkingLot::ParkingLot(const InitializationPackage& initPackage, const DemoManager& demoManager)
+ParkingLot::ParkingLot(
+	const InitializationPackage &initPackage,
+	QVector<QPointer<ParkingSpotGUI>> spotsFloor1,
+	QVector<QPointer<ParkingSpotGUI>> spotsFloor2
+)
 {
 	// This should collect the unique floor IDs from all the spots
 	std::map<std::string, std::unique_ptr<ParkingFloor>> floorMap;
@@ -28,7 +35,19 @@ ParkingLot::ParkingLot(const InitializationPackage& initPackage, const DemoManag
 		auto& floor = floorMap[spotId.floorId.uniqueId];
 		auto spot = std::make_unique<ParkingSpotController>(spotId, *floor);
 		// TODO: Add the hardware to the corresponding spot from the DemoManager:
+		for (auto hardware : spotsFloor1) {
+			if (hardware->spotId.uniqueId == spotId.uniqueId) {
+				spot->spotHardware = hardware;
+				break;
+			}
+		}
 
+		for (auto hardware : spotsFloor2) {
+			if (hardware->spotId.uniqueId == spotId.uniqueId) {
+				spot->spotHardware = hardware;
+				break;
+			}
+		}
 
 		floor->addSpot(std::move(spot));
 	}
