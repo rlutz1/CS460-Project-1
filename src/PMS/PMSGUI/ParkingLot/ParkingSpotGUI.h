@@ -40,6 +40,7 @@ public:
 
     std::shared_ptr<IParkingSpotSensorDataSink> pmc;
 public slots:
+    void signalVehicleSensed(bool vehicleParked);
     void signalVehicleParkedOnSpot();
     void signalVehicleLeftParkingSpot();
 

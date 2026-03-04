@@ -45,8 +45,8 @@ public:
     void signalGateOpen() override;
 
 public slots:
-    void vehicleOnEntranceGateInductionSensor();
-    void vehiclePassedSecondEntranceGateSensor();
+    void vehicleOnEntranceGateInductionSensor(bool sensorState);
+    void vehiclePassedSecondEntranceGateSensor(bool sensorState);
 
 
 protected:

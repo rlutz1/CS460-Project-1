@@ -18,7 +18,7 @@ public:
 
     WidgetMeta wm;
     SensorId sensorId;
-    // bool triggered;
+    bool triggered;
 
     void reset();
 
@@ -26,7 +26,7 @@ public slots:
     void trigger();
 
     signals:
-    void triggerSend();
+    void triggerSend(bool sensorState);
 
 protected:
     QRectF boundingRect() const override;

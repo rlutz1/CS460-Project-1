@@ -19,11 +19,8 @@ struct WidgetMeta {
     int zPos;
 };
 
-// for use in "sensor triggers"
-struct TriggerPack {
-    SpotId spotId;
-    GateId gateId;
-    bool triggered;
+enum TriggerType {
+
 };
 
 

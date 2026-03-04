@@ -79,13 +79,13 @@ void ExitGateGUI::signalGateOpen() {
 
 // sequence of "probing" events (where we probe our "devices" to see that our PMC backend works correctly)
 // FOLLOWS the vehicle animation sequence so far.
-void ExitGateGUI::vehicleOnExitGateInductionSensor() {
+void ExitGateGUI::vehicleOnExitGateInductionSensor(bool sensorState) {
     pmc->vehicleSensed(id);
 }
 
 // sequence of "probing" events (where we probe our "devices" to see that our PMC backend works correctly)
 // FOLLOWS the vehicle animation sequence so far.
-void ExitGateGUI::vehiclePassedSecondExitGateSensor() {
+void ExitGateGUI::vehiclePassedSecondExitGateSensor(bool sensorState) {
     // should do nothing (here for consistency)
     pmc->vehicleAbsent(id);
     pmc->successfulExit();

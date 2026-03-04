@@ -8,10 +8,11 @@
 #include <QGraphicsScene>
 #include <QPainter>
 #include <iostream>
+
 SensorGUI::SensorGUI(QGraphicsScene& scene, SensorId id, WidgetMeta widgetMeta) :
     sensorId(id),
-    wm(widgetMeta)
-    // triggered(false)
+    wm(widgetMeta),
+    triggered(false)
 {
     resize(wm.width, wm.height);
     setZValue(wm.zPos);
@@ -19,8 +20,8 @@ SensorGUI::SensorGUI(QGraphicsScene& scene, SensorId id, WidgetMeta widgetMeta) 
 
 void SensorGUI::trigger() {
     std::cout << "trigger" << std::endl;
-    // triggered = !triggered;
-    emit triggerSend(); // todo: this should ideally send through the triggered bool
+    triggered = !triggered;
+    emit triggerSend(triggered); // todo: this should ideally send through the triggered bool
 }
 
 // REQUIRED FOR GRAPHICS ITEM

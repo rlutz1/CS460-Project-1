@@ -84,8 +84,8 @@ public:
 	void successfulExit() override;
 
 	// IParkingSpotSensorDataSink
-	void vehicleParked(SpotId spotId) override;
-	void vehicleUnparked(SpotId spotId) override;
+	void vehicleParked(SpotId spotId, SensorId sensorId) override;
+	void vehicleUnparked(SpotId spotId, SensorId sensorId) override;
 
 
 	void handleSensorTrigger(const SensorId& sensor, bool detected);

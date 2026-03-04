@@ -54,6 +54,9 @@ ParkingSpotGUI::ParkingSpotGUI(QGraphicsScene& scene, SpotId spotId, WidgetMeta 
             availableColor = Qt::green;
     }
     led->currColor = availableColor;
+
+    connect(ultrasonicSensor, &SensorGUI::triggerSend, this, &ParkingSpotGUI::signalVehicleSensed);
+    connect(weightSensor, &SensorGUI::triggerSend, this, &ParkingSpotGUI::signalVehicleSensed);
 }
 
 // REQUIRED FOR GRAPHICS ITEM
@@ -91,6 +94,13 @@ void ParkingSpotGUI::markSpotUnavailable() {
     led->color(unavailableColor);
 }
 
+void ParkingSpotGUI::signalVehicleSensed(bool vehicleParked) {
+    if (vehicleParked) {
+        signalVehicleParkedOnSpot();
+    } else {
+        signalVehicleLeftParkingSpot();
+    }
+}
 
 void ParkingSpotGUI::signalVehicleParkedOnSpot() {
     pmc->vehicleParked(spotId);
