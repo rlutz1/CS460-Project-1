@@ -42,6 +42,12 @@ public:
 		return state;
 	}
 
+
+	/////////////////////////////////// ///////////////////////////////////
+	// assumed to always take in a parking spot id.
+	void markParkingSpotAvailability(SpotId parkingSpotId, int floor, bool available);
+
+
 private:
 	State state;
 	std::vector<std::unique_ptr<ParkingFloor>> floors;

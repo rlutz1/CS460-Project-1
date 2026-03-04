@@ -80,6 +80,7 @@ void ParkingManagementController::vehicleParked(SpotId spotId) {
 	}
 	availabilityDisplay.updateAvailabilityTracking(spotId.type, floorNum, false);
 	// signal spotId parking spot to be UNavailable.
+	lot.markParkingSpotAvailability(spotId, floorNum, false); // false === unavailable
 }
 
 void ParkingManagementController::vehicleUnparked(SpotId spotId) {
@@ -94,6 +95,7 @@ void ParkingManagementController::vehicleUnparked(SpotId spotId) {
 	}
 	availabilityDisplay.updateAvailabilityTracking(spotId.type, floorNum, true);
 	// signal spotId parking spot to be available.
+	lot.markParkingSpotAvailability(spotId, floorNum, true); // true === available
 }
 
 

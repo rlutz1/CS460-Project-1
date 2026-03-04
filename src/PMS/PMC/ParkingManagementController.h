@@ -98,8 +98,8 @@ public:
 	int getTotalSpots() const { return totalSpots; }
 	ParkingLot::State getLotState() const;
 
-private:
 	ParkingLot lot;
+private:
 	CentralGateController centralGate;
 	AvailabilityController availabilityDisplay;
 

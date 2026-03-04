@@ -52,12 +52,15 @@ public:
 		return id;
 	}
 
-private:
+
+	/////////////////////////////////////// ///////////////////////////////////////
+	void markSpotAvailability(bool isAvailable);
 	SpotId id;
+	IParkingSpotHardwareSink* spotHardware;
+private:
 	State state;
 	bool weightDetected;
 	bool ultrasonicDetected;
-	IParkingSpotHardwareSink* spotHardware;
 	// This should hopefully notify the floor of any state changes
 	ParkingFloor& floor;
 	// This should reconfigure the overall state of the spot based on both of the sensor readings (TRUE or FALSE)

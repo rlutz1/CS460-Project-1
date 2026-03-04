@@ -73,6 +73,24 @@ void ParkingLot::notifyFloorStateChanged(SpotType type, ParkingSpotController::S
 	updateState();
 }
 
+
+void ParkingLot::markParkingSpotAvailability(SpotId spotId, int floor, bool available) {
+	// check which floor we will go to:
+
+	for (auto& floor: floors) {
+		if (floor->id.uniqueId == "floor1") {
+			floor->markParkingSpotAvailability(spotId, available);
+			break;
+		}else if (floor->id.uniqueId == "floor2") {
+			floor->markParkingSpotAvailability(spotId, available);
+			break;
+		}
+	}
+}
+
+
+
+
 void ParkingLot::updateState()
 {
 	// This says that the lot is FULL if the total available spots (all types) is zero
