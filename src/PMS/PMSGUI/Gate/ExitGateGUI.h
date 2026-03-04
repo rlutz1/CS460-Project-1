@@ -4,20 +4,20 @@
 
 #ifndef CS460_PROJECT_1_EXITGATEGUI_H
 #define CS460_PROJECT_1_EXITGATEGUI_H
-#include <QGraphicsWidget>
+
+#include <QGraphicsOpacityEffect> // only used in this class so far.
+#include <QPointer>
 
 #include "../../Initialization.h"
 #include "../../Definitions/Identifiers.h"
 #include "../Hardware/LedGUI.h"
 #include "../Hardware/SensorGUI.h"
 #include "../Hardware/SpikesGUI.h"
-
 #include "../GUIStructs/GUIStructs.h"
 #include "../../PMC/PMCInterfaces/IGateInstructionSink.h"
 #include "../PMSGUIInterfaces/IInductionSensorDataSink.h"
 
-#include <QGraphicsOpacityEffect> // only used in this class so far.
-#include <QPointer>
+
 
 class ParkingManagementController;
 

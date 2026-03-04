@@ -5,6 +5,8 @@
 #ifndef CS460_PROJECT_1_PARKINGSPOT_H
 #define CS460_PROJECT_1_PARKINGSPOT_H
 #include <QGraphicsWidget>
+#include <QPointer>
+
 #include "../GUIStructs/GUIStructs.h"
 #include "../../Initialization.h"
 #include "../Hardware/LedGUI.h"
@@ -20,9 +22,9 @@ public:
     QColor availableColor;
     QColor occupiedColor;
     QColor unavailableColor;
-    LedGUI* led;
-    SensorGUI* ultrasonicSensor;
-    SensorGUI* weightSensor;
+    QPointer<LedGUI> led;
+    QPointer<SensorGUI> ultrasonicSensor;
+    QPointer<SensorGUI> weightSensor;
     SpotId spotId;
     WidgetMeta wm;
 

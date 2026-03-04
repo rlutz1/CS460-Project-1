@@ -47,7 +47,7 @@ public:
         DemoManager* demoManager,
         bool chaos
         );
-    // ~VehicleGUI() override;
+
     DemoManager* demoManager;
     QSequentialAnimationGroup animationGroup;
     QSequentialAnimationGroup initialAnimation;

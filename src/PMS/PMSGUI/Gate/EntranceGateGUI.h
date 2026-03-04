@@ -4,18 +4,17 @@
 
 #ifndef CS460_PROJECT_1_ENTRANCEGATEGUI_H
 #define CS460_PROJECT_1_ENTRANCEGATEGUI_H
-#include <QGraphicsWidget>
+
+#include <QPointer>
 #include "../../Initialization.h"
 #include "../../Definitions/Identifiers.h"
 #include "../../PMC/PMCInterfaces/IGateInstructionSink.h"
 #include "../Hardware/LedGUI.h"
 #include "../Hardware/SensorGUI.h"
 #include "../Hardware/SpikesGUI.h"
-
 #include "../GUIStructs/GUIStructs.h"
 #include "../PMSGUIInterfaces/IInductionSensorDataSink.h"
 
-#include <QPointer>
 
 class ParkingManagementController;
 
