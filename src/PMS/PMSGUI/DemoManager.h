@@ -52,7 +52,8 @@ public slots: // slots for signals to send to!
 private:
     QGraphicsScene scene;
     QParallelAnimationGroup currAnimation;
-    vector<VehicleGUI*> activeVehicles;
+    // vector<VehicleGUI*> activeVehicles;
+    QVector<QPointer<VehicleGUI>> activeVehicles;
     AvailabilityGUI* availabilityDisplay;
     // InitializationPackage initPackage;
 

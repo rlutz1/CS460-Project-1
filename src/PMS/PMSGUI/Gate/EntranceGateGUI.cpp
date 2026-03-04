@@ -32,33 +32,10 @@ EntranceGateGUI::EntranceGateGUI(QGraphicsScene& scene, InitializationPackage& i
     openGateIndicator(Qt::green),
     closedGateIndicator(Qt::red)
 {
-
-    // led = new LedGUI(
-    // scene,
-    // {.x = wm.x, .y = wm.y, .width = 25, .height = 25, .color = Qt::gray, .zPos = (wm.zPos + 1)}
-    // );
     led->setParentItem(this);
-
-    // initOpenSensor = new SensorGUI(
-    //     scene,
-    //     id.initOpenId,
-    //     {.x = wm.x - wm.width, .y = wm.y, .width = 25, .height = 25, .color = Qt::black, .zPos = (wm.zPos + 1)}
-    // );
     initOpenSensor->setParentItem(this);
-
-    // stayOpenSensor = new SensorGUI(
-    //     scene,
-    //     id.stayOpenId,
-    //     {.x = wm.x + wm.width + (wm.width / 2), .y = wm.y, .width = 25, .height = 25, .color = Qt::black, .zPos = (wm.zPos + 1)}
-    // );
     stayOpenSensor->setParentItem(this);
-
-    // spikes = new SpikesGUI(
-    //     scene,
-    //     {.x = wm.x - wm.width - wm.width, .y = wm.y, .width = 25, .height = 100, .color = Qt::magenta, .zPos = (wm.zPos + 1)}
-    // );
     spikes->setParentItem(this);
-
 
     resize(wm.width, wm.height);
     setZValue(wm.zPos);

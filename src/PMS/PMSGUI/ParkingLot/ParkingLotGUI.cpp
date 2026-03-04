@@ -15,14 +15,6 @@
 #include "../../Initialization.h"
 
 
-#define Y_TOP_LOTS 300
-#define Y_BOTTOM_LOTS (-200)
-#define Y_GATE_CENTER 0
-
-// ParkingLotGUI::~ParkingLotGUI() {
-//     parkingFloors.clear();
-// }
-
 ParkingLotGUI::ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initPackage, WidgetMeta widgetMeta) :
     gate(new GateGUI(
         scene,
@@ -32,12 +24,6 @@ ParkingLotGUI::ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initP
     // set visual data
     resize(wm.width, wm.height);
     setZValue(wm.zPos); // hard coded, needs to be underneath ALL
-
-    // QPointer<GateGUI> gate = new GateGUI(
-    //     scene,
-    //     initPackage,
-    //     {.x = wm.x, .y = wm.y + 150, .width = 300, .height = 300, .color = Qt::darkGray, .zPos = (wm.zPos + 1)}
-    // );
     gate->setParentItem(this);
 
 
@@ -76,22 +62,15 @@ QRectF ParkingLotGUI::boundingRect() const {
 void ParkingLotGUI::paint(QPainter *painter,
     const QStyleOptionGraphicsItem *option,
     QWidget *widget) {
-    // std::cout <<  "painting lot" << std::endl;
-    // painter->setBackground(Qt::transparent);
     painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
     painter->setPen(QPen(Qt::black));
     painter->setBrush(QBrush(wm.color));
-    // painter->setBrush(QBrush(Qt::transparent));
     painter->drawRect(boundingRect());
 }
 
 void ParkingLotGUI::reset() {
     for (QPointer<ParkingFloorGUI> floor: parkingFloors) {
-        if (floor) {
-            floor->reset();
-        }
-
+        floor->reset();
     }
     gate->reset();
-
 }

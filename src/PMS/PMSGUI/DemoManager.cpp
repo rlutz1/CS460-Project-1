@@ -39,15 +39,7 @@ DemoManager::DemoManager(
     QGraphicsView(parent)
 {
     this->setMinimumSize(QSize(width, height));
-    // initScene();
-   //  parkingLot = new ParkingLotGUI(
-   //      scene,
-   //     initPackage,
-   //     {.x = 0, .y = 0, .width = width, .height = height, .color = Qt::darkGray, .zPos = 0}
-   // );
-    // parkingLot->setParent(this);
     scene.addItem(parkingLot);
-
     setScene(&scene);
 } // end constructor
 
@@ -62,7 +54,7 @@ void DemoManager::runChaosDemo() {
 
     for (int i = 0; i < numCars; i++) {
 
-        VehicleGUI* vehicle = new VehicleGUI(
+        QPointer<VehicleGUI> vehicle = new VehicleGUI(
         scene,
         {.x = parkingLot->wm.x, .y = parkingLot->wm.y, .width = 25, .height = 25, .color = Qt::darkMagenta, .zPos = 100},
         {
@@ -87,6 +79,7 @@ void DemoManager::runChaosDemo() {
             ); // run the vehicle at a timing offset
 
         delay += 4000;
+        scene.addItem(vehicle);
         activeVehicles.push_back(vehicle); // add to active vehicles`
         currAnimation.addAnimation(&vehicle->animationGroup); // add to the parallel parent animation
     } // end loop
@@ -99,7 +92,7 @@ void DemoManager::runChaosDemo() {
 void DemoManager::runSimpleDemo() {
     stopDemo(); // clean out whatever's there
 
-    VehicleGUI* vehicle = new VehicleGUI(
+    QPointer<VehicleGUI> vehicle = new VehicleGUI(
             scene,
             {.x = parkingLot->wm.x, .y = parkingLot->wm.y, .width = 25, .height = 25, .color = Qt::darkMagenta, .zPos = 100},
             {
@@ -122,7 +115,7 @@ void DemoManager::runSimpleDemo() {
             this,
             false
             ); // single vehicle
-
+    scene.addItem(vehicle);
     activeVehicles.push_back(vehicle); // add to active vehicles
     // vehicle->animationGroup.setLoopCount(1);// single iteration (this is default)
     currAnimation.addAnimation(&(vehicle->animationGroup)); // get this animation
@@ -134,15 +127,12 @@ void DemoManager::runSimpleDemo() {
 void DemoManager::stopDemo() {
     currAnimation.stop(); // stop the animation (should be controlling with button enables, however)
     // currAnimation.clear(); // clear the vehicle animations, only when dynamically allocated
-    for (VehicleGUI* vehicle : activeVehicles) { // cleanup our end.
-        ((QObject*)vehicle)->deleteLater();
+    for (QPointer<VehicleGUI> vehicle : activeVehicles) { // cleanup our end.
+        vehicle->deleteLater();
     }
     activeVehicles.clear(); // clear out the vector
-    parkingLot->reset();
-    availabilityDisplay->reset();
-    // TODO: reset lot components to initial state.
-    // reset all lot components
-    // reset the availability display
+    parkingLot->reset(); // reset the lot
+    availabilityDisplay->reset(); // reset the avail display
 }
 
 /**
@@ -163,34 +153,6 @@ void DemoManager::initGraphicsMetadata() {
     setRenderHint(QPainter::Antialiasing);
     scene.setBackgroundBrush(Qt::transparent);
     setAttribute(Qt::WA_TranslucentBackground);
-} // end method
-
-/**
- * add all items necessary to the scene of the
- * graphics view.
- */
-void DemoManager::initScene() {
-    // scene.addItem(&parkingLot);
-    // for (ParkingFloorGUI* floor : parkingLot.parkingFloors) {
-    //     scene.addItem(floor);
-    //     for (ParkingSpotGUI* spot : floor->parkingSpots) {
-    //         scene.addItem(spot);
-    //         scene.addItem(spot->led);
-    //         scene.addItem(spot->ultrasonicSensor);
-    //         scene.addItem(spot->weightSensor);
-    //     } // end loop
-    // } // end loop
-    // scene.addItem(&parkingLot.gate);
-    // scene.addItem(&parkingLot.gate.entranceGate);
-    // scene.addItem(&parkingLot.gate.entranceGate.led);
-    // scene.addItem(&parkingLot.gate.entranceGate.initOpenSensor);
-    // scene.addItem(&parkingLot.gate.entranceGate.stayOpenSensor);
-    // scene.addItem(&parkingLot.gate.entranceGate.spikes);
-    // scene.addItem(&parkingLot.gate.exitGate);
-    // scene.addItem(&parkingLot.gate.exitGate.led);
-    // scene.addItem(&parkingLot.gate.exitGate.initOpenSensor);
-    // scene.addItem(&parkingLot.gate.exitGate.stayOpenSensor);
-    // scene.addItem(&parkingLot.gate.exitGate.spikes);
 } // end method
 
 // TODO

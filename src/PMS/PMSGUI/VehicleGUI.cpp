@@ -41,7 +41,6 @@ VehicleGUI::VehicleGUI(
     setZValue(wm.zPos);
 
     initAnimation(animationMeta, chaos);
-    scene.addItem(this);
 }
 
 void VehicleGUI::initSignals() {

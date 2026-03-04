@@ -29,8 +29,6 @@ ParkingFloorGUI::ParkingFloorGUI(QGraphicsScene& scene, InitializationPackage& i
 
 }
 
-
-
 // REQUIRED FOR GRAPHICS ITEM
 QRectF ParkingFloorGUI::boundingRect() const {
     qreal penWidth = 1;
@@ -197,7 +195,7 @@ void ParkingFloorGUI::initGenFloor(QGraphicsScene& scene, InitializationPackage&
 }
 
 void ParkingFloorGUI::reset() {
-    for (ParkingSpotGUI* parkingSpot : parkingSpots) {
+    for (QPointer<ParkingSpotGUI> parkingSpot : parkingSpots) {
         parkingSpot->reset();
     }
 }

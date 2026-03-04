@@ -9,16 +9,14 @@
 #include <QPainter>
 
 SpikesGUI::SpikesGUI(QGraphicsScene& scene, WidgetMeta widgetMeta) :
-    wm(widgetMeta) {
-
+    wm(widgetMeta)
+{
     resize(wm.width, wm.height);
     setZValue(wm.zPos);
 
     QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(this);
     opacityEffect->setOpacity(0.5);
     setGraphicsEffect(opacityEffect);
-
-    // scene.addItem(this);
 }
 
 // REQUIRED FOR GRAPHICS ITEM
@@ -31,11 +29,9 @@ QRectF SpikesGUI::boundingRect() const {
 void SpikesGUI::paint(QPainter *painter,
     const QStyleOptionGraphicsItem *option,
     QWidget *widget) {
-    // painter->setBackground(Qt::transparent);
     painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
     painter->setPen(QPen(Qt::black));
     painter->setBrush(QBrush(wm.color));
-    // painter->setBrush(QBrush(Qt::transparent));
     painter->drawRect(boundingRect());
 }
 
