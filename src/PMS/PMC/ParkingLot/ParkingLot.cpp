@@ -100,16 +100,18 @@ void ParkingLot::notifyFloorStateChanged(SpotType type, ParkingSpotController::S
 
 void ParkingLot::markParkingSpotAvailability(SpotId spotId, int floor, bool available) {
 	// check which floor we will go to:
+	floors[floor - 1]->markParkingSpotAvailability(spotId, available);
 
-	for (auto& floor: floors) {
-		if (floor->id.uniqueId == "floor1") {
-			floor->markParkingSpotAvailability(spotId, available);
-			break;
-		}else if (floor->id.uniqueId == "floor2") {
-			floor->markParkingSpotAvailability(spotId, available);
-			break;
-		}
-	}
+	// commented this out--this was just making it so only first floor was being updated:
+	// for (auto& floor: floors) {
+	// 	if (floor->id.uniqueId == "floor1") {
+	// 		floor->markParkingSpotAvailability(spotId, available);
+	// 		break;
+	// 	} else if (floor->id.uniqueId == "floor2") {
+	// 		floor->markParkingSpotAvailability(spotId, available);
+	// 		break;
+	// 	}
+	// }
 }
 
 
