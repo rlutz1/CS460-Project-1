@@ -51,6 +51,7 @@ public:
 
     void increaseCount(QLabel& count);
     void decreaseCount(QLabel& countLabel);
+    void setStyle();
     void reset();
 
     // IAvailabilityIntructionSink.h

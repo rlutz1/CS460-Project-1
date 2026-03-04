@@ -77,6 +77,9 @@ AvailabilityGUI::AvailabilityGUI(QWidget* parent, InitializationPackage initPack
 
     layout.addWidget(&headerLog, 5, 0);
     layout.addWidget(&log, 5, 1);
+
+    setStyle();
+
 }
 
 void AvailabilityGUI::increaseCount(QLabel& countLabel) {
@@ -219,6 +222,25 @@ int AvailabilityGUI::getLotTotalAvailable() {
     return totalLotAvailability;
 }
 
+// convenience method for changing the style of the widget
+void AvailabilityGUI::setStyle() {
+    QFont serifFont("Times", 12, QFont::Bold);
+    setFont(serifFont);
+    setStyleSheet("background-color: rgb(0, 0, 0); color: rgb(252, 152, 3);");
+
+    // set headers to differentiate visually
+    headerTotalAvail.setStyleSheet("color: rgb(252, 186, 88);");
+    headerFloor1Avail.setStyleSheet("color: rgb(252, 186, 88);");
+    headerFloor2Avail.setStyleSheet("color: rgb(252, 186, 88);");
+    headerLog.setStyleSheet("color: rgb(252, 186, 88);");
+    headerInTransit.setStyleSheet("color: rgb(252, 186, 88);");
+    headerNormalType.setStyleSheet("color: green");
+    headerHandicapType.setStyleSheet("color: blue");
+    headerEvType.setStyleSheet("color: yellow");
+    headerMotorcycleType.setStyleSheet("color: white");
+}
+
+// for visual reset of the widget
 void AvailabilityGUI::reset() {
     // these are for the count updates
     totalAvailNormal.setText(QString::number(initPackage.numbers.totalNormalSpots));
