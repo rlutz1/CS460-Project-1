@@ -48,11 +48,16 @@ public:
 		return id;
 	}
 
-private:
+
+	///////////////////////////// /////////////////////////////
+	void markParkingSpotAvailability(SpotId spotId, bool available);
 	FloorId id;
+	std::vector<std::unique_ptr<ParkingSpotController>> spots;
+
+
+private:
 	ParkingLot& lot;
 	State state;
-	std::vector<std::unique_ptr<ParkingSpotController>> spots;
 	// Contains the available spots per type
 	std::map<SpotType, int> availableCounts;
 

@@ -12,7 +12,7 @@ ParkingManagementController::ParkingManagementController(
 	const IAvailabilityInstructionSink& availPtr,
 	const DemoManager& demoManager
 	)
-	: lot(initPackage),
+	: lot(initPackage, demoManager),
       totalSpots(0),
       vehiclesInside(0),
 	  centralGate(demoManager.parkingLot->gate->entranceGate, demoManager.parkingLot->gate->exitGate),
@@ -67,6 +67,38 @@ void ParkingManagementController::successfulExit() {
 	int remaining = totalSpots - vehiclesInside;
 	availabilityDisplay.updateLogMessage(remaining > 0 ? "LOT OPEN" : "FULL");
 }
+
+void ParkingManagementController::vehicleParked(SpotId spotId) {
+	availabilityDisplay.updateInTransit(false);
+
+	// hardcoded values based on run_demo.cpp constraint of 2 floors.
+	int floorNum;
+	if (spotId.floorId.uniqueId == "floor1") {
+		floorNum = 1;
+	}else if (spotId.floorId.uniqueId == "floor1"){
+		floorNum = 2;
+	}
+	availabilityDisplay.updateAvailabilityTracking(spotId.type, floorNum, false);
+	// signal spotId parking spot to be UNavailable.
+	lot.markParkingSpotAvailability(spotId, floorNum, false); // false === unavailable
+}
+
+void ParkingManagementController::vehicleUnparked(SpotId spotId) {
+	availabilityDisplay.updateInTransit(true);
+
+	// hardcoded values based on run_demo.cpp constraint of 2 floors.
+	int floorNum;
+	if (spotId.floorId.uniqueId == "floor1") {
+		floorNum = 1;
+	}else if (spotId.floorId.uniqueId == "floor1"){
+		floorNum = 2;
+	}
+	availabilityDisplay.updateAvailabilityTracking(spotId.type, floorNum, true);
+	// signal spotId parking spot to be available.
+	lot.markParkingSpotAvailability(spotId, floorNum, true); // true === available
+}
+
+
 
 // This is where the parking spot sensor is handled
 void ParkingManagementController::handleSensorTrigger(const SensorId& sensor, bool detected)

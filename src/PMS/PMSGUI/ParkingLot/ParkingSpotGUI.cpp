@@ -7,6 +7,8 @@
 #include <QGraphicsScene>
 #include <QPainter>
 
+#include "../PMSGUIInterfaces/IParkingSpotSensorDataSink.h"
+
 
 ParkingSpotGUI::ParkingSpotGUI(QGraphicsScene& scene, SpotId spotId, WidgetMeta widgetMeta) :
     spotId(spotId),
@@ -74,4 +76,22 @@ void ParkingSpotGUI::reset() {
     led->reset(availableColor);
     ultrasonicSensor->reset();
     weightSensor->reset();
+}
+
+
+void ParkingSpotGUI::markSpotAvailable() {
+    currColor = availableColor;
+}
+
+void ParkingSpotGUI::markSpotUnavailable() {
+    currColor = unavailableColor;
+}
+
+
+void ParkingSpotGUI::signalVehicleParkedOnSpot() {
+    pmc->vehicleParked(spotId);
+}
+
+void ParkingSpotGUI::signalVehicleLeftParkingSpot() {
+    pmc->vehicleUnparked(spotId);
 }

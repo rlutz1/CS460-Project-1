@@ -9,7 +9,7 @@
 //Added to match call in header file
 ParkingLot::~ParkingLot() = default;
 
-ParkingLot::ParkingLot(const InitializationPackage& initPackage)
+ParkingLot::ParkingLot(const InitializationPackage& initPackage, const DemoManager& demoManager)
 {
 	// This should collect the unique floor IDs from all the spots
 	std::map<std::string, std::unique_ptr<ParkingFloor>> floorMap;
@@ -27,6 +27,9 @@ ParkingLot::ParkingLot(const InitializationPackage& initPackage)
 	{
 		auto& floor = floorMap[spotId.floorId.uniqueId];
 		auto spot = std::make_unique<ParkingSpotController>(spotId, *floor);
+		// TODO: Add the hardware to the corresponding spot from the DemoManager:
+
+
 		floor->addSpot(std::move(spot));
 	}
 
@@ -72,6 +75,24 @@ void ParkingLot::notifyFloorStateChanged(SpotType type, ParkingSpotController::S
 	}
 	updateState();
 }
+
+
+void ParkingLot::markParkingSpotAvailability(SpotId spotId, int floor, bool available) {
+	// check which floor we will go to:
+
+	for (auto& floor: floors) {
+		if (floor->id.uniqueId == "floor1") {
+			floor->markParkingSpotAvailability(spotId, available);
+			break;
+		}else if (floor->id.uniqueId == "floor2") {
+			floor->markParkingSpotAvailability(spotId, available);
+			break;
+		}
+	}
+}
+
+
+
 
 void ParkingLot::updateState()
 {

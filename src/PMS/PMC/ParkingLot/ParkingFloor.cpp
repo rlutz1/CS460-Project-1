@@ -61,6 +61,25 @@ void ParkingFloor::addSpot(std::unique_ptr<ParkingSpotController> spot)
 	spots.push_back(std::move(spot));
 }
 
+
+
+
+///////////////////////////// /////////////////////////////
+void ParkingFloor::markParkingSpotAvailability(SpotId spotId, bool available) {
+	for (auto& parkingSpot: spots ) {
+		bool spotIdsMatch = parkingSpot->id.uniqueId == spotId.uniqueId;
+		if (spotIdsMatch) {
+			parkingSpot->markSpotAvailability(available);
+			break;
+		}
+	}
+}
+
+
+
+
+
+
 void ParkingFloor::updateState()
 {
 	// The floor is FULL if no spots are AVAILABLE, not including the UNAVAILABLE spots

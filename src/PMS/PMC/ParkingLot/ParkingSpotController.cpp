@@ -4,6 +4,7 @@
 
 #include "ParkingSpotController.h"
 #include "ParkingFloor.h"
+#include "../PMCInterfaces/IParkingSpotHardwareSink.h"
 
 // Initializing a ParkingSpotController object
 ParkingSpotController::ParkingSpotController(const SpotId& id, ParkingFloor& floor) : id(id), floor(floor),
@@ -29,6 +30,22 @@ void ParkingSpotController::updateSpotAvailability(const SensorId& sensor, bool 
 	}
 	updateStateFromSensors();
 }
+
+
+
+
+/////////////////////////////////////// ///////////////////////////////////////
+void ParkingSpotController::markSpotAvailability(bool isAvailable) {
+	if (isAvailable) {
+		spotHardware->markSpotAvailable();
+	}else {
+		spotHardware->markSpotUnavailable();
+	}
+}
+
+
+
+
 
 void ParkingSpotController::updateStateFromSensors()
 {
@@ -57,3 +74,5 @@ void ParkingSpotController::forceUnavailable()
 }
 
 // Might need methods for configuring sensors here idkK
+
+

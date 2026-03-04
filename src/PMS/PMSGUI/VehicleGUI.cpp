@@ -19,7 +19,9 @@ VehicleGUI::VehicleGUI(
     WidgetMeta widgetMeta,
     AnimationMeta animationMeta,
     DemoManager* demoManager,
-    bool chaos
+    bool chaos,
+    int floorToParkIn,
+    int parkSpotIndexFromFloor
     ) :
     demoManager(demoManager),
     wm(widgetMeta),
@@ -34,7 +36,9 @@ VehicleGUI::VehicleGUI(
     unpark(this, "pos"),
     approachExitGate(this, "pos"),
     passSecondExitSensor(this, "pos"),
-    exit(this, "pos")
+    exit(this, "pos"),
+    cachedFloorToParkIn(floorToParkIn),
+    cachedParkSpotIndexFromFloor(parkSpotIndexFromFloor)
 {
     resize(wm.width, wm.height);
     setPos(0, animationMeta.yEntryTrack); // careful with this, enure it works every time! can cause issues!
@@ -52,7 +56,19 @@ void VehicleGUI::initSignals() {
     connect(&passSecondEntrySensor, &QPropertyAnimation::finished,
         demoManager->parkingLot->gate->entranceGate, &EntranceGateGUI::vehiclePassedSecondEntranceGateSensor);
 
-    // TODO: parking, unparking signals
+
+    // initialize the vehicle parking in a spot ->vehicleParked signal
+    connect(&park, &QPropertyAnimation::finished,
+        demoManager->parkingLot->parkingFloors[cachedFloorToParkIn]
+        ->parkingSpots[cachedParkSpotIndexFromFloor], &ParkingSpotGUI::signalVehicleParkedOnSpot);
+    // initialize the vehicle leaving in a spot -> vehicleLeft signal
+    connect(&unpark, &QPropertyAnimation::finished,
+        demoManager->parkingLot->parkingFloors[cachedFloorToParkIn]
+        ->parkingSpots[cachedParkSpotIndexFromFloor], &ParkingSpotGUI::signalVehicleLeftParkingSpot);
+
+    // initialize the vehicle left a spot vehicleUnparked signal
+    // connect(&unpark, &QPropertyAnimation::finished,
+    //     );
 
     // initialize the open exit gate signal connection
     connect(&approachExitGate, &QPropertyAnimation::finished,

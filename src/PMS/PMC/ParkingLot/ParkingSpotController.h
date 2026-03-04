@@ -7,6 +7,7 @@
 
 #include "../../Definitions/Identifiers.h"
 
+class IParkingSpotHardwareSink;
 // Hopefully will be a useful declaration for callback to floor
 class ParkingFloor;
 
@@ -51,8 +52,12 @@ public:
 		return id;
 	}
 
-private:
+
+	/////////////////////////////////////// ///////////////////////////////////////
+	void markSpotAvailability(bool isAvailable);
 	SpotId id;
+	IParkingSpotHardwareSink* spotHardware;
+private:
 	State state;
 	bool weightDetected;
 	bool ultrasonicDetected;

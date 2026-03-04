@@ -75,7 +75,9 @@ void DemoManager::runChaosDemo() {
             .parkTime = 1000
             },
             this,
-            true
+            true,
+            i % 2,
+            i
             ); // run the vehicle at a timing offset
 
         delay += 4000;
@@ -113,7 +115,9 @@ void DemoManager::runSimpleDemo() {
                 .parkTime = 1000
             },
             this,
-            false
+            false,
+            1,
+            1
             ); // single vehicle
     scene.addItem(vehicle);
     activeVehicles.push_back(vehicle); // add to active vehicles
@@ -144,7 +148,14 @@ void DemoManager::addSignalReceiver(std::shared_ptr<ParkingManagementController>
     // std::shared_ptr<ParkingManagementController> ptr(pmc);
     parkingLot->gate->entranceGate->pmc = pmc;
     parkingLot->gate->exitGate->pmc = pmc;
+
+    for (auto& floor: parkingLot->parkingFloors) {
+        for (auto& parkingSpot: floor->parkingSpots) {
+            parkingSpot->pmc = pmc;
+        }
+    }
 } // end method
+
 
 /**
  * metadata things for smoothing animations/painting

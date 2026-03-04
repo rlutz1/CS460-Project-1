@@ -10,6 +10,7 @@
 #include <QPropertyAnimation>
 
 #include "DemoManager.h"
+#include "../../PMS/Definitions/Identifiers.h"
 #include "GUIStructs/GUIStructs.h"
 #include <QPauseAnimation>
 class DemoManager;
@@ -45,7 +46,9 @@ public:
         WidgetMeta widgetMeta,
         AnimationMeta animMeta,
         DemoManager* demoManager,
-        bool chaos
+        bool chaos,
+        int floorToParkIn,
+        int parkSpotIndexFromFloor
         );
 
     DemoManager* demoManager;
@@ -62,6 +65,10 @@ public:
     QPropertyAnimation approachExitGate;
     QPropertyAnimation passSecondExitSensor;
     QPropertyAnimation exit;
+
+    // Cached location where parking spot is parked in during animation.
+    int cachedFloorToParkIn;
+    int cachedParkSpotIndexFromFloor;
 protected:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
