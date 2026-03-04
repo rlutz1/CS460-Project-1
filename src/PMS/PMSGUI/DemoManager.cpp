@@ -75,7 +75,9 @@ void DemoManager::runChaosDemo() {
             .parkTime = 1000
             },
             this,
-            true
+            true,
+            i % 2,
+            i
             ); // run the vehicle at a timing offset
 
         delay += 4000;
@@ -112,7 +114,9 @@ void DemoManager::runSimpleDemo() {
                 .parkTime = 1000
             },
             this,
-            false
+            false,
+            1,
+            1
             ); // single vehicle
 
     activeVehicles.push_back(vehicle); // add to active vehicles
