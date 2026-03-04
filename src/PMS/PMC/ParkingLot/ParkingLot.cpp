@@ -9,7 +9,7 @@
 //Added to match call in header file
 ParkingLot::~ParkingLot() = default;
 
-ParkingLot::ParkingLot(const InitializationPackage& initPackage)
+ParkingLot::ParkingLot(const InitializationPackage& initPackage, const DemoManager& demoManager)
 {
 	// This should collect the unique floor IDs from all the spots
 	std::map<std::string, std::unique_ptr<ParkingFloor>> floorMap;
@@ -27,6 +27,9 @@ ParkingLot::ParkingLot(const InitializationPackage& initPackage)
 	{
 		auto& floor = floorMap[spotId.floorId.uniqueId];
 		auto spot = std::make_unique<ParkingSpotController>(spotId, *floor);
+		// TODO: Add the hardware to the corresponding spot from the DemoManager:
+
+
 		floor->addSpot(std::move(spot));
 	}
 

@@ -12,7 +12,7 @@ ParkingManagementController::ParkingManagementController(
 	const IAvailabilityInstructionSink& availPtr,
 	const DemoManager& demoManager
 	)
-	: lot(initPackage),
+	: lot(initPackage, demoManager),
       totalSpots(0),
       vehiclesInside(0),
 	  centralGate(demoManager.parkingLot->gate->entranceGate, demoManager.parkingLot->gate->exitGate),

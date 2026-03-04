@@ -12,6 +12,7 @@
 #include <map>
 #include <memory>
 
+class DemoManager;
 class ParkingSpotController;
 
 class ParkingFloor;
@@ -27,7 +28,8 @@ public:
 	};
 
 	// This constructor should build entire lot from initialization package
-	ParkingLot(const InitializationPackage& initPackage);
+	ParkingLot(const InitializationPackage &initPackage, const DemoManager &demoManager) {
+	}
 
 	// This should get total available spots of a given type across all floors
 	int getCurrentAvailableCount(SpotType type) const;
