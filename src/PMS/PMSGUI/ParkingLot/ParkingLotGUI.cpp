@@ -24,20 +24,20 @@
 // }
 
 ParkingLotGUI::ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initPackage, WidgetMeta widgetMeta) :
-    // gate(
-    //     scene,
-    //     initPackage,
-    //     {.x = wm.x, .y = wm.y + 150, .width = 300, .height = 300, .color = Qt::darkGray, .zPos = (wm.zPos + 1)}),
+    gate(new GateGUI(
+        scene,
+        initPackage,
+        {.x = wm.x, .y = wm.y + 150, .width = 300, .height = 300, .color = Qt::darkGray, .zPos = (wm.zPos + 1)})),
     wm(widgetMeta) {
     // set visual data
     resize(wm.width, wm.height);
     setZValue(wm.zPos); // hard coded, needs to be underneath ALL
 
-    QPointer<GateGUI> gate = new GateGUI(
-        scene,
-        initPackage,
-        {.x = wm.x, .y = wm.y + 150, .width = 300, .height = 300, .color = Qt::darkGray, .zPos = (wm.zPos + 1)}
-    );
+    // QPointer<GateGUI> gate = new GateGUI(
+    //     scene,
+    //     initPackage,
+    //     {.x = wm.x, .y = wm.y + 150, .width = 300, .height = 300, .color = Qt::darkGray, .zPos = (wm.zPos + 1)}
+    // );
     gate->setParentItem(this);
 
 

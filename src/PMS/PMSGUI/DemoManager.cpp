@@ -29,23 +29,23 @@ DemoManager::DemoManager(
     int height,
     AvailabilityGUI& availabilityDisplay
     ) :
-    // parkingLot(
-    //     scene,
-    //     initPackage,
-    //     {.x = 0, .y = 0, .width = width, .height = height, .color = Qt::darkGray, .zPos = 0}
-    //     ),
+    parkingLot( new ParkingLotGUI(
+        scene,
+        initPackage,
+        {.x = 0, .y = 0, .width = width, .height = height, .color = Qt::darkGray, .zPos = 0}
+        )),
     availabilityDisplay(&availabilityDisplay),
     // initPackage(initPackage),
     QGraphicsView(parent)
 {
     this->setMinimumSize(QSize(width, height));
     // initScene();
-    parkingLot = new ParkingLotGUI(
-        scene,
-       initPackage,
-       {.x = 0, .y = 0, .width = width, .height = height, .color = Qt::darkGray, .zPos = 0}
-   );
-    // parkingLot.setParent(this);
+   //  parkingLot = new ParkingLotGUI(
+   //      scene,
+   //     initPackage,
+   //     {.x = 0, .y = 0, .width = width, .height = height, .color = Qt::darkGray, .zPos = 0}
+   // );
+    // parkingLot->setParent(this);
     scene.addItem(parkingLot);
 
     setScene(&scene);
@@ -149,11 +149,11 @@ void DemoManager::stopDemo() {
  * add the pmc receiver to all sensors that emit signals during process.
  * @param pmc top level pmc to receive signals from sensors
  */
-void DemoManager::addSignalReceiver(ParkingManagementController *pmc) const {
+void DemoManager::addSignalReceiver(ParkingManagementController* pmc) const {
 
     // std::shared_ptr<ParkingManagementController> ptr(pmc);
-    // parkingLot->gate->entranceGate->addSignalReceiver(ptr);
-    // parkingLot->gate->exitGate->addSignalReceiver(ptr);
+    parkingLot->gate->entranceGate->pmc = pmc;
+    parkingLot->gate->exitGate->pmc = pmc;
 } // end method
 
 /**

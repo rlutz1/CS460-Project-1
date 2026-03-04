@@ -36,8 +36,9 @@ public:
     QPointer<SensorGUI> initOpenSensor;
     QPointer<SensorGUI> stayOpenSensor;
     QPointer<SpikesGUI> spikes;
+    IInductionSensorDataSink* pmc;
 
-    void addSignalReceiver(std::shared_ptr<IInductionSensorDataSink> pmc);
+    void addSignalReceiver(IInductionSensorDataSink* pmc);
     void reset();
 
     // IGateInstructionSink
@@ -52,7 +53,7 @@ protected:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
            QWidget *widget) override;
-    std::shared_ptr<IInductionSensorDataSink> pmc;
+
 };
 
 

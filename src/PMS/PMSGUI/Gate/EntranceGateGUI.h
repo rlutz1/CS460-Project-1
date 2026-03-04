@@ -36,7 +36,9 @@ public:
     QPointer<SensorGUI> stayOpenSensor;
     QPointer<SpikesGUI> spikes;
 
-    void addSignalReceiver(std::shared_ptr<IInductionSensorDataSink> pmc);
+    IInductionSensorDataSink* pmc;
+
+    void addSignalReceiver(IInductionSensorDataSink* pmc);
     void reset();
 
     // IGateInstructionSink
@@ -54,7 +56,7 @@ protected:
            QWidget *widget) override;
 
 private:
-    std::shared_ptr<IInductionSensorDataSink> pmc;
+
 };
 
 

@@ -11,35 +11,36 @@
 
 
 GateGUI::GateGUI(QGraphicsScene& scene, InitializationPackage& initPackage, WidgetMeta widgetMeta) :
-    // entranceGate(
-    //     scene,
-    //     initPackage,
-    //     initPackage.entranceGateId,
-    //     {.x = wm.x + 150, .y = wm.y + 200, .width = 50, .height = 100, .color = Qt::green, .zPos = (wm.zPos + 1)}),
-    // exitGate(scene,
-    //     initPackage,
-    //     initPackage.exitGateId,
-    //     {.x = wm.x + 150, .y = wm.y, .width = 50, .height = 100, .color = Qt::green, .zPos = (wm.zPos + 1)}),
+    entranceGate( new EntranceGateGUI(
+        scene,
+        initPackage,
+        initPackage.entranceGateId,
+        {.x = wm.x + 150, .y = wm.y + 200, .width = 50, .height = 100, .color = Qt::green, .zPos = (wm.zPos + 1)})),
+    exitGate( new ExitGateGUI(
+        scene,
+        initPackage,
+        initPackage.exitGateId,
+        {.x = wm.x + 150, .y = wm.y, .width = 50, .height = 100, .color = Qt::green, .zPos = (wm.zPos + 1)})),
     wm(widgetMeta)
     {
     resize(wm.width, wm.height);
     setZValue(wm.zPos);
 
-    entranceGate = new EntranceGateGUI(
-        scene,
-        initPackage,
-        initPackage.entranceGateId,
-        {.x = wm.x + 150, .y = wm.y + 200, .width = 50, .height = 100, .color = Qt::green, .zPos = (wm.zPos + 1)}
-    );
-
+    // entranceGate = new EntranceGateGUI(
+    //     scene,
+    //     initPackage,
+    //     initPackage.entranceGateId,
+    //     {.x = wm.x + 150, .y = wm.y + 200, .width = 50, .height = 100, .color = Qt::green, .zPos = (wm.zPos + 1)}
+    // );
+    //
     entranceGate->setParentItem(this);
-
-    exitGate = new ExitGateGUI(
-        scene,
-        initPackage,
-        initPackage.exitGateId,
-        {.x = wm.x + 150, .y = wm.y, .width = 50, .height = 100, .color = Qt::green, .zPos = (wm.zPos + 1)}
-    );
+    //
+    // exitGate = new ExitGateGUI(
+    //     scene,
+    //     initPackage,
+    //     initPackage.exitGateId,
+    //     {.x = wm.x + 150, .y = wm.y, .width = 50, .height = 100, .color = Qt::green, .zPos = (wm.zPos + 1)}
+    // );
 
     exitGate->setParentItem(this);
 
