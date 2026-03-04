@@ -11,14 +11,16 @@
 SensorGUI::SensorGUI(QGraphicsScene& scene, SensorId id, WidgetMeta widgetMeta) :
     sensorId(id),
     wm(widgetMeta)
+    // triggered(false)
 {
     resize(wm.width, wm.height);
     setZValue(wm.zPos);
 }
 
-TriggerPack SensorGUI::trigger() {
+void SensorGUI::trigger() {
     std::cout << "trigger" << std::endl;
-    return{};
+    // triggered = !triggered;
+    emit triggerSend(); // todo: this should ideally send through the triggered bool
 }
 
 // REQUIRED FOR GRAPHICS ITEM

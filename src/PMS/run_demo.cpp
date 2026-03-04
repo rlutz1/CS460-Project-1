@@ -140,10 +140,12 @@ InitializationPackage genInitPackage() {
 GateId initGateId(GateType type) {
     if (type == ENTRANCE) {
         SensorId firstSensor {
-            .uniqueId = "entranceGateInitOpen"
+            .uniqueId = "entranceGateInitOpen",
+            .parentId = "entranceGate"
         };
         SensorId secondSensor {
-            .uniqueId = "entranceGateStayOpen"
+            .uniqueId = "entranceGateStayOpen",
+            .parentId = "entranceGate"
         };
         return GateId {
             .uniqueId = "entranceGate",
@@ -153,10 +155,12 @@ GateId initGateId(GateType type) {
         };
     } else {
         SensorId firstSensor {
-            .uniqueId = "exitGateInitOpen"
+            .uniqueId = "exitGateInitOpen",
+            .parentId = "exitGate"
         };
         SensorId secondSensor {
-            .uniqueId = "exitGateStayOpen"
+            .uniqueId = "exitGateStayOpen",
+            .parentId = "exitGate"
         };
         return GateId {
             .uniqueId = "exitGate",
@@ -215,8 +219,8 @@ void initSpotIterator
               .uniqueId = spotId,
               .type = type,
               .floorId = floorId,
-              .ultrasonicId = SensorId {.uniqueId = "ultrasonic", .parentSpotId = spotId},
-              .weightId = SensorId {.uniqueId = "weight", .parentSpotId = spotId}
+              .ultrasonicId = SensorId {.uniqueId = "ultrasonic", .parentId = spotId},
+              .weightId = SensorId {.uniqueId = "weight", .parentId = spotId}
           }
         );
     }

@@ -48,13 +48,21 @@ VehicleGUI::VehicleGUI(
 }
 
 void VehicleGUI::initSignals() {
+    // // initialize the open entry gate signal connection
+    // connect(&approachEntryGate, &QPropertyAnimation::finished,
+    //    demoManager->parkingLot->gate->entranceGate, &EntranceGateGUI::vehicleOnEntranceGateInductionSensor);
+    //
+    // // initialize the vehicle has passed through the entry gate successfully signal
+    // connect(&passSecondEntrySensor, &QPropertyAnimation::finished,
+    //     demoManager->parkingLot->gate->entranceGate, &EntranceGateGUI::vehiclePassedSecondEntranceGateSensor);
+
     // initialize the open entry gate signal connection
     connect(&approachEntryGate, &QPropertyAnimation::finished,
-       demoManager->parkingLot->gate->entranceGate, &EntranceGateGUI::vehicleOnEntranceGateInductionSensor);
+       demoManager->parkingLot->gate->entranceGate->initOpenSensor, &SensorGUI::trigger);
 
     // initialize the vehicle has passed through the entry gate successfully signal
     connect(&passSecondEntrySensor, &QPropertyAnimation::finished,
-        demoManager->parkingLot->gate->entranceGate, &EntranceGateGUI::vehiclePassedSecondEntranceGateSensor);
+        demoManager->parkingLot->gate->entranceGate->stayOpenSensor, &SensorGUI::trigger);
 
     // initialize the vehicle parking in a spot ->vehicleParked signal
     connect(&park, &QPropertyAnimation::finished,

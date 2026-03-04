@@ -30,7 +30,7 @@ struct FloorId {
 // a sensor identifier
 struct SensorId {
     string uniqueId;
-    string parentSpotId;
+    string parentId;
 };
 
 // a spot identifier
