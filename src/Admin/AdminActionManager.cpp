@@ -44,6 +44,7 @@ void AdminActionManager::handleLogout()
         QMessageBox::Yes | QMessageBox::No);
     if (response == QMessageBox::Yes)
     {
+        emit logoutSignal();
         close();
     }
 }

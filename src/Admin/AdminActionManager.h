@@ -11,7 +11,9 @@ class AdminActionManager : public QMainWindow{
 public:
     explicit AdminActionManager(QWidget *parent = 0);
     QString optionSelected() {return options->currentText();};
-    bool canLogout() const {return logout;};
+
+signals:
+    void logoutSignal();
 
 private slots:
     void handleAvailability();

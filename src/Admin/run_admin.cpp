@@ -13,6 +13,7 @@ int run_admin(int argc, char *argv[]) {
 
     AdminUserInterface userInterface;
     userInterface.show();
+
     a.exec();
 
     if (!userInterface.isLoginSuccessful())
