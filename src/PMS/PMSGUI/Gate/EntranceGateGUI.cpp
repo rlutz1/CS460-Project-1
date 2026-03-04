@@ -8,45 +8,73 @@
 #include <QGraphicsOpacityEffect> // only used in this class so far.
 
 EntranceGateGUI::EntranceGateGUI(QGraphicsScene& scene, InitializationPackage& initPackage, GateId id, WidgetMeta widgetMeta) :
-    led(
-        scene,
-        {.x = wm.x, .y = wm.y, .width = 25, .height = 25, .color = Qt::gray, .zPos = (wm.zPos + 1)}
-        ),
-    initOpenSensor(
-        scene,
-        id.initOpenId,
-        {.x = wm.x - wm.width, .y = wm.y, .width = 25, .height = 25, .color = Qt::black, .zPos = (wm.zPos + 1)}
-        ),
-    stayOpenSensor(
-        scene,
-        id.stayOpenId,
-        {.x = wm.x + wm.width + (wm.width / 2), .y = wm.y, .width = 25, .height = 25, .color = Qt::black, .zPos = (wm.zPos + 1)}
-        ),
-    spikes(
-        scene,
-        {.x = wm.x - wm.width - wm.width, .y = wm.y, .width = 25, .height = 100, .color = Qt::magenta, .zPos = (wm.zPos + 1)}
-        ),
+    // led(
+    //     scene,
+    //     {.x = wm.x, .y = wm.y, .width = 25, .height = 25, .color = Qt::gray, .zPos = (wm.zPos + 1)}
+    //     ),
+    // initOpenSensor(
+    //     scene,
+    //     id.initOpenId,
+    //     {.x = wm.x - wm.width, .y = wm.y, .width = 25, .height = 25, .color = Qt::black, .zPos = (wm.zPos + 1)}
+    //     ),
+    // stayOpenSensor(
+    //     scene,
+    //     id.stayOpenId,
+    //     {.x = wm.x + wm.width + (wm.width / 2), .y = wm.y, .width = 25, .height = 25, .color = Qt::black, .zPos = (wm.zPos + 1)}
+    //     ),
+    // spikes(
+    //     scene,
+    //     {.x = wm.x - wm.width - wm.width, .y = wm.y, .width = 25, .height = 100, .color = Qt::magenta, .zPos = (wm.zPos + 1)}
+    //     ),
     id(id),
     wm(widgetMeta),
     currColor(Qt::red),
     openGateIndicator(Qt::green),
     closedGateIndicator(Qt::red)
 {
+
+    led = new LedGUI(
+    scene,
+    {.x = wm.x, .y = wm.y, .width = 25, .height = 25, .color = Qt::gray, .zPos = (wm.zPos + 1)}
+    );
+    led->setParentItem(this);
+
+    initOpenSensor = new SensorGUI(
+        scene,
+        id.initOpenId,
+        {.x = wm.x - wm.width, .y = wm.y, .width = 25, .height = 25, .color = Qt::black, .zPos = (wm.zPos + 1)}
+    );
+    initOpenSensor->setParentItem(this);
+
+    stayOpenSensor = new SensorGUI(
+        scene,
+        id.stayOpenId,
+        {.x = wm.x + wm.width + (wm.width / 2), .y = wm.y, .width = 25, .height = 25, .color = Qt::black, .zPos = (wm.zPos + 1)}
+    );
+    stayOpenSensor->setParentItem(this);
+
+    spikes = new SpikesGUI(
+        scene,
+        {.x = wm.x - wm.width - wm.width, .y = wm.y, .width = 25, .height = 100, .color = Qt::magenta, .zPos = (wm.zPos + 1)}
+    );
+    spikes->setParentItem(this);
+
+
     resize(wm.width, wm.height);
     setZValue(wm.zPos);
 }
 
-void EntranceGateGUI::addSignalReceiver(IInductionSensorDataSink* receiver) {
-    pmc = receiver;
+void EntranceGateGUI::addSignalReceiver(std::shared_ptr<IInductionSensorDataSink> pmc) {
+    this->pmc = pmc;
 }
 
 void EntranceGateGUI::signalGateClose() {
     // PMS said to lower spikes :
     // TODO: verify that opacity is the way to show that spikes are raised/lowered.
     // opacityEffect should last as long as `spikes` is alives
-    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(&spikes);
+    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(spikes);
     opacityEffect->setOpacity(0.5);
-    spikes.setGraphicsEffect(opacityEffect);
+    spikes->setGraphicsEffect(opacityEffect);
 
     // PMS said to close gate:
 
@@ -61,9 +89,9 @@ void EntranceGateGUI::signalGateOpen() {
     // PMS said to raise spikes:
     // TODO: verify that opacity is the way to show that spikes are raised/lowered.
     // opacityEffect should last as long as `spikes` is alives
-    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(&spikes);
+    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(spikes);
     opacityEffect->setOpacity(1);
-    spikes.setGraphicsEffect(opacityEffect);
+    spikes->setGraphicsEffect(opacityEffect);
     // PMS said to open gate:
     currColor = openGateIndicator;
     update();
@@ -110,5 +138,5 @@ void EntranceGateGUI::paint(QPainter *painter,
 void EntranceGateGUI::reset() {
     currColor = closedGateIndicator;
     update();
-    spikes.reset();
+    spikes->reset();
 }

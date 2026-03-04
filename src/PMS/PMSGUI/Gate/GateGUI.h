@@ -11,6 +11,7 @@
 #include "../../Definitions/Identifiers.h"
 #include "../GUIStructs/GUIStructs.h"
 #include <QGraphicsScene>
+#include <QPointer>
 
 class GateGUI : public QGraphicsWidget {
     Q_OBJECT;
@@ -19,8 +20,8 @@ public:
     GateGUI(QGraphicsScene& scene, InitializationPackage& initPackage, WidgetMeta widgetMeta);
 
     WidgetMeta wm;
-    EntranceGateGUI entranceGate;
-    ExitGateGUI exitGate;
+    QPointer<EntranceGateGUI> entranceGate;
+    QPointer<ExitGateGUI> exitGate;
 
     void reset();
 

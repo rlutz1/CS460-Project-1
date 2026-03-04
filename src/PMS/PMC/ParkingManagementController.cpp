@@ -15,7 +15,7 @@ ParkingManagementController::ParkingManagementController(
 	: lot(initPackage),
       totalSpots(0),
       vehiclesInside(0),
-	  centralGate((IGateInstructionSink*) &(demoManager.parkingLot.gate.entranceGate), (IGateInstructionSink*) &(demoManager.parkingLot.gate.exitGate)),
+	  centralGate((IGateInstructionSink*) &(demoManager.parkingLot->gate->entranceGate), (IGateInstructionSink*) &(demoManager.parkingLot->gate->exitGate)),
       availabilityDisplay((IAvailabilityInstructionSink*) &availPtr)
 {
 	// This should calculate the total spots from the initialization numbers

@@ -51,8 +51,9 @@ ParkingSpotGUI::ParkingSpotGUI(QGraphicsScene& scene, SpotId spotId, WidgetMeta 
         spotId.weightId,
         {.x = wm.x + (wm.width / 2) - 5, .y = wm.y + wm.height - 10, .width = 10, .height = 10, .color = Qt::black, .zPos = (widgetMeta.zPos + 1)}
         );
-    // scene.addItem((QGraphicsWidget*)&led);
-    // scene.addItem(this);
+    led->setParentItem(this);
+    ultrasonicSensor->setParentItem(this);
+    weightSensor->setParentItem(this);
 
 }
 

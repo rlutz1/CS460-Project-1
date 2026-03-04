@@ -29,17 +29,25 @@ DemoManager::DemoManager(
     int height,
     AvailabilityGUI& availabilityDisplay
     ) :
-    parkingLot(
-        scene,
-        initPackage,
-        {.x = 0, .y = 0, .width = width, .height = height, .color = Qt::darkGray, .zPos = 0}
-        ),
+    // parkingLot(
+    //     scene,
+    //     initPackage,
+    //     {.x = 0, .y = 0, .width = width, .height = height, .color = Qt::darkGray, .zPos = 0}
+    //     ),
     availabilityDisplay(&availabilityDisplay),
     // initPackage(initPackage),
     QGraphicsView(parent)
 {
     this->setMinimumSize(QSize(width, height));
-    initScene();
+    // initScene();
+    parkingLot = new ParkingLotGUI(
+        scene,
+       initPackage,
+       {.x = 0, .y = 0, .width = width, .height = height, .color = Qt::darkGray, .zPos = 0}
+   );
+    // parkingLot.setParent(this);
+    scene.addItem(parkingLot);
+
     setScene(&scene);
 } // end constructor
 
@@ -56,20 +64,20 @@ void DemoManager::runChaosDemo() {
 
         VehicleGUI* vehicle = new VehicleGUI(
         scene,
-        {.x = parkingLot.wm.x, .y = parkingLot.wm.y, .width = 25, .height = 25, .color = Qt::darkMagenta, .zPos = 100},
+        {.x = parkingLot->wm.x, .y = parkingLot->wm.y, .width = 25, .height = 25, .color = Qt::darkMagenta, .zPos = 100},
         {
             .entryDelay = delay,
             .movementType = QEasingCurve::OutCubic,
             .approachGateTime = 1000,
             .throughGateTime = 1000,
-            .xFirstEntryGateSensor = parkingLot.gate.entranceGate.initOpenSensor.wm.x + 25,
-            .xSecondEntryGateSensor = parkingLot.gate.entranceGate.stayOpenSensor.wm.x + 25,
-            .xFirstExitGateSensor = parkingLot.gate.exitGate.initOpenSensor.wm.x - 25,
-            .xSecondExitGateSensor = parkingLot.gate.exitGate.stayOpenSensor.wm.x - 25,
-            .yEntryTrack = parkingLot.gate.entranceGate.wm.y + 50,
-            .yExitTrack = parkingLot.gate.exitGate.wm.y + 50,
-            .xSpot = parkingLot.parkingFloors[i % 2]->parkingSpots[i]->wm.x + 12, // NOTE: not maleable to num parking spots!
-            .ySpot = parkingLot.parkingFloors[i % 2]->parkingSpots[i]->wm.y + 40,
+            .xFirstEntryGateSensor = parkingLot->gate->entranceGate->initOpenSensor->wm.x + 25,
+            .xSecondEntryGateSensor = parkingLot->gate->entranceGate->stayOpenSensor->wm.x + 25,
+            .xFirstExitGateSensor = parkingLot->gate->exitGate->initOpenSensor->wm.x - 25,
+            .xSecondExitGateSensor = parkingLot->gate->exitGate->stayOpenSensor->wm.x - 25,
+            .yEntryTrack = parkingLot->gate->entranceGate->wm.y + 50,
+            .yExitTrack = parkingLot->gate->exitGate->wm.y + 50,
+            .xSpot = parkingLot->parkingFloors[i % 2]->parkingSpots[i]->wm.x + 12, // NOTE: not maleable to num parking spots!
+            .ySpot = parkingLot->parkingFloors[i % 2]->parkingSpots[i]->wm.y + 40,
             .generalMovementTime = 2000,
             .parkPauseTime = 4000,
             .parkTime = 1000
@@ -93,20 +101,20 @@ void DemoManager::runSimpleDemo() {
 
     VehicleGUI* vehicle = new VehicleGUI(
             scene,
-            {.x = parkingLot.wm.x, .y = parkingLot.wm.y, .width = 25, .height = 25, .color = Qt::darkMagenta, .zPos = 100},
+            {.x = parkingLot->wm.x, .y = parkingLot->wm.y, .width = 25, .height = 25, .color = Qt::darkMagenta, .zPos = 100},
             {
                 .entryDelay = 1000,
                 .movementType = QEasingCurve::OutCubic,
                 .approachGateTime = 1000,
                 .throughGateTime = 1000,
-                .xFirstEntryGateSensor = parkingLot.gate.entranceGate.initOpenSensor.wm.x + 25,
-                .xSecondEntryGateSensor = parkingLot.gate.entranceGate.stayOpenSensor.wm.x + 25,
-                .xFirstExitGateSensor = parkingLot.gate.exitGate.initOpenSensor.wm.x - 25,
-                .xSecondExitGateSensor = parkingLot.gate.exitGate.stayOpenSensor.wm.x - 25,
-                .yEntryTrack = parkingLot.gate.entranceGate.wm.y + 50,
-                .yExitTrack = parkingLot.gate.exitGate.wm.y + 50,
-                .xSpot = parkingLot.parkingFloors[1]->parkingSpots[1]->wm.x + 12,
-                .ySpot = parkingLot.parkingFloors[1]->parkingSpots[1]->wm.y + 40,
+                .xFirstEntryGateSensor = parkingLot->gate->entranceGate->initOpenSensor->wm.x + 25,
+                .xSecondEntryGateSensor = parkingLot->gate->entranceGate->stayOpenSensor->wm.x + 25,
+                .xFirstExitGateSensor = parkingLot->gate->exitGate->initOpenSensor->wm.x - 25,
+                .xSecondExitGateSensor = parkingLot->gate->exitGate->stayOpenSensor->wm.x - 25,
+                .yEntryTrack = parkingLot->gate->entranceGate->wm.y + 50,
+                .yExitTrack = parkingLot->gate->exitGate->wm.y + 50,
+                .xSpot = parkingLot->parkingFloors[1]->parkingSpots[1]->wm.x + 12,
+                .ySpot = parkingLot->parkingFloors[1]->parkingSpots[1]->wm.y + 40,
                 .generalMovementTime = 2000,
                 .parkPauseTime = 1000,
                 .parkTime = 1000
@@ -130,7 +138,7 @@ void DemoManager::stopDemo() {
         ((QObject*)vehicle)->deleteLater();
     }
     activeVehicles.clear(); // clear out the vector
-    parkingLot.reset();
+    parkingLot->reset();
     availabilityDisplay->reset();
     // TODO: reset lot components to initial state.
     // reset all lot components
@@ -141,9 +149,11 @@ void DemoManager::stopDemo() {
  * add the pmc receiver to all sensors that emit signals during process.
  * @param pmc top level pmc to receive signals from sensors
  */
-void DemoManager::addSignalReceiver(ParkingManagementController *pmc) {
-    parkingLot.gate.entranceGate.addSignalReceiver(pmc);
-    parkingLot.gate.exitGate.addSignalReceiver(pmc);
+void DemoManager::addSignalReceiver(ParkingManagementController *pmc) const {
+
+    // std::shared_ptr<ParkingManagementController> ptr(pmc);
+    // parkingLot->gate->entranceGate->addSignalReceiver(ptr);
+    // parkingLot->gate->exitGate->addSignalReceiver(ptr);
 } // end method
 
 /**
@@ -160,27 +170,27 @@ void DemoManager::initGraphicsMetadata() {
  * graphics view.
  */
 void DemoManager::initScene() {
-    scene.addItem(&parkingLot);
-    for (ParkingFloorGUI* floor : parkingLot.parkingFloors) {
-        scene.addItem(floor);
-        for (ParkingSpotGUI* spot : floor->parkingSpots) {
-            scene.addItem(spot);
-            scene.addItem(spot->led);
-            scene.addItem(spot->ultrasonicSensor);
-            scene.addItem(spot->weightSensor);
-        } // end loop
-    } // end loop
-    scene.addItem(&parkingLot.gate);
-    scene.addItem(&parkingLot.gate.entranceGate);
-    scene.addItem(&parkingLot.gate.entranceGate.led);
-    scene.addItem(&parkingLot.gate.entranceGate.initOpenSensor);
-    scene.addItem(&parkingLot.gate.entranceGate.stayOpenSensor);
-    scene.addItem(&parkingLot.gate.entranceGate.spikes);
-    scene.addItem(&parkingLot.gate.exitGate);
-    scene.addItem(&parkingLot.gate.exitGate.led);
-    scene.addItem(&parkingLot.gate.exitGate.initOpenSensor);
-    scene.addItem(&parkingLot.gate.exitGate.stayOpenSensor);
-    scene.addItem(&parkingLot.gate.exitGate.spikes);
+    // scene.addItem(&parkingLot);
+    // for (ParkingFloorGUI* floor : parkingLot.parkingFloors) {
+    //     scene.addItem(floor);
+    //     for (ParkingSpotGUI* spot : floor->parkingSpots) {
+    //         scene.addItem(spot);
+    //         scene.addItem(spot->led);
+    //         scene.addItem(spot->ultrasonicSensor);
+    //         scene.addItem(spot->weightSensor);
+    //     } // end loop
+    // } // end loop
+    // scene.addItem(&parkingLot.gate);
+    // scene.addItem(&parkingLot.gate.entranceGate);
+    // scene.addItem(&parkingLot.gate.entranceGate.led);
+    // scene.addItem(&parkingLot.gate.entranceGate.initOpenSensor);
+    // scene.addItem(&parkingLot.gate.entranceGate.stayOpenSensor);
+    // scene.addItem(&parkingLot.gate.entranceGate.spikes);
+    // scene.addItem(&parkingLot.gate.exitGate);
+    // scene.addItem(&parkingLot.gate.exitGate.led);
+    // scene.addItem(&parkingLot.gate.exitGate.initOpenSensor);
+    // scene.addItem(&parkingLot.gate.exitGate.stayOpenSensor);
+    // scene.addItem(&parkingLot.gate.exitGate.spikes);
 } // end method
 
 // TODO

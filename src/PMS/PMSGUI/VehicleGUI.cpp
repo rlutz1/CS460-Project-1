@@ -47,27 +47,24 @@ VehicleGUI::VehicleGUI(
 void VehicleGUI::initSignals() {
     // initialize the open entry gate signal connection
     connect(&approachEntryGate, &QPropertyAnimation::finished,
-       &demoManager->parkingLot.gate.entranceGate, &EntranceGateGUI::vehicleOnEntranceGateInductionSensor);
+       demoManager->parkingLot->gate->entranceGate, &EntranceGateGUI::vehicleOnEntranceGateInductionSensor);
 
     // initialize the vehicle has passed through the entry gate successfully signal
     connect(&passSecondEntrySensor, &QPropertyAnimation::finished,
-        &demoManager->parkingLot.gate.entranceGate, &EntranceGateGUI::vehiclePassedSecondEntranceGateSensor);
+        demoManager->parkingLot->gate->entranceGate, &EntranceGateGUI::vehiclePassedSecondEntranceGateSensor);
 
     // TODO: parking, unparking signals
 
     // initialize the open exit gate signal connection
     connect(&approachExitGate, &QPropertyAnimation::finished,
-        &demoManager->parkingLot.gate.exitGate, &ExitGateGUI::vehicleOnExitGateInductionSensor);
+        demoManager->parkingLot->gate->exitGate, &ExitGateGUI::vehicleOnExitGateInductionSensor);
 
     // initialize the vehicle has passed through the exit gate successfully signal
     connect(&passSecondExitSensor, &QPropertyAnimation::finished,
-          &demoManager->parkingLot.gate.exitGate, &ExitGateGUI::vehiclePassedSecondExitGateSensor);
+          demoManager->parkingLot->gate->exitGate, &ExitGateGUI::vehiclePassedSecondExitGateSensor);
 }
 
 void VehicleGUI::initAnimation(AnimationMeta animMeta, bool chaos) {
-
-
-
     offsetPause.setDuration(animMeta.entryDelay); // for controlling start flow
 
     approachEntryGate.setDuration(animMeta.approachGateTime);

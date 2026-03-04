@@ -7,6 +7,8 @@
 #include <iostream>
 #include <QGraphicsScene>
 #include <QPainter>
+#include <QVector>
+#include <QPointer>
 
 #include "ParkingFloorGUI.h"
 #include "../Gate/GateGUI.h"
@@ -17,23 +19,29 @@
 #define Y_BOTTOM_LOTS (-200)
 #define Y_GATE_CENTER 0
 
-
+// ParkingLotGUI::~ParkingLotGUI() {
+//     parkingFloors.clear();
+// }
 
 ParkingLotGUI::ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initPackage, WidgetMeta widgetMeta) :
-    gate(
-        scene,
-        initPackage,
-        {.x = wm.x, .y = wm.y + 150, .width = 300, .height = 300, .color = Qt::darkGray, .zPos = (wm.zPos + 1)}),
+    // gate(
+    //     scene,
+    //     initPackage,
+    //     {.x = wm.x, .y = wm.y + 150, .width = 300, .height = 300, .color = Qt::darkGray, .zPos = (wm.zPos + 1)}),
     wm(widgetMeta) {
     // set visual data
-    // setGeometry(wm.x, wm.y, wm.width, wm.height);
     resize(wm.width, wm.height);
     setZValue(wm.zPos); // hard coded, needs to be underneath ALL
 
-    std::cout << wm.x << wm.y << wm.width << wm.height << std::endl;
+    QPointer<GateGUI> gate = new GateGUI(
+        scene,
+        initPackage,
+        {.x = wm.x, .y = wm.y + 150, .width = 300, .height = 300, .color = Qt::darkGray, .zPos = (wm.zPos + 1)}
+    );
+    gate->setParentItem(this);
 
-    // init floors
-    ParkingFloorGUI* floor;
+
+    QPointer<ParkingFloorGUI> floor;
     for (FloorId id: initPackage.floorIds) {
         // the scene object will delete ALL ITEMS on deconstruction. no cleanup required from us.
         if (id.uniqueId.compare("floor1") == 0) { // dirty, i know, but doable since we will not change
@@ -41,21 +49,20 @@ ParkingLotGUI::ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initP
             scene,
             initPackage,
             id,
-{.x = wm.x + 300, .y = wm.y, .width = 400, .height = wm.height,  .color = Qt::lightGray, .zPos = (wm.zPos + 1)}
+            {.x = wm.x + 300, .y = wm.y, .width = 400, .height = wm.height,  .color = Qt::lightGray, .zPos = (wm.zPos + 1)}
             );
         } else {
             floor = new ParkingFloorGUI(
             scene,
             initPackage,
             id,
-{.x = wm.x + wm.width / initPackage.numbers.floors, .y = wm.y, .width = wm.width / initPackage.numbers.floors, .height = wm.height,  .color = Qt::lightGray, .zPos = (wm.zPos + 1)}
+            {.x = wm.x + wm.width / initPackage.numbers.floors, .y = wm.y, .width = wm.width / initPackage.numbers.floors, .height = wm.height,  .color = Qt::lightGray, .zPos = (wm.zPos + 1)}
             );
         }
+        floor->setParentItem(this);
         parkingFloors.push_back(floor);
     } // end loop
 
-
-    // scene.addItem(this); // add myself to the scene
 } // end constructor
 
 
@@ -79,9 +86,12 @@ void ParkingLotGUI::paint(QPainter *painter,
 }
 
 void ParkingLotGUI::reset() {
-    for (ParkingFloorGUI* floor: parkingFloors) {
-        floor->reset();
+    for (QPointer<ParkingFloorGUI> floor: parkingFloors) {
+        if (floor) {
+            floor->reset();
+        }
+
     }
-    gate.reset();
+    gate->reset();
 
 }

@@ -15,6 +15,8 @@
 #include "../GUIStructs/GUIStructs.h"
 #include "../PMSGUIInterfaces/IInductionSensorDataSink.h"
 
+#include <QPointer>
+
 class ParkingManagementController;
 
 class EntranceGateGUI : public QGraphicsWidget, public IGateInstructionSink {
@@ -29,12 +31,12 @@ public:
 
     WidgetMeta wm;
     GateId id;
-    LedGUI led;
-    SensorGUI initOpenSensor;
-    SensorGUI stayOpenSensor;
-    SpikesGUI spikes;
+    QPointer<LedGUI> led;
+    QPointer<SensorGUI> initOpenSensor;
+    QPointer<SensorGUI> stayOpenSensor;
+    QPointer<SpikesGUI> spikes;
 
-    void addSignalReceiver(IInductionSensorDataSink* pmc);
+    void addSignalReceiver(std::shared_ptr<IInductionSensorDataSink> pmc);
     void reset();
 
     // IGateInstructionSink
@@ -52,7 +54,7 @@ protected:
            QWidget *widget) override;
 
 private:
-    IInductionSensorDataSink* pmc;
+    std::shared_ptr<IInductionSensorDataSink> pmc;
 };
 
 

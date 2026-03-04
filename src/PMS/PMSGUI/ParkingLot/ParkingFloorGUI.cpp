@@ -7,11 +7,10 @@
 #include <QGraphicsScene>
 #include <QPainter>
 #include <stack>
+#include <QVector>
+#include <QPointer>
 using std::cout;
 using std::stack;
-
-
-
 
 
 ParkingFloorGUI::ParkingFloorGUI(QGraphicsScene& scene, InitializationPackage& initPackage, FloorId floorId, WidgetMeta widgetMeta) :
@@ -28,8 +27,9 @@ ParkingFloorGUI::ParkingFloorGUI(QGraphicsScene& scene, InitializationPackage& i
         initGenFloor(scene, initPackage);
     }
 
-    // scene.addItem(this);
 }
+
+
 
 // REQUIRED FOR GRAPHICS ITEM
 QRectF ParkingFloorGUI::boundingRect() const {
@@ -119,11 +119,12 @@ void ParkingFloorGUI::initFirstFloor(QGraphicsScene& scene, InitializationPackag
                 handicapPlacements.pop();
                 widgetMeta = {.x = pt.x, .y = pt.y, .width = widerSpotWidth, .height = spotHeight, .color = Qt::gray, .zPos = wm.zPos + 1};
             }
-            ParkingSpotGUI* parkingSpot = new ParkingSpotGUI(
+            QPointer<ParkingSpotGUI> parkingSpot = new ParkingSpotGUI(
                 scene,
                 id,
                 widgetMeta
             );
+            parkingSpot->setParentItem(this);
             parkingSpots.push_back(parkingSpot);
         }
     }
@@ -184,11 +185,12 @@ void ParkingFloorGUI::initGenFloor(QGraphicsScene& scene, InitializationPackage&
                 widgetMeta = {.x = pt.x, .y = pt.y, .width = widerSpotWidth, .height = spotHeight, .color = Qt::gray, .zPos = wm.zPos + 1};
             }
 
-            ParkingSpotGUI* parkingSpot = new ParkingSpotGUI(
+            QPointer<ParkingSpotGUI> parkingSpot = new ParkingSpotGUI(
                 scene,
                 id,
                 widgetMeta
             );
+            parkingSpot->setParentItem(this);
             parkingSpots.push_back(parkingSpot);
         }
     }

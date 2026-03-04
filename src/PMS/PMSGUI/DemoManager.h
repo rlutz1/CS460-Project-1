@@ -38,8 +38,8 @@ public:
         );
 
     // public for signal easier signal relaying between vehicle and different parking lot components
-    ParkingLotGUI parkingLot;
-    void addSignalReceiver(ParkingManagementController* pmc);
+    QPointer<ParkingLotGUI> parkingLot;
+    void addSignalReceiver(ParkingManagementController* pmc) const;
 
 
 
