@@ -80,7 +80,7 @@ void ParkingManagementController::vehicleParked(SpotId spotId) {
 	int floorNum;
 	if (spotId.floorId.uniqueId == "floor1") {
 		floorNum = 1;
-	}else if (spotId.floorId.uniqueId == "floor1"){
+	}else if (spotId.floorId.uniqueId == "floor2"){
 		floorNum = 2;
 	}
 	availabilityDisplay.updateAvailabilityTracking(spotId.type, floorNum, false);
@@ -95,7 +95,7 @@ void ParkingManagementController::vehicleUnparked(SpotId spotId) {
 	int floorNum;
 	if (spotId.floorId.uniqueId == "floor1") {
 		floorNum = 1;
-	}else if (spotId.floorId.uniqueId == "floor1"){
+	}else if (spotId.floorId.uniqueId == "floor2"){
 		floorNum = 2;
 	}
 	availabilityDisplay.updateAvailabilityTracking(spotId.type, floorNum, true);

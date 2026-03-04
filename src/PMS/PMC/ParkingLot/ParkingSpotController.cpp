@@ -38,7 +38,7 @@ void ParkingSpotController::updateSpotAvailability(const SensorId& sensor, bool 
 void ParkingSpotController::markSpotAvailability(bool isAvailable) {
 	if (isAvailable) {
 		spotHardware->markSpotAvailable();
-	}else {
+	} else {
 		spotHardware->markSpotUnavailable();
 	}
 }
@@ -52,7 +52,7 @@ void ParkingSpotController::updateStateFromSensors()
 	// TODO: This can be for the admin override
 	if (state == State::UNAVAILABLE) return;
 
-	State newState = (weightDetected && ultrasonicDetected) ? State::AVAILABLE : State::UNAVAILABLE;
+	State newState = (weightDetected && ultrasonicDetected) ? State::AVAILABLE : State::OCCUPIED;
 	if (newState != state)
 	{
 		State oldState = state;

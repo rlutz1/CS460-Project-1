@@ -34,20 +34,22 @@ ParkingLot::ParkingLot(
 	{
 		auto& floor = floorMap[spotId.floorId.uniqueId];
 		auto spot = std::make_unique<ParkingSpotController>(spotId, *floor);
+
 		// TODO: Add the hardware to the corresponding spot from the DemoManager:
 		for (auto hardware : spotsFloor1) {
 			if (hardware->spotId.uniqueId == spotId.uniqueId) {
 				spot->spotHardware = hardware;
 				break;
-			}
+			} // end if
 		}
 
 		for (auto hardware : spotsFloor2) {
 			if (hardware->spotId.uniqueId == spotId.uniqueId) {
 				spot->spotHardware = hardware;
 				break;
-			}
-		}
+			} // end if
+		} // end if
+		// end adding of hardware
 
 		floor->addSpot(std::move(spot));
 	}
