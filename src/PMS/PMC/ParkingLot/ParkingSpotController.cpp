@@ -5,6 +5,7 @@
 #include "ParkingSpotController.h"
 #include "ParkingFloor.h"
 #include "../PMCInterfaces/IParkingSpotHardwareSink.h"
+#include <iostream>
 
 // Initializing a ParkingSpotController object
 ParkingSpotController::ParkingSpotController(const SpotId& id, ParkingFloor& floor) : id(id), floor(floor),
@@ -19,7 +20,7 @@ void ParkingSpotController::updateSpotAvailability(const SensorId& sensor, bool 
 	{
 		ultrasonicDetected = vehicleDetected;
 	}
-	else if (sensor.uniqueId == id.floorId.uniqueId)
+	else if (sensor.uniqueId == id.weightId.uniqueId)
 	{
 		weightDetected = vehicleDetected;
 	}
@@ -29,32 +30,15 @@ void ParkingSpotController::updateSpotAvailability(const SensorId& sensor, bool 
 		return;
 	}
 	updateStateFromSensors();
-}
 
-
-
-
-/////////////////////////////////////// ///////////////////////////////////////
-/**
- * this is coming from the "parking sensors".
- * we will cheat this just a little and assume both sensors trigger.
- * the update spot availabilities are here for a moment.
- * following todos: roxanne know's what to do
- */
-void ParkingSpotController::markSpotAvailability(bool isAvailable) {
-	if (isAvailable) {
-		updateSpotAvailability(id.ultrasonicId, false); // TODO: this should really come from the sensors, if time
-		updateSpotAvailability(id.weightId, false); // TODO: this should really come from the sensors, if time
+	if (state == State::AVAILABLE)
+	{
 		spotHardware->markSpotAvailable();
-	} else {
-		updateSpotAvailability(id.ultrasonicId, true); // TODO: this should really come from the sensors, if time
-		updateSpotAvailability(id.weightId, true); // TODO: this should really come from the sensors, if time
+	} else if (state == State::OCCUPIED)
+	{
 		spotHardware->markSpotOccupied();
 	}
 }
-
-
-
 
 
 void ParkingSpotController::updateStateFromSensors()
@@ -62,7 +46,10 @@ void ParkingSpotController::updateStateFromSensors()
 	// TODO: This can be for the admin override
 	if (state == State::UNAVAILABLE) return;
 
+
 	State newState = (weightDetected && ultrasonicDetected) ? State::AVAILABLE : State::OCCUPIED;
+
+
 	if (newState != state)
 	{
 		State oldState = state;
@@ -70,6 +57,13 @@ void ParkingSpotController::updateStateFromSensors()
 		// TODO: Make sure this is added correctly after finishing ParkingFloor
 		//floor.notifySpotStateChanged(id.type, oldState, newState);
 	}
+
+	if (state == State::AVAILABLE) {
+		std::cout << "avail" << std::endl;
+	} else if (state == State::OCCUPIED) {
+		std::cout << "occupied" << std::endl;
+	}
+
 }
 
 // TODO: Something for admin override forcing unavailable (might be useless)
@@ -79,6 +73,7 @@ void ParkingSpotController::forceUnavailable()
 	{
 		State oldState = state;
 		state = State::UNAVAILABLE;
+		spotHardware->markSpotUnavailable();
 		//floor.notifySpotStateChanged(id.type, oldState, state);
 	}
 }

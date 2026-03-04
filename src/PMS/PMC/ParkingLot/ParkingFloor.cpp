@@ -62,22 +62,18 @@ void ParkingFloor::addSpot(std::unique_ptr<ParkingSpotController> spot)
 }
 
 
-
-
-///////////////////////////// /////////////////////////////
-void ParkingFloor::markParkingSpotAvailability(SpotId spotId, bool available) {
+void ParkingFloor::updateParkingSpotAvailability(SpotId spotId, bool available) {
 	for (auto& parkingSpot: spots ) {
 		bool spotIdsMatch = parkingSpot->id.uniqueId == spotId.uniqueId;
 		if (spotIdsMatch) {
-			parkingSpot->markSpotAvailability(available);
+			// this is a simulation only logic to ensure that the update is consistent.
+			// TODO, should be from parking lot top if time, vehicleParked()
+			parkingSpot->updateSpotAvailability(spotId.weightId, available);
+			parkingSpot->updateSpotAvailability(spotId.ultrasonicId, available);
 			break;
 		}
 	}
 }
-
-
-
-
 
 
 void ParkingFloor::updateState()

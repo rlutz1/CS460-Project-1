@@ -35,7 +35,7 @@ ParkingLot::ParkingLot(
 		auto& floor = floorMap[spotId.floorId.uniqueId];
 		auto spot = std::make_unique<ParkingSpotController>(spotId, *floor);
 
-		// TODO: Add the hardware to the corresponding spot from the DemoManager:
+		// Add the hardware to the corresponding spot from the DemoManager:
 		for (auto hardware : spotsFloor1) {
 			if (hardware->spotId.uniqueId == spotId.uniqueId) {
 				spot->spotHardware = hardware;
@@ -98,24 +98,10 @@ void ParkingLot::notifyFloorStateChanged(SpotType type, ParkingSpotController::S
 }
 
 
-void ParkingLot::markParkingSpotAvailability(SpotId spotId, int floor, bool available) {
+void ParkingLot::updateParkingSpotAvailability(SpotId spotId, int floor, bool available) {
 	// check which floor we will go to:
-	floors[floor - 1]->markParkingSpotAvailability(spotId, available);
-
-	// commented this out--this was just making it so only first floor was being updated:
-	// for (auto& floor: floors) {
-	// 	if (floor->id.uniqueId == "floor1") {
-	// 		floor->markParkingSpotAvailability(spotId, available);
-	// 		break;
-	// 	} else if (floor->id.uniqueId == "floor2") {
-	// 		floor->markParkingSpotAvailability(spotId, available);
-	// 		break;
-	// 	}
-	// }
+	floors[floor - 1]->updateParkingSpotAvailability(spotId, available);
 }
-
-
-
 
 void ParkingLot::updateState()
 {

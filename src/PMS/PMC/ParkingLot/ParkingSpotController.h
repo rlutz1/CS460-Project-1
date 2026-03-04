@@ -54,7 +54,7 @@ public:
 
 
 	/////////////////////////////////////// ///////////////////////////////////////
-	void markSpotAvailability(bool isAvailable);
+	// void markSpotAvailability(bool isAvailable);
 	SpotId id;
 	IParkingSpotHardwareSink* spotHardware;
 private:

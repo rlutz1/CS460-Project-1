@@ -49,8 +49,7 @@ public:
 	}
 
 
-	///////////////////////////// /////////////////////////////
-	void markParkingSpotAvailability(SpotId spotId, bool available);
+	void updateParkingSpotAvailability(SpotId spotId, bool available);
 	FloorId id;
 	std::vector<std::unique_ptr<ParkingSpotController>> spots;
 
