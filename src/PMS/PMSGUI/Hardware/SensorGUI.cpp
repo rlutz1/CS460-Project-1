@@ -19,9 +19,8 @@ SensorGUI::SensorGUI(QGraphicsScene& scene, SensorId id, WidgetMeta widgetMeta) 
 }
 
 void SensorGUI::trigger() {
-    std::cout << "trigger" << std::endl;
     triggered = !triggered;
-    emit triggerSend(triggered, sensorId); // todo: this should ideally send through the triggered bool
+    emit triggerSend(triggered, sensorId);
 }
 
 // REQUIRED FOR GRAPHICS ITEM

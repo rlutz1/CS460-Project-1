@@ -75,7 +75,7 @@ void ParkingManagementController::successfulExit() {
 }
 
 void ParkingManagementController::vehicleParked(SpotId spotId, SensorId sensorId) {
-	availabilityDisplay.updateInTransit(false);
+	// availabilityDisplay.updateInTransit(false);
 
 	// hardcoded values based on run_demo.cpp constraint of 2 floors.
 	int floorNum;
@@ -92,7 +92,7 @@ void ParkingManagementController::vehicleParked(SpotId spotId, SensorId sensorId
 }
 
 void ParkingManagementController::vehicleUnparked(SpotId spotId, SensorId sensorId) {
-	availabilityDisplay.updateInTransit(true);
+	// availabilityDisplay.updateInTransit(true);
 
 	// hardcoded values based on run_demo.cpp constraint of 2 floors.
 	int floorNum;
@@ -101,13 +101,18 @@ void ParkingManagementController::vehicleUnparked(SpotId spotId, SensorId sensor
 	}else if (spotId.floorId.uniqueId == "floor2"){
 		floorNum = 2;
 	}
-	// availabilityDisplay.updateAvailabilityTracking(spotId.type, floorNum, true);
 	// signal spotId parking spot to be available.
 	lot.updateParkingSpotAvailability(spotId, sensorId, floorNum, true); // true === available
 }
 
+// for notifying availability count changed--signal from the lot expected.
 void ParkingManagementController::notifyCountChange(SpotType type, int floorNum, bool increase) {
 	availabilityDisplay.updateAvailabilityTracking(type, floorNum, increase);
+}
+
+// for notifying that transit count changed--signal from the lot expected.
+void ParkingManagementController::notifyTransitCountChange(bool increase) {
+	availabilityDisplay.updateInTransit(increase);
 }
 
 

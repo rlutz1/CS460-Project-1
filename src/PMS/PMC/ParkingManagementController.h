@@ -92,6 +92,7 @@ public:
 
 	void updateLogMessage(const std::string& msg);
 	void notifyCountChange(SpotType type, int floorNum, bool increase);
+	void notifyTransitCountChange(bool increase);
 
 	// The necessary getters
 	int getTotalAvailable(SpotType type) const;

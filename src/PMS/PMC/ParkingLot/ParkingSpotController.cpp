@@ -57,13 +57,6 @@ void ParkingSpotController::updateStateFromSensors()
 		// TODO: Make sure this is added correctly after finishing ParkingFloor
 		floor.notifySpotStateChanged(id.type, oldState, newState);
 	}
-
-	if (state == State::AVAILABLE) {
-		std::cout << "avail" << std::endl;
-	} else if (state == State::OCCUPIED) {
-		std::cout << "occupied" << std::endl;
-	}
-
 }
 
 // TODO: Something for admin override forcing unavailable (might be useless)

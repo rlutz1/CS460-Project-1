@@ -90,12 +90,18 @@ void ParkingLot::notifyFloorStateChanged(SpotType type, ParkingSpotController::S
 	// This should update the overall counts
 	if (oldState == ParkingSpotController::State::AVAILABLE && newState != ParkingSpotController::State::AVAILABLE)
 	{
+		if (newState == ParkingSpotController::State::OCCUPIED) {
+			pmc.notifyTransitCountChange(false);
+		}
 		totalAvailableCounts[type]--;
 		pmc.notifyCountChange(type, floorNum,false);
 	}
 	else if (oldState != ParkingSpotController::State::AVAILABLE && newState ==
 		ParkingSpotController::State::AVAILABLE)
 	{
+		if (oldState == ParkingSpotController::State::OCCUPIED) {
+			pmc.notifyTransitCountChange(true);
+		}
 		totalAvailableCounts[type]++;
 		pmc.notifyCountChange(type, floorNum,true);
 	}
