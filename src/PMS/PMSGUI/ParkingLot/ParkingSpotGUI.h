@@ -22,7 +22,6 @@ class ParkingSpotGUI : public QGraphicsWidget, public IParkingSpotHardwareSink {
 public:
     ParkingSpotGUI(QGraphicsScene& scene, SpotId spotId, WidgetMeta widgetMeta);
 
-    QColor currColor;
     QColor availableColor;
     QColor occupiedColor;
     QColor unavailableColor;

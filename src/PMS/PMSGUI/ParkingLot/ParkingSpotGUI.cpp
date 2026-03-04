@@ -80,17 +80,14 @@ void ParkingSpotGUI::reset() {
 
 
 void ParkingSpotGUI::markSpotAvailable() {
-    // currColor = availableColor;
     led->color(availableColor);
 }
 
 void ParkingSpotGUI::markSpotOccupied() {
-    // currColor = availableColor;
     led->color(occupiedColor);
 }
 
 void ParkingSpotGUI::markSpotUnavailable() {
-    // currColor = unavailableColor;
     led->color(unavailableColor);
 }
 
