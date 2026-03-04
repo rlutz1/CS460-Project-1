@@ -1,6 +1,6 @@
-//
-// Created by Eliud Garcia on 2/24/26.
-//
+/**
+ * this class acts as the spike driver for directional spikes.
+ */
 
 #ifndef CS460_PROJECT_1_SPIKES_H
 #define CS460_PROJECT_1_SPIKES_H

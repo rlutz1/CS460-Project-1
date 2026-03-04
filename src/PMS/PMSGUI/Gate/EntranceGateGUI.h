@@ -1,6 +1,7 @@
-//
-// Created by lutzr on 2/25/2026.
-//
+/**
+ * this class acts as the gate control driver for the entrance gate.
+ */
+
 
 #ifndef CS460_PROJECT_1_ENTRANCEGATEGUI_H
 #define CS460_PROJECT_1_ENTRANCEGATEGUI_H

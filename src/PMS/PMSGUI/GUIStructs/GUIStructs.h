@@ -1,12 +1,11 @@
-//
-// Created by lutzr on 2/25/2026.
-// this is strictly for ease of metadata generation and passing
-//
+/**
+ * these are strictly for ease of metadata passing when
+ * positioning/coloring things on initialization
+ * of the GUI.
+ */
 
 #ifndef CS460_PROJECT_1_GUISTRUCTS_H
 #define CS460_PROJECT_1_GUISTRUCTS_H
-
-#include "../../Definitions/Identifiers.h"
 
 // for ease of use to pass this to child widgets
 // only for use on front end
@@ -18,11 +17,6 @@ struct WidgetMeta {
     QColor color;
     int zPos;
 };
-
-enum TriggerType {
-
-};
-
 
 // quick use only. may expand usage later.
 struct Point {

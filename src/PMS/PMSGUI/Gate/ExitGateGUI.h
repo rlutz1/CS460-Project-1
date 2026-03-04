@@ -1,13 +1,11 @@
-//
-// Created by lutzr on 2/25/2026.
-//
+/**
+ * this class acts as the gate control driver for the exit gate.
+ */
 
 #ifndef CS460_PROJECT_1_EXITGATEGUI_H
 #define CS460_PROJECT_1_EXITGATEGUI_H
 
-#include <QGraphicsOpacityEffect> // only used in this class so far.
 #include <QPointer>
-
 #include "../../Initialization.h"
 #include "../../Definitions/Identifiers.h"
 #include "../Hardware/LedGUI.h"

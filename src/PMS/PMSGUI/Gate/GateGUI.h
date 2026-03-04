@@ -1,14 +1,13 @@
-//
-// Created by Eliud Garcia on 2/24/26.
-//
+/**
+ * this class acts as a general container--primarily visual--
+ * for the entrance and exit gates of demo.
+ */
 
 #ifndef CS460_PROJECT_1_GATE_H
 #define CS460_PROJECT_1_GATE_H
-#include <QGraphicsWidget>
 #include "EntranceGateGUI.h"
 #include "ExitGateGUI.h"
 #include "../../Initialization.h"
-#include "../../Definitions/Identifiers.h"
 #include "../GUIStructs/GUIStructs.h"
 #include <QGraphicsScene>
 #include <QPointer>
@@ -24,9 +23,6 @@ public:
     QPointer<ExitGateGUI> exitGate;
 
     void reset();
-
-private:
-
 
 protected:
     QRectF boundingRect() const override;

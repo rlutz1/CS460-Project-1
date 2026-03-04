@@ -1,6 +1,6 @@
-//
-// Created by Eliud Garcia on 2/24/26.
-//
+/**
+ * this class acts as the led driver for all led's used
+ */
 
 #ifndef CS460_PROJECT_1_LEDGUI_H
 #define CS460_PROJECT_1_LEDGUI_H

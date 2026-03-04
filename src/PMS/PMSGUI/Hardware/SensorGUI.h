@@ -1,6 +1,6 @@
-//
-// Created by Eliud Garcia on 2/24/26.
-//
+/**
+ * this class acts as the sensor driver for all general sensors
+ */
 
 #ifndef CS460_PROJECT_1_SENSOR_H
 #define CS460_PROJECT_1_SENSOR_H
