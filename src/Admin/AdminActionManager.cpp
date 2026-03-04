@@ -12,6 +12,8 @@ AdminActionManager::AdminActionManager(QWidget* parent) : QMainWindow(parent)
     setFixedSize(600, 300);
     QWidget* mainWindow = new QWidget();
     QVBoxLayout* confirmLayout = new QVBoxLayout(mainWindow);
+
+    // Admin Actions for parking lot
     options = new QComboBox();
     options -> addItem("Make Unavailable");
     options -> addItem("Make Available");
@@ -20,14 +22,17 @@ AdminActionManager::AdminActionManager(QWidget* parent) : QMainWindow(parent)
     parking -> addItem("ID002");
     parking -> addItem("ID003");
 
+    // Buttons to confirm actions or logout
     confirmButton = new QPushButton("Confirm");
     connect(confirmButton, &QPushButton::clicked, this, &AdminActionManager::handleAvailability);
     logoutButton = new QPushButton("Logout");
     connect(logoutButton, &QPushButton::clicked, this, &AdminActionManager::handleLogout);
 
+    // Message recording admin actions
     actionReporter = new QTextEdit(this);
     actionReporter -> setReadOnly(true);
 
+    // Organizing the entire window
     QHBoxLayout* minorLayout = new QHBoxLayout();
     minorLayout -> addWidget(options);
     minorLayout -> addWidget(parking);
@@ -38,6 +43,9 @@ AdminActionManager::AdminActionManager(QWidget* parent) : QMainWindow(parent)
     setCentralWidget(mainWindow);
 }
 
+/**
+ * Upon confirming admin action, will update associated items
+ */
 void AdminActionManager::handleAvailability()
 {
     QString optionSelected = options->currentText();
@@ -51,6 +59,10 @@ void AdminActionManager::handleAvailability()
     }
 }
 
+/**
+ * Handles admin logging out. If confirmed, then admin application
+ * will close. Otherwise, return to application.
+ */
 void AdminActionManager::handleLogout()
 {
     QMessageBox::StandardButton response;
@@ -59,7 +71,6 @@ void AdminActionManager::handleLogout()
         QMessageBox::Yes | QMessageBox::No);
     if (response == QMessageBox::Yes)
     {
-        emit logoutSignal();
         close();
     }
 }

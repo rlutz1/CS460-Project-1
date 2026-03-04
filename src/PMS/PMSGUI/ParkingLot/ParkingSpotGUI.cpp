@@ -7,16 +7,53 @@
 #include <QGraphicsScene>
 #include <QPainter>
 
+#include "../PMSGUIInterfaces/IParkingSpotSensorDataSink.h"
 
-ParkingSpotGUI::ParkingSpotGUI(QGraphicsScene& scene, InitializationPackage& initPackage, SpotId spotId, WidgetMeta widgetMeta) :
+
+ParkingSpotGUI::ParkingSpotGUI(QGraphicsScene& scene, SpotId spotId, WidgetMeta widgetMeta) :
     spotId(spotId),
-    wm(widgetMeta) {
+    wm(widgetMeta),
+    led (new LedGUI(
+        scene,
+        {.x = widgetMeta.x + (widgetMeta.width / 2) - 5, .y = widgetMeta.y, .width = 10, .height = 10, .color = availableColor, .zPos = (widgetMeta.zPos + 1)}
+    )),
+    ultrasonicSensor( new SensorGUI(
+       scene,
+       spotId.ultrasonicId,
+       {.x = widgetMeta.x + (widgetMeta.width / 2) - 5, .y = widgetMeta.y + (widgetMeta.height / 2), .width = 10, .height = 10, .color = Qt::black, .zPos = (widgetMeta.zPos + 1)}
+    )),
+    weightSensor ( new SensorGUI(
+        scene,
+        spotId.weightId,
+        {.x = widgetMeta.x + (widgetMeta.width / 2) - 5, .y = widgetMeta.y + widgetMeta.height - 10, .width = 10, .height = 10, .color = Qt::black, .zPos = (widgetMeta.zPos + 1)}
+    )),
+    occupiedColor(Qt::red),
+    unavailableColor(Qt::gray)
+    {
     // set visual data
     resize(wm.width, wm.height);
     setZValue(wm.zPos);
 
-    scene.addItem(this);
+    led->setParentItem(this);
+    ultrasonicSensor->setParentItem(this);
+    weightSensor->setParentItem(this);
 
+    // TODO move to function initAvailableColor()
+    switch (spotId.type) {
+        case EV:
+            availableColor = Qt::yellow;
+            break;
+        case HANDICAP:
+            availableColor = Qt::blue;
+            break;
+        case MOTORCYCLE:
+            availableColor = Qt::white;
+            break;
+        case NORMAL:
+        default:
+            availableColor = Qt::green;
+    }
+    led->currColor = availableColor;
 }
 
 // REQUIRED FOR GRAPHICS ITEM
@@ -29,10 +66,36 @@ QRectF ParkingSpotGUI::boundingRect() const {
 void ParkingSpotGUI::paint(QPainter *painter,
     const QStyleOptionGraphicsItem *option,
     QWidget *widget) {
-    // painter->setBackground(Qt::transparent);
     painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
     painter->setPen(QPen(Qt::black));
     painter->setBrush(QBrush(wm.color));
-    // painter->setBrush(QBrush(Qt::transparent));
     painter->drawRect(boundingRect());
+}
+
+void ParkingSpotGUI::reset() {
+    led->reset(availableColor);
+    ultrasonicSensor->reset();
+    weightSensor->reset();
+}
+
+
+void ParkingSpotGUI::markSpotAvailable() {
+    led->color(availableColor);
+}
+
+void ParkingSpotGUI::markSpotOccupied() {
+    led->color(occupiedColor);
+}
+
+void ParkingSpotGUI::markSpotUnavailable() {
+    led->color(unavailableColor);
+}
+
+
+void ParkingSpotGUI::signalVehicleParkedOnSpot() {
+    pmc->vehicleParked(spotId);
+}
+
+void ParkingSpotGUI::signalVehicleLeftParkingSpot() {
+    pmc->vehicleUnparked(spotId);
 }

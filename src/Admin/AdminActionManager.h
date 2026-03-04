@@ -12,9 +12,6 @@ class AdminActionManager : public QMainWindow{
 public:
     explicit AdminActionManager(QWidget *parent = 0);
 
-signals:
-    void logoutSignal();
-
 private slots:
     void handleAvailability();
     void handleLogout();

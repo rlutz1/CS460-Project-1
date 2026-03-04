@@ -7,13 +7,17 @@
 
 #include <map>
 #include <QGraphicsView>
+#include <QParallelAnimationGroup>
 
 #include "VehicleGUI.h"
 #include "ParkingLot/ParkingLotGUI.h"
 #include "../Initialization.h"
+#include "../PMC/ParkingManagementController.h"
+#include "Availability/AvailabilityGUI.h"
 
 class QGraphicsScene;
 class GateGUI;
+class VehicleGUI;
 struct SpotId;
 struct GateId;
 
@@ -25,17 +29,33 @@ using std::map;
 class DemoManager : public QGraphicsView {
     Q_OBJECT;
 public:
-    DemoManager(QWidget* parent, InitializationPackage initPackage, int width, int height);
+    DemoManager(
+        QWidget* parent,
+        InitializationPackage initPackage,
+        int width,
+        int height,
+        AvailabilityGUI& availabilityDisplay
+        );
+
+    // public for signal easier signal relaying between vehicle and different parking lot components
+    QPointer<ParkingLotGUI> parkingLot;
+    void addSignalReceiver(std::shared_ptr<ParkingManagementController> pmc) const;
+
+
 
 public slots: // slots for signals to send to!
     void runSimpleDemo();
     void runChaosDemo();
     void stopDemo();
+    // void test(); // testing animation connection
 
 private:
     QGraphicsScene scene;
-    ParkingLotGUI parkingLot;
+    QParallelAnimationGroup currAnimation;
+    QVector<QPointer<VehicleGUI>> activeVehicles;
+    AvailabilityGUI* availabilityDisplay;
 
+    void initScene();
     void initGraphicsMetadata();
 };
 

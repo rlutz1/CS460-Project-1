@@ -8,13 +8,17 @@
 
 #include "../GUIStructs/GUIStructs.h"
 
-class LedGUI : QGraphicsWidget {
+class LedGUI : public QGraphicsWidget {
     Q_OBJECT;
 
 public:
     LedGUI(QGraphicsScene& scene, WidgetMeta widgetMeta);
 
     WidgetMeta wm;
+    QColor currColor;
+
+    void reset(QColor color);
+    void color(QColor color);
 
 protected:
     QRectF boundingRect() const override;

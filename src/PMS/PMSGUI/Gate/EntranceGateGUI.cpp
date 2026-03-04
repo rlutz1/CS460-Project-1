@@ -5,33 +5,93 @@
 #include "EntranceGateGUI.h"
 #include <QGraphicsScene>
 #include <QPainter>
+#include <QGraphicsOpacityEffect> // only used in this class so far.
 
 EntranceGateGUI::EntranceGateGUI(QGraphicsScene& scene, InitializationPackage& initPackage, GateId id, WidgetMeta widgetMeta) :
-    led(
+    led( new LedGUI(
         scene,
         {.x = wm.x, .y = wm.y, .width = 25, .height = 25, .color = Qt::gray, .zPos = (wm.zPos + 1)}
-        ),
-    initOpenSensor(
+        )),
+    initOpenSensor( new SensorGUI(
         scene,
         id.initOpenId,
         {.x = wm.x - wm.width, .y = wm.y, .width = 25, .height = 25, .color = Qt::black, .zPos = (wm.zPos + 1)}
-        ),
-    stayOpenSensor(
+        )),
+    stayOpenSensor( new SensorGUI(
         scene,
         id.stayOpenId,
         {.x = wm.x + wm.width + (wm.width / 2), .y = wm.y, .width = 25, .height = 25, .color = Qt::black, .zPos = (wm.zPos + 1)}
-        ),
-    spikes(
+        )),
+    spikes( new SpikesGUI(
         scene,
         {.x = wm.x - wm.width - wm.width, .y = wm.y, .width = 25, .height = 100, .color = Qt::magenta, .zPos = (wm.zPos + 1)}
-        ),
+        )),
     id(id),
-    wm(widgetMeta) {
+    wm(widgetMeta),
+    currColor(Qt::red),
+    openGateIndicator(Qt::green),
+    closedGateIndicator(Qt::red)
+{
+    led->setParentItem(this);
+    initOpenSensor->setParentItem(this);
+    stayOpenSensor->setParentItem(this);
+    spikes->setParentItem(this);
 
     resize(wm.width, wm.height);
     setZValue(wm.zPos);
+}
 
-    scene.addItem(this);
+void EntranceGateGUI::addSignalReceiver(IInductionSensorDataSink* pmc) {
+    // this->pmc = pmc;
+}
+
+void EntranceGateGUI::signalGateClose() {
+    // PMS said to lower spikes :
+    // TODO: verify that opacity is the way to show that spikes are raised/lowered.
+    // opacityEffect should last as long as `spikes` is alives
+    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(spikes);
+    opacityEffect->setOpacity(0.5);
+    spikes->setGraphicsEffect(opacityEffect);
+
+    // PMS said to close gate:
+
+    // same animation as close but backwards.
+    currColor = closedGateIndicator;
+    update();
+    // end with giving PMS a successful Exit message (to be done at the finish of the animation after it has passed 2nd sensor).
+
+}
+
+void EntranceGateGUI::signalGateOpen() {
+    // PMS said to raise spikes:
+    // TODO: verify that opacity is the way to show that spikes are raised/lowered.
+    // opacityEffect should last as long as `spikes` is alives
+    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(spikes);
+    opacityEffect->setOpacity(1);
+    spikes->setGraphicsEffect(opacityEffect);
+    // PMS said to open gate:
+    currColor = openGateIndicator;
+    update();
+    // start LED flashing for the gate lights
+    // slide gate (y position) slowly upwards.
+
+
+
+}
+
+
+// sequence of "probing" events (where we probe our "devices" to see that our PMC backend works correctly)
+// FOLLOWS the vehicle animation sequence so far.
+void EntranceGateGUI::vehicleOnEntranceGateInductionSensor() {
+    pmc->vehicleSensed(id);
+}
+
+
+// sequence of "probing" events (where we probe our "devices" to see that our PMC backend works correctly)
+// FOLLOWS the vehicle animation sequence so far.
+void EntranceGateGUI::vehiclePassedSecondEntranceGateSensor() {
+    pmc->vehicleAbsent(id);
+    pmc->successfulEntry();
 }
 
 // REQUIRED FOR GRAPHICS ITEM
@@ -47,7 +107,13 @@ void EntranceGateGUI::paint(QPainter *painter,
     // painter->setBackground(Qt::transparent);
     painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
     painter->setPen(QPen(Qt::black));
-    painter->setBrush(QBrush(wm.color));
+    painter->setBrush(QBrush(currColor));
     // painter->setBrush(QBrush(Qt::transparent));
     painter->drawRect(boundingRect());
+}
+
+void EntranceGateGUI::reset() {
+    currColor = closedGateIndicator;
+    update();
+    spikes->reset();
 }

@@ -5,17 +5,43 @@
 #ifndef CS460_PROJECT_1_PARKINGSPOT_H
 #define CS460_PROJECT_1_PARKINGSPOT_H
 #include <QGraphicsWidget>
+#include <QPointer>
+
 #include "../GUIStructs/GUIStructs.h"
 #include "../../Initialization.h"
+#include "../Hardware/LedGUI.h"
+#include "../Hardware/SensorGUI.h"
 
-class ParkingSpotGUI : QGraphicsWidget {
+#include "../../PMC/PMCInterfaces//IParkingSpotHardwareSink.h"
+
+class IParkingSpotSensorDataSink;
+
+class ParkingSpotGUI : public QGraphicsWidget, public IParkingSpotHardwareSink {
     Q_OBJECT;
 
 public:
-    ParkingSpotGUI(QGraphicsScene& scene, InitializationPackage& initPackage, SpotId spotId, WidgetMeta widgetMeta);
+    ParkingSpotGUI(QGraphicsScene& scene, SpotId spotId, WidgetMeta widgetMeta);
 
+    QColor availableColor;
+    QColor occupiedColor;
+    QColor unavailableColor;
+    QPointer<LedGUI> led;
+    QPointer<SensorGUI> ultrasonicSensor;
+    QPointer<SensorGUI> weightSensor;
     SpotId spotId;
     WidgetMeta wm;
+
+    void reset();
+
+    // IParkingSpotHardwareSink
+    void markSpotAvailable() override;
+    void markSpotUnavailable() override;
+    void markSpotOccupied() override;
+
+    std::shared_ptr<IParkingSpotSensorDataSink> pmc;
+public slots:
+    void signalVehicleParkedOnSpot();
+    void signalVehicleLeftParkingSpot();
 
 protected:
     QRectF boundingRect() const override;

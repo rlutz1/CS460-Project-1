@@ -8,13 +8,21 @@
 #include <QPainter>
 
 LedGUI::LedGUI(QGraphicsScene& scene, WidgetMeta widgetMeta) :
-    wm(widgetMeta) {
-
+    wm(widgetMeta),
+    currColor(wm.color)
+{
     resize(wm.width, wm.height);
     setZValue(wm.zPos);
+}
 
-    scene.addItem(this);
-
+/**
+ * the method matching the color change method sig
+ * in our SAD.
+ * @param color to change to
+ */
+void LedGUI::color(QColor color) {
+    currColor = color;
+    update();
 }
 
 // REQUIRED FOR GRAPHICS ITEM
@@ -27,10 +35,13 @@ QRectF LedGUI::boundingRect() const {
 void LedGUI::paint(QPainter *painter,
     const QStyleOptionGraphicsItem *option,
     QWidget *widget) {
-    // painter->setBackground(Qt::transparent);
     painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
     painter->setPen(QPen(Qt::black));
-    painter->setBrush(QBrush(wm.color));
-    // painter->setBrush(QBrush(Qt::transparent));
+    painter->setBrush(QBrush(currColor));
     painter->drawRect(boundingRect());
+}
+
+void LedGUI::reset(QColor color) {
+    currColor = color;
+    update();
 }

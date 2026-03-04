@@ -13,6 +13,7 @@ AdminUserInterface::AdminUserInterface(QWidget* parent) : QMainWindow(parent)
     QHBoxLayout* layout = new QHBoxLayout(centralWidget);
     loginSuccessful = false;
 
+    // Username section for login
     QVBoxLayout* user = new QVBoxLayout;
     QLabel *userLabel = new QLabel("Username");
     userLabel -> setGeometry(20, 20, 80, 20);
@@ -21,6 +22,7 @@ AdminUserInterface::AdminUserInterface(QWidget* parent) : QMainWindow(parent)
     user -> addWidget(userLabel);
     user -> addWidget(usernameEdit);
 
+    // Password section for login
     QVBoxLayout* password = new QVBoxLayout;
     QLabel *passwordLabel = new QLabel("Password");
     passwordLabel -> setGeometry(20, 60, 80, 20);
@@ -30,17 +32,24 @@ AdminUserInterface::AdminUserInterface(QWidget* parent) : QMainWindow(parent)
     password->addWidget(passwordLabel);
     password->addWidget(passwordEdit);
 
+    // Login confirmation with current credentials using ENTER or Login Button
     loginButton = new QPushButton("Login");
     connect(passwordEdit, &QLineEdit::returnPressed, this, &AdminUserInterface::handleLogin);
     connect(loginButton, &QPushButton::clicked, this, &AdminUserInterface::handleLogin);
 
+    // Organize Layouts
     layout->addLayout(user);
     layout->addLayout(password);
     layout->addWidget(loginButton);
     setCentralWidget(centralWidget);
 }
 
-
+/**
+ * Handles inputs from entry boxes and checks if credentials inputted
+ * match system's known authorized credentials. Close login screen and
+ * continue to application if successful. Otherwise, return to login
+ * screen.
+ */
 void AdminUserInterface::handleLogin()
 {
     QString username = usernameEdit->text();

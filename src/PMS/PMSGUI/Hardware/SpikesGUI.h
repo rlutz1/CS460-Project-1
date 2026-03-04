@@ -8,12 +8,14 @@
 
 #include "../GUIStructs/GUIStructs.h"
 
-class SpikesGUI : QGraphicsWidget {
+class SpikesGUI : public QGraphicsWidget {
     Q_OBJECT;
 public:
     SpikesGUI(QGraphicsScene& scene, WidgetMeta widgetMeta);
 
     WidgetMeta wm;
+
+    void reset();
 
 protected:
     QRectF boundingRect() const override;

@@ -24,11 +24,24 @@ using std::vector;
 int run_demo(int argc, char *argv[]) {
     QApplication a(argc, argv);
     QWidget mainWindow;
+    // layout for bottom part of window
+    QWidget bottomContainer(&mainWindow);
+    QHBoxLayout bottomLayout(&bottomContainer);
+
 
     InitializationPackage initPackage = genInitPackage(); // initialize config info for both front and backend
-    DemoManager demoManager(&mainWindow, initPackage, WINDOW_WIDTH, WINDOW_HEIGHT); // initialize the front end
-    ParkingManagementController pmc(initPackage); // initialize the backend
-    // initialize sink? or unnecessary step -- leaving for eliud for now
+
+    // for displaying availability -> a vanilla widget
+    AvailabilityGUI availabilityDisplay(&bottomContainer, initPackage);
+    DemoManager demoManager(
+        &mainWindow,
+        initPackage,
+        WINDOW_WIDTH,
+        WINDOW_HEIGHT,
+        availabilityDisplay
+        ); // initialize the front end
+
+   // initialize sink? or unnecessary step -- leaving for eliud for now
 
     // init the main window
     // there are issues with scoping of the following,
@@ -37,31 +50,29 @@ int run_demo(int argc, char *argv[]) {
     QVBoxLayout layout(&mainWindow);
     mainWindow.setLayout(&layout);
 
-    // layout for bottom part of window
-    QWidget bottomContainer;
-    QHBoxLayout bottomLayout(&bottomContainer);
 
     // layout for stacking the bottons on left sid
-    QWidget buttonContainer;
+    QWidget buttonContainer(&bottomContainer);
     QVBoxLayout buttonLayout(&buttonContainer);
 
-    QPushButton startSimpleDemoButton("Start Simple Demo", &mainWindow); // TODO disable both on click, enable stop
-    QPushButton startChaosDemoButton("Start Chaos Demo", &mainWindow); // TODO disable both on click, enable stop
-    QPushButton stopDemoButton("Stop Demo", &mainWindow);// TODO disable this, enable both demo buttons
+    QPushButton startSimpleDemoButton("Start Simple Demo", &buttonContainer); // TODO disable both on click, enable stop
+    QPushButton startChaosDemoButton("Start Chaos Demo", &buttonContainer); // TODO disable both on click, enable stop
+    QPushButton stopDemoButton("Stop Demo", &buttonContainer);// TODO disable this, enable both demo buttons
     // TODO: next line, connections for all
-    // QObject::connect(&button, &QPushButton::clicked, &parking_lot, &ParkingLot::run_demo);
+    QObject::connect(&startSimpleDemoButton, &QPushButton::clicked, &demoManager, &DemoManager::runSimpleDemo);
+    QObject::connect(&startChaosDemoButton, &QPushButton::clicked, &demoManager, &DemoManager::runChaosDemo);
+    QObject::connect(&stopDemoButton, &QPushButton::clicked, &demoManager, &DemoManager::stopDemo);
 
     buttonLayout.addWidget(&startSimpleDemoButton);
     buttonLayout.addWidget(&startChaosDemoButton);
     buttonLayout.addWidget(&stopDemoButton);
 
-    // for displaying availability -> a vanilla widget
-    AvailabilityGUI availabilityDisplay;
-
     // add to the bottom layout: buttons and availbility display
     bottomLayout.addWidget(&buttonContainer);
     bottomLayout.addWidget((QWidget*) &availabilityDisplay);
 
+    std::shared_ptr<ParkingManagementController> pmc = std::make_shared<ParkingManagementController>(initPackage, availabilityDisplay, demoManager); // initialize the backend
+    demoManager.addSignalReceiver(pmc);
     // adding main two containers to the UI
     layout.addWidget(&demoManager);
     layout.addWidget(&bottomContainer);

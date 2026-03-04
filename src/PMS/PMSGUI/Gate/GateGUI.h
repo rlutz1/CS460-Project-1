@@ -11,17 +11,22 @@
 #include "../../Definitions/Identifiers.h"
 #include "../GUIStructs/GUIStructs.h"
 #include <QGraphicsScene>
+#include <QPointer>
 
-class GateGUI : QGraphicsWidget {
+class GateGUI : public QGraphicsWidget {
     Q_OBJECT;
 
 public:
     GateGUI(QGraphicsScene& scene, InitializationPackage& initPackage, WidgetMeta widgetMeta);
 
     WidgetMeta wm;
+    QPointer<EntranceGateGUI> entranceGate;
+    QPointer<ExitGateGUI> exitGate;
+
+    void reset();
+
 private:
-    EntranceGateGUI entranceGate;
-    ExitGateGUI exitGate;
+
 
 protected:
     QRectF boundingRect() const override;

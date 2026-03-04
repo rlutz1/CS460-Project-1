@@ -13,21 +13,24 @@
 #include "../../Initialization.h"
 #include "../../Definitions/Identifiers.h"
 #include "../GUIStructs/GUIStructs.h"
+#include <QPointer>
+#include <QVector>
 class QGraphicsScene;
 using string = std::string;
 using std::map; // this may not work, remove if so
 
 // ParkingLot GUI has floors and gate. sets up those widgets
 // and adds to the scene.
-class ParkingLotGUI : QGraphicsWidget {
+class ParkingLotGUI : public QGraphicsWidget {
     Q_OBJECT;
 public:
     ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initPackage, WidgetMeta widgetMeta);
 
     WidgetMeta wm;
-    vector<ParkingFloorGUI*> parkingFloors;
-    GateGUI gate;
+    QVector<QPointer<ParkingFloorGUI>> parkingFloors;
+    QPointer<GateGUI> gate;
 
+    void reset();
 protected:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,

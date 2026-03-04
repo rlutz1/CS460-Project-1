@@ -7,10 +7,11 @@
 
 #include "../../Definitions/Identifiers.h"
 
+class IParkingSpotHardwareSink;
 // Hopefully will be a useful declaration for callback to floor
 class ParkingFloor;
 
-// I am going to leave this as a placeholder for the sensor configuration updates (might not need)
+// TODO: I am going to leave this as a placeholder for the sensor configuration updates (might not need)
 struct SensorUpdate
 {
 };
@@ -32,7 +33,7 @@ public:
 	// This called when a sensor triggers (weight or ultrasonic) outlined in the SAD
 	void updateSpotAvailability(const SensorId& sensor, bool vehicleDetected);
 
-	// This is the administrative override that Roxanne want Gabriel to focus on
+	// TODO: This is the administrative override that I think Roxanne want Gabriel to focus on
 	void forceUnavailable();
 
 	// The necessary Getters
@@ -51,8 +52,12 @@ public:
 		return id;
 	}
 
-private:
+
+	/////////////////////////////////////// ///////////////////////////////////////
+	void markSpotAvailability(bool isAvailable);
 	SpotId id;
+	IParkingSpotHardwareSink* spotHardware;
+private:
 	State state;
 	bool weightDetected;
 	bool ultrasonicDetected;

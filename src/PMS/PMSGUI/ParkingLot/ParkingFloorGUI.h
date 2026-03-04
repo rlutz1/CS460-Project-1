@@ -6,19 +6,22 @@
 #define CS460_PROJECT_1_PARKINGFLOOR_H
 #include <QGraphicsWidget>
 #include "ParkingSpotGUI.h"
-
+#include <QPointer>
+#include <QVector>
 #include "../../Initialization.h"
 #include "../../Definitions/Identifiers.h"
 #include "../GUIStructs/GUIStructs.h"
 
-class ParkingFloorGUI : QGraphicsWidget {
+class ParkingFloorGUI : public QGraphicsWidget {
     Q_OBJECT;
 public:
     ParkingFloorGUI(QGraphicsScene& scene, InitializationPackage& initPackage, FloorId floorId, WidgetMeta widgetMeta);
 
     FloorId floorId;
     WidgetMeta wm;
-    vector<ParkingSpotGUI*> parkingSpots;
+    QVector<QPointer<ParkingSpotGUI>> parkingSpots; // TODO: try unique_ptr
+
+    void reset();
 
 protected:
     QRectF boundingRect() const override;
@@ -28,8 +31,7 @@ protected:
 private:
     void initGenFloor(QGraphicsScene& scene, InitializationPackage& initPackage);
     void initFirstFloor(QGraphicsScene& scene, InitializationPackage& initPackage);
-    // void initSpots(InitializationPackage& initPackage); // TODO: for separating the above monsters
+    // void initSpots(InitializationPackage& initPackage); // TODO: for separating the above monsters if time
 };
-
 
 #endif //CS460_PROJECT_1_PARKINGFLOOR_H
