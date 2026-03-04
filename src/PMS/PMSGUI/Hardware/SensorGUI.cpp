@@ -4,15 +4,21 @@
 
 #include "SensorGUI.h"
 
+#include <iostream>
 #include <QGraphicsScene>
 #include <QPainter>
-
+#include <iostream>
 SensorGUI::SensorGUI(QGraphicsScene& scene, SensorId id, WidgetMeta widgetMeta) :
     sensorId(id),
     wm(widgetMeta)
 {
     resize(wm.width, wm.height);
     setZValue(wm.zPos);
+}
+
+TriggerPack SensorGUI::trigger() {
+    std::cout << "trigger" << std::endl;
+    return{};
 }
 
 // REQUIRED FOR GRAPHICS ITEM

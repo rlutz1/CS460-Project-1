@@ -164,16 +164,3 @@ void DemoManager::initGraphicsMetadata() {
     scene.setBackgroundBrush(Qt::transparent);
     setAttribute(Qt::WA_TranslucentBackground);
 } // end method
-
-// TODO
-// // potential override for final cleanups
-// void DemoManager::closeEvent(QCloseEvent *event) {
-//     event->accept();
-//     cout << "closing.." << std::endl;
-//     stopDemo();
-// }
-
-// for testing that i can change the values from here on anim finished
-// void DemoManager::test() {
-//     availabilityDisplay->floor1AvailEv.setText("blah");
-// }

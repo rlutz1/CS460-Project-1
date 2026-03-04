@@ -9,6 +9,8 @@
 #include "../../Definitions/Identifiers.h"
 #include "../GUIStructs/GUIStructs.h"
 
+
+
 class SensorGUI : public QGraphicsWidget{
     Q_OBJECT;
 public:
@@ -18,6 +20,9 @@ public:
     SensorId sensorId;
 
     void reset();
+
+public slots:
+    TriggerPack trigger();
 
 protected:
     QRectF boundingRect() const override;

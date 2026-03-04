@@ -56,19 +56,26 @@ void VehicleGUI::initSignals() {
     connect(&passSecondEntrySensor, &QPropertyAnimation::finished,
         demoManager->parkingLot->gate->entranceGate, &EntranceGateGUI::vehiclePassedSecondEntranceGateSensor);
 
+    // initialize the vehicle parking in a spot ->vehicleParked signal
+    connect(&park, &QPropertyAnimation::finished,
+        demoManager->parkingLot->parkingFloors[cachedFloorToParkIn]
+        ->parkingSpots[cachedParkSpotIndexFromFloor]->ultrasonicSensor, &SensorGUI::trigger);
 
     // initialize the vehicle parking in a spot ->vehicleParked signal
     connect(&park, &QPropertyAnimation::finished,
         demoManager->parkingLot->parkingFloors[cachedFloorToParkIn]
-        ->parkingSpots[cachedParkSpotIndexFromFloor], &ParkingSpotGUI::signalVehicleParkedOnSpot);
+        ->parkingSpots[cachedParkSpotIndexFromFloor]->weightSensor, &SensorGUI::trigger);
+
     // initialize the vehicle leaving in a spot -> vehicleLeft signal
     connect(&unpark, &QPropertyAnimation::finished,
         demoManager->parkingLot->parkingFloors[cachedFloorToParkIn]
-        ->parkingSpots[cachedParkSpotIndexFromFloor], &ParkingSpotGUI::signalVehicleLeftParkingSpot);
+        ->parkingSpots[cachedParkSpotIndexFromFloor]->ultrasonicSensor, &SensorGUI::trigger);
 
-    // initialize the vehicle left a spot vehicleUnparked signal
-    // connect(&unpark, &QPropertyAnimation::finished,
-    //     );
+    // initialize the vehicle leaving in a spot -> vehicleLeft signal
+    connect(&unpark, &QPropertyAnimation::finished,
+        demoManager->parkingLot->parkingFloors[cachedFloorToParkIn]
+        ->parkingSpots[cachedParkSpotIndexFromFloor]->weightSensor, &SensorGUI::trigger);
+
 
     // initialize the open exit gate signal connection
     connect(&approachExitGate, &QPropertyAnimation::finished,
