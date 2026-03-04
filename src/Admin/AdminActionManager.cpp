@@ -9,9 +9,9 @@
 AdminActionManager::AdminActionManager(QWidget* parent) : QMainWindow(parent)
 {
     setWindowTitle("Main Page");
-    setFixedSize(600, 200);
+    setFixedSize(600, 300);
     QWidget* mainWindow = new QWidget();
-    QHBoxLayout* confirmLayout = new QHBoxLayout(mainWindow);
+    QVBoxLayout* confirmLayout = new QVBoxLayout(mainWindow);
     options = new QComboBox();
     options -> addItem("Make Unavailable");
     options -> addItem("Make Available");
@@ -25,15 +25,30 @@ AdminActionManager::AdminActionManager(QWidget* parent) : QMainWindow(parent)
     logoutButton = new QPushButton("Logout");
     connect(logoutButton, &QPushButton::clicked, this, &AdminActionManager::handleLogout);
 
-    confirmLayout -> addWidget(options);
-    confirmLayout -> addWidget(parking);
-    confirmLayout -> addWidget(confirmButton);
-    confirmLayout -> addWidget(logoutButton);
+    actionReporter = new QTextEdit(this);
+    actionReporter -> setReadOnly(true);
+
+    QHBoxLayout* minorLayout = new QHBoxLayout();
+    minorLayout -> addWidget(options);
+    minorLayout -> addWidget(parking);
+    minorLayout -> addWidget(confirmButton);
+    minorLayout -> addWidget(logoutButton);
+    confirmLayout -> addLayout(minorLayout);
+    confirmLayout -> addWidget(actionReporter);
     setCentralWidget(mainWindow);
 }
 
 void AdminActionManager::handleAvailability()
 {
+    QString optionSelected = options->currentText();
+    if (optionSelected == "Make Available")
+    {
+        actionReporter -> append("Made " + parking -> currentText() + " Available");
+    }
+    else if (optionSelected == "Make Unavailable")
+    {
+        actionReporter -> append("Made " + parking -> currentText() + " Unavailable");
+    }
 }
 
 void AdminActionManager::handleLogout()

@@ -4,13 +4,13 @@
 #include <QPushButton>
 #include <QComboBox>
 #include <QMainWindow>
+#include <QTextEdit>
 
 class AdminActionManager : public QMainWindow{
     Q_OBJECT
 
 public:
     explicit AdminActionManager(QWidget *parent = 0);
-    QString optionSelected() {return options->currentText();};
 
 signals:
     void logoutSignal();
@@ -24,6 +24,7 @@ private:
     QComboBox *parking;
     QPushButton *confirmButton;
     QPushButton *logoutButton;
+    QTextEdit *actionReporter;
 
     bool logout;
 };
