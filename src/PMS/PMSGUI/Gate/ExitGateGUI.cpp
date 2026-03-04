@@ -29,7 +29,9 @@ ExitGateGUI::ExitGateGUI(QGraphicsScene& scene, InitializationPackage& initPacka
         wm(widgetMeta),
     currColor(Qt::red),
     openGateIndicator(Qt::green),
-    closedGateIndicator(Qt::red)
+    closedGateIndicator(Qt::red),
+    openGateLight(Qt::yellow),
+    closedGateLight(Qt::gray)
 {
     led->setParentItem(this);
     initOpenSensor->setParentItem(this);
@@ -43,38 +45,24 @@ ExitGateGUI::ExitGateGUI(QGraphicsScene& scene, InitializationPackage& initPacka
     connect(stayOpenSensor, &SensorGUI::triggerSend, this, &ExitGateGUI::vehiclePassedSecondExitGateSensor);
 }
 
-void ExitGateGUI::addSignalReceiver(IInductionSensorDataSink* pmc) {
-    // this->pmc = pmc;
-}
-
+// signal received from pmc to close the gate
 void ExitGateGUI::signalGateClose() {
-    // PMS said to lower spikes :
-    // TODO: verify that opacity is the way to show that spikes are raised/lowered.
-    // opacityEffect should last as long as `spikes` is alives
-    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(spikes);
-    opacityEffect->setOpacity(0.5);
-    spikes->setGraphicsEffect(opacityEffect);
-
-    // PMS said to close gate:
-    // same animation as open but backwards.
-    currColor = closedGateIndicator;
-    update();
-    // end with giving PMS a successful Exit message (to be done at the finsih of the animation after it has passed 2nd sensor)
+    // need to close gate
+    close();
+    // need to lower spikes
+    spikes->lower();
+    // turn off "flashing" light
+    flash(false);
 }
 
+// signal received from pmc to open the gate
 void ExitGateGUI::signalGateOpen() {
-    // PMS said to raise spikes:
-    // TODO: verify that opacity is the way to show that spikes are raised/lowered.
-    // opacityEffect should last as long as `spikes` is alives
-    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(spikes);
-    opacityEffect->setOpacity(1);
-    spikes->setGraphicsEffect(opacityEffect);
-    // PMS said to open gate:
-    currColor = openGateIndicator;
-    update();
-    // TODO: figure out issue with Signal 11:SIGSEV on my computer for gui debugging) & test car frame signals with this.
-    // start LED flashing for the gate lights
-    // slide gate (y position) slowly upwards.
+    // need to open gate
+    open();
+    // need to raise spikes
+    spikes->raise();
+    // turn on "flashing" light
+    flash(true);
 }
 
 // sequence of "probing" events (where we probe our "devices" to see that our PMC backend works correctly)
@@ -90,6 +78,28 @@ void ExitGateGUI::vehiclePassedSecondExitGateSensor(bool sensorState, SensorId s
     pmc->vehicleAbsent(id);
     pmc->successfulExit();
 }
+
+// to signify a driver action of closing the gate signal
+void ExitGateGUI::close() {
+    currColor = closedGateIndicator;
+    update();
+}
+
+// to signify the opening of the gate via driver
+void ExitGateGUI::open() {
+    currColor = openGateIndicator;
+    update();
+}
+
+// to signify the flashing of the led on gate open
+void ExitGateGUI::flash(bool flashingOn) {
+    if (flashingOn) {
+        led->color(openGateLight);
+    } else {
+        led->color(closedGateLight);
+    }
+}
+
 
 // REQUIRED FOR GRAPHICS ITEM
 QRectF ExitGateGUI::boundingRect() const {
@@ -109,8 +119,9 @@ void ExitGateGUI::paint(QPainter *painter,
     painter->drawRect(boundingRect());
 }
 
+// visual reset of the exit gate
 void ExitGateGUI::reset() {
-    currColor = closedGateIndicator;
-    update();
-    spikes->reset();
+    close();
+    spikes->lower();
+    flash(false);
 }

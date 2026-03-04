@@ -5,7 +5,6 @@
 #include "SpikesGUI.h"
 
 #include <QGraphicsOpacityEffect>
-#include <QGraphicsScene>
 #include <QPainter>
 
 SpikesGUI::SpikesGUI(QGraphicsScene& scene, WidgetMeta widgetMeta) :
@@ -13,9 +12,21 @@ SpikesGUI::SpikesGUI(QGraphicsScene& scene, WidgetMeta widgetMeta) :
 {
     resize(wm.width, wm.height);
     setZValue(wm.zPos);
+    lower();
 
+}
+
+// method to "lower" the spikes
+void SpikesGUI::lower() {
     QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(this);
     opacityEffect->setOpacity(0.5);
+    setGraphicsEffect(opacityEffect);
+}
+
+// method to "raise" the spikes
+void SpikesGUI::raise() {
+    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(this);
+    opacityEffect->setOpacity(1);
     setGraphicsEffect(opacityEffect);
 }
 
@@ -35,8 +46,7 @@ void SpikesGUI::paint(QPainter *painter,
     painter->drawRect(boundingRect());
 }
 
+// simple method to reset the spikes to a lowered state
 void SpikesGUI::reset() {
-    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(this);
-    opacityEffect->setOpacity(0.5);
-    setGraphicsEffect(opacityEffect);
+    lower();
 }

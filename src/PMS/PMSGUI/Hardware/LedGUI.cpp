@@ -15,12 +15,14 @@ LedGUI::LedGUI(QGraphicsScene& scene, WidgetMeta widgetMeta) :
     setZValue(wm.zPos);
 }
 
-/**
- * the method matching the color change method sig
- * in our SAD.
- * @param color to change to
- */
+// method to change the color of the led
 void LedGUI::color(QColor color) {
+    currColor = color;
+    update();
+}
+
+// method to visually reset the LED to a default color.
+void LedGUI::reset(QColor color) {
     currColor = color;
     update();
 }
@@ -39,9 +41,4 @@ void LedGUI::paint(QPainter *painter,
     painter->setPen(QPen(Qt::black));
     painter->setBrush(QBrush(currColor));
     painter->drawRect(boundingRect());
-}
-
-void LedGUI::reset(QColor color) {
-    currColor = color;
-    update();
 }

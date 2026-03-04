@@ -29,6 +29,8 @@ public:
     QColor currColor;
     QColor openGateIndicator;
     QColor closedGateIndicator;
+    QColor openGateLight;
+    QColor closedGateLight;
 
     WidgetMeta wm;
     GateId id;
@@ -38,7 +40,9 @@ public:
     QPointer<SpikesGUI> spikes;
     std::shared_ptr<IInductionSensorDataSink> pmc;
 
-    void addSignalReceiver(IInductionSensorDataSink* pmc);
+    void close();
+    void open();
+    void flash(bool flashingOn);
     void reset();
 
     // IGateInstructionSink

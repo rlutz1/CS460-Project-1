@@ -15,6 +15,8 @@ public:
 
     WidgetMeta wm;
 
+    void lower();
+    void raise();
     void reset();
 
 protected:

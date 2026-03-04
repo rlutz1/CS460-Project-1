@@ -17,8 +17,8 @@ public:
     WidgetMeta wm;
     QColor currColor;
 
-    void reset(QColor color);
     void color(QColor color);
+    void reset(QColor color);
 
 protected:
     QRectF boundingRect() const override;

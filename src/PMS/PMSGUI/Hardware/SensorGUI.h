@@ -20,6 +20,8 @@ public:
     SensorId sensorId;
     bool triggered;
 
+    void enable();
+    void disable();
     void reset();
 
 public slots:

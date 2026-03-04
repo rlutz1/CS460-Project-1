@@ -18,9 +18,26 @@ SensorGUI::SensorGUI(QGraphicsScene& scene, SensorId id, WidgetMeta widgetMeta) 
     setZValue(wm.zPos);
 }
 
+// method to generally signify the change of a sensor from
+// high to low/low to high.
 void SensorGUI::trigger() {
     triggered = !triggered;
     emit triggerSend(triggered, sensorId);
+}
+
+// entry point to "enable" the sensor
+void SensorGUI::enable() {
+
+}
+
+// entry point to "disable" the sensor
+void SensorGUI::disable() {
+
+}
+
+// method to visually reset the sensor to a default state
+void SensorGUI::reset() {
+    enable();
 }
 
 // REQUIRED FOR GRAPHICS ITEM
@@ -37,9 +54,5 @@ void SensorGUI::paint(QPainter *painter,
     painter->setPen(QPen(Qt::black));
     painter->setBrush(QBrush(wm.color));
     painter->drawRect(boundingRect());
-}
-
-void SensorGUI::reset() {
-
 }
 

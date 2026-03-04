@@ -30,7 +30,9 @@ EntranceGateGUI::EntranceGateGUI(QGraphicsScene& scene, InitializationPackage& i
     wm(widgetMeta),
     currColor(Qt::red),
     openGateIndicator(Qt::green),
-    closedGateIndicator(Qt::red)
+    closedGateIndicator(Qt::red),
+    openGateLight(Qt::yellow),
+    closedGateLight(Qt::gray)
 {
     led->setParentItem(this);
     initOpenSensor->setParentItem(this);
@@ -44,42 +46,24 @@ EntranceGateGUI::EntranceGateGUI(QGraphicsScene& scene, InitializationPackage& i
     connect(stayOpenSensor, &SensorGUI::triggerSend, this, &EntranceGateGUI::vehiclePassedSecondEntranceGateSensor);
 }
 
-void EntranceGateGUI::addSignalReceiver(IInductionSensorDataSink* pmc) {
-    // this->pmc = pmc;
-}
-
+// signal received from pmc to close the gate
 void EntranceGateGUI::signalGateClose() {
-    // PMS said to lower spikes :
-    // TODO: verify that opacity is the way to show that spikes are raised/lowered.
-    // opacityEffect should last as long as `spikes` is alives
-    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(spikes);
-    opacityEffect->setOpacity(0.5);
-    spikes->setGraphicsEffect(opacityEffect);
-
-    // PMS said to close gate:
-
-    // same animation as close but backwards.
-    currColor = closedGateIndicator;
-    update();
-    // end with giving PMS a successful Exit message (to be done at the finish of the animation after it has passed 2nd sensor).
-
+    // need to close gate
+    close();
+    // need to lower spikes
+    spikes->lower();
+    // turn off "flashing" light
+    flash(false);
 }
 
+// signal received from pmc to open the gate
 void EntranceGateGUI::signalGateOpen() {
-    // PMS said to raise spikes:
-    // TODO: verify that opacity is the way to show that spikes are raised/lowered.
-    // opacityEffect should last as long as `spikes` is alives
-    QGraphicsOpacityEffect* opacityEffect = new QGraphicsOpacityEffect(spikes);
-    opacityEffect->setOpacity(1);
-    spikes->setGraphicsEffect(opacityEffect);
-    // PMS said to open gate:
-    currColor = openGateIndicator;
-    update();
-    // start LED flashing for the gate lights
-    // slide gate (y position) slowly upwards.
-
-
-
+    // need to open gate
+    open();
+    // need to raise spikes
+    spikes->raise();
+    // turn on "flashing" light
+    flash(true);
 }
 
 
@@ -89,12 +73,32 @@ void EntranceGateGUI::vehicleOnEntranceGateInductionSensor(bool sensorState, Sen
     pmc->vehicleSensed(id);
 }
 
-
 // sequence of "probing" events (where we probe our "devices" to see that our PMC backend works correctly)
 // FOLLOWS the vehicle animation sequence so far.
 void EntranceGateGUI::vehiclePassedSecondEntranceGateSensor(bool sensorState, SensorId sensorId) {
     pmc->vehicleAbsent(id);
     pmc->successfulEntry();
+}
+
+// to signify a driver action of closing the gate signal
+void EntranceGateGUI::close() {
+    currColor = closedGateIndicator;
+    update();
+}
+
+// to signify the opening of the gate via driver
+void EntranceGateGUI::open() {
+    currColor = openGateIndicator;
+    update();
+}
+
+// to signify the flashing of the led on gate open
+void EntranceGateGUI::flash(bool flashingOn) {
+    if (flashingOn) {
+        led->color(openGateLight);
+    } else {
+        led->color(closedGateLight);
+    }
 }
 
 // REQUIRED FOR GRAPHICS ITEM
@@ -116,7 +120,7 @@ void EntranceGateGUI::paint(QPainter *painter,
 }
 
 void EntranceGateGUI::reset() {
-    currColor = closedGateIndicator;
-    update();
-    spikes->reset();
+    close();
+    spikes->lower();
+    flash(false);
 }
