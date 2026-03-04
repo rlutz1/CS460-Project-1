@@ -38,8 +38,8 @@ public:
         );
 
     // public for signal easier signal relaying between vehicle and different parking lot components
-    ParkingLotGUI parkingLot;
-    void addSignalReceiver(ParkingManagementController* pmc);
+    QPointer<ParkingLotGUI> parkingLot;
+    void addSignalReceiver(std::shared_ptr<ParkingManagementController> pmc) const;
 
 
 
@@ -52,9 +52,8 @@ public slots: // slots for signals to send to!
 private:
     QGraphicsScene scene;
     QParallelAnimationGroup currAnimation;
-    vector<VehicleGUI*> activeVehicles;
+    QVector<QPointer<VehicleGUI>> activeVehicles;
     AvailabilityGUI* availabilityDisplay;
-    // InitializationPackage initPackage;
 
     void initScene();
     void initGraphicsMetadata();

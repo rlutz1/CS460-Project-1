@@ -13,6 +13,8 @@
 #include "../../Initialization.h"
 #include "../../Definitions/Identifiers.h"
 #include "../GUIStructs/GUIStructs.h"
+#include <QPointer>
+#include <QVector>
 class QGraphicsScene;
 using string = std::string;
 using std::map; // this may not work, remove if so
@@ -23,10 +25,12 @@ class ParkingLotGUI : public QGraphicsWidget {
     Q_OBJECT;
 public:
     ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initPackage, WidgetMeta widgetMeta);
+    // ~ParkingLotGUI() override;
 
     WidgetMeta wm;
-    vector<ParkingFloorGUI*> parkingFloors; // TODO: try unique_ptr
-    GateGUI gate;
+    // vector<ParkingFloorGUI*> parkingFloors; // TODO: try unique_ptr
+    QVector<QPointer<ParkingFloorGUI>> parkingFloors;
+    QPointer<GateGUI> gate;
 
     void reset();
 protected:

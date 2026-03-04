@@ -17,6 +17,7 @@
 #include "../PMSGUIInterfaces/IInductionSensorDataSink.h"
 
 #include <QGraphicsOpacityEffect> // only used in this class so far.
+#include <QPointer>
 
 class ParkingManagementController;
 
@@ -31,10 +32,11 @@ public:
 
     WidgetMeta wm;
     GateId id;
-    LedGUI led;
-    SensorGUI initOpenSensor;
-    SensorGUI stayOpenSensor;
-    SpikesGUI spikes;
+    QPointer<LedGUI> led;
+    QPointer<SensorGUI> initOpenSensor;
+    QPointer<SensorGUI> stayOpenSensor;
+    QPointer<SpikesGUI> spikes;
+    std::shared_ptr<IInductionSensorDataSink> pmc;
 
     void addSignalReceiver(IInductionSensorDataSink* pmc);
     void reset();
@@ -51,7 +53,7 @@ protected:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
            QWidget *widget) override;
-    IInductionSensorDataSink* pmc;
+
 };
 
 
