@@ -71,7 +71,7 @@ int run_demo(int argc, char *argv[]) {
     bottomLayout.addWidget(&buttonContainer);
     bottomLayout.addWidget((QWidget*) &availabilityDisplay);
 
-    ParkingManagementController* pmc = new ParkingManagementController(initPackage, availabilityDisplay, demoManager); // initialize the backend
+    std::shared_ptr<ParkingManagementController> pmc = std::make_shared<ParkingManagementController>(initPackage, availabilityDisplay, demoManager); // initialize the backend
     demoManager.addSignalReceiver(pmc);
     // adding main two containers to the UI
     layout.addWidget(&demoManager);

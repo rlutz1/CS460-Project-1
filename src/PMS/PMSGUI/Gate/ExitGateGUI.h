@@ -36,7 +36,7 @@ public:
     QPointer<SensorGUI> initOpenSensor;
     QPointer<SensorGUI> stayOpenSensor;
     QPointer<SpikesGUI> spikes;
-    IInductionSensorDataSink* pmc;
+    std::shared_ptr<IInductionSensorDataSink> pmc;
 
     void addSignalReceiver(IInductionSensorDataSink* pmc);
     void reset();

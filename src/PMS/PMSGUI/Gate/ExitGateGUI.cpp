@@ -41,7 +41,7 @@ ExitGateGUI::ExitGateGUI(QGraphicsScene& scene, InitializationPackage& initPacka
 }
 
 void ExitGateGUI::addSignalReceiver(IInductionSensorDataSink* pmc) {
-    this->pmc = pmc;
+    // this->pmc = pmc;
 }
 
 void ExitGateGUI::signalGateClose() {

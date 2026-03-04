@@ -139,7 +139,7 @@ void DemoManager::stopDemo() {
  * add the pmc receiver to all sensors that emit signals during process.
  * @param pmc top level pmc to receive signals from sensors
  */
-void DemoManager::addSignalReceiver(ParkingManagementController* pmc) const {
+void DemoManager::addSignalReceiver(std::shared_ptr<ParkingManagementController> pmc) const {
 
     // std::shared_ptr<ParkingManagementController> ptr(pmc);
     parkingLot->gate->entranceGate->pmc = pmc;

@@ -42,7 +42,7 @@ EntranceGateGUI::EntranceGateGUI(QGraphicsScene& scene, InitializationPackage& i
 }
 
 void EntranceGateGUI::addSignalReceiver(IInductionSensorDataSink* pmc) {
-    this->pmc = pmc;
+    // this->pmc = pmc;
 }
 
 void EntranceGateGUI::signalGateClose() {
