@@ -35,11 +35,21 @@ void ParkingSpotController::updateSpotAvailability(const SensorId& sensor, bool 
 
 
 /////////////////////////////////////// ///////////////////////////////////////
+/**
+ * this is coming from the "parking sensors".
+ * we will cheat this just a little and assume both sensors trigger.
+ * the update spot availabilities are here for a moment.
+ * following todos: roxanne know's what to do
+ */
 void ParkingSpotController::markSpotAvailability(bool isAvailable) {
 	if (isAvailable) {
+		updateSpotAvailability(id.ultrasonicId, false); // TODO: this should really come from the sensors, if time
+		updateSpotAvailability(id.weightId, false); // TODO: this should really come from the sensors, if time
 		spotHardware->markSpotAvailable();
 	} else {
-		spotHardware->markSpotUnavailable();
+		updateSpotAvailability(id.ultrasonicId, true); // TODO: this should really come from the sensors, if time
+		updateSpotAvailability(id.weightId, true); // TODO: this should really come from the sensors, if time
+		spotHardware->markSpotOccupied();
 	}
 }
 
