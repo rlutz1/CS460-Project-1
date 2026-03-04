@@ -46,8 +46,8 @@ public:
     void signalGateOpen() override;
 
 public slots:
-    void vehicleOnExitGateInductionSensor(bool sensorState);
-    void vehiclePassedSecondExitGateSensor(bool sensorState);
+    void vehicleOnExitGateInductionSensor(bool sensorState, SensorId sensorId);
+    void vehiclePassedSecondExitGateSensor(bool sensorState, SensorId sensorId);
 
 protected:
     QRectF boundingRect() const override;

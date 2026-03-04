@@ -85,14 +85,14 @@ void EntranceGateGUI::signalGateOpen() {
 
 // sequence of "probing" events (where we probe our "devices" to see that our PMC backend works correctly)
 // FOLLOWS the vehicle animation sequence so far.
-void EntranceGateGUI::vehicleOnEntranceGateInductionSensor(bool sensorState) {
+void EntranceGateGUI::vehicleOnEntranceGateInductionSensor(bool sensorState, SensorId sensorId) {
     pmc->vehicleSensed(id);
 }
 
 
 // sequence of "probing" events (where we probe our "devices" to see that our PMC backend works correctly)
 // FOLLOWS the vehicle animation sequence so far.
-void EntranceGateGUI::vehiclePassedSecondEntranceGateSensor(bool sensorState) {
+void EntranceGateGUI::vehiclePassedSecondEntranceGateSensor(bool sensorState, SensorId sensorId) {
     pmc->vehicleAbsent(id);
     pmc->successfulEntry();
 }
