@@ -85,13 +85,21 @@ void VehicleGUI::initSignals() {
         ->parkingSpots[cachedParkSpotIndexFromFloor]->weightSensor, &SensorGUI::trigger);
 
 
+    // // initialize the open exit gate signal connection
+    // connect(&approachExitGate, &QPropertyAnimation::finished,
+    //     demoManager->parkingLot->gate->exitGate, &ExitGateGUI::vehicleOnExitGateInductionSensor);
+    //
+    // // initialize the vehicle has passed through the exit gate successfully signal
+    // connect(&passSecondExitSensor, &QPropertyAnimation::finished,
+    //       demoManager->parkingLot->gate->exitGate, &ExitGateGUI::vehiclePassedSecondExitGateSensor);
+
     // initialize the open exit gate signal connection
     connect(&approachExitGate, &QPropertyAnimation::finished,
-        demoManager->parkingLot->gate->exitGate, &ExitGateGUI::vehicleOnExitGateInductionSensor);
+        demoManager->parkingLot->gate->exitGate->initOpenSensor, &SensorGUI::trigger);
 
     // initialize the vehicle has passed through the exit gate successfully signal
     connect(&passSecondExitSensor, &QPropertyAnimation::finished,
-          demoManager->parkingLot->gate->exitGate, &ExitGateGUI::vehiclePassedSecondExitGateSensor);
+          demoManager->parkingLot->gate->exitGate->stayOpenSensor, &SensorGUI::trigger);
 }
 
 void VehicleGUI::initAnimation(AnimationMeta animMeta, bool chaos) {

@@ -38,6 +38,9 @@ ExitGateGUI::ExitGateGUI(QGraphicsScene& scene, InitializationPackage& initPacka
 
     resize(wm.width, wm.height);
     setZValue(wm.zPos);
+
+    connect(initOpenSensor, &SensorGUI::triggerSend, this, &ExitGateGUI::vehicleOnExitGateInductionSensor);
+    connect(stayOpenSensor, &SensorGUI::triggerSend, this, &ExitGateGUI::vehiclePassedSecondExitGateSensor);
 }
 
 void ExitGateGUI::addSignalReceiver(IInductionSensorDataSink* pmc) {
