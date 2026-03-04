@@ -7,6 +7,7 @@
 
 #include "../../Definitions/Identifiers.h"
 
+class IParkingSpotHardwareSink;
 // Hopefully will be a useful declaration for callback to floor
 class ParkingFloor;
 
@@ -56,6 +57,7 @@ private:
 	State state;
 	bool weightDetected;
 	bool ultrasonicDetected;
+	IParkingSpotHardwareSink* spotHardware;
 	// This should hopefully notify the floor of any state changes
 	ParkingFloor& floor;
 	// This should reconfigure the overall state of the spot based on both of the sensor readings (TRUE or FALSE)

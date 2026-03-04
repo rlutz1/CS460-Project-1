@@ -68,6 +68,22 @@ void ParkingManagementController::successfulExit() {
 	availabilityDisplay.updateLogMessage(remaining > 0 ? "LOT OPEN" : "FULL");
 }
 
+void ParkingManagementController::vehicleParked(SpotId spotId) {
+	// TODO:
+	// signal availability dislay to decrment in-transit count by 1.
+	// signal availability display what type to decrement available.
+	// signal spotId parking spot to be UNavailable.
+}
+
+void ParkingManagementController::vehicleUnparked(SpotId spotId) {
+	// TODO:
+	// signal availability dislay to increment in-transit count by 1.
+	// signal availability display what type to increment available.
+	// signal spotId parking spot to be available.
+}
+
+
+
 // This is where the parking spot sensor is handled
 void ParkingManagementController::handleSensorTrigger(const SensorId& sensor, bool detected)
 {

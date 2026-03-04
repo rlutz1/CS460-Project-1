@@ -10,7 +10,9 @@
 #include "../Hardware/LedGUI.h"
 #include "../Hardware/SensorGUI.h"
 
-class ParkingSpotGUI : public QGraphicsWidget {
+#include "../../PMC/PMCInterfaces//IParkingSpotHardwareSink.h"
+
+class ParkingSpotGUI : public QGraphicsWidget, public IParkingSpotHardwareSink {
     Q_OBJECT;
 
 public:
@@ -27,6 +29,15 @@ public:
     WidgetMeta wm;
 
     void reset();
+
+    // IParkingSpotHardwareSink
+    void markSpotAvailable() override;
+    void markSpotUnavailable() override;
+
+public slots:
+    void signalVehicleParkedOnSpot();
+    void signalVehicleLeftParkingSpot();
+
 protected:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,

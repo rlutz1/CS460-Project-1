@@ -14,6 +14,7 @@
 #include "../PMC/PMCInterfaces/IGateInstructionSink.h"
 #include "../PMC/PMCInterfaces/IAvailabilityInstructionSink.h"
 #include "../PMSGUI/Availability/AvailabilityGUI.h"
+#include "../PMSGUI/PMSGUIInterfaces/IParkingSpotSensorDataSink.h"
 
 class DemoManager;
 
@@ -66,7 +67,7 @@ private:
 };
 
 
-class ParkingManagementController : public IInductionSensorDataSink
+class ParkingManagementController : public IInductionSensorDataSink, public IParkingSpotSensorDataSink
 {
 public:
 	ParkingManagementController(
@@ -74,13 +75,17 @@ public:
 		const IAvailabilityInstructionSink& availPtr,
 		const DemoManager& demoManager
 		);
-	// IInductionSensorDataSink
+	//IInductionSensorDataSink
 	// When a vehicle us detected at gate (entry or exit)
 	void vehicleSensed(GateId gateId) override;
 	// When a vehicle has passed through gate
 	void vehicleAbsent(GateId gateId) override;
 	void successfulEntry() override;
 	void successfulExit() override;
+
+	// IParkingSpotSensorDataSink
+	void vehicleParked(SpotId spotId) override;
+	void vehicleUnparked(SpotId spotId) override;
 
 
 	void handleSensorTrigger(const SensorId& sensor, bool detected);

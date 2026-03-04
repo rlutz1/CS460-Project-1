@@ -79,3 +79,21 @@ void ParkingSpotGUI::reset() {
     ultrasonicSensor->reset();
     weightSensor->reset();
 }
+
+
+void ParkingSpotGUI::markSpotAvailable() {
+    currColor = availableColor;
+}
+
+void ParkingSpotGUI::markSpotUnavailable() {
+    currColor = unavailableColor;
+}
+
+
+void ParkingSpotGUI::signalVehicleParkedOnSpot() {
+
+}
+
+void ParkingSpotGUI::signalVehicleLeftParkingSpot() {
+
+}
