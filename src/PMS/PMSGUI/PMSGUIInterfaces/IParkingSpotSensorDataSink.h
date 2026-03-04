@@ -11,8 +11,8 @@ class IParkingSpotSensorDataSink {
     public:
     ~IParkingSpotSensorDataSink() = default;
 
-    virtual void vehicleParked(SpotId spotId) = 0;
-    virtual void vehicleUnparked(SpotId spotId) = 0;
+    virtual void vehicleParked(SpotId spotId, SensorId sensorId) = 0;
+    virtual void vehicleUnparked(SpotId spotId, SensorId sensorId) = 0;
 };
 
 #endif //CS460_PROJECT_1_IPARKINGSPOTSENSORDATASINK_H

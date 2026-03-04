@@ -73,7 +73,7 @@ void ParkingManagementController::successfulExit() {
 	availabilityDisplay.updateLogMessage(remaining > 0 ? "LOT OPEN" : "FULL");
 }
 
-void ParkingManagementController::vehicleParked(SpotId spotId) {
+void ParkingManagementController::vehicleParked(SpotId spotId, SensorId sensorId) {
 	availabilityDisplay.updateInTransit(false);
 
 	// hardcoded values based on run_demo.cpp constraint of 2 floors.
@@ -88,7 +88,7 @@ void ParkingManagementController::vehicleParked(SpotId spotId) {
 	lot.updateParkingSpotAvailability(spotId, floorNum, false); // false === unavailable
 }
 
-void ParkingManagementController::vehicleUnparked(SpotId spotId) {
+void ParkingManagementController::vehicleUnparked(SpotId spotId, SensorId sensorId) {
 	availabilityDisplay.updateInTransit(true);
 
 	// hardcoded values based on run_demo.cpp constraint of 2 floors.

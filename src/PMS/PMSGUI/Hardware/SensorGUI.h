@@ -26,7 +26,7 @@ public slots:
     void trigger();
 
     signals:
-    void triggerSend(bool sensorState);
+    void triggerSend(bool sensorState, SensorId sensorId);
 
 protected:
     QRectF boundingRect() const override;

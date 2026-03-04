@@ -40,9 +40,9 @@ public:
 
     std::shared_ptr<IParkingSpotSensorDataSink> pmc;
 public slots:
-    void signalVehicleSensed(bool vehicleParked);
-    void signalVehicleParkedOnSpot();
-    void signalVehicleLeftParkingSpot();
+    void signalVehicleSensed(bool vehicleParked, SensorId sensorId);
+    void signalVehicleParkedOnSpot(SensorId sensorId);
+    void signalVehicleLeftParkingSpot(SensorId sensorId);
 
 protected:
     QRectF boundingRect() const override;

@@ -94,18 +94,18 @@ void ParkingSpotGUI::markSpotUnavailable() {
     led->color(unavailableColor);
 }
 
-void ParkingSpotGUI::signalVehicleSensed(bool vehicleParked) {
+void ParkingSpotGUI::signalVehicleSensed(bool vehicleParked, SensorId sensorId) {
     if (vehicleParked) {
-        signalVehicleParkedOnSpot();
+        signalVehicleParkedOnSpot(sensorId);
     } else {
-        signalVehicleLeftParkingSpot();
+        signalVehicleLeftParkingSpot(sensorId);
     }
 }
 
-void ParkingSpotGUI::signalVehicleParkedOnSpot() {
-    pmc->vehicleParked(spotId);
+void ParkingSpotGUI::signalVehicleParkedOnSpot(SensorId sensorId) {
+    pmc->vehicleParked(spotId, sensorId);
 }
 
-void ParkingSpotGUI::signalVehicleLeftParkingSpot() {
-    pmc->vehicleUnparked(spotId);
+void ParkingSpotGUI::signalVehicleLeftParkingSpot(SensorId sensorId) {
+    pmc->vehicleUnparked(spotId, sensorId);
 }
