@@ -6,6 +6,7 @@
 #include "ParkingFloor.h"
 #include <map>
 
+#include "../ParkingManagementController.h"
 #include "../../PMSGUI/ParkingLot/ParkingSpotGUI.h"
 #include "../PMCInterfaces/IParkingSpotHardwareSink.h"
 
@@ -13,10 +14,12 @@
 ParkingLot::~ParkingLot() = default;
 
 ParkingLot::ParkingLot(
+    ParkingManagementController& pmc,
 	const InitializationPackage &initPackage,
 	QVector<QPointer<ParkingSpotGUI>> spotsFloor1,
 	QVector<QPointer<ParkingSpotGUI>> spotsFloor2
-)
+) :
+pmc(pmc)
 {
 	// This should collect the unique floor IDs from all the spots
 	std::map<std::string, std::unique_ptr<ParkingFloor>> floorMap;
@@ -82,25 +85,28 @@ int ParkingLot::getCurrentAvailableCount(SpotType type) const
 }
 
 void ParkingLot::notifyFloorStateChanged(SpotType type, ParkingSpotController::State oldState,
-                                         ParkingSpotController::State newState)
+                                         ParkingSpotController::State newState, int floorNum)
 {
 	// This should update the overall counts
 	if (oldState == ParkingSpotController::State::AVAILABLE && newState != ParkingSpotController::State::AVAILABLE)
 	{
 		totalAvailableCounts[type]--;
+		pmc.notifyCountChange(type, floorNum,false);
 	}
 	else if (oldState != ParkingSpotController::State::AVAILABLE && newState ==
 		ParkingSpotController::State::AVAILABLE)
 	{
 		totalAvailableCounts[type]++;
+		pmc.notifyCountChange(type, floorNum,true);
 	}
 	updateState();
+
 }
 
 
-void ParkingLot::updateParkingSpotAvailability(SpotId spotId, int floor, bool available) {
+void ParkingLot::updateParkingSpotAvailability(SpotId spotId, SensorId sensorId, int floor, bool available) {
 	// check which floor we will go to:
-	floors[floor - 1]->updateParkingSpotAvailability(spotId, available);
+	floors[floor - 1]->updateParkingSpotAvailability(spotId, sensorId, available);
 }
 
 void ParkingLot::updateState()

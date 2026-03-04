@@ -55,7 +55,7 @@ void ParkingSpotController::updateStateFromSensors()
 		State oldState = state;
 		state = newState;
 		// TODO: Make sure this is added correctly after finishing ParkingFloor
-		//floor.notifySpotStateChanged(id.type, oldState, newState);
+		floor.notifySpotStateChanged(id.type, oldState, newState);
 	}
 
 	if (state == State::AVAILABLE) {
@@ -74,7 +74,7 @@ void ParkingSpotController::forceUnavailable()
 		State oldState = state;
 		state = State::UNAVAILABLE;
 		spotHardware->markSpotUnavailable();
-		//floor.notifySpotStateChanged(id.type, oldState, state);
+		floor.notifySpotStateChanged(id.type, oldState, state);
 	}
 }
 

@@ -28,16 +28,25 @@ void ParkingFloor::notifySpotStateChanged(SpotType type, ParkingSpotController::
 	if (oldState == ParkingSpotController::State::AVAILABLE && newState != ParkingSpotController::State::AVAILABLE)
 	{
 		availableCounts[type]--;
+		if (id.uniqueId == "floor1") {
+			lot.notifyFloorStateChanged(type, oldState, newState, 1);
+		} else {
+			lot.notifyFloorStateChanged(type, oldState, newState, 2);
+		}
 	}
 	else if (oldState != ParkingSpotController::State::AVAILABLE && newState ==
 		ParkingSpotController::State::AVAILABLE)
 	{
 		availableCounts[type]++;
+		if (id.uniqueId == "floor1") {
+			lot.notifyFloorStateChanged(type, oldState, newState, 1);
+		} else {
+			lot.notifyFloorStateChanged(type, oldState, newState, 2);
+		}
 	}
 	// This should re-evaluate the floor state
 	updateState();
 	// This should notify the parking lot so it can update the overall counts
-	lot.notifyFloorStateChanged(type, oldState, newState);
 }
 
 void ParkingFloor::notifySpotTypeChanged(SpotType oldType, SpotType newType, ParkingSpotController::State currentState)
@@ -62,14 +71,12 @@ void ParkingFloor::addSpot(std::unique_ptr<ParkingSpotController> spot)
 }
 
 
-void ParkingFloor::updateParkingSpotAvailability(SpotId spotId, bool available) {
+void ParkingFloor::updateParkingSpotAvailability(SpotId spotId, SensorId sensorId, bool available) {
 	for (auto& parkingSpot: spots ) {
 		bool spotIdsMatch = parkingSpot->id.uniqueId == spotId.uniqueId;
 		if (spotIdsMatch) {
 			// this is a simulation only logic to ensure that the update is consistent.
-			// TODO, should be from parking lot top if time, vehicleParked()
-			parkingSpot->updateSpotAvailability(spotId.weightId, available);
-			parkingSpot->updateSpotAvailability(spotId.ultrasonicId, available);
+			parkingSpot->updateSpotAvailability(sensorId, available);
 			break;
 		}
 	}

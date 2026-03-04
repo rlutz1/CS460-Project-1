@@ -14,6 +14,7 @@
 #include <QPointer>
 #include <QVector>
 
+class ParkingManagementController;
 class ParkingSpotGUI;
 class DemoManager;
 class ParkingSpotController;
@@ -33,6 +34,7 @@ public:
 
 	// This constructor should build entire lot from initialization package
 	ParkingLot(
+		ParkingManagementController& pmc,
 		const InitializationPackage &initPackage,
 		QVector<QPointer<ParkingSpotGUI>> spotsFloor1,
 		QVector<QPointer<ParkingSpotGUI>> spotsFloor2
@@ -43,7 +45,7 @@ public:
 
 	// This should be called by a floor when a spot's state changes
 	void notifyFloorStateChanged(SpotType type, ParkingSpotController::State oldState,
-	                             ParkingSpotController::State newState);
+	                             ParkingSpotController::State newState, int floorNum);
 
 	// The necessary getter
 	State getState() const
@@ -54,11 +56,12 @@ public:
 
 	/////////////////////////////////// ///////////////////////////////////
 	// assumed to always take in a parking spot id.
-	void updateParkingSpotAvailability(SpotId parkingSpotId, int floor, bool available);
+	void updateParkingSpotAvailability(SpotId parkingSpotId, SensorId sensorId, int floor, bool available);
 
 
 private:
 	State state;
+	ParkingManagementController& pmc;
 	std::vector<std::unique_ptr<ParkingFloor>> floors;
 	// Contains the available spots per type
 	std::map<SpotType, int> totalAvailableCounts;

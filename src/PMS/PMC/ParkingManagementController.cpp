@@ -14,6 +14,7 @@ ParkingManagementController::ParkingManagementController(
 	const DemoManager& demoManager
 	)
 	: lot(
+		*this,
 		initPackage,
 		demoManager.parkingLot->parkingFloors[0]->parkingSpots,
 		demoManager.parkingLot->parkingFloors[1]->parkingSpots
@@ -83,9 +84,11 @@ void ParkingManagementController::vehicleParked(SpotId spotId, SensorId sensorId
 	}else if (spotId.floorId.uniqueId == "floor2"){
 		floorNum = 2;
 	}
-	availabilityDisplay.updateAvailabilityTracking(spotId.type, floorNum, false);
+	lot.updateParkingSpotAvailability(spotId, sensorId, floorNum, false); // false === occupied
+
+	// availabilityDisplay.updateAvailabilityTracking(spotId.type, floorNum, false);
 	// signal spotId parking spot to be UNavailable.
-	lot.updateParkingSpotAvailability(spotId, floorNum, false); // false === unavailable
+
 }
 
 void ParkingManagementController::vehicleUnparked(SpotId spotId, SensorId sensorId) {
@@ -98,9 +101,13 @@ void ParkingManagementController::vehicleUnparked(SpotId spotId, SensorId sensor
 	}else if (spotId.floorId.uniqueId == "floor2"){
 		floorNum = 2;
 	}
-	availabilityDisplay.updateAvailabilityTracking(spotId.type, floorNum, true);
+	// availabilityDisplay.updateAvailabilityTracking(spotId.type, floorNum, true);
 	// signal spotId parking spot to be available.
-	lot.updateParkingSpotAvailability(spotId, floorNum, true); // true === available
+	lot.updateParkingSpotAvailability(spotId, sensorId, floorNum, true); // true === available
+}
+
+void ParkingManagementController::notifyCountChange(SpotType type, int floorNum, bool increase) {
+	availabilityDisplay.updateAvailabilityTracking(type, floorNum, increase);
 }
 
 
