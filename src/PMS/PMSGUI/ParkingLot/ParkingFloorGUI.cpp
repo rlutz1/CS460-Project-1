@@ -116,7 +116,6 @@ void ParkingFloorGUI::initGenFloor(QGraphicsScene& scene, InitializationPackage&
     // TOP ROW NORMALS
     for (int i = 0; i < 12; i++) {
         Point point = {.x = wm.x + (spotWidth * i), .y = wm.y};
-        // cout << point.x << " " << point.y << std::endl;
         normalPlacements.push(point);
     }
     // TOP ROW EV

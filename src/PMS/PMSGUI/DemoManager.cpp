@@ -41,6 +41,8 @@ void DemoManager::runChaosDemo() {
 
     int numCars = 5;
     int delay = 0;
+    // motorcycle, ev included in below hardcodes
+    int spots[] = {13, 17, 2, 23, 10};
 
     for (int i = 0; i < numCars; i++) {
 
@@ -58,8 +60,8 @@ void DemoManager::runChaosDemo() {
             .xSecondExitGateSensor = parkingLot->gate->exitGate->stayOpenSensor->wm.x - 25,
             .yEntryTrack = parkingLot->gate->entranceGate->wm.y + 50,
             .yExitTrack = parkingLot->gate->exitGate->wm.y + 50,
-            .xSpot = parkingLot->parkingFloors[i % 2]->parkingSpots[i]->wm.x + 12, // NOTE: not maleable to num parking spots!
-            .ySpot = parkingLot->parkingFloors[i % 2]->parkingSpots[i]->wm.y + 40,
+            .xSpot = parkingLot->parkingFloors[i % 2]->parkingSpots[spots[i]]->wm.x + 12, // NOTE: not maleable to num parking spots!
+            .ySpot = parkingLot->parkingFloors[i % 2]->parkingSpots[spots[i]]->wm.y + 40,
             .generalMovementTime = 2000,
             .parkPauseTime = 4000,
             .parkTime = 1000
@@ -67,7 +69,7 @@ void DemoManager::runChaosDemo() {
             this,
             true,
             i % 2,
-            i
+            spots[i]
             ); // run the vehicle at a timing offset
 
         delay += 4000;
