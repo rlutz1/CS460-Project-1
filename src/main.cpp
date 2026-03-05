@@ -12,7 +12,7 @@ using std::cout;
 using std::string;
 
 int main(int argc, char *argv[]) {
-    if (((string)argv[1]).compare("-d") == 0) {
+    if (argc > 1 && ((string)argv[1]).compare("-d") == 0) {
         cout << "Booting up parking demo..." << std::endl;
         run_demo(argc, argv);
     } else {

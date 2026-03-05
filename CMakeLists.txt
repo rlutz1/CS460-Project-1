@@ -17,6 +17,7 @@ find_package(Qt6 COMPONENTS
         Core
         Gui
         Widgets
+        Network
         REQUIRED)
 
 #TODO: add your executables along the way . i.e. add_executable(<projName>  <sourceFiles>)
@@ -30,6 +31,12 @@ add_executable(CS460_Project_1
         src/PMS/PMSGUI/DemoManager.cpp
         src/Admin/run_admin.cpp
         src/Admin/run_admin.h
+        src/Admin/AdminUserInterface.cpp
+        src/Admin/AdminUserInterface.h
+        src/Admin/AdminActionManager.cpp
+        src/Admin/AdminActionManager.h
+#        src/Admin/AdminSocket.cpp
+#        src/Admin/AdminSocket.h
         src/PMS/PMSGUI/ParkingLot/ParkingLotGUI.cpp
         src/PMS/PMSGUI/ParkingLot/ParkingLotGUI.h
         src/PMS/PMSGUI/ParkingLot/ParkingSpotGUI.cpp
@@ -74,6 +81,7 @@ target_link_libraries(CS460_Project_1
         Qt::Core
         Qt::Gui
         Qt::Widgets
+        Qt::Network
 )
 
 
