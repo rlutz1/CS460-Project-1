@@ -1,4 +1,8 @@
 
+/**
+ * LOCATION OF MAIN DRIVER FOR BOTH PMS AND ADMIN APPS
+ */
+
 #include "PMS/run_demo.h"
 #include "Admin/run_admin.h"
 #include <string>
