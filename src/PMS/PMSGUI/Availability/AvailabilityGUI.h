@@ -1,6 +1,6 @@
-//
-// Created by Eliud Garcia on 2/24/26.
-//
+/**
+ * this class is to stand in for the availability display driver
+ */
 
 #ifndef CS460_PROJECT_1_AVAILABILITYGUI_H
 #define CS460_PROJECT_1_AVAILABILITYGUI_H
@@ -67,6 +67,5 @@ private:
     int getLotTotalAvailable();
 
 };
-
 
 #endif //CS460_PROJECT_1_AVAILABILITYGUI_H

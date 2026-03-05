@@ -4,8 +4,7 @@
 
 #include "AvailabilityGUI.h"
 
-#include <qgridlayout.h>
-
+#include <QGridLayout>
 #include "../../Initialization.h"
 
 
@@ -82,6 +81,7 @@ AvailabilityGUI::AvailabilityGUI(QWidget* parent, InitializationPackage initPack
 
 }
 
+// directive to increase count in the display
 void AvailabilityGUI::increaseCount(QLabel& countLabel) {
     QString newCount(countLabel.text());
     int tempCount = newCount.toInt();
@@ -90,6 +90,7 @@ void AvailabilityGUI::increaseCount(QLabel& countLabel) {
     countLabel.setText(newCount);
 }
 
+// directive to decrease count in display
 void AvailabilityGUI::decreaseCount(QLabel& countLabel) {
     QString newCount(countLabel.text());
     int tempCount = newCount.toInt();
@@ -98,16 +99,17 @@ void AvailabilityGUI::decreaseCount(QLabel& countLabel) {
     countLabel.setText(newCount);
 }
 
+// directive to increase in transit count only
 void AvailabilityGUI::increaseInTransitCount() {
     increaseCount(inTransit);
 }
 
+// directive to decrease in transit count only
 void AvailabilityGUI::decreaseInTransitCount() {
     decreaseCount(inTransit);
 }
 
-
-
+// access point to increase a certain type availability by floor
 void AvailabilityGUI::increaseAvailabilityCount(SpotType spotType, int floor) {
     switch (spotType) {
         case NORMAL:
@@ -198,8 +200,7 @@ bool AvailabilityGUI::decreaseAvailabilityCount(SpotType spotType, int floor) {
     return false;
 }
 
-
-
+// access point to set the log message
 void AvailabilityGUI::setLogMsg(std::string newLogMsg) {
     QString qnewLogMsg;
     qnewLogMsg.append(newLogMsg);
@@ -207,10 +208,7 @@ void AvailabilityGUI::setLogMsg(std::string newLogMsg) {
     log.setText(qnewLogMsg);
 }
 
-QSize AvailabilityGUI::sizeHint() const {
-    return QSize(500, 500);
-}
-
+// access point to request total lot availability
 int AvailabilityGUI::getLotTotalAvailable() {
     int totalLotAvailability = 0;
 
@@ -261,4 +259,9 @@ void AvailabilityGUI::reset() {
     inTransit.setText(QString::number(0));
 
     log.setText("LOT OPEN");
+}
+
+// for the Qmainwidget holding this
+QSize AvailabilityGUI::sizeHint() const {
+    return QSize(500, 500);
 }
