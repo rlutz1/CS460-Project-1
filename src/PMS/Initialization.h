@@ -1,6 +1,7 @@
-//
-// Created by lutzr on 2/25/2026.
-//
+/**
+ * these definitions are used for ease of initialization
+ * of the parking lot for both front and back end
+ */
 
 #ifndef CS460_PROJECT_1_INITIALIZATION_H
 #define CS460_PROJECT_1_INITIALIZATION_H

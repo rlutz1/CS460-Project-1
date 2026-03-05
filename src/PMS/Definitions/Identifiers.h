@@ -1,6 +1,8 @@
-//
-// Created by lutzr on 2/25/2026.
-//
+/**
+ * these are useful definitions, following SAD mentions
+ * of ids, types, etc that are useful in the back and
+ * front end logic.
+ */
 
 #ifndef CS460_PROJECT_1_IDENTIFIERS_H
 #define CS460_PROJECT_1_IDENTIFIERS_H
@@ -42,6 +44,7 @@ struct SpotId {
     SensorId weightId;
 };
 
+// a gate identifier
 struct GateId {
     string uniqueId;
     GateType type;

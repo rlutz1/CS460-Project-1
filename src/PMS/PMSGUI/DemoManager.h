@@ -1,6 +1,7 @@
-//
-// Created by Eliud Garcia on 2/24/26.
-//
+/**
+ * this class acts as a manger of the demos, and doubles
+ * as the graphics view where the primary demonstration occurs.
+ */
 
 #ifndef CS460_PROJECT_1_DEMOMANAGER_H
 #define CS460_PROJECT_1_DEMOMANAGER_H
@@ -21,11 +22,6 @@ class VehicleGUI;
 struct SpotId;
 struct GateId;
 
-
-using std::map;
-
-// demo manager -- container for the graphic view and initiating the
-// stop and start of demos.
 class DemoManager : public QGraphicsView {
     Q_OBJECT;
 public:
@@ -40,8 +36,6 @@ public:
     // public for signal easier signal relaying between vehicle and different parking lot components
     QPointer<ParkingLotGUI> parkingLot;
     void addSignalReceiver(std::shared_ptr<ParkingManagementController> pmc) const;
-
-
 
 public slots: // slots for signals to send to!
     void runSimpleDemo();

@@ -1,42 +1,19 @@
-//
-// Created by Eliud Garcia on 2/24/26.
-//
+/**
+ * this class is primarily for visualize a vehicle
+ * driving through the lot, entering, exiting, and parking.
+ * these are dynamically created by the demo manager.
+ */
 
 #ifndef CS460_PROJECT_1_VEHICLE_H
 #define CS460_PROJECT_1_VEHICLE_H
 #include <QGraphicsWidget>
 #include <QSequentialAnimationGroup>
-#include <QEasingCurve>
 #include <QPropertyAnimation>
-
 #include "DemoManager.h"
 #include "../../PMS/Definitions/Identifiers.h"
 #include "GUIStructs/GUIStructs.h"
 #include <QPauseAnimation>
 class DemoManager;
-
-struct AnimationMeta {
-    int entryDelay;
-
-    QEasingCurve movementType;
-    int approachGateTime;
-    int throughGateTime;
-    int xFirstEntryGateSensor;
-    int xSecondEntryGateSensor;
-    int xFirstExitGateSensor;
-    int xSecondExitGateSensor;
-
-    int yEntryTrack;
-    int yExitTrack;
-
-    int xSpot;
-    int ySpot;
-
-    int generalMovementTime;
-    int parkPauseTime;
-    int parkTime;
-    // int gateOpenDelay; // this should be constant
-};
 
 class VehicleGUI : public QGraphicsWidget {
 
@@ -79,10 +56,7 @@ private:
 
     void initAnimation(AnimationMeta animMeta, bool chaos);
     void initSignals();
-    void removePause(int x, int y);
+
 };
-
-
-
 
 #endif //CS460_PROJECT_1_VEHICLE_H

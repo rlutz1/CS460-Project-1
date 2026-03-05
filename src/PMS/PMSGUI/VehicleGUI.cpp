@@ -40,22 +40,17 @@ VehicleGUI::VehicleGUI(
     cachedFloorToParkIn(floorToParkIn),
     cachedParkSpotIndexFromFloor(parkSpotIndexFromFloor)
 {
+    // style setting
     resize(wm.width, wm.height);
-    setPos(0, animationMeta.yEntryTrack); // careful with this, enure it works every time! can cause issues!
+    setPos(0, animationMeta.yEntryTrack);
     setZValue(wm.zPos);
 
+    // initialize the animation
     initAnimation(animationMeta, chaos);
 }
 
+// add animation finish signals to the signal slots -- trigger(), as seen in SAD.
 void VehicleGUI::initSignals() {
-    // // initialize the open entry gate signal connection
-    // connect(&approachEntryGate, &QPropertyAnimation::finished,
-    //    demoManager->parkingLot->gate->entranceGate, &EntranceGateGUI::vehicleOnEntranceGateInductionSensor);
-    //
-    // // initialize the vehicle has passed through the entry gate successfully signal
-    // connect(&passSecondEntrySensor, &QPropertyAnimation::finished,
-    //     demoManager->parkingLot->gate->entranceGate, &EntranceGateGUI::vehiclePassedSecondEntranceGateSensor);
-
     // initialize the open entry gate signal connection
     connect(&approachEntryGate, &QPropertyAnimation::finished,
        demoManager->parkingLot->gate->entranceGate->initOpenSensor, &SensorGUI::trigger);
@@ -84,15 +79,6 @@ void VehicleGUI::initSignals() {
         demoManager->parkingLot->parkingFloors[cachedFloorToParkIn]
         ->parkingSpots[cachedParkSpotIndexFromFloor]->weightSensor, &SensorGUI::trigger);
 
-
-    // // initialize the open exit gate signal connection
-    // connect(&approachExitGate, &QPropertyAnimation::finished,
-    //     demoManager->parkingLot->gate->exitGate, &ExitGateGUI::vehicleOnExitGateInductionSensor);
-    //
-    // // initialize the vehicle has passed through the exit gate successfully signal
-    // connect(&passSecondExitSensor, &QPropertyAnimation::finished,
-    //       demoManager->parkingLot->gate->exitGate, &ExitGateGUI::vehiclePassedSecondExitGateSensor);
-
     // initialize the open exit gate signal connection
     connect(&approachExitGate, &QPropertyAnimation::finished,
         demoManager->parkingLot->gate->exitGate->initOpenSensor, &SensorGUI::trigger);
@@ -102,6 +88,7 @@ void VehicleGUI::initSignals() {
           demoManager->parkingLot->gate->exitGate->stayOpenSensor, &SensorGUI::trigger);
 }
 
+// initialize the animation associated with this vehicle specifically.
 void VehicleGUI::initAnimation(AnimationMeta animMeta, bool chaos) {
     offsetPause.setDuration(animMeta.entryDelay); // for controlling start flow
 

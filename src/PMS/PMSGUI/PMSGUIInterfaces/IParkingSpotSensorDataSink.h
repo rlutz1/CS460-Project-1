@@ -7,6 +7,10 @@
 
 struct SpotId;
 
+/**
+ * IParkingSpotSensorDataSink - abstract class:
+ *      For PMC component to derive (i.e. implement interface).
+ */
 class IParkingSpotSensorDataSink {
     public:
     ~IParkingSpotSensorDataSink() = default;

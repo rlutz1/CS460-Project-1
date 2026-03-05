@@ -3,19 +3,10 @@
 //
 
 #include "DemoManager.h"
-
-#include <iostream>
-
 #include "../Initialization.h"
-#include <QPoint>
 #include <QParallelAnimationGroup>
 #include <QSequentialAnimationGroup>
-using std::cout;
-
-
 #include "ParkingLot/ParkingLotGUI.h"
-#include <random>
-
 
 /**
  * this constructor initializes the parking lot, which is the wrapper
@@ -43,9 +34,8 @@ DemoManager::DemoManager(
     setScene(&scene);
 } // end constructor
 
-/**
- * run many vehicles in a cycle to showcase stability
- */
+
+// run many vehicles in a cycle to showcase stability
 void DemoManager::runChaosDemo() {
     stopDemo(); // clean out whatever's there
 
@@ -88,9 +78,7 @@ void DemoManager::runChaosDemo() {
     currAnimation.start();
 } // end method
 
-/**
- * run exactly 1 vehicle through entry, park, and exit.
- */
+// run exactly 1 vehicle through entry, park, and exit.
 void DemoManager::runSimpleDemo() {
     stopDemo(); // clean out whatever's there
 
@@ -121,13 +109,12 @@ void DemoManager::runSimpleDemo() {
             ); // single vehicle
     scene.addItem(vehicle);
     activeVehicles.push_back(vehicle); // add to active vehicles
-    // vehicle->animationGroup.setLoopCount(1);// single iteration (this is default)
     currAnimation.addAnimation(&(vehicle->animationGroup)); // get this animation
     currAnimation.start(); // start animation
-    // TODO: need to clean up on full finish!
+    // TODO: clean up on full finish if time!
 }
 
-// stop all animations, clear to initial state.
+// stop all animations, clear to initial state (visually).
 void DemoManager::stopDemo() {
     currAnimation.stop(); // stop the animation (should be controlling with button enables, however)
     // currAnimation.clear(); // clear the vehicle animations, only when dynamically allocated
@@ -137,6 +124,7 @@ void DemoManager::stopDemo() {
     activeVehicles.clear(); // clear out the vector
     parkingLot->reset(); // reset the lot
     availabilityDisplay->reset(); // reset the avail display
+    // TODO: reset internal state if time!
 }
 
 /**
