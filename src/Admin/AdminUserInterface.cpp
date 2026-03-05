@@ -59,6 +59,8 @@ void AdminUserInterface::handleLogin()
     {
         QMessageBox::information(this, "Login", "Login Successful");
         loginSuccessful = true;
+        usernameEdit->clear();
+        passwordEdit->clear();
         this->close();
     }
     else

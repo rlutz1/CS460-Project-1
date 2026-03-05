@@ -17,6 +17,7 @@ find_package(Qt6 COMPONENTS
         Core
         Gui
         Widgets
+        Network
         REQUIRED)
 
 #TODO: add your executables along the way . i.e. add_executable(<projName>  <sourceFiles>)
@@ -78,6 +79,7 @@ target_link_libraries(CS460_Project_1
         Qt::Core
         Qt::Gui
         Qt::Widgets
+        Qt::Network
 )
 
 

@@ -6,11 +6,13 @@
 #include <QMainWindow>
 #include <QTextEdit>
 
+#include "AdminSocket.h"
+
 class AdminActionManager : public QMainWindow{
     Q_OBJECT
 
 public:
-    explicit AdminActionManager(QWidget *parent = 0);
+    explicit AdminActionManager(QWidget *parent, AdminSocket* adminSoc);
 
 private slots:
     void handleAvailability();
@@ -23,7 +25,7 @@ private:
     QPushButton *logoutButton;
     QTextEdit *actionReporter;
 
-    bool logout;
+    AdminSocket* adminSocket;
 };
 
 
