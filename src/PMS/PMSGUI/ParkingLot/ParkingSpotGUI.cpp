@@ -6,7 +6,6 @@
 
 #include <QGraphicsScene>
 #include <QPainter>
-
 #include "../PMSGUIInterfaces/IParkingSpotSensorDataSink.h"
 
 
@@ -38,7 +37,7 @@ ParkingSpotGUI::ParkingSpotGUI(QGraphicsScene& scene, SpotId spotId, WidgetMeta 
     ultrasonicSensor->setParentItem(this);
     weightSensor->setParentItem(this);
 
-    // TODO move to function initAvailableColor()
+    // simple initial colors on start.
     switch (spotId.type) {
         case EV:
             availableColor = Qt::yellow;
@@ -53,10 +52,46 @@ ParkingSpotGUI::ParkingSpotGUI(QGraphicsScene& scene, SpotId spotId, WidgetMeta 
         default:
             availableColor = Qt::green;
     }
+
     led->currColor = availableColor;
 
+    // connect trigger signals to this access point to the pmc
     connect(ultrasonicSensor, &SensorGUI::triggerSend, this, &ParkingSpotGUI::signalVehicleSensed);
     connect(weightSensor, &SensorGUI::triggerSend, this, &ParkingSpotGUI::signalVehicleSensed);
+}
+
+// directive signal to mark the spot available
+void ParkingSpotGUI::markSpotAvailable() {
+    led->color(availableColor);
+}
+
+// directive signal to mark spot occupied
+void ParkingSpotGUI::markSpotOccupied() {
+    led->color(occupiedColor);
+}
+
+// directive signal to mark spot unavailable
+void ParkingSpotGUI::markSpotUnavailable() {
+    led->color(unavailableColor);
+}
+
+// general funnel signal to take sensor high/low and transmit accordingly to pmc
+void ParkingSpotGUI::signalVehicleSensed(bool vehicleParked, SensorId sensorId) {
+    if (vehicleParked) {
+        signalVehicleParkedOnSpot(sensorId);
+    } else {
+        signalVehicleLeftParkingSpot(sensorId);
+    }
+}
+
+// notify pmc that a vehicle has parked
+void ParkingSpotGUI::signalVehicleParkedOnSpot(SensorId sensorId) {
+    pmc->vehicleParked(spotId, sensorId);
+}
+
+// notify pmc that a vehicle has left
+void ParkingSpotGUI::signalVehicleLeftParkingSpot(SensorId sensorId) {
+    pmc->vehicleUnparked(spotId, sensorId);
 }
 
 // REQUIRED FOR GRAPHICS ITEM
@@ -75,37 +110,9 @@ void ParkingSpotGUI::paint(QPainter *painter,
     painter->drawRect(boundingRect());
 }
 
+// visual reset of this and its components.
 void ParkingSpotGUI::reset() {
     led->reset(availableColor);
     ultrasonicSensor->reset();
     weightSensor->reset();
-}
-
-
-void ParkingSpotGUI::markSpotAvailable() {
-    led->color(availableColor);
-}
-
-void ParkingSpotGUI::markSpotOccupied() {
-    led->color(occupiedColor);
-}
-
-void ParkingSpotGUI::markSpotUnavailable() {
-    led->color(unavailableColor);
-}
-
-void ParkingSpotGUI::signalVehicleSensed(bool vehicleParked, SensorId sensorId) {
-    if (vehicleParked) {
-        signalVehicleParkedOnSpot(sensorId);
-    } else {
-        signalVehicleLeftParkingSpot(sensorId);
-    }
-}
-
-void ParkingSpotGUI::signalVehicleParkedOnSpot(SensorId sensorId) {
-    pmc->vehicleParked(spotId, sensorId);
-}
-
-void ParkingSpotGUI::signalVehicleLeftParkingSpot(SensorId sensorId) {
-    pmc->vehicleUnparked(spotId, sensorId);
 }

@@ -1,23 +1,19 @@
-//
-// Created by lutzr on 2/25/2026.
-//
+/**
+ * this class is primarily used as a container for all components of the lot
+ */
 
 #ifndef CS460_PROJECT_1_PARKINGLOTGUI_H
 #define CS460_PROJECT_1_PARKINGLOTGUI_H
-// #include <unordered_map>
-#include <QGraphicsWidget>
+
 #include "ParkingFloorGUI.h"
-
 #include "../Gate/GateGUI.h"
-
 #include "../../Initialization.h"
-#include "../../Definitions/Identifiers.h"
 #include "../GUIStructs/GUIStructs.h"
 #include <QPointer>
 #include <QVector>
+
 class QGraphicsScene;
 using string = std::string;
-using std::map; // this may not work, remove if so
 
 // ParkingLot GUI has floors and gate. sets up those widgets
 // and adds to the scene.
@@ -37,7 +33,5 @@ protected:
            QWidget *widget) override;
 
 };
-
-
 
 #endif //CS460_PROJECT_1_PARKINGLOTGUI_H

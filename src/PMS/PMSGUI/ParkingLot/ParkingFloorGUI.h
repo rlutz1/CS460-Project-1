@@ -1,10 +1,10 @@
-//
-// Created by Eliud Garcia on 2/24/26.
-//
+/**
+ * this is primarily a visual container class for parking spot widgets.
+ */
 
 #ifndef CS460_PROJECT_1_PARKINGFLOOR_H
 #define CS460_PROJECT_1_PARKINGFLOOR_H
-#include <QGraphicsWidget>
+
 #include "ParkingSpotGUI.h"
 #include <QPointer>
 #include <QVector>
@@ -31,7 +31,6 @@ protected:
 private:
     void initGenFloor(QGraphicsScene& scene, InitializationPackage& initPackage);
     void initFirstFloor(QGraphicsScene& scene, InitializationPackage& initPackage);
-    // void initSpots(InitializationPackage& initPackage); // TODO: for separating the above monsters if time
 };
 
 #endif //CS460_PROJECT_1_PARKINGFLOOR_H

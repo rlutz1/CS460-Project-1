@@ -41,6 +41,7 @@ ExitGateGUI::ExitGateGUI(QGraphicsScene& scene, InitializationPackage& initPacka
     resize(wm.width, wm.height);
     setZValue(wm.zPos);
 
+    // connect trigger signals to this access point to the pmc
     connect(initOpenSensor, &SensorGUI::triggerSend, this, &ExitGateGUI::vehicleOnExitGateInductionSensor);
     connect(stayOpenSensor, &SensorGUI::triggerSend, this, &ExitGateGUI::vehiclePassedSecondExitGateSensor);
 }

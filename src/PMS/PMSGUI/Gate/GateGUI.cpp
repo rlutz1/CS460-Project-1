@@ -41,11 +41,9 @@ QRectF GateGUI::boundingRect() const {
 void GateGUI::paint(QPainter *painter,
     const QStyleOptionGraphicsItem *option,
     QWidget *widget) {
-    // painter->setBackground(Qt::transparent);
     painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
     painter->setPen(QPen(Qt::black));
     painter->setBrush(QBrush(wm.color));
-    // painter->setBrush(QBrush(Qt::transparent));
     painter->drawRect(boundingRect());
 }
 

@@ -5,7 +5,6 @@
 #include "ParkingLotGUI.h"
 
 #include <iostream>
-#include <QGraphicsScene>
 #include <QPainter>
 #include <QVector>
 #include <QPointer>
@@ -26,11 +25,11 @@ ParkingLotGUI::ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initP
     setZValue(wm.zPos); // hard coded, needs to be underneath ALL
     gate->setParentItem(this);
 
-
+    // initialize the floors
     QPointer<ParkingFloorGUI> floor;
     for (FloorId id: initPackage.floorIds) {
-        // the scene object will delete ALL ITEMS on deconstruction. no cleanup required from us.
-        if (id.uniqueId.compare("floor1") == 0) { // dirty, i know, but doable since we will not change
+
+        if (id.uniqueId.compare("floor1") == 0) { // this is notably not maleable to change
             floor = new ParkingFloorGUI(
             scene,
             initPackage,
@@ -47,9 +46,9 @@ ParkingLotGUI::ParkingLotGUI(QGraphicsScene& scene, InitializationPackage& initP
         }
         floor->setParentItem(this);
         parkingFloors.push_back(floor);
-    } // end loop
+    }
 
-} // end constructor
+}
 
 
 // REQUIRED FOR GRAPHICS ITEM
@@ -68,6 +67,7 @@ void ParkingLotGUI::paint(QPainter *painter,
     painter->drawRect(boundingRect());
 }
 
+// visually reset this and components
 void ParkingLotGUI::reset() {
     for (QPointer<ParkingFloorGUI> floor: parkingFloors) {
         floor->reset();

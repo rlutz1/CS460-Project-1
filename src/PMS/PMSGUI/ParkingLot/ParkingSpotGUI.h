@@ -1,17 +1,17 @@
-//
-// Created by Eliud Garcia on 2/24/26.
-//
+/**
+ * this class is intended to be a visual container/signal funnel for
+ * demonstration for sensors and led.
+ */
 
 #ifndef CS460_PROJECT_1_PARKINGSPOT_H
 #define CS460_PROJECT_1_PARKINGSPOT_H
+
 #include <QGraphicsWidget>
 #include <QPointer>
-
 #include "../GUIStructs/GUIStructs.h"
 #include "../../Initialization.h"
 #include "../Hardware/LedGUI.h"
 #include "../Hardware/SensorGUI.h"
-
 #include "../../PMC/PMCInterfaces//IParkingSpotHardwareSink.h"
 
 class IParkingSpotSensorDataSink;

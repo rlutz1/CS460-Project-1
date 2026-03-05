@@ -1,17 +1,12 @@
-//
-// Created by Eliud Garcia on 2/24/26.
-//
 
 #include "ParkingFloorGUI.h"
-#include <iostream>
 #include <QGraphicsScene>
 #include <QPainter>
 #include <stack>
 #include <QVector>
 #include <QPointer>
-using std::cout;
-using std::stack;
 
+using std::stack;
 
 ParkingFloorGUI::ParkingFloorGUI(QGraphicsScene& scene, InitializationPackage& initPackage, FloorId floorId, WidgetMeta widgetMeta) :
     floorId(floorId),
@@ -26,26 +21,6 @@ ParkingFloorGUI::ParkingFloorGUI(QGraphicsScene& scene, InitializationPackage& i
     } else {
         initGenFloor(scene, initPackage);
     }
-
-}
-
-// REQUIRED FOR GRAPHICS ITEM
-QRectF ParkingFloorGUI::boundingRect() const {
-    qreal penWidth = 1;
-    return QRectF(wm.x, wm.y, // this is BETTER
-                  wm.width, wm.height);
-}
-
-// REQUIRED FOR GRAPHICS ITEM
-void ParkingFloorGUI::paint(QPainter *painter,
-                            const QStyleOptionGraphicsItem *option,
-                            QWidget *widget) {
-    // cout << floorId.uniqueId << " painting" << std::endl;
-    // painter->setBackground(Qt::transparent);
-    painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
-    painter->setPen(QPen(Qt::black));
-    painter->setBrush(QBrush(wm.color));
-    painter->drawRect(boundingRect());
 }
 
 
@@ -194,6 +169,23 @@ void ParkingFloorGUI::initGenFloor(QGraphicsScene& scene, InitializationPackage&
     }
 }
 
+// REQUIRED FOR GRAPHICS ITEM
+QRectF ParkingFloorGUI::boundingRect() const {
+    return QRectF(wm.x, wm.y, // this is BETTER
+                  wm.width, wm.height);
+}
+
+// REQUIRED FOR GRAPHICS ITEM
+void ParkingFloorGUI::paint(QPainter *painter,
+                            const QStyleOptionGraphicsItem *option,
+                            QWidget *widget) {
+    painter->setCompositionMode(QPainter::CompositionMode_SourceOver);
+    painter->setPen(QPen(Qt::black));
+    painter->setBrush(QBrush(wm.color));
+    painter->drawRect(boundingRect());
+}
+
+// visually reset this and its components
 void ParkingFloorGUI::reset() {
     for (QPointer<ParkingSpotGUI> parkingSpot : parkingSpots) {
         parkingSpot->reset();

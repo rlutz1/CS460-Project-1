@@ -38,6 +38,7 @@ EntranceGateGUI::EntranceGateGUI(QGraphicsScene& scene, InitializationPackage& i
     resize(wm.width, wm.height);
     setZValue(wm.zPos);
 
+    // connect trigger signals to this access point to the pmc
     connect(initOpenSensor, &SensorGUI::triggerSend, this, &EntranceGateGUI::vehicleOnEntranceGateInductionSensor);
     connect(stayOpenSensor, &SensorGUI::triggerSend, this, &EntranceGateGUI::vehiclePassedSecondEntranceGateSensor);
 }
