@@ -6,6 +6,13 @@
 #include <QMessageBox>
 #include <QPushButton>
 
+#include "../PMS/Definitions/Identifiers.h"
+#include "../PMS/Initialization.h"
+#include "../PMS/run_demo.h"
+#include <vector>
+using std::vector;
+
+
 AdminActionManager::AdminActionManager(QWidget* parent) : QMainWindow(parent)
 // AdminActionManager::AdminActionManager(QWidget* parent, AdminSocket* adminSoc) : QMainWindow(parent), adminSocket(adminSoc)
 {
@@ -16,12 +23,24 @@ AdminActionManager::AdminActionManager(QWidget* parent) : QMainWindow(parent)
 
     // Admin Actions for parking lot
     options = new QComboBox();
-    options -> addItem("Make Unavailable");
     options -> addItem("Make Available");
+    options -> addItem("Make Unavailable");
+
+    // Parking spots list
+    InitializationPackage initPackage = genInitPackage();
     parking = new QComboBox();
-    parking -> addItem("ID001");
-    parking -> addItem("ID002");
-    parking -> addItem("ID003");
+    for (SpotId id : initPackage.spotIds)
+    {
+        if (id.uniqueId.find("spot") != std::string::npos)
+        activities.push_back({id, true});
+    }
+    for (SpotActivity id : activities)
+    {
+        parking -> addItem(id.spotId.uniqueId.data());
+    }
+    // parking -> addItem("ID001");
+    // parking -> addItem("ID002");
+    // parking -> addItem("ID003");
 
     // Buttons to confirm actions or logout
     confirmButton = new QPushButton("Confirm");
@@ -51,16 +70,37 @@ void AdminActionManager::handleAvailability()
 {
     QString optionSelected = options->currentText();
     QString selectedParking = parking->currentText();
-    QString message;
+    std::vector<SpotActivity>::iterator it = std::find_if(activities.begin(),
+        activities.end(), [&](const SpotActivity &a)
+        {
+            return a.spotId.uniqueId.data() == selectedParking;
+        });
+    // QString message;
     if (optionSelected == "Make Available")
     {
-        message = "Made " + selectedParking + " Available";
-        actionReporter -> append("Made " + selectedParking + " Available");
+        if (it->isAvailable == false)
+        {
+            actionReporter -> append("Made " + selectedParking + " Available");
+            it->isAvailable = true;
+        }
+        else
+        {
+            actionReporter -> append(selectedParking + " is already Available");
+        }
+        // message = "Made " + selectedParking + " Available";
     }
     else if (optionSelected == "Make Unavailable")
     {
-        message = "Made " + selectedParking + " Available";
-        actionReporter -> append("Made " + selectedParking + " Unavailable");
+        if (it->isAvailable == true)
+        {
+            actionReporter -> append("Made " + selectedParking + " Unavailable");
+            it->isAvailable = false;
+        }
+        else
+        {
+            actionReporter -> append(selectedParking + " is already Unavailable");
+        }
+        // message = "Made " + selectedParking + " Available";
     }
     // if (adminSocket && adminSocket->isConnected())
     // {

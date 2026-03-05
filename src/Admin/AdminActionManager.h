@@ -5,6 +5,15 @@
 #include <QComboBox>
 #include <QMainWindow>
 #include <QTextEdit>
+#include <vector>
+#include "../PMS/run_demo.h"
+using std::vector;
+
+struct SpotActivity
+{
+    SpotId spotId;
+    bool isAvailable;
+};
 
 #include "AdminSocket.h"
 
@@ -25,6 +34,7 @@ private:
     QPushButton *confirmButton;
     QPushButton *logoutButton;
     QTextEdit *actionReporter;
+    std::vector<SpotActivity> activities;
 
     // AdminSocket* adminSocket;
 };
