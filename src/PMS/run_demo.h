@@ -1,6 +1,6 @@
-//
-// Created by lutzr on 2/25/2026.
-//
+/**
+ * runner for the demo application!
+ */
 
 #ifndef CS460_PROJECT_1_RUN_DEMO_H
 #define CS460_PROJECT_1_RUN_DEMO_H

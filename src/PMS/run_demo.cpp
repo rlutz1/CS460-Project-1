@@ -41,8 +41,6 @@ int run_demo(int argc, char *argv[]) {
         availabilityDisplay
         ); // initialize the front end
 
-   // initialize sink? or unnecessary step -- leaving for eliud for now
-
     // init the main window
     // there are issues with scoping of the following,
     // so it's here to avoid leaking and crashing on exit
@@ -50,15 +48,15 @@ int run_demo(int argc, char *argv[]) {
     QVBoxLayout layout(&mainWindow);
     mainWindow.setLayout(&layout);
 
-
-    // layout for stacking the bottons on left sid
+    // layout for stacking the bottons on left side
     QWidget buttonContainer(&bottomContainer);
     QVBoxLayout buttonLayout(&buttonContainer);
 
+    // init buttons
     QPushButton startSimpleDemoButton("Start Simple Demo", &buttonContainer); // TODO disable both on click, enable stop
     QPushButton startChaosDemoButton("Start Chaos Demo", &buttonContainer); // TODO disable both on click, enable stop
     QPushButton stopDemoButton("Stop Demo", &buttonContainer);// TODO disable this, enable both demo buttons
-    // TODO: next line, connections for all
+
     QObject::connect(&startSimpleDemoButton, &QPushButton::clicked, &demoManager, &DemoManager::runSimpleDemo);
     QObject::connect(&startChaosDemoButton, &QPushButton::clicked, &demoManager, &DemoManager::runChaosDemo);
     QObject::connect(&stopDemoButton, &QPushButton::clicked, &demoManager, &DemoManager::stopDemo);
@@ -71,6 +69,7 @@ int run_demo(int argc, char *argv[]) {
     bottomLayout.addWidget(&buttonContainer);
     bottomLayout.addWidget((QWidget*) &availabilityDisplay);
 
+    // make the pmc shareable to enable sink communication
     std::shared_ptr<ParkingManagementController> pmc = std::make_shared<ParkingManagementController>(initPackage, availabilityDisplay, demoManager); // initialize the backend
     demoManager.addSignalReceiver(pmc);
     // adding main two containers to the UI
