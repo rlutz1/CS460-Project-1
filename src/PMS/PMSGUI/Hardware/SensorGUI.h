@@ -30,8 +30,6 @@ public slots:
     signals:
     void triggerSend(bool sensorState, SensorId sensorId);
 
-    void reset();
-
 protected:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
