@@ -6,7 +6,6 @@
 #include <QDebug>
 
 class AdminSocket : public QObject{
-    Q_OBJECT
 
 public:
     explicit AdminSocket(QObject *parent = nullptr);

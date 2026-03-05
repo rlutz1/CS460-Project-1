@@ -35,6 +35,8 @@ add_executable(CS460_Project_1
         src/Admin/AdminUserInterface.h
         src/Admin/AdminActionManager.cpp
         src/Admin/AdminActionManager.h
+#        src/Admin/AdminSocket.cpp
+#        src/Admin/AdminSocket.h
         src/PMS/PMSGUI/ParkingLot/ParkingLotGUI.cpp
         src/PMS/PMSGUI/ParkingLot/ParkingLotGUI.h
         src/PMS/PMSGUI/ParkingLot/ParkingSpotGUI.cpp

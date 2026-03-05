@@ -6,7 +6,8 @@
 #include <QMessageBox>
 #include <QPushButton>
 
-AdminActionManager::AdminActionManager(QWidget* parent, AdminSocket* adminSoc) : QMainWindow(parent), adminSocket(adminSoc)
+AdminActionManager::AdminActionManager(QWidget* parent) : QMainWindow(parent)
+// AdminActionManager::AdminActionManager(QWidget* parent, AdminSocket* adminSoc) : QMainWindow(parent), adminSocket(adminSoc)
 {
     setWindowTitle("Main Page");
     setFixedSize(600, 300);
@@ -61,10 +62,10 @@ void AdminActionManager::handleAvailability()
         message = "Made " + selectedParking + " Available";
         actionReporter -> append("Made " + selectedParking + " Unavailable");
     }
-    if (adminSocket && adminSocket->isConnected())
-    {
-        adminSocket -> sendMessage(message);
-    }
+    // if (adminSocket && adminSocket->isConnected())
+    // {
+    //     adminSocket -> sendMessage(message);
+    // }
 }
 
 /**

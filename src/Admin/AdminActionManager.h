@@ -12,7 +12,8 @@ class AdminActionManager : public QMainWindow{
     Q_OBJECT
 
 public:
-    explicit AdminActionManager(QWidget *parent, AdminSocket* adminSoc);
+    explicit AdminActionManager(QWidget *parent = 0);
+    // explicit AdminActionManager(QWidget *parent = 0, AdminSocket* adminSoc = 0);
 
 private slots:
     void handleAvailability();
@@ -25,7 +26,7 @@ private:
     QPushButton *logoutButton;
     QTextEdit *actionReporter;
 
-    AdminSocket* adminSocket;
+    // AdminSocket* adminSocket;
 };
 
 

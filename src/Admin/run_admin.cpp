@@ -6,7 +6,7 @@
 
 #include "AdminUserInterface.h"
 #include "AdminActionManager.h"
-#include "AdminSocket.h"
+// #include "AdminSocket.h"
 
 
 // driver for admin app
@@ -24,15 +24,15 @@ int run_admin(int argc, char *argv[]) {
         return 0;
     }
 
-    AdminSocket* adminSocket = new AdminSocket();
-    QString serverHost = "127.0.0.1";
-    quint16 serverPort = 12345;
-    if (!adminSocket->connectToServer(serverHost, serverPort))
-    {
-        QMessageBox::warning(nullptr, "Connection Failed", "Could not connect to Server");
-        delete adminSocket;
-        return 0;
-    }
+    // AdminSocket* adminSocket = new AdminSocket();
+    // QString serverHost = "127.0.0.1";
+    // quint16 serverPort = 12345;
+    // if (!adminSocket->connectToServer(serverHost, serverPort))
+    // {
+    //     QMessageBox::warning(nullptr, "Connection Failed", "Could not connect to Server");
+    //     delete adminSocket;
+    //     return 0;
+    // }
 
     // Run admin application login
     AdminActionManager mainPage;
@@ -40,8 +40,8 @@ int run_admin(int argc, char *argv[]) {
     int result = a.exec();
 
     // Cleanup
-    adminSocket->disconnect();
-    delete adminSocket;
+    // adminSocket->disconnect();
+    // delete adminSocket;
 
     return result;
 }
