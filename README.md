@@ -70,5 +70,46 @@ This directory contains a single header file for useful identifying structs for 
 
 ## Demo 
 
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# maybe put the demo report stuff pasted here?
+NOTE: the slides of our presentation can be found under `documentation/demo-slides` in this repository if desired in both PDF and PPTX format.
+
+The demo runs as follows: (1) the showing of a single car entering, parking, and exiting the structure, and (2) multiple cars cycling through, in and out of the parking lot, interacting with different types of spots (e.g., motorcycle and EV spots).
+
+For visual context, our demo was a singular GUI window representing a parking lot with an availability display beside it. This window displayed hardware graphically, such as gates, spikes, sensors, and LEDs placed on a 2 floored parking structure (separated by a fine line to indicate the first floor on the left, and the second floor on the right). The parking lot contained one entrance gate and one exit gate, with their respective spikes; the parking lot’s floors had a variety of different parking spot types (e.g., EV, Motorcycle, etc). The availability display was represented near the lot graphic to detail the parking availability count during the runs of the demo for each spot type and floor - it also depicted the in-transit vehicle count.
+
+### Demo Decisions & Justifications
+
+#### Demo Inclusions
+
+##### Actual Components
+
+The backend logic for nearly the entirety of the PMS was implemented and showcased in our demo, minus the Administrator process component, the Power Controller, and the physical hardware components. We wanted to showcase how our backend handles signals given to the PMC by the simulated, graphical hardware, to then trickle down into the respective lower-level logical controllers pertaining to the specific hardware drivers that signaled to the PMC. Additionally, we wanted to highlight the proper tracking of our availability displays when the PMC dictates the updates for parking availability by spot-type and floor level. This backend followed our architecture, as we composed the PMC to be the actual mediator to all those signals, and structured our components to match the SAD structure, from the Gate Controllers, Parking Lot/Floor/Spot, and Availability Controllers.
+
+##### Substituted Components
+
+We substituted actual hardware, like gates, spikes, LEDs, sensors, and availability displays, for graphical versions of them. This allowed us to interact with gate and parking drivers by simulating sensors getting triggered via vehicles passing through them. With this, we can easily demonstrate that our PMC could interact with a form of vehicle and a parking lot's respective gates/parking spots and ensure that it could receive signals, to then be able to update their corresponding hardware - following the path through all the components laid out in the lower-level logic controllers and into the simulated hardware. Despite the simulated hardware, in practice, they were still connected to their respective controllers as detailed in our architecture and communicated via their drivers to the PMC as depicted in our software architecture design.
+
+We used Qt signals (see **Technologies Used**) in order to attach our simulated sensors to their corresponding device drivers so that vehicles triggering them  - i.e. their animations being near the sensors -  could let our backend recognize their presence; the Qt signals let the sensors’ device drivers know about the presence of a vehicle to then have those device drivers formulate a signal to the PMC [2].
+
+#### Demo Inclusions
+
+1. Decided to omit showcasing our Power Controller in our demo. We decided not to showcase the capabilities of our PMS in handling power outages; hence, we decided to omit the idea of handling switching between our main power grid and emergency battery packs. Thus, constructing our demo with the assumption that the power for all technology remains on.
+2. Decided not to showcase our Administrator process component (and consequently our PMS API for it), in order to highlight the primary signal, circulation logic between the PMC and the hardware.
+
+### Illustrated Use Cases
+
+1. Vehicle Entry/Exit and Parking Structure Capacity Management \
+   + To handle the core operational flow of vehicles entering and exiting the parking structure while maintaining accurate capacity counts at both the structure and floor levels.
+2. Parking Spot Occupation and State Update
+   + Accurately reflect the occupancy status of a parking spot and update the floor and structure availability.
+
+### Technologies Used 
+
++ **C++** - Sole programming language used. 
++ **Qt (ver. 6.10.2)**  - framework to assemble and interact with our GUI [2]. 
++ **Clion** - IDE for C++ and running/showcasing our GUI demo [1]. 
++ **Git/GitHub** - code versioning and code history with a repository.
+
+### References
+
+[1] JetBrains, “CLion,” JetBrains. https://www.jetbrains.com/clion/ \
+[2] Qt, “Get and Install Qt,” Qt Group | Documentation.   https://doc.qt.io/qt-6/get-and-install-qt.html 
