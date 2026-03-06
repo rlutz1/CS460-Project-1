@@ -60,6 +60,8 @@ Further, the directories contain:
 Additional software items in order to enable development in this folder are as follows:
 
 + **PMSGUIInterfaces** - contains abstract classes for PMC to implement/derive from in order to receive communcations from hardware components; acts as a simulated wire communication.
+  + **IInductionSensorDataSink.h** - definition of sensor to PMC communcations from the gate induction sensors. 
+  + **IParkingSpotSensorDataSink.h** - definition of sensor to PMC communications from the parking spot sensors (weight and ultrasonic).
 + **GUIStructs** - structs useful for GUI development only; no logical purpose.
 
 #### Definitions
